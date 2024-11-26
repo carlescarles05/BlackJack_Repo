@@ -906,7 +906,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 330585546}
   footstepClips:
   - {fileID: 8300000, guid: ba2ba93fd8cd87e4a96e50ce00367fbb, type: 3}
-  stepInterval: 0.5
+  stepInterval: 3
 --- !u!1 &1619432069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,3 +1422,4 @@ MonoBehaviour:
   seatPoint: {fileID: 1939691119}
   canvasObject: {fileID: 791713286}
   interactKey: 101
+  transitionSpeed: 2
