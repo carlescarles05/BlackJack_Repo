@@ -5,24 +5,25 @@ using UnityEngine;
 
 public class SitOnObject : MonoBehaviour
 {
-    public Transform seatPoint;          // Punto donde el jugador debe sentarse
-    public GameObject canvasObject;      // Referencia al Canvas que aparecerá sobre la mesa
+    public Transform seatPoint;        // El punto donde el jugador debe ir
+    public Canvas canvasObject;       // Referencia al Canvas
     public KeyCode interactKey = KeyCode.E;  // Tecla para interactuar con la silla
 
-    private Transform playerTransform;   // Transform del jugador
-    private PlayerMovement playerMovement; // Script de movimiento del jugador
-    private bool isSitting = false;      // ¿Está el jugador sentado?
+    private bool isSitting = false;   // ¿Está el jugador sentado?
+    private Transform playerTransform;
+    private PlayerMovement playerMovement;
+    private CharacterController characterController;
 
     void Start()
     {
-        // Obtener el transform del jugador y su script de movimiento
         playerTransform = GameObject.FindWithTag("Player").transform;
         playerMovement = playerTransform.GetComponent<PlayerMovement>();
+        characterController = playerTransform.GetComponent<CharacterController>();
 
-        // Asegurarse de que el canvas esté desactivado inicialmente
+        // Asegúrate de que el Canvas esté desactivado al inicio
         if (canvasObject != null)
         {
-            canvasObject.SetActive(false);
+            canvasObject.gameObject.SetActive(false);
         }
     }
 
@@ -30,20 +31,31 @@ public class SitOnObject : MonoBehaviour
     {
         if (!isSitting)
         {
-            // Detectar cercanía del jugador con la silla
-            if (Vector3.Distance(playerTransform.position, seatPoint.position) < 2f)
+            // Detectar la cercanía del jugador con la silla
+            Collider[] nearbyObjects = Physics.OverlapSphere(playerTransform.position, 2f);
+            foreach (Collider obj in nearbyObjects)
             {
-                Debug.Log("Silla detectada. Presiona 'E' para sentarte.");
-                if (Input.GetKeyDown(interactKey))
+                if (obj.CompareTag("Chair"))
                 {
-                    SitDown(); // Llamar a la función para sentarse
+                    Debug.Log("Silla detectada. Presiona 'E' para sentarte.");
+                    if (Input.GetKeyDown(interactKey))
+                    {
+                        SitDown(obj.transform);
+                        break;
+                    }
                 }
             }
         }
     }
 
-    void SitDown()
+    void SitDown(Transform chair)
     {
+        if (seatPoint == null)
+        {
+            Debug.LogError("No se ha asignado un SeatPoint en el Inspector.");
+            return;
+        }
+
         isSitting = true;
 
         // Desactivar el movimiento del jugador
@@ -51,16 +63,20 @@ public class SitOnObject : MonoBehaviour
         {
             playerMovement.enabled = false;
         }
-
-        // Posicionar al jugador en el SeatPoint
-        playerTransform.position = seatPoint.position;
-
-        // Mostrar el Canvas sobre la mesa
-        if (canvasObject != null)
+        if (characterController != null)
         {
-            canvasObject.SetActive(true);
+            characterController.enabled = false;
         }
 
-        Debug.Log("El jugador ahora está sentado y el Canvas aparece sobre la mesa.");
+        // Colocar al jugador en el SeatPoint
+        playerTransform.position = seatPoint.position;
+
+        // Activar el Canvas
+        if (canvasObject != null)
+        {
+            canvasObject.gameObject.SetActive(true);
+        }
+
+        Debug.Log("El jugador ahora está sentado.");
     }
 }
