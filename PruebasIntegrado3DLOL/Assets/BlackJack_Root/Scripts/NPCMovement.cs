@@ -1,50 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPCMovement : MonoBehaviour
 {
-    public float moveSpeed = 3f;             // Velocidad de movimiento del NPC
-    public float minWaitTime = 1f;          // Tiempo mínimo antes de cambiar de destino
-    public float maxWaitTime = 3f;          // Tiempo máximo antes de cambiar de destino
-    public float movementRange = 5f;        // Rango alrededor del NPC para moverse
+    public float minWaitTime = 1f;  // Tiempo mínimo antes de cambiar de destino
+    public float maxWaitTime = 3f;  // Tiempo máximo antes de cambiar de destino
+    public float movementRange = 5f; // Rango de movimiento desde la posición actual
 
-    private Vector3 targetPosition;         // Posición objetivo del NPC
-    private bool isMoving = false;          // ¿Está el NPC en movimiento?
+    private NavMeshAgent agent;  // Referencia al NavMeshAgent
+    private Vector3 startPosition;  // Posición inicial del NPC
 
     void Start()
     {
+        // Obtener el NavMeshAgent del NPC
+        agent = GetComponent<NavMeshAgent>();
+        startPosition = transform.position;
+
+        // Elegir el primer destino
         ChooseNewDestination();
     }
 
     void Update()
     {
-        if (isMoving)
+        // Verifica si el NPC llegó al destino
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            // Mover al NPC hacia el objetivo
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-            // Si el NPC ha alcanzado su destino, deja de moverse y espera
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                isMoving = false;
-                Invoke(nameof(ChooseNewDestination), Random.Range(minWaitTime, maxWaitTime));
-            }
+            // Espera antes de elegir un nuevo destino
+            Invoke(nameof(ChooseNewDestination), Random.Range(minWaitTime, maxWaitTime));
         }
     }
 
     void ChooseNewDestination()
     {
-        // Elegir una nueva posición dentro del rango definido
+        // Generar un destino aleatorio dentro del rango
         Vector3 randomDirection = new Vector3(
             Random.Range(-movementRange, movementRange),
-            0f, // Mantener el NPC en el mismo plano
+            0f,
             Random.Range(-movementRange, movementRange)
         );
 
-        targetPosition = transform.position + randomDirection;
-        targetPosition.y = transform.position.y; // Asegurarse de que la altura sea la misma
+        Vector3 newDestination = startPosition + randomDirection;
 
-        isMoving = true;
+        // Establecer el destino en el NavMeshAgent
+        if (NavMesh.SamplePosition(newDestination, out NavMeshHit hit, movementRange, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+        }
     }
 }
