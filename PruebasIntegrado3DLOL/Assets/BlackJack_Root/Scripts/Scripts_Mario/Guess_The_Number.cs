@@ -4,12 +4,12 @@ using UnityEngine.UI;
 public class GuessTheNumber : MonoBehaviour
 {
     public InputField inputField;
-    public Text resultText; 
+    public Text resultText;
     public Button guessButton; 
+    private int AINumber;
 
-    private int AINumber; 
-    private int points; 
-
+    public Player_Points player_Points;
+    public Player_Clock player_Clock;
     void Start()
     {
         guessButton.onClick.AddListener(OnGuessButtonClick); 
@@ -19,27 +19,30 @@ public class GuessTheNumber : MonoBehaviour
     void StartGame()
     {
         AINumber = Random.Range(1, 22); 
-        points = 0; 
+    
         resultText.text = "Elige del 1 - 21 ";
     }
 
     void OnGuessButtonClick()
     {
-        // Verifica que el jugador haya ingresado un número válido
+        // verify valid input
         if (int.TryParse(inputField.text, out int playerGuess))
         {
             int difference = Mathf.Abs(playerGuess - AINumber); 
 
             if (difference == 0)
             {
-                points += 8;
-                resultText.text = $"¡Adivinaste el número! +8 minutos. Puntuación: {points}. Reiniciando...";
+
+                player_Points.AddPoints(+250);
+                player_Clock.AddTime(8*60);
+                resultText.text = $"¡Adivinaste el número! +8 minutos.Reiniciando...";
                 StartGame();
             }
             else if (difference == 1)
             {
-                points += 5;
-                resultText.text = $"¡Casi aciertas! +5 minutos. Puntuación: {points}.";
+                player_Points.AddPoints(+200);
+                player_Clock.AddTime(5*60);
+                resultText.text = $"¡Casi aciertas! +5 minutos.";
             }
             else if (difference == 2)
             {
@@ -47,25 +50,28 @@ public class GuessTheNumber : MonoBehaviour
             }
             else if (difference <= 5)
             {
-                points -= 2;
-                resultText.text = $"Te alejaste un poco. -2 minutos. Puntuación: {points}.";
+                player_Points.AddPoints(-200);
+                player_Clock.AddTime(-2 * 60);
+                resultText.text = $"Te alejaste un poco. -2 minutos.";
             }
             else if (difference <= 10)
             {
-                points -= 5;
-                resultText.text = $"Estás algo lejos. -5 minutos. Puntuación: {points}.";
+                player_Points.AddPoints(-30);
+                player_Clock.AddTime(-5 *60);
+                resultText.text = $"Estás algo lejos. -5 minutos.";
             }
             else
             {
-                points -= 8;
-                resultText.text = $"Te alejaste demasiado. -8 minutos. Puntuación: {points}.";
+                player_Points.AddPoints(-100);
+                player_Clock.AddTime(-8*60);
+                resultText.text = $"Te alejaste demasiado. -8 minutos.";
             }
 
             inputField.text = "";
         }
         else
         {
-            resultText.text = "Por favor, ingresa un número válido.";
+            resultText.text = "enter a valid number";
         }
     }
 }
