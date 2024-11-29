@@ -4,20 +4,37 @@ using UnityEngine;
 
 public class DeckManager : MonoBehaviour
 {
-    public List<Card> deck = new List<Card>(); // Lista que representa el mazo de cartas
+    public GameObject[] Deck; // Array de prefabs de cartas
+    public Transform[] PlayerCardSpawns; // Spawn Points para las cartas del jugador
+    public Transform[] EnemyCardSpawns;  // Spawn Points para las cartas del enemigo
 
-    public Card DrawCard()
+    private int currentIndex = 0;
+
+    public void DrawCards()
     {
-        if (deck.Count > 0)
+        // Robar dos cartas para el jugador
+        for (int i = 0; i < PlayerCardSpawns.Length; i++)
         {
-            Card drawnCard = deck[0]; // Tomar la primera carta del mazo
-            deck.RemoveAt(0);         // Eliminarla del mazo
-            return drawnCard;
+            SpawnCard(PlayerCardSpawns[i]);
         }
-        else
+
+        // Robar dos cartas para el enemigo
+        for (int i = 0; i < EnemyCardSpawns.Length; i++)
         {
-            Debug.LogWarning("El mazo está vacío.");
-            return null;
+            SpawnCard(EnemyCardSpawns[i]);
         }
+    }
+
+    private void SpawnCard(Transform spawnPoint)
+    {
+        if (currentIndex >= Deck.Length)
+        {
+            Debug.Log("No quedan cartas en el mazo.");
+            return;
+        }
+
+        // Instanciar la carta en el Spawn Point
+        GameObject card = Instantiate(Deck[currentIndex], spawnPoint.position, spawnPoint.rotation);
+        currentIndex++;
     }
 }
