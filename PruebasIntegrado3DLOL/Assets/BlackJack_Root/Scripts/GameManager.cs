@@ -8,16 +8,21 @@ public class GameManager : MonoBehaviour
     public int playerScore = 0;
     public int opponentScore = 0;
 
+    public CardSpawner cardSpawner;
+
+    void Start()
+    {
+        // Al empezar, hacer que se generen las cartas
+        cardSpawner.SpawnCards();
+    }
+
+
     public void StartGame()
     {
         // Iniciar el reparto de cartas
         if (deckManager != null)
         {
             deckManager.DrawCards();
-        }
-        else
-        {
-            Debug.LogError("DeckManager no está asignado en el Inspector.");
         }
     }
 
