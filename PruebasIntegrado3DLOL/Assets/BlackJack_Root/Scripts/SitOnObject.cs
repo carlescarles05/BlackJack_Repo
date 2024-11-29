@@ -131,10 +131,11 @@ public class SitOnObject : MonoBehaviour
     public Canvas canvasObject;        // Referencia al Canvas
     public KeyCode interactKey = KeyCode.E;  // Tecla para interactuar con la silla
     public float transitionSpeed = 2f; // Velocidad de la transición al sentarse
-    public GameObject smokeObject;    // El objeto que contiene el ParticleSystem (humo)
-    public GameObject smokeObject2;    // El objeto que contiene el ParticleSystem (humo)
-    public GameObject cardObject;    // El objeto de la carta que aparecerá
-    public GameObject cardObject2;    // El objeto de la carta que aparecerá
+
+    public GameObject smokeObject;    // Humo 1
+    public GameObject smokeObject2;   // Humo 2
+    public GameObject cardObject;     // Carta 1
+    public GameObject cardObject2;    // Carta 2
 
     private bool isSitting = false;    // ¿Está el jugador sentado?
     private bool isTransitioning = false; // ¿Está en proceso de transición?
@@ -148,7 +149,7 @@ public class SitOnObject : MonoBehaviour
         playerMovement = playerTransform.GetComponent<PlayerMovement>();
         characterController = playerTransform.GetComponent<CharacterController>();
 
-        // Asegúrate de que el Canvas y la carta estén desactivados al inicio
+        // Desactivar elementos al inicio
         if (canvasObject != null)
         {
             canvasObject.gameObject.SetActive(false);
@@ -156,12 +157,22 @@ public class SitOnObject : MonoBehaviour
 
         if (cardObject != null)
         {
-            cardObject.SetActive(false); // Desactivar la carta al principio
+            cardObject.SetActive(false);
         }
 
         if (smokeObject != null)
         {
-            smokeObject.SetActive(false); // Desactivar el humo al principio
+            smokeObject.SetActive(false);
+        }
+
+        if (cardObject2 != null)
+        {
+            cardObject2.SetActive(false);
+        }
+
+        if (smokeObject2 != null)
+        {
+            smokeObject2.SetActive(false);
         }
     }
 
@@ -169,7 +180,6 @@ public class SitOnObject : MonoBehaviour
     {
         if (!isSitting && !isTransitioning)
         {
-            // Detectar la cercanía del jugador con la silla
             Collider[] nearbyObjects = Physics.OverlapSphere(playerTransform.position, 2f);
             foreach (Collider obj in nearbyObjects)
             {
@@ -186,7 +196,7 @@ public class SitOnObject : MonoBehaviour
         }
     }
 
-    System.Collections.IEnumerator SitDownSmooth(Transform chair)
+    IEnumerator SitDownSmooth(Transform chair)
     {
         if (seatPoint == null)
         {
@@ -197,14 +207,8 @@ public class SitOnObject : MonoBehaviour
         isTransitioning = true;
 
         // Desactivar el movimiento del jugador
-        if (playerMovement != null)
-        {
-            playerMovement.enabled = false;
-        }
-        if (characterController != null)
-        {
-            characterController.enabled = false;
-        }
+        if (playerMovement != null) playerMovement.enabled = false;
+        if (characterController != null) characterController.enabled = false;
 
         // Mover al jugador gradualmente al SeatPoint
         float elapsedTime = 0f;
@@ -214,39 +218,18 @@ public class SitOnObject : MonoBehaviour
         {
             playerTransform.position = Vector3.Lerp(startPosition, seatPoint.position, elapsedTime);
             elapsedTime += Time.deltaTime * transitionSpeed;
-
-            yield return null; // Esperar al siguiente frame
+            yield return null;
         }
 
-        playerTransform.position = seatPoint.position; // Asegurarse de que esté exactamente en el punto final
+        playerTransform.position = seatPoint.position;
         isSitting = true;
         isTransitioning = false;
 
-        // Activar el Particle System de humo
-        if (smokeObject != null)
-        {
-            smokeObject.SetActive(true);  // Activar el objeto de humo
-            ParticleOnce smokeParticleScript = smokeObject.GetComponent<ParticleOnce>();
-            if (smokeParticleScript != null)
-            {
-                smokeParticleScript.PlayOnce();  // Reproduce el Particle System una sola vez
-            }
-        }
+        // Activar el primer conjunto (humo 1 y carta 1)
+        yield return ActivateEffect(smokeObject, cardObject);
 
-        // Esperar un poco antes de activar la carta (para que el humo termine de reproducirse)
-        yield return new WaitForSeconds(1f); // Ajusta el tiempo si es necesario para que el humo se vea
-
-        // Activar la carta después del humo
-        if (cardObject != null)
-        {
-            cardObject.SetActive(true);  // Activar la carta después de un retraso
-        }
-
-        // Desactivar el Particle System de humo después de que la carta aparezca
-        if (smokeObject != null)
-        {
-            DeactivateParticleSystem();
-        }
+        // Activar el segundo conjunto (humo 2 y carta 2)
+        yield return ActivateEffect(smokeObject2, cardObject2);
 
         // Activar el Canvas
         if (canvasObject != null)
@@ -257,18 +240,43 @@ public class SitOnObject : MonoBehaviour
         Debug.Log("El jugador ahora está sentado.");
     }
 
-    // Método que desactiva el Particle System después de que la carta aparezca
-    void DeactivateParticleSystem()
+    // Método genérico para manejar humo y carta
+    IEnumerator ActivateEffect(GameObject smoke, GameObject card)
     {
-        if (smokeObject != null)
+        if (smoke != null)
         {
-            ParticleSystem ps = smokeObject.GetComponent<ParticleSystem>();
-            if (ps != null)
+            smoke.SetActive(true);  // Activar humo
+            ParticleOnce smokeParticleScript = smoke.GetComponent<ParticleOnce>();
+            if (smokeParticleScript != null)
             {
-                ps.Stop();  // Detener el Particle System
-                ps.Clear(); // Limpiar las partículas
-                smokeObject.SetActive(false); // Desactivar el objeto con el Particle System
+                smokeParticleScript.PlayOnce(); // Reproducir el sistema de partículas
             }
+        }
+
+        // Esperar un segundo antes de mostrar la carta
+        yield return new WaitForSeconds(1f);
+
+        if (card != null)
+        {
+            card.SetActive(true);  // Activar carta
+        }
+
+        // Desactivar el humo después de que aparezca la carta
+        if (smoke != null)
+        {
+            DeactivateParticleSystem(smoke);
+        }
+    }
+
+    // Método que desactiva el Particle System
+    void DeactivateParticleSystem(GameObject smoke)
+    {
+        ParticleSystem ps = smoke.GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            ps.Stop();
+            ps.Clear();
+            smoke.SetActive(false);
         }
     }
 }
