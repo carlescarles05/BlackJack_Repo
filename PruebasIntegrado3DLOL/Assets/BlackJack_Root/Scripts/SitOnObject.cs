@@ -2,130 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class SitOnObject : MonoBehaviour
 {
-
-    /*public Transform seatPoint;         // El punto donde el jugador debe ir
-    public Canvas canvasObject;         // Referencia al Canvas
-    public GameObject objectToShow;     // Objeto que aparece cuando el jugador se sienta
-    public ParticleSystem summonEffect; // Sistema de partículas para el humo
-    public KeyCode interactKey = KeyCode.E; // Tecla para interactuar con la silla
-    public float transitionSpeed = 2f;  // Velocidad de la transición al sentarse
-
-    private bool isSitting = false;     // ¿Está el jugador sentado?
-    private bool isTransitioning = false; // ¿Está en proceso de transición?
-    private Transform playerTransform;
-    private PlayerMovement playerMovement;
-    private CharacterController characterController;
-
-    void Start()
-    {
-        playerTransform = GameObject.FindWithTag("Player").transform;
-        playerMovement = playerTransform.GetComponent<PlayerMovement>();
-        characterController = playerTransform.GetComponent<CharacterController>();
-
-        // Asegúrate de que el Canvas y el objeto estén desactivados al inicio
-        if (canvasObject != null)
-        {
-            canvasObject.gameObject.SetActive(false);
-        }
-
-        if (objectToShow != null)
-        {
-            objectToShow.SetActive(false);
-        }
-
-        if (summonEffect != null)
-        {
-            summonEffect.Stop(); // Asegúrate de que el sistema de partículas no esté activo al inicio
-        }
-    }
-
-    void Update()
-    {
-        if (!isSitting && !isTransitioning)
-        {
-            // Detectar la cercanía del jugador con la silla
-            Collider[] nearbyObjects = Physics.OverlapSphere(playerTransform.position, 2f);
-            foreach (Collider obj in nearbyObjects)
-            {
-                if (obj.CompareTag("Chair"))
-                {
-                    Debug.Log("Silla detectada. Presiona 'E' para sentarte.");
-                    if (Input.GetKeyDown(interactKey))
-                    {
-                        StartCoroutine(SitDownSmooth(obj.transform));
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-
-    System.Collections.IEnumerator SitDownSmooth(Transform chair)
-    {
-        if (seatPoint == null)
-        {
-            Debug.LogError("No se ha asignado un SeatPoint en el Inspector.");
-            yield break;
-        }
-
-        isTransitioning = true;
-
-        // Desactivar el movimiento del jugador
-        if (playerMovement != null)
-        {
-            playerMovement.enabled = false;
-        }
-        if (characterController != null)
-        {
-            characterController.enabled = false;
-        }
-
-        // Mover al jugador gradualmente al SeatPoint
-        float elapsedTime = 0f;
-        Vector3 startPosition = playerTransform.position;
-
-        while (elapsedTime < 1f)
-        {
-            playerTransform.position = Vector3.Lerp(startPosition, seatPoint.position, elapsedTime);
-            elapsedTime += Time.deltaTime * transitionSpeed;
-
-            yield return null; // Esperar al siguiente frame
-        }
-
-        playerTransform.position = seatPoint.position; // Asegurarse de que esté exactamente en el punto final
-        isSitting = true;
-        isTransitioning = false;
-
-        // Activar el Canvas
-        if (canvasObject != null)
-        {
-            canvasObject.gameObject.SetActive(true);
-        }
-
-        // Activar el efecto de partículas
-        if (summonEffect != null)
-        {
-            summonEffect.Play(); // Iniciar el efecto de partículas
-            Debug.Log("Efecto de partículas iniciado.");
-            yield return new WaitForSeconds(summonEffect.main.duration); // Esperar a que termine
-        }
-
-        // Mostrar el objeto después del efecto
-        if (objectToShow != null)
-        {
-            Debug.Log("Efecto de partículas terminado. Activando objeto.");
-            objectToShow.SetActive(true);
-        }
-
-
-
-        Debug.Log("El jugador ahora está sentado, y el objeto ha sido invocado.");
-
-    }*/
 
     public Transform seatPoint;        // El punto donde el jugador debe ir
     public Canvas canvasObject;        // Referencia al Canvas
@@ -142,6 +22,15 @@ public class SitOnObject : MonoBehaviour
     private Transform playerTransform;
     private PlayerMovement playerMovement;
     private CharacterController characterController;
+
+    // Nueva parte para las cartas
+    private int playerTotal = 0;
+    private int enemyTotal = 0;
+    public TextMeshProUGUI playerTotalText;  // Canvas Text para el jugador
+    public TextMeshProUGUI enemyTotalText;   // Canvas Text para el enemigo
+
+    // Valores posibles para las cartas
+    int[] cardValues = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 };
 
     void Start()
     {
@@ -237,6 +126,9 @@ public class SitOnObject : MonoBehaviour
             canvasObject.gameObject.SetActive(true);
         }
 
+        // Generar las cartas aleatorias para el jugador y enemigo
+        GenerateCards();
+
         Debug.Log("El jugador ahora está sentado.");
     }
 
@@ -278,5 +170,21 @@ public class SitOnObject : MonoBehaviour
             ps.Clear();
             smoke.SetActive(false);
         }
+    }
+
+    // Método para generar cartas aleatorias
+    void GenerateCards()
+    {
+        // Generar carta para el jugador
+        int playerCard1 = cardValues[Random.Range(0, cardValues.Length)];
+        int playerCard2 = cardValues[Random.Range(0, cardValues.Length)];
+        playerTotal = playerCard1 + playerCard2;
+        playerTotalText.text = playerTotal + "/21";
+
+        // Generar carta para el enemigo
+        int enemyCard1 = cardValues[Random.Range(0, cardValues.Length)];
+        int enemyCard2 = cardValues[Random.Range(0, cardValues.Length)];
+        enemyTotal = enemyCard1 + enemyCard2;
+        enemyTotalText.text = enemyTotal + "/21";
     }
 }
