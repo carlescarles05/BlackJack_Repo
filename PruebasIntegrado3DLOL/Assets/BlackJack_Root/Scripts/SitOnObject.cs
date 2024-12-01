@@ -6,13 +6,15 @@ using TMPro;
 
 public class SitOnObject : MonoBehaviour
 {
-
     public Transform seatPoint;
     public Canvas canvasObject;        // Canvas del jugador
     public Canvas enemyCanvasObject;   // Canvas del enemigo
     public KeyCode interactKey = KeyCode.E;
     public float transitionSpeed = 2f;
     public TextMeshProUGUI playerTotalText;  // Referencia al texto del jugador
+
+    public List<GameObject> PlayerCards = new List<GameObject>(); // Lista para las cartas del jugador
+    public bool IsPlayerTurn = true; // Controla si es el turno del jugador
 
     public GameObject smokeObject;
     public GameObject smokeObject2;
@@ -33,7 +35,7 @@ public class SitOnObject : MonoBehaviour
     private CharacterController characterController;
 
     public int playerTotal = 0;
-    private int enemyTotal = 0;
+    public int enemyTotal = 0;
     int[] cardValues = new int[] { 1, 2, 3, 4, 5 };
 
     void Start()
@@ -75,7 +77,6 @@ public class SitOnObject : MonoBehaviour
             {
                 if (obj.CompareTag("Chair"))
                 {
-                    Debug.Log("Silla detectada. Presiona 'E' para sentarte.");
                     if (Input.GetKeyDown(interactKey))
                     {
                         StartCoroutine(SitDownSmooth(obj.transform));
@@ -132,7 +133,6 @@ public class SitOnObject : MonoBehaviour
             enemyCanvasObject.gameObject.SetActive(true);
         }
 
-        Debug.Log("El jugador ahora está sentado.");
     }
 
     IEnumerator ActivateEffect(GameObject smoke, GameObject card)
@@ -211,8 +211,6 @@ public class SitOnObject : MonoBehaviour
         playerTotal = 0;
         UpdatePlayerCanvas();
     }
-
-
 
 
 }
