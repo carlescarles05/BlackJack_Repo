@@ -40766,8 +40766,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216803548}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.1529007, y: 3.5250401, z: 1.1607434}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -9.5502, y: 5.758, z: 1.43}
+  m_LocalScale: {x: 0.5034642, y: 0.08818842, z: 0.2530975}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 408178332}
@@ -40803,10 +40803,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSitScript: {fileID: 2049512165}
-  playerCardSpawnPoint: {fileID: 0}
+  playerCardSpawnPoint: {fileID: 1216803549}
   cardPrefab: {fileID: 7042065486897809914, guid: d4afb20f413628a42b3fd3430b12f746,
     type: 3}
-  resultText: {fileID: 0}
   hitButton: {fileID: 2004203359}
   standButton: {fileID: 2111497437}
 --- !u!4 &1218172601

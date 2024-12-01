@@ -9,7 +9,6 @@ public class BJManager : MonoBehaviour
     public SitOnObject playerSitScript; // Asignar script del jugador en el Inspector
     public Transform playerCardSpawnPoint; // Punto inicial para generar cartas del jugador
     public GameObject cardPrefab; // Prefab de la carta
-    public TextMeshProUGUI resultText; // Texto para mostrar el resultado
     public Button hitButton; // Botón "Pedir Carta"
     public Button standButton; // Botón "Plantarse"
 
@@ -53,6 +52,12 @@ public class BJManager : MonoBehaviour
 
     void GeneratePlayerCard()
     {
+        if (cardPrefab == null || playerCardSpawnPoint == null)
+        {
+            Debug.LogError("Falta asignar 'cardPrefab' o 'playerCardSpawnPoint' en el BJManager.");
+            return;
+        }
+
         // Generar una nueva carta aleatoria
         int newCard = playerSitScript.GenerateCard();
         playerSitScript.PlayerTotal += newCard;
@@ -60,7 +65,7 @@ public class BJManager : MonoBehaviour
         // Crear visualmente la carta
         GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
         card.transform.localPosition += new Vector3(cardOffset * (playerSitScript.PlayerCards.Count - 1), 0, 0);
-        card.GetComponentInChildren<TextMeshProUGUI>().text = newCard.ToString();
+        //card.GetComponentInChildren<TextMeshProUGUI>().text = newCard.ToString();
 
         playerSitScript.PlayerCards.Add(card);
 
@@ -128,10 +133,17 @@ public class BJManager : MonoBehaviour
 
     void EndGame(bool playerWon)
     {
-        resultText.text = playerWon ? "¡Ganaste!" : "Perdiste. ¡Intenta de nuevo!";
-        resultText.gameObject.SetActive(true);
+        if (playerWon)
+        {
+            Debug.Log("¡Ganaste!");
+            // Si necesitas algún efecto visual o lógica adicional, añádelo aquí.
+        }
+        else
+        {
+            Debug.Log("Perdiste. ¡Intenta de nuevo!");
+        }
 
-        hitButton.interactable = false;
-        standButton.interactable = false;
+        // Desactiva botones o reinicia el juego aquí si es necesario.
+        playerSitScript.IsPlayerTurn = false;
     }
 }
