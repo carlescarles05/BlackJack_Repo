@@ -31,7 +31,7 @@ public class Player_Clock : MonoBehaviour
             }
             if (totalTime <= 0) 
             {
-               timer.text = string.Format("{0:D2}:{1:D2}", 00, 00);
+               timer.text = string.Format("{0:D2}:{1:D2}", 00,00);
                 isTimerRunning = false;
             Debug.Log("Time's up!"); //new action to trigger when time is up
             }
