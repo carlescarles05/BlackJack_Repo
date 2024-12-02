@@ -39,9 +39,9 @@ public class NPCInteractio : MonoBehaviour
         if (playerInRange)
         {
             // Colocar el texto y la imagen encima del NPC (ajustar la altura si es necesario)
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 2, 0));
+            /*Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 2, 0));
             interactionKeyText.transform.position = screenPosition;
-            interactionKeyBackground.transform.position = screenPosition;
+            interactionKeyBackground.transform.position = screenPosition;*/
             
 
             // Verificar si el jugador presiona la tecla "E"
@@ -52,16 +52,15 @@ public class NPCInteractio : MonoBehaviour
         }
     }
 
-    // Se llama cuando el jugador entra en el trigger
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        // Verificamos si el objeto que entra es el jugador (asegúrate de que el tag esté configurado correctamente)
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Jugador ha entrado en el trigger");
             playerInRange = true;
-            interactionKeyText.gameObject.SetActive(true);
             interactionKeyBackground.SetActive(true);
+            interactionKeyText.gameObject.SetActive(true);
+
         }
     }
 
