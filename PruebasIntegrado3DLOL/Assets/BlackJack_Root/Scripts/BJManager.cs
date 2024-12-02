@@ -30,8 +30,6 @@ public class BJManager : MonoBehaviour
         // Generar dos cartas iniciales para el jugador
         GeneratePlayerCard();
         GeneratePlayerCard();
-
-        Debug.Log("Cartas iniciales del jugador: " + playerSitScript.PlayerTotal);
     }
 
     public void PlayerHit()
@@ -52,7 +50,6 @@ public class BJManager : MonoBehaviour
     {
         if (cardPrefab == null || playerCardSpawnPoint == null)
         {
-            Debug.LogError("Falta asignar 'cardPrefab' o 'playerCardSpawnPoint' en el BJManager.");
             return;
         }
 
