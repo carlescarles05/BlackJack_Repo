@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class BJManager : MonoBehaviour
 {
-    public SitOnObject playerSitScript; // Asignar script del jugador en el Inspector
-    public Transform playerCardSpawnPoint; // Punto inicial para generar cartas del jugador
+    public SitOnObject playerSitScript; // Script del jugador
+    public Transform playerCardSpawnPoint; // Objeto vacío para spawn de cartas del jugador
     public GameObject cardPrefab; // Prefab de la carta
     public Button hitButton; // Botón "Pedir Carta"
     public Button standButton; // Botón "Plantarse"
@@ -17,11 +17,11 @@ public class BJManager : MonoBehaviour
 
     void Start()
     {
-        // Asignar los eventos de los botones
+        // Asignar eventos a los botones
         hitButton.onClick.AddListener(PlayerHit);
         standButton.onClick.AddListener(PlayerStand);
 
-        // Inicializar cartas
+        // Generar las cartas iniciales
         DealInitialCards();
     }
 
@@ -39,8 +39,6 @@ public class BJManager : MonoBehaviour
         if (!playerSitScript.IsPlayerTurn) return;
 
         GeneratePlayerCard();
-
-        Debug.Log("Nueva carta del jugador: " + playerSitScript.PlayerTotal);
 
         // Verificar si el jugador pierde
         if (playerSitScript.PlayerTotal > 21)
@@ -63,18 +61,30 @@ public class BJManager : MonoBehaviour
         playerSitScript.PlayerTotal += newCard;
 
         // Crear visualmente la carta
-        GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
-        card.transform.localPosition += new Vector3(cardOffset * (playerSitScript.PlayerCards.Count - 1), 0, 0);
-        //card.GetComponentInChildren<TextMeshProUGUI>().text = newCard.ToString();
+        GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint.position, Quaternion.identity);
+        card.transform.SetParent(playerCardSpawnPoint); // Asegura que la carta esté dentro del spawn point en la jerarquía
+        card.transform.localScale = Vector3.one; // Normaliza la escala si es necesario
 
-        playerSitScript.PlayerCards.Add(card);
-
-        // Limitar el número de cartas visibles
-        if (playerSitScript.PlayerCards.Count > maxCardCount)
+        // Activar el efecto de partículas (si existe)
+        ParticleSystem particleSystem = playerCardSpawnPoint.GetComponentInChildren<ParticleSystem>();
+        if (particleSystem != null)
         {
-            Destroy(playerSitScript.PlayerCards[0]);
-            playerSitScript.PlayerCards.RemoveAt(0);
+            particleSystem.Play();
         }
+
+        // Añadir el valor de la carta al texto
+        TextMeshProUGUI cardText = card.GetComponentInChildren<TextMeshProUGUI>();
+        if (cardText != null)
+        {
+            cardText.text = newCard.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("El prefab de la carta no tiene un componente TextMeshProUGUI.");
+        }
+
+        // Agregar la carta a la lista de cartas del jugador
+        playerSitScript.PlayerCards.Add(card);
 
         // Actualizar el texto del total del jugador
         if (playerSitScript.playerTotalText != null)
@@ -136,14 +146,17 @@ public class BJManager : MonoBehaviour
         if (playerWon)
         {
             Debug.Log("¡Ganaste!");
-            // Si necesitas algún efecto visual o lógica adicional, añádelo aquí.
         }
         else
         {
             Debug.Log("Perdiste. ¡Intenta de nuevo!");
         }
 
-        // Desactiva botones o reinicia el juego aquí si es necesario.
+        // Desactivar los botones
+        hitButton.interactable = false;
+        standButton.interactable = false;
+
+        // Reiniciar o realizar acciones adicionales si es necesario
         playerSitScript.IsPlayerTurn = false;
     }
 }
