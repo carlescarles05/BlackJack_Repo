@@ -26,6 +26,7 @@ public class GuessTheCard : MonoBehaviour
     {
         AINumber = Random.Range(1, 22); // AI selects a random number between 1 and 21
         resultText.text = "Elige una carta.";
+        Debug.Log($"AI has picked card number: {AINumber}");
     }
 
     void OnCardClick(GameObject clickedCard)
@@ -40,7 +41,7 @@ public class GuessTheCard : MonoBehaviour
             player_Points.AddPoints(+250);
             player_Clock.AddTime(8 * 60);
             resultText.text = $"¡Adivinaste la carta! +8 minutos. Reiniciando...";
-            StartGame();
+           
         }
         else if (difference == 1)
         {
