@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5627375103119753771}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -111,7 +110,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5659291887470007700}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -227,7 +225,6 @@ GameObject:
   - component: {fileID: 6338599778500178706}
   - component: {fileID: 2860476987254378814}
   - component: {fileID: 8187003763355817966}
-  - component: {fileID: 482813918415463195}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -244,18 +241,17 @@ RectTransform:
   m_GameObject: {fileID: 1180648090081331857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1210160838809474892}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6338599778500178706
 Canvas:
   m_ObjectHideFlags: 0
@@ -319,23 +315,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &482813918415463195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180648090081331857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0e652f72039ed4b939c01c8babae41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputField: {fileID: 186782227559690816}
-  resultText: {fileID: 2506449911876420619}
-  guessButton: {fileID: 1364439425189535554}
-  player_Points: {fileID: 0}
-  player_Clock: {fileID: 0}
 --- !u!1 &4306448171231400513
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +338,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4306448171231400513}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 280.10376, y: 42.55896, z: 154.8975}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -369,7 +349,6 @@ Transform:
   - {fileID: 248969853001499440}
   - {fileID: 6273265418972149260}
   m_Father: {fileID: 4553255941524958249}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5747230162005973888
 GameObject:
@@ -402,7 +381,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5627375103119753771}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -484,7 +462,6 @@ RectTransform:
   m_Children:
   - {fileID: 8973255510246518080}
   m_Father: {fileID: 1210160838809474892}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.50781256, y: 0.407}
   m_AnchorMax: {x: 0.59000003, y: 0.43500003}
@@ -604,7 +581,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1210160838809474892}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2817917, y: 0.35681486}
   m_AnchorMax: {x: 0.63339585, y: 0.39037037}
@@ -686,7 +662,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1210160838809474892}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -769,7 +744,6 @@ RectTransform:
   - {fileID: 232966843433400730}
   - {fileID: 7200682223335327579}
   m_Father: {fileID: 1210160838809474892}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41300002, y: 0.45640746}
   m_AnchorMax: {x: 0.59529155, y: 0.5917778}
