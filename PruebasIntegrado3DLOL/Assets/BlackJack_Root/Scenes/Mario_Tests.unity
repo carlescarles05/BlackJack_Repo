@@ -13014,6 +13014,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 722895768}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1180648090081331857, guid: efe078c132f07d84b89c2f5be6223021,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4075341506155327032}
     - targetCorrespondingSourceObject: {fileID: 7135319329121388400, guid: efe078c132f07d84b89c2f5be6223021,
         type: 3}
       insertIndex: -1
@@ -13022,6 +13026,12 @@ PrefabInstance:
 --- !u!4 &4075341506155327029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1210160838809474892, guid: efe078c132f07d84b89c2f5be6223021,
+    type: 3}
+  m_PrefabInstance: {fileID: 4075341506155327028}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4075341506155327030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1180648090081331857, guid: efe078c132f07d84b89c2f5be6223021,
     type: 3}
   m_PrefabInstance: {fileID: 4075341506155327028}
   m_PrefabAsset: {fileID: 0}
@@ -13037,6 +13047,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4075341506155327032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075341506155327030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7bb9acb2cffc5f45abddc238a0ad9b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionIntKeys: []
+  m_PositionIntValues: 
+  m_PositionStringKeys: []
+  m_PositionStringValues: []
+  m_PositionFloatKeys: []
+  m_PositionFloatValues: []
+  m_PositionDoubleKeys: []
+  m_PositionDoubleValues: []
+  m_PositionObjectKeys: []
+  m_PositionObjectValues: []
+  m_PositionColorKeys: []
+  m_PositionColorValues: []
 --- !u!1 &4075341506155327033 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7135319329121388400, guid: efe078c132f07d84b89c2f5be6223021,

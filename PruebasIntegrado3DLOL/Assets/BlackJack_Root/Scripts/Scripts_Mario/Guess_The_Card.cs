@@ -15,10 +15,8 @@ public class GuessTheCard : MonoBehaviour
     public Player_Clock player_Clock;
     private int selectedCardIndex = 0;
 //Updated upstream
-    //private GameInputActions inputActions;
-//
-   // private GameInputActions inputActions;
-// Stashed changes
+    private GameInputActions inputActions;
+
     private Vector2 navigationInput;
 
     /// <summary>
@@ -32,34 +30,70 @@ public class GuessTheCard : MonoBehaviour
     /// INput input
     /// </summary>
 //< Updated upstream
-    /*void Awake()
-=======
-  /*  void Awake()
->>>>>>> Stashed changes
+   void Awake()
+
     {
-        //inputActions = new GameInputActions();
+        inputActions = new GameInputActions();
+
         inputActions.Player.Navigate.performed += OnNavigate;
-        inputActions.Player.Navigate.canceled += ctx => navigationInput = Vector2.zero;
+        //inputActions.Player.Navigate.canceled += ctx => navigationInput = Vector2.zero;
         inputActions.Player.Submit.performed += OnSubmit;
         inputActions.Enabled();
-    }*/
+    }
+    void Update()
+    {
+        // Check for a left mouse button click
+        // if (Input.GetMouseButtonDown(0))
+        /* {
+              Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+              RaycastHit hit;
+
+              // Cast a ray from the camera to where the user clicked
+              if (Physics.Raycast(ray, out hit))
+              {
+                  // Check if the clicked object is one of the cards
+                  foreach (GameObject card in cards)
+                  {
+                      if (hit.collider.gameObject == card)
+                      {
+                          OnCardClick(card); // Trigger the click logic
+                          return;
+                      }
+                  }
+              }
+          }*/
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
+        {
+            MoveSelection(1); // Move to the next card
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") < 0)
+        {
+            MoveSelection(-1); // Move to the previous card
+        }
+
+        // Confirm selection with Enter or gamepad A button
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Submit"))
+        {
+            OnCardClick(cards[selectedCardIndex]); // Trigger the card logic
+        }
+    }
 
     /// <summary>
     /// ///////////// Method screen navigation
     /// </summary>
- 
+
     void OnNavigate(InputAction.CallbackContext context)
     {
-        navigationInput = context.ReadValue<Vector2>();
-        if (navigationInput.x > 0)
+        Vector2 input = context.ReadValue<Vector2>();
+        if ( input.x > 0)
         {
             MoveSelection(1);
         }
-        else if (navigationInput.x < 0) 
+        else if (input.x < 0) 
         {
             MoveSelection(-1);
         }
-        if (navigationInput.y > 0)
+       /* if (navigationInput.y > 0)
         {
 // Updated upstream
            
@@ -74,7 +108,7 @@ public class GuessTheCard : MonoBehaviour
         {
            
 // Stashed changes
-        }
+        }*/
     }
 
     // method when key down
@@ -82,52 +116,14 @@ public class GuessTheCard : MonoBehaviour
     {
         OnCardClick(cards[selectedCardIndex]); // card logic trigger
     }
-    void OnDestroy()
+  /* void OnDestroy()
     {
        // inputActions.Disable();
     }
+  */
+
     /// <summary>
     /// /////////////
-    /// </summary>
-    void Update()
-    {
-        // Check for a left mouse button click
-       // if (Input.GetMouseButtonDown(0))
-      /* {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            // Cast a ray from the camera to where the user clicked
-            if (Physics.Raycast(ray, out hit))
-            {
-                // Check if the clicked object is one of the cards
-                foreach (GameObject card in cards)
-                {
-                    if (hit.collider.gameObject == card)
-                    {
-                        OnCardClick(card); // Trigger the click logic
-                        return;
-                    }
-                }
-            }
-        }*/
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
-        {
-            MoveSelection(1); // Move to the next card
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") < 0)
-        {
-            MoveSelection(-1); // Move to the previous card
-        }
-
-        // Confirm selection with Enter or gamepad A button
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Submit"))
-        {
-            OnCardClick(cards[ selectedCardIndex ]); // Trigger the card logic
-        }
-    }
-    /// <summary>
-    /// ////////////////
     /// </summary>
    
     void MoveSelection(int direction) 
