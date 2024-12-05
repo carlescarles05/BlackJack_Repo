@@ -14,7 +14,11 @@ public class GuessTheCard : MonoBehaviour
     public Player_Points player_Points;
     public Player_Clock player_Clock;
     private int selectedCardIndex = 0;
+<<<<<<< Updated upstream
     //private GameInputActions inputActions;
+=======
+   // private GameInputActions inputActions;
+>>>>>>> Stashed changes
     private Vector2 navigationInput;
 
     /// <summary>
@@ -27,9 +31,13 @@ public class GuessTheCard : MonoBehaviour
     /// <summary>
     /// INput input
     /// </summary>
+<<<<<<< Updated upstream
     /*void Awake()
+=======
+  /*  void Awake()
+>>>>>>> Stashed changes
     {
-        inputActions = new GameInputActions();
+        //inputActions = new GameInputActions();
         inputActions.Player.Navigate.performed += OnNavigate;
         inputActions.Player.Navigate.canceled += ctx => navigationInput = Vector2.zero;
         inputActions.Player.Submit.performed += OnSubmit;
@@ -53,11 +61,19 @@ public class GuessTheCard : MonoBehaviour
         }
         if (navigationInput.y > 0)
         {
+<<<<<<< Updated upstream
            
         }
         else if (navigationInput.y < 0) 
         {
 
+=======
+          
+        }
+        else if (navigationInput.y < 0) 
+        {
+           
+>>>>>>> Stashed changes
         }
     }
 
@@ -76,7 +92,7 @@ public class GuessTheCard : MonoBehaviour
     void Update()
     {
         // Check for a left mouse button click
-        if (Input.GetMouseButtonDown(0))
+       // if (Input.GetMouseButtonDown(0))
       /* {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
