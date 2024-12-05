@@ -14,11 +14,11 @@ public class GuessTheCard : MonoBehaviour
     public Player_Points player_Points;
     public Player_Clock player_Clock;
     private int selectedCardIndex = 0;
-<<<<<<< Updated upstream
+//Updated upstream
     //private GameInputActions inputActions;
-=======
+//
    // private GameInputActions inputActions;
->>>>>>> Stashed changes
+// Stashed changes
     private Vector2 navigationInput;
 
     /// <summary>
@@ -31,7 +31,7 @@ public class GuessTheCard : MonoBehaviour
     /// <summary>
     /// INput input
     /// </summary>
-<<<<<<< Updated upstream
+//< Updated upstream
     /*void Awake()
 =======
   /*  void Awake()
@@ -61,19 +61,19 @@ public class GuessTheCard : MonoBehaviour
         }
         if (navigationInput.y > 0)
         {
-<<<<<<< Updated upstream
+// Updated upstream
            
         }
         else if (navigationInput.y < 0) 
         {
 
-=======
+////
           
         }
         else if (navigationInput.y < 0) 
         {
            
->>>>>>> Stashed changes
+// Stashed changes
         }
     }
 
