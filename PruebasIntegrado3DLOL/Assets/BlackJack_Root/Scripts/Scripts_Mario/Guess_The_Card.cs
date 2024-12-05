@@ -14,7 +14,7 @@ public class GuessTheCard : MonoBehaviour
     public Player_Points player_Points;
     public Player_Clock player_Clock;
     private int selectedCardIndex = 0;
-    private GameInputActions inputActions;
+    //private GameInputActions inputActions;
     private Vector2 navigationInput;
 
     /// <summary>
@@ -27,14 +27,14 @@ public class GuessTheCard : MonoBehaviour
     /// <summary>
     /// INput input
     /// </summary>
-    void Awake()
+    /*void Awake()
     {
         inputActions = new GameInputActions();
         inputActions.Player.Navigate.performed += OnNavigate;
         inputActions.Player.Navigate.canceled += ctx => navigationInput = Vector2.zero;
         inputActions.Player.Submit.performed += OnSubmit;
         inputActions.Enabled();
-    }
+    }*/
 
     /// <summary>
     /// ///////////// Method screen navigation
@@ -53,11 +53,11 @@ public class GuessTheCard : MonoBehaviour
         }
         if (navigationInput.y > 0)
         {
-            MoveSelectionUp();
+           
         }
         else if (navigationInput.y < 0) 
         {
-            MoveSelectionDown();
+
         }
     }
 
@@ -68,7 +68,7 @@ public class GuessTheCard : MonoBehaviour
     }
     void OnDestroy()
     {
-        inputActions.Disable();
+       // inputActions.Disable();
     }
     /// <summary>
     /// /////////////
