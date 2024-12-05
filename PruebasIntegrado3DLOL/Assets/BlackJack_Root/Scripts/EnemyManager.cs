@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemyCard2;          // Objeto de la segunda carta
     public GameObject enemySmoke1;         // Partícula para la primera carta
     public GameObject enemySmoke2;         // Partícula para la segunda carta
-    public int[] cardValues = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }; // Valores posibles de las cartas
+    public int[] cardValues = { 1, 2, 3, 4, 5, 6 }; // Valores posibles de las cartas
 
     public int enemyTotal;                // Total de las cartas del enemigo
 

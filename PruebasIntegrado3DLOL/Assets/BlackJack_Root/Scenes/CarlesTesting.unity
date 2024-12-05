@@ -20093,6 +20093,7 @@ Transform:
   - {fileID: 381189584}
   - {fileID: 1174261040}
   - {fileID: 1216803549}
+  - {fileID: 1144083035}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
@@ -20716,7 +20717,7 @@ Transform:
   m_GameObject: {fileID: 736077440}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.974, y: 5.9500275, z: 2.5}
+  m_LocalPosition: {x: -9.974, y: 5.9500275, z: 2.1239}
   m_LocalScale: {x: 0.3253688, y: 0.08818842, z: 0.15612572}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40586,6 +40587,37 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1144083034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1144083035}
+  m_Layer: 0
+  m_Name: EnemyCardSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1144083035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144083034}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.58, y: 5.717, z: 1.62}
+  m_LocalScale: {x: 0.5034642, y: 0.08818842, z: 0.2530975}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 408178332}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174261039
 GameObject:
   m_ObjectHideFlags: 0
@@ -40837,6 +40869,7 @@ MonoBehaviour:
     type: 3}
   enemyTotalText: {fileID: 2111720492}
   enemyTotal: 0
+  enemyCards: []
 --- !u!1 &1216803548
 GameObject:
   m_ObjectHideFlags: 0
@@ -40900,9 +40933,9 @@ MonoBehaviour:
   enemyAI: {fileID: 1187731359}
   playerTotal: 0
   playerCards: []
-  EnemyCards: []
+  enemyCards: []
   playerCardSpawnPoint: {fileID: 1216803549}
-  enemyCardSpawnPoint: {fileID: 381189584}
+  enemyCardSpawnPoint: {fileID: 1144083035}
   cardPrefab: {fileID: 7042065486897809914, guid: d4afb20f413628a42b3fd3430b12f746,
     type: 3}
   cardOffset: 30
@@ -56049,17 +56082,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619432069}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 1.7099985}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 6.89}
   m_LocalScale: {x: 0.0013048534, y: 0.001529393, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 430878244}
   m_Father: {fileID: 791713287}
-  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -944.73, y: -392.57}
+  m_AnchoredPosition: {x: -944.12, y: -392.08}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619432071
@@ -56199,7 +56232,7 @@ Transform:
   m_GameObject: {fileID: 1627590882}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.974, y: 5.9500275, z: 2.2351}
+  m_LocalPosition: {x: -9.974, y: 5.9500275, z: 1.859}
   m_LocalScale: {x: 0.3253688, y: 0.08818842, z: 0.15612572}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56580,7 +56613,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004203357}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 7.27}
+  m_LocalPosition: {x: 0, y: 0, z: 6.79}
   m_LocalScale: {x: 0.009248482, y: 0.015845504, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56589,7 +56622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -944.68, y: -392.46}
+  m_AnchoredPosition: {x: -945.22754, y: -392.46}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2004203359
@@ -61862,7 +61895,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111497435}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 7.27}
+  m_LocalPosition: {x: 0, y: 0, z: 6.79}
   m_LocalScale: {x: 0.009248482, y: 0.015845504, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61871,7 +61904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -945.55, y: -392.46}
+  m_AnchoredPosition: {x: -946.09753, y: -392.46}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2111497437

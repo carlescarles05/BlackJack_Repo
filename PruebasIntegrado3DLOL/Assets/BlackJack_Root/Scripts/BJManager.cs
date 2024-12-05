@@ -46,6 +46,7 @@ public class BJManager : MonoBehaviour
         standButton.onClick.AddListener(PlayerStand);
 
         UpdatePlayerTotalUI();
+        SetPlayerTurn(true); // Asegurarnos de que empiece el turno del jugador
     }
 
     public void PlayerHit()
@@ -53,7 +54,7 @@ public class BJManager : MonoBehaviour
         if (currentTurn != Turn.Player) return;
 
         int cardValue = GenerateCard();
-        playerTotal += cardValue;
+        playerTotal += cardValue; // Acumular el valor de la carta al total del jugador
         UpdatePlayerTotalUI();
 
         GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
@@ -73,7 +74,7 @@ public class BJManager : MonoBehaviour
     public void PlayerStand()
     {
         Debug.Log("Jugador se planta.");
-        SetPlayerTurn(false); // Cambiar el turno al enemigo
+        EndPlayerTurn(); // Cambiar el turno al enemigo
     }
 
     public int GenerateCard()
@@ -83,7 +84,9 @@ public class BJManager : MonoBehaviour
 
     private void EndPlayerTurn()
     {
+        // Cambiar el turno al enemigo
         currentTurn = Turn.Enemy;
+        SetPlayerTurn(false); // Deshabilitar los botones del jugador
         StartCoroutine(EnemyTurnRoutine());
     }
 
@@ -101,16 +104,44 @@ public class BJManager : MonoBehaviour
             UpdateEnemyTotalUI();
             Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
 
+            GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
+            card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
+            enemyCards.Add(card);
+
             if (enemyTotal > 21)
             {
                 Debug.Log("¡El enemigo se pasó de 21!");
-                EndGame(true); // Jugador gana
+                EndGame(true);
                 yield break;
             }
         }
 
+        // El enemigo se planta
         Debug.Log("El enemigo se planta.");
-        CompareScores();
+        EndEnemyTurn();
+    }
+
+    private void EndEnemyTurn()
+    {
+        // Termina el turno del enemigo y pasa al turno del jugador
+        currentTurn = Turn.Player;
+        SetPlayerTurn(true); // Habilitar los botones del jugador
+    }
+
+    private void SetPlayerTurn(bool isTurn)
+    {
+        isPlayerTurn = isTurn;
+        hitButton.interactable = isTurn;
+        standButton.interactable = isTurn;
+
+        if (isTurn)
+        {
+            Debug.Log("Es el turno del jugador.");
+        }
+        else
+        {
+            Debug.Log("Es el turno del enemigo.");
+        }
     }
 
     private void UpdateEnemyTotalUI()
@@ -134,45 +165,6 @@ public class BJManager : MonoBehaviour
         else
         {
             Debug.LogError("PlayerTotalText no está asignado en el Inspector.");
-        }
-    }
-
-    public void CompareScores()
-    {
-        Debug.Log("Comparando los puntajes...");
-
-        if (playerTotal > maxPoints)
-        {
-            EndGame(false); // Jugador pierde
-        }
-        else if (enemyTotal > maxPoints)
-        {
-            EndGame(true); // Jugador gana
-        }
-        else if (playerTotal > enemyTotal)
-        {
-            EndGame(true); // Jugador gana
-        }
-        else if (enemyTotal > playerTotal)
-        {
-            EndGame(false); // Jugador pierde
-        }
-        else
-        {
-            EndGame(null); // Empate
-        }
-    }
-
-    private void SetPlayerTurn(bool isTurn)
-    {
-        isPlayerTurn = isTurn;
-        hitButton.interactable = isTurn;
-        standButton.interactable = isTurn;
-
-        if (!isTurn && !isGameOver)
-        {
-            Debug.Log("Turno del enemigo.");
-            enemyAI.EnemyTurn();
         }
     }
 

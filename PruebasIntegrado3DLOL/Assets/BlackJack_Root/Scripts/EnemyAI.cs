@@ -12,13 +12,13 @@ public class EnemyAI : MonoBehaviour
     public int enemyTotal = 0; // Total de puntos del enemigo
 
     private int cardOffset = 30; // Espaciado entre cartas visibles del enemigo
-    private List<GameObject> enemyCards = new List<GameObject>(); // Lista de cartas del enemigo
+    public List<GameObject> enemyCards = new List<GameObject>(); // Lista de cartas del enemigo
 
     public void EnemyTurn()
     {
         if (bjManager == null)
         {
-            Debug.LogError("BJManager no asignado. Asegúrate de arrastrar el objeto en el Inspector.");
+            Debug.LogError("BJManager no asignado.");
             return;
         }
 
@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator EnemyTurnRoutine()
     {
-        Debug.Log("Turno del enemigo.");
+        Debug.Log("Turno del enemigo comenzado.");
         while (enemyTotal < 17)
         {
             yield return new WaitForSeconds(1f);
@@ -52,18 +52,17 @@ public class EnemyAI : MonoBehaviour
         }
 
         Debug.Log("El enemigo se planta.");
-        bjManager.CompareScores();
     }
 
     private void UpdateEnemyTotalUI()
     {
         if (enemyTotalText != null)
         {
-            enemyTotalText.text = $"{enemyTotal}/21";
+            enemyTotalText.text = $"{enemyTotal}/21"; // Asegúrate de que esto se actualice correctamente
         }
         else
         {
-            Debug.LogError("EnemyTotalText no está asignado en el Inspector.");
+            Debug.LogError("enemyTotalText no está asignado en el Inspector.");
         }
     }
 }
