@@ -1,6 +1,10 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using Unity.VisualScripting;
+
+
 
 public class GuessTheCard : MonoBehaviour
 {
@@ -10,17 +14,70 @@ public class GuessTheCard : MonoBehaviour
     public Player_Points player_Points;
     public Player_Clock player_Clock;
     private int selectedCardIndex = 0;
+    private GameInputActions inputActions;
+    private Vector2 navigationInput;
 
+    /// <summary>
+    /// ////////////
+    /// </summary>
     void Start()
     {
         StartGame();
     }
+    /// <summary>
+    /// INput input
+    /// </summary>
+    void Awake()
+    {
+        inputActions = new GameInputActions();
+        inputActions.Player.Navigate.performed += OnNavigate;
+        inputActions.Player.Navigate.canceled += ctx => navigationInput = Vector2.zero;
+        inputActions.Player.Submit.performed += OnSubmit;
+        inputActions.Enabled();
+    }
 
+    /// <summary>
+    /// ///////////// Method screen navigation
+    /// </summary>
+ 
+    void OnNavigate(InputAction.CallbackContext context)
+    {
+        navigationInput = context.ReadValue<Vector2>();
+        if (navigationInput.x > 0)
+        {
+            MoveSelection(1);
+        }
+        else if (navigationInput.x < 0) 
+        {
+            MoveSelection(-1);
+        }
+        if (navigationInput.y > 0)
+        {
+            MoveSelectionUp();
+        }
+        else if (navigationInput.y < 0) 
+        {
+            MoveSelectionDown();
+        }
+    }
+
+    // method when key down
+    void OnSubmit(InputAction.CallbackContext context)
+    {
+        OnCardClick(cards[selectedCardIndex]); // card logic trigger
+    }
+    void OnDestroy()
+    {
+        inputActions.Disable();
+    }
+    /// <summary>
+    /// /////////////
+    /// </summary>
     void Update()
     {
         // Check for a left mouse button click
         if (Input.GetMouseButtonDown(0))
-        {
+      /* {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -37,7 +94,7 @@ public class GuessTheCard : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
         {
             MoveSelection(1); // Move to the next card
@@ -53,6 +110,10 @@ public class GuessTheCard : MonoBehaviour
             OnCardClick(cards[ selectedCardIndex ]); // Trigger the card logic
         }
     }
+    /// <summary>
+    /// ////////////////
+    /// </summary>
+   
     void MoveSelection(int direction) 
     {
         HighLightCard(selectedCardIndex,false);
@@ -73,6 +134,10 @@ public class GuessTheCard : MonoBehaviour
 
         HighLightCard(selectedCardIndex, true);
     }
+
+    /// <summary>
+    /// ////////
+    ///
     void HighLightCard(int index, bool highlight) 
     {
      Renderer renderer = cards[index].GetComponent<Renderer>();
@@ -85,18 +150,25 @@ public class GuessTheCard : MonoBehaviour
          renderer.material.color =Color.white;
         }
     }
+    /// <summary>
+    /// ////////////////
+    /// </summary>
     void StartGame()
     {
         MachineNumber = Random.Range(1, 22); // AI selects a random number between 1 and 21
         resultText.text = "Elige una carta.";
         Debug.Log($"Machine has picked card number: {MachineNumber}");
     }
-
+    /// <summary>
+    /// ///////////////
+    /// </summary>
     void RestartGame()
     {
         StartGame(); // Reinitialize the game state
     }
-
+    //////////////
+    ////////
+    ////
     void OnCardClick(GameObject clickedCard)
     {
         // Get the card's assigned number
