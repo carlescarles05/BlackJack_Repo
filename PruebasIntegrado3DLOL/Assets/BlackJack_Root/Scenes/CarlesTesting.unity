@@ -40831,12 +40831,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a276ca8f9b996f34fb2fa2410e95bb5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTotal: 0
+  bjManager: {fileID: 1218172600}
   enemyCardSpawnPoint: {fileID: 381189584}
   cardPrefab: {fileID: 7042065486897809914, guid: d4afb20f413628a42b3fd3430b12f746,
     type: 3}
-  gameManager: {fileID: 1218172600}
-  EnemyCards: []
+  enemyTotalText: {fileID: 2111720492}
+  enemyTotal: 0
 --- !u!1 &1216803548
 GameObject:
   m_ObjectHideFlags: 0
@@ -40899,12 +40899,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAI: {fileID: 1187731359}
   playerTotal: 0
-  PlayerCards: []
+  playerCards: []
+  EnemyCards: []
   playerCardSpawnPoint: {fileID: 1216803549}
+  enemyCardSpawnPoint: {fileID: 381189584}
   cardPrefab: {fileID: 7042065486897809914, guid: d4afb20f413628a42b3fd3430b12f746,
     type: 3}
   cardOffset: 30
   playerTotalText: {fileID: 430878245}
+  hitButton: {fileID: 2004203359}
+  standButton: {fileID: 2111497437}
+  currentTurn: 0
 --- !u!4 &1218172601
 Transform:
   m_ObjectHideFlags: 0

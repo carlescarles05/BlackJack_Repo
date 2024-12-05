@@ -1,65 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public int enemyTotal = 0; // Puntos totales del enemigo
+    public BJManager bjManager; // Referencia al BJManager
     public Transform enemyCardSpawnPoint; // Punto donde aparecen las cartas del enemigo
     public GameObject cardPrefab; // Prefab de las cartas
-    public BJManager gameManager; // Referencia al BJManager
+    public TextMeshProUGUI enemyTotalText; // Texto para mostrar el total de puntos del enemigo
+    public int enemyTotal = 0; // Total de puntos del enemigo
 
-    private int maxEnemyCards = 5; // Número máximo de cartas visibles
-    private int cardOffset = 30; // Espaciado entre cartas
-    public List<GameObject> EnemyCards = new List<GameObject>();
-
-    private void Start()
-    {
-        if (EnemyCards == null)
-        {
-            EnemyCards = new List<GameObject>();
-        }
-        if (gameManager == null)
-        {
-            gameManager = FindObjectOfType<BJManager>();
-            if (gameManager == null)
-            {
-                Debug.LogError("BJManager no encontrado. Por favor, asegúrate de asignarlo en el Inspector.");
-            }
-        }
-    }
+    private int cardOffset = 30; // Espaciado entre cartas visibles del enemigo
+    private List<GameObject> enemyCards = new List<GameObject>(); // Lista de cartas del enemigo
 
     public void EnemyTurn()
     {
+        Debug.Log("EnemyTurn ha sido llamado."); // Confirmar que entra aquí
+        StartCoroutine(EnemyTurnRoutine());
+    }
+
+    private IEnumerator EnemyTurnRoutine()
+    {
         Debug.Log("Turno del enemigo.");
 
-        while (enemyTotal < 17) // Lógica básica: Pedir cartas si el total es menor a 17
+        while (enemyTotal < 17) // Lógica básica: el enemigo pide carta si tiene menos de 17 puntos
         {
-            // Generar una nueva carta
-            int newCard = gameManager.GenerateCard();
-            enemyTotal += newCard;
+            yield return new WaitForSeconds(1f); // Simula una pausa entre acciones de la IA
 
-            // Crear la carta visualmente
+            // Generar y añadir una carta
+            int cardValue = bjManager.GenerateCard(); // Llama al método de BJManager
+            enemyTotal += cardValue;
+            UpdateEnemyTotalUI();
+
+            // Instanciar una nueva carta
             GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
+            card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
+            enemyCards.Add(card);
 
-            // Ajustar la posición de la carta basándose en la lista de cartas
-            card.transform.localPosition += new Vector3(cardOffset * EnemyCards.Count, 0, 0);
-            EnemyCards.Add(card);
+            Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
 
-            Debug.Log($"Carta del enemigo: {newCard}");
-            Debug.Log($"Total del enemigo: {enemyTotal}");
-
-            // Verificar si el enemigo pierde
+            // Verificar si el enemigo se pasó de 21
             if (enemyTotal > 21)
             {
-                Debug.Log("El enemigo se pasó de 21.");
-                gameManager.EndGame(true); // Jugador gana
-                return;
+                Debug.Log("¡El enemigo se pasó de 21!");
+                bjManager.EndGame(true); // Jugador gana
+                yield break;
             }
         }
 
-        // El enemigo se planta
         Debug.Log("El enemigo se planta.");
-        gameManager.CompareScores(); // Comparar puntajes
+        bjManager.CompareScores();
+    }
+
+    private void UpdateEnemyTotalUI()
+    {
+        if (enemyTotalText != null)
+        {
+            enemyTotalText.text = $"{enemyTotal}/21";
+            Debug.Log($"Actualizando el puntaje del enemigo: {enemyTotal}/21");
+        }
+        else
+        {
+            Debug.LogError("EnemyTotalText no está asignado en el Inspector.");
+        }
     }
 }

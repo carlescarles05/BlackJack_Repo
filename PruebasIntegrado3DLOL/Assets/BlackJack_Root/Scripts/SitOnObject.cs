@@ -211,6 +211,4 @@ public class SitOnObject : MonoBehaviour
         playerTotal = 0;
         UpdatePlayerCanvas();
     }
-
-
 }
