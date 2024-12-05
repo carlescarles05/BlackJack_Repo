@@ -9,6 +9,7 @@ public class Player_Clock : MonoBehaviour
     public int startSeconds = 30;
     private int totalTime;
 
+
     public Text timer;
     private bool isTimerRunning = true;
     // Start is called before the first frame update
@@ -18,6 +19,7 @@ public class Player_Clock : MonoBehaviour
         UpdateTimer_UI_TXT();
         StartCoroutine(CountdownCoroutine());
     }
+  
     IEnumerator CountdownCoroutine()
     {
      while(isTimerRunning && totalTime > 0) 
