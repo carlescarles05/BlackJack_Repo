@@ -9,7 +9,7 @@ public class BJManager : MonoBehaviour
     public EnemyAI enemyAI; // Referencia al script EnemyAI
     public int playerTotal = 0; // Puntos totales del jugador
     public List<GameObject> playerCards = new List<GameObject>(); // Cartas del jugador
-    public List<GameObject> EnemyCards = new List<GameObject>(); // Cartas del enemigo
+    public List<GameObject> enemyCards = new List<GameObject>(); // Cartas del enemigo
     public Transform playerCardSpawnPoint; // Punto donde aparecen las cartas del jugador
     public Transform enemyCardSpawnPoint; // Punto donde aparecen las cartas del enemigo
     public GameObject cardPrefab; // Prefab de las cartas
@@ -28,6 +28,8 @@ public class BJManager : MonoBehaviour
     }
 
     public Turn currentTurn = Turn.Player;
+    private bool isPlayerTurn;
+    private int enemyTotal;
 
     private void Start()
     {
@@ -70,15 +72,13 @@ public class BJManager : MonoBehaviour
 
     public void PlayerStand()
     {
-        if (currentTurn != Turn.Player) return;
-
         Debug.Log("Jugador se planta.");
-        EndPlayerTurn();
+        SetPlayerTurn(false); // Cambiar el turno al enemigo
     }
 
     public int GenerateCard()
     {
-        return Random.Range(1, 11);
+        return Random.Range(1, 11); // Cambia a (1, 12) si quieres incluir el 11
     }
 
     private void EndPlayerTurn()
@@ -89,38 +89,47 @@ public class BJManager : MonoBehaviour
 
     private IEnumerator EnemyTurnRoutine()
     {
-        Debug.Log("Turno del enemigo.");
+        Debug.Log("Turno del enemigo iniciado.");
 
-        while (enemyAI.enemyTotal < 17)
+        while (enemyTotal < 17)
         {
             yield return new WaitForSeconds(1f);
 
             int cardValue = GenerateCard();
-            enemyAI.enemyTotal += cardValue;
+            enemyTotal += cardValue;
 
-            GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
-            card.transform.localPosition += new Vector3(cardOffset * EnemyCards.Count, 0, 0);
-            EnemyCards.Add(card);
+            UpdateEnemyTotalUI();
+            Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
 
-            if (enemyAI.enemyTotal > maxPoints)
+            if (enemyTotal > 21)
             {
                 Debug.Log("¡El enemigo se pasó de 21!");
-                EndGame(true);
+                EndGame(true); // Jugador gana
                 yield break;
             }
         }
 
         Debug.Log("El enemigo se planta.");
         CompareScores();
+    }
 
-        currentTurn = Turn.Player;
+    private void UpdateEnemyTotalUI()
+    {
+        if (enemyAI.enemyTotalText != null)
+        {
+            enemyAI.enemyTotalText.text = $"{enemyTotal}/21";
+        }
+        else
+        {
+            Debug.LogError("enemyTotalText no está asignado en el Inspector.");
+        }
     }
 
     private void UpdatePlayerTotalUI()
     {
         if (playerTotalText != null)
         {
-            playerTotalText.text = $"{playerTotal}/{maxPoints}";
+            playerTotalText.text = $"{playerTotal}/21";
         }
         else
         {
@@ -134,23 +143,36 @@ public class BJManager : MonoBehaviour
 
         if (playerTotal > maxPoints)
         {
-            EndGame(false);
+            EndGame(false); // Jugador pierde
         }
-        else if (enemyAI.enemyTotal > maxPoints)
+        else if (enemyTotal > maxPoints)
         {
-            EndGame(true);
+            EndGame(true); // Jugador gana
         }
-        else if (playerTotal > enemyAI.enemyTotal)
+        else if (playerTotal > enemyTotal)
         {
-            EndGame(true);
+            EndGame(true); // Jugador gana
         }
-        else if (enemyAI.enemyTotal > playerTotal)
+        else if (enemyTotal > playerTotal)
         {
-            EndGame(false);
+            EndGame(false); // Jugador pierde
         }
         else
         {
-            EndGame(null);
+            EndGame(null); // Empate
+        }
+    }
+
+    private void SetPlayerTurn(bool isTurn)
+    {
+        isPlayerTurn = isTurn;
+        hitButton.interactable = isTurn;
+        standButton.interactable = isTurn;
+
+        if (!isTurn && !isGameOver)
+        {
+            Debug.Log("Turno del enemigo.");
+            enemyAI.EnemyTurn();
         }
     }
 

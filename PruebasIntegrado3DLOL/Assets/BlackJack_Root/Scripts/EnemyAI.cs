@@ -16,35 +16,37 @@ public class EnemyAI : MonoBehaviour
 
     public void EnemyTurn()
     {
-        Debug.Log("EnemyTurn ha sido llamado."); // Confirmar que entra aquí
+        if (bjManager == null)
+        {
+            Debug.LogError("BJManager no asignado. Asegúrate de arrastrar el objeto en el Inspector.");
+            return;
+        }
+
+        Debug.Log("EnemyTurn ha sido llamado.");
         StartCoroutine(EnemyTurnRoutine());
     }
 
     private IEnumerator EnemyTurnRoutine()
     {
         Debug.Log("Turno del enemigo.");
-
-        while (enemyTotal < 17) // Lógica básica: el enemigo pide carta si tiene menos de 17 puntos
+        while (enemyTotal < 17)
         {
-            yield return new WaitForSeconds(1f); // Simula una pausa entre acciones de la IA
+            yield return new WaitForSeconds(1f);
 
-            // Generar y añadir una carta
-            int cardValue = bjManager.GenerateCard(); // Llama al método de BJManager
+            int cardValue = bjManager.GenerateCard();
             enemyTotal += cardValue;
             UpdateEnemyTotalUI();
 
-            // Instanciar una nueva carta
             GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
             card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
             enemyCards.Add(card);
 
             Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
 
-            // Verificar si el enemigo se pasó de 21
             if (enemyTotal > 21)
             {
                 Debug.Log("¡El enemigo se pasó de 21!");
-                bjManager.EndGame(true); // Jugador gana
+                bjManager.EndGame(true);
                 yield break;
             }
         }
@@ -58,7 +60,6 @@ public class EnemyAI : MonoBehaviour
         if (enemyTotalText != null)
         {
             enemyTotalText.text = $"{enemyTotal}/21";
-            Debug.Log($"Actualizando el puntaje del enemigo: {enemyTotal}/21");
         }
         else
         {
