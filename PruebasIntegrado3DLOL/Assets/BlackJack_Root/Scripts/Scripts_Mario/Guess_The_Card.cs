@@ -35,10 +35,10 @@ public class GuessTheCard : MonoBehaviour
     {
         inputActions = new GameInputActions();
 
-        inputActions.Player.Navigate.performed += OnNavigate;
+        inputActions.Navigate.Navigate.performed += OnNavigate; //Navigation
         //inputActions.Player.Navigate.canceled += ctx => navigationInput = Vector2.zero;
-        inputActions.Player.Submit.performed += OnSubmit;
-        inputActions.Enabled();
+        inputActions.Navigate.Submit.performed += OnSubmit;
+        inputActions.Navigate.Enable();  //Enable the Navigate action map
     }
     void Update()
     {

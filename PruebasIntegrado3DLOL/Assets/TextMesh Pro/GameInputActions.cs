@@ -15,10 +15,9 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @GameInputActions : IInputActionCollection2, IDisposable
+public partial class @GameInputActions: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public InputActionMap Player { get; }
     public @GameInputActions()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -135,11 +134,7 @@ public partial class @GameInputActions : IInputActionCollection2, IDisposable
         m_Navigate_Navigate = m_Navigate.FindAction("Navigate", throwIfNotFound: true);
         m_Navigate_Submit = m_Navigate.FindAction("Submit", throwIfNotFound: true);
     }
-    void wake() 
-    {
-        inputActions = new GameInputActions();
-        inputActions.Player.Enable();
-    }
+
     public void Dispose()
     {
         UnityEngine.Object.Destroy(asset);
