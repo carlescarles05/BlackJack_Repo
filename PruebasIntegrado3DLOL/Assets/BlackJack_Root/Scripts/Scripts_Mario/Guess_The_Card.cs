@@ -8,13 +8,13 @@ using Unity.VisualScripting;
 
 public class GuessTheCard : MonoBehaviour
 {
+    //DInput
     public GameObject[] cards;
     public Text resultText;
     private int MachineNumber;
     public Player_Points player_Points;
     public Player_Clock player_Clock;
-    private int selectedCardIndex = 0;
-//Updated upstream
+    private int selectedCardIndexPos = 0;
     private GameInputActions inputActions;
 
     private Vector2 navigationInput;
@@ -26,17 +26,24 @@ public class GuessTheCard : MonoBehaviour
     {
         StartGame();
     }
+    void StartGame()
+    {
+        //INIT
+        MachineNumber = Random.Range(1, 22); // AI selects a random number between 1 and 21
+        resultText.text = "Elige una carta.";
+        Debug.Log($"Machine has picked card number: {MachineNumber}");
+    }
     /// <summary>
     /// INput input
     /// </summary>
-//< Updated upstream
-   void Awake()
+    //< Updated upstream
+    void Awake()
 
     {
+        //KEYS INPUT
         inputActions = new GameInputActions();
 
         inputActions.Navigate.Navigate.performed += OnNavigate; //Navigation
-        //inputActions.Player.Navigate.canceled += ctx => navigationInput = Vector2.zero;
         inputActions.Navigate.Submit.performed += OnSubmit;
         inputActions.Navigate.Enable();  //Enable the Navigate action map
     }
@@ -61,7 +68,7 @@ public class GuessTheCard : MonoBehaviour
                       }
                   }
               }
-          }*/
+          }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
         {
             MoveSelection(1); // Move to the next card
@@ -75,7 +82,7 @@ public class GuessTheCard : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Submit"))
         {
             OnCardClick(cards[selectedCardIndex]); // Trigger the card logic
-        }
+        }*/
     }
 
     /// <summary>
@@ -85,7 +92,7 @@ public class GuessTheCard : MonoBehaviour
     void OnNavigate(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
-        if ( input.x > 0)
+        if ( input.x > 0)  //Right move
         {
             MoveSelection(1);
         }
@@ -95,7 +102,6 @@ public class GuessTheCard : MonoBehaviour
         }
        /* if (navigationInput.y > 0)
         {
-// Updated upstream
            
         }
         else if (navigationInput.y < 0) 
@@ -106,21 +112,16 @@ public class GuessTheCard : MonoBehaviour
         }
         else if (navigationInput.y < 0) 
         {
-           
-// Stashed changes
-        }*/
+           */
+
     }
 
     // method when key down
     void OnSubmit(InputAction.CallbackContext context)
     {
-        OnCardClick(cards[selectedCardIndex]); // card logic trigger
+        Debug.Log($"Submited!Selected Index:{selectedCardIndexPos}");
+        SelectedCardAction(cards[selectedCardIndexPos]); // card logic trigger
     }
-  /* void OnDestroy()
-    {
-       // inputActions.Disable();
-    }
-  */
 
     /// <summary>
     /// /////////////
@@ -128,28 +129,28 @@ public class GuessTheCard : MonoBehaviour
    
     void MoveSelection(int direction) 
     {
-        HighLightCard(selectedCardIndex,false);
+        HighLightCard(selectedCardIndexPos, false);
 
         //update the index
-        selectedCardIndex += direction;
+        selectedCardIndexPos += direction;
 
-        if (selectedCardIndex >= cards.Length)
+        if (selectedCardIndexPos >= cards.Length)
         {
 
-            selectedCardIndex = 0;
+            selectedCardIndexPos = 0;
 
         }
-        else if (selectedCardIndex <0)
+        else if (selectedCardIndexPos < 0)
         {
-         selectedCardIndex = cards.Length-1;
+            selectedCardIndexPos = cards.Length-1;
         }
 
-        HighLightCard(selectedCardIndex, true);
+        HighLightCard(selectedCardIndexPos, true);
     }
 
-    /// <summary>
+    ////////////////
     /// ////////
-    ///
+    ////
     void HighLightCard(int index, bool highlight) 
     {
      Renderer renderer = cards[index].GetComponent<Renderer>();
@@ -162,26 +163,10 @@ public class GuessTheCard : MonoBehaviour
          renderer.material.color =Color.white;
         }
     }
-    /// <summary>
-    /// ////////////////
-    /// </summary>
-    void StartGame()
-    {
-        MachineNumber = Random.Range(1, 22); // AI selects a random number between 1 and 21
-        resultText.text = "Elige una carta.";
-        Debug.Log($"Machine has picked card number: {MachineNumber}");
-    }
-    /// <summary>
-    /// ///////////////
-    /// </summary>
-    void RestartGame()
-    {
-        StartGame(); // Reinitialize the game state
-    }
     //////////////
     ////////
     ////
-    void OnCardClick(GameObject clickedCard)
+    void SelectedCardAction(GameObject clickedCard)
     {
         // Get the card's assigned number
         int cardNumber = int.Parse(clickedCard.name.Replace("Card_", ""));
@@ -228,5 +213,9 @@ public class GuessTheCard : MonoBehaviour
             resultText.text = $"Te alejaste demasiado. Pierdes tiempo (-8 minutos).";
             Invoke("RestartGame", 2f); 
         }
+    }
+    void RestartGame()
+    {
+        StartGame(); // Reinitialize the game state
     }
 }
