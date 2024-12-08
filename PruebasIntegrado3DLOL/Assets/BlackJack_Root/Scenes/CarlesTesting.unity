@@ -40942,6 +40942,7 @@ MonoBehaviour:
   playerTotalText: {fileID: 430878245}
   hitButton: {fileID: 2004203359}
   standButton: {fileID: 2111497437}
+  EnemyAI: {fileID: 1187731359}
   currentTurn: 0
 --- !u!4 &1218172601
 Transform:
