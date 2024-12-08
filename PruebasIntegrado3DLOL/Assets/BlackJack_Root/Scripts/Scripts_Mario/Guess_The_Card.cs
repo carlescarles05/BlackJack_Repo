@@ -49,40 +49,7 @@ public class GuessTheCard : MonoBehaviour
     }
     void Update()
     {
-        // Check for a left mouse button click
-        // if (Input.GetMouseButtonDown(0))
-        /* {
-              Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-              RaycastHit hit;
-
-              // Cast a ray from the camera to where the user clicked
-              if (Physics.Raycast(ray, out hit))
-              {
-                  // Check if the clicked object is one of the cards
-                  foreach (GameObject card in cards)
-                  {
-                      if (hit.collider.gameObject == card)
-                      {
-                          OnCardClick(card); // Trigger the click logic
-                          return;
-                      }
-                  }
-              }
-          }
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
-        {
-            MoveSelection(1); // Move to the next card
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") < 0)
-        {
-            MoveSelection(-1); // Move to the previous card
-        }
-
-        // Confirm selection with Enter or gamepad A button
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Submit"))
-        {
-            OnCardClick(cards[selectedCardIndex]); // Trigger the card logic
-        }*/
+       
     }
 
     /// <summary>
@@ -92,41 +59,27 @@ public class GuessTheCard : MonoBehaviour
     void OnNavigate(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
-        if ( input.x > 0)  //Right move
+        if (input.x > 0)  // Move right
         {
             MoveSelection(1);
         }
-        else if (input.x < 0) 
+        else if (input.x < 0) // Move left
         {
             MoveSelection(-1);
         }
-       /* if (navigationInput.y > 0)
-        {
-           
-        }
-        else if (navigationInput.y < 0) 
-        {
-
-////
-          
-        }
-        else if (navigationInput.y < 0) 
-        {
-           */
-
     }
 
     // method when key down
     void OnSubmit(InputAction.CallbackContext context)
     {
-        Debug.Log($"Submited!Selected Index:{selectedCardIndexPos}");
-        SelectedCardAction(cards[selectedCardIndexPos]); // card logic trigger
+        Debug.Log($"Submitted! Selected Index: {selectedCardIndexPos}");
+        SelectedCardAction(cards[selectedCardIndexPos]);
     }
 
     /// <summary>
     /// /////////////
     /// </summary>
-   
+
     void MoveSelection(int direction) 
     {
         HighLightCard(selectedCardIndexPos, false);
