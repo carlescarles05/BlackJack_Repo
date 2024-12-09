@@ -17,12 +17,16 @@ public class BJManager : MonoBehaviour
     public TextMeshProUGUI playerTotalText; // Referencia al texto del canvas
     public Button hitButton; // Botón "Robar carta"
     public Button standButton; // Botón "Plantarse"
+    public bool isPlayerStanding = false;
+    public BJManager bjManager; // Asegúrate de tener esta variable pública en el script
 
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
     private int enemyTotal;
 
     [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
+
+
 
     public enum Turn
     {
@@ -52,22 +56,6 @@ public class BJManager : MonoBehaviour
 
     public void PlayerHit()
     {
-        /*if (currentTurn != Turn.Player || isGameOver) return;
-
-        int cardValue = GenerateCard();
-        playerTotal += cardValue;
-        UpdatePlayerTotalUI();
-
-        GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
-        card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
-        playerCards.Add(card);
-
-        if (playerTotal > maxPoints)
-        {
-            Debug.Log("¡Te pasaste de 21!");
-            EndGame(false);
-            return;
-        }*/
         if (currentTurn != Turn.Player) return;
 
         int cardValue = GenerateCard();
@@ -94,7 +82,15 @@ public class BJManager : MonoBehaviour
         if (currentTurn != Turn.Player || isGameOver) return;
 
         Debug.Log("Jugador se planta.");
+
+        // Finalizar el turno del jugador
         EndTurn();
+
+        // Asegurarse de iniciar el turno del enemigo
+        if (currentTurn == Turn.Enemy)
+        {
+            StartEnemyTurn();
+        }
     }
 
     public int GenerateCard()
@@ -104,15 +100,20 @@ public class BJManager : MonoBehaviour
 
     public void EndTurn()
     {
+        if (isGameOver) return;
+
+        // Alternar turno
         if (currentTurn == Turn.Player)
         {
             currentTurn = Turn.Enemy;
-            StartEnemyTurn();
+            Debug.Log("Turno del enemigo.");
+            enemyAI.EnemyTurn(); // Llama una vez al turno del enemigo
         }
         else if (currentTurn == Turn.Enemy)
         {
             currentTurn = Turn.Player;
-            StartPlayerTurn();
+            Debug.Log("Turno del jugador.");
+            // Aquí puedes configurar la lógica para reiniciar el turno del jugador si es necesario
         }
     }
 
@@ -128,41 +129,39 @@ public class BJManager : MonoBehaviour
 
     private void StartEnemyTurn()
     {
-        if (isGameOver) return;
+        if (currentTurn != Turn.Enemy || isGameOver) return;
 
-        Debug.Log("Es el turno del enemigo.");
-        hitButton.interactable = false;
-        standButton.interactable = false;
-
+        Debug.Log("Turno del enemigo iniciado.");
         StartCoroutine(EnemyTurnRoutine());
     }
 
     private IEnumerator EnemyTurnRoutine()
     {
-        while (enemyTotal < 17 && !isGameOver)
+        Debug.Log("Turno del enemigo comenzado.");
+
+        // El enemigo solo toma una carta y termina su turno
+        yield return new WaitForSeconds(1f); // Simular tiempo de espera
+
+        int cardValue = bjManager.GenerateCard();
+        enemyTotal += cardValue;
+        UpdateEnemyTotalUI();
+
+        Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
+
+        GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
+        card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
+        enemyCards.Add(card);
+
+        // Verificar si el enemigo se pasa de 21
+        if (enemyTotal > 21)
         {
-            yield return new WaitForSeconds(1f);
-
-            int cardValue = GenerateCard();
-            enemyTotal += cardValue;
-
-            UpdateEnemyTotalUI();
-            Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
-
-            GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
-            card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
-            enemyCards.Add(card);
-
-            if (enemyTotal > maxPoints)
-            {
-                Debug.Log("¡El enemigo se pasó de 21!");
-                EndGame(true);
-                yield break;
-            }
+            Debug.Log("¡El enemigo se pasó de 21!");
+            bjManager.EndGame(true);
+            yield break; // Termina la rutina si se pasa
         }
 
-        Debug.Log("El enemigo se planta.");
-        EndTurn();
+        // Finalizar el turno del enemigo
+        bjManager.EndTurn();
     }
 
     private void UpdateEnemyTotalUI()

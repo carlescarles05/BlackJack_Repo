@@ -23,36 +23,11 @@ public class EnemyAI : MonoBehaviour
         }
 
         Debug.Log("EnemyTurn ha sido llamado.");
-        StartCoroutine(EnemyTurnRoutine());
+        StartCoroutine(EnemyTurnRoutine()); // Asegúrate de que solo se llama a esta rutina una vez
     }
 
     private IEnumerator EnemyTurnRoutine()
     {
-        /*Debug.Log("Turno del enemigo comenzado.");
-        while (enemyTotal < 17)
-        {
-            yield return new WaitForSeconds(1f);
-
-            int cardValue = bjManager.GenerateCard();
-            enemyTotal += cardValue;
-            UpdateEnemyTotalUI();
-
-            GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
-            card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
-            enemyCards.Add(card);
-
-            Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
-
-            if (enemyTotal > 21)
-            {
-                Debug.Log("¡El enemigo se pasó de 21!");
-                bjManager.EndGame(true);
-                yield break;
-            }
-        }
-
-        Debug.Log("El enemigo se planta.");
-        bjManager.EndTurn(); // Notificar que el turno del enemigo ha terminado*/
         Debug.Log("Turno del enemigo comenzado.");
 
         // Pide solo una carta, no más
