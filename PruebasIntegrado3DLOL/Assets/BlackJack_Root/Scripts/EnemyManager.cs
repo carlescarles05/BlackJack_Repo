@@ -21,11 +21,6 @@ public class EnemyManager : MonoBehaviour
         int card2Value = cardValues[Random.Range(0, cardValues.Length)];
         enemyTotal = card1Value + card2Value;
 
-        // Actualizar el texto del canvas
-        /*if (enemyTotalText != null)
-        {
-            enemyTotalText.text = enemyTotal + "/21";
-        }*/
 
         // Activar las cartas y partículas
         StartCoroutine(ActivateCardWithParticles(enemySmoke1, enemyCard1));

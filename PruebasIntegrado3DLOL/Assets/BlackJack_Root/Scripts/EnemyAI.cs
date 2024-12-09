@@ -25,17 +25,15 @@ public class EnemyAI : MonoBehaviour
     public void EnemyTurn()
     {
         // Verificar si bjManager está asignado correctamente
-        if (bjManager != null)
-        {
-            // Llamamos la corutina del BJManager correctamente
-            bjManager.StartCoroutine(bjManager.EnemyTurnRoutine());  // Llama a la corutina desde BJManager
-        }
-        else
-        {
-            Debug.LogError("BJManager no está asignado en EnemyAI.");
-        }
+    if (bjManager != null)
+    {
+        // Llamamos la corutina del BJManager correctamente
+        bjManager.StartCoroutine(bjManager.EnemyTurnRoutine());  // Llama a la corutina desde BJManager
     }
-
-    
+    else
+    {
+        Debug.LogError("BJManager no está asignado en EnemyAI.");
+    }
+    }  
 
 }
