@@ -100,20 +100,15 @@ public class BJManager : MonoBehaviour
 
     public void EndTurn()
     {
-        if (isGameOver) return;
-
-        // Alternar turno
         if (currentTurn == Turn.Player)
         {
             currentTurn = Turn.Enemy;
-            Debug.Log("Turno del enemigo.");
-            enemyAI.EnemyTurn(); // Llama una vez al turno del enemigo
+            StartEnemyTurn();
         }
         else if (currentTurn == Turn.Enemy)
         {
             currentTurn = Turn.Player;
-            Debug.Log("Turno del jugador.");
-            // Aquí puedes configurar la lógica para reiniciar el turno del jugador si es necesario
+            StartPlayerTurn();
         }
     }
 

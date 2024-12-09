@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator EnemyTurnRoutine()
     {
+
         Debug.Log("Turno del enemigo comenzado.");
 
         // Pide solo una carta, no más

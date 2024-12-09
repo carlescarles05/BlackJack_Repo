@@ -92,5 +92,4 @@ public class EnemyManager : MonoBehaviour
         UpdateEnemyCanvas();
     }
 
-
 }
