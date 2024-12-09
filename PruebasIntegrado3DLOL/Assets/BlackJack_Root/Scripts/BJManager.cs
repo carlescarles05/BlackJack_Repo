@@ -26,8 +26,6 @@ public class BJManager : MonoBehaviour
 
     [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
 
-
-
     public enum Turn
     {
         Player,
@@ -86,16 +84,17 @@ public class BJManager : MonoBehaviour
         // Finalizar el turno del jugador
         EndTurn();
 
-        // Asegurarse de iniciar el turno del enemigo
+        // Ahora es el turno del enemigo
+        // Verificar que el turno haya cambiado a enemigo antes de llamar a EnemyTurn()
         if (currentTurn == Turn.Enemy)
         {
-            StartEnemyTurn();
+            enemyAI.EnemyTurn();  // Llamamos al turno del enemigo directamente
         }
     }
 
     public int GenerateCard()
     {
-        return Random.Range(1, 11); // Cambia a (1, 12) si quieres incluir el 11
+        return Random.Range(1, 7); // Cambia a (1, 7)
     }
 
     public void EndTurn()
@@ -125,49 +124,51 @@ public class BJManager : MonoBehaviour
     private void StartEnemyTurn()
     {
         if (currentTurn != Turn.Enemy || isGameOver) return;
-
-        Debug.Log("Turno del enemigo iniciado.");
         StartCoroutine(EnemyTurnRoutine());
     }
 
-    private IEnumerator EnemyTurnRoutine()
+    public IEnumerator EnemyTurnRoutine()
     {
         Debug.Log("Turno del enemigo comenzado.");
 
-        // El enemigo solo toma una carta y termina su turno
-        yield return new WaitForSeconds(1f); // Simular tiempo de espera
+        yield return new WaitForSeconds(1f); // Pausa simulada para el turno del enemigo
 
-        int cardValue = bjManager.GenerateCard();
+        // Generar carta
+        int cardValue = GenerateCard();
         enemyTotal += cardValue;
+        Debug.Log($"Valor de la carta: {cardValue}, Total enemigo: {enemyTotal}");
+
         UpdateEnemyTotalUI();
 
-        Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
-
+        // Instanciar la carta visualmente
         GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
         card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
         enemyCards.Add(card);
 
-        // Verificar si el enemigo se pasa de 21
+        Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
+
+        // Verificar si el enemigo se pasó de 21
         if (enemyTotal > 21)
         {
             Debug.Log("¡El enemigo se pasó de 21!");
-            bjManager.EndGame(true);
-            yield break; // Termina la rutina si se pasa
+            EndGame(true); // El jugador gana
+            yield break;
         }
 
         // Finalizar el turno del enemigo
-        bjManager.EndTurn();
+        Debug.Log("El enemigo termina su turno.");
+        EndTurn(); // Cambiar al turno del jugador
     }
 
     private void UpdateEnemyTotalUI()
     {
-        if (enemyAI.enemyTotalText != null)
+        if (enemyAI != null && enemyAI.enemyTotalText != null)
         {
             enemyAI.enemyTotalText.text = $"{enemyTotal}/21";
         }
         else
         {
-            Debug.LogError("enemyTotalText no está asignado en el Inspector.");
+            Debug.LogError("enemyAI o enemyTotalText no está asignado en el Inspector.");
         }
     }
 

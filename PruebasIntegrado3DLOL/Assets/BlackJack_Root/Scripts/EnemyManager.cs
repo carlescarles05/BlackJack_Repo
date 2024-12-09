@@ -22,10 +22,10 @@ public class EnemyManager : MonoBehaviour
         enemyTotal = card1Value + card2Value;
 
         // Actualizar el texto del canvas
-        if (enemyTotalText != null)
+        /*if (enemyTotalText != null)
         {
             enemyTotalText.text = enemyTotal + "/21";
-        }
+        }*/
 
         // Activar las cartas y partículas
         StartCoroutine(ActivateCardWithParticles(enemySmoke1, enemyCard1));
@@ -81,7 +81,7 @@ public class EnemyManager : MonoBehaviour
         return newCard;
     }
 
-    public void UpdateEnemyCanvas()
+    /*public void UpdateEnemyCanvas()
     {
         enemyTotalText.text = enemyTotal + "/21";
     }
@@ -90,6 +90,6 @@ public class EnemyManager : MonoBehaviour
     {
         enemyTotal = 0;
         UpdateEnemyCanvas();
-    }
+    }*/
 
 }
