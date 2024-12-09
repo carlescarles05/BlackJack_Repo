@@ -19,9 +19,10 @@ public class GuessTheCard : MonoBehaviour
 
     private Vector2 navigationInput;
 
-    /// <summary>
-    /// ////////////
-    /// </summary>
+/// ////////////////
+/// ///////
+/// 
+
     void Start()
     {
         StartGame();
@@ -33,9 +34,6 @@ public class GuessTheCard : MonoBehaviour
         resultText.text = "Elige una carta.";
         Debug.Log($"Machine has picked card number: {MachineNumber}");
     }
-    /// <summary>
-    /// INput input
-    /// </summary>
     //< Updated upstream
     void Awake()
 
@@ -116,9 +114,29 @@ public class GuessTheCard : MonoBehaviour
          renderer.material.color =Color.white;
         }
     }
+
     //////////////
     ////////
     ////
+    ///
+    void HighlightMachineCard()  //Apart
+    {
+        foreach (var card in cards) 
+        {
+            int cardNumber = int.Parse(card.name.Replace("Card_", ""));
+            if (cardNumber == MachineNumber)
+            {
+             Renderer renderer = card.GetComponent<Renderer>();
+                renderer.material.color = Color.red; //machine card highlight
+                break;
+            }
+        }
+    }
+    //////////////
+    ////////
+    ////
+    ///
+
     void SelectedCardAction(GameObject clickedCard)
     {
         // Get the card's assigned number
@@ -131,44 +149,54 @@ public class GuessTheCard : MonoBehaviour
             player_Points.AddPoints(+250);
             player_Clock.AddTime(8 * 60);
             resultText.text = $"¡Adivinaste la carta! Tienes +8 minutos de vida. Reiniciando...";
-            Invoke("RestartGame", 2f);
+            
         }
         else if (difference == 1)
         {
             player_Points.AddPoints(+200);
             player_Clock.AddTime(5 * 60);
             resultText.text = $"¡Casi aciertas! Tienes +5 minutos.";
-            Invoke("RestartGame", 2f); 
+          
         }
         else if (difference == 2)
         {
             resultText.text = "No recibes nada esta vez.";
-            Invoke("RestartGame", 2f); 
+          
         }
         else if (difference <= 5)
         {
             player_Points.AddPoints(-200);
             player_Clock.AddTime(-2 * 60);
             resultText.text = $"Por poco. Pierdes tiempo (-2 minutos).";
-            Invoke("RestartGame", 2f); 
+        
         }
         else if (difference <= 10)
         {
             player_Points.AddPoints(-30);
             player_Clock.AddTime(-5 * 60);
             resultText.text = $"Estás algo lejos. Pierdes tiempo (-5 minutos).";
-            Invoke("RestartGame", 2f); 
+         
         }
         else
         {
             player_Points.AddPoints(-100);
             player_Clock.AddTime(-8 * 60);
             resultText.text = $"Te alejaste demasiado. Pierdes tiempo (-8 minutos).";
-            Invoke("RestartGame", 2f); 
+           
+
+        
         }
+        HighlightMachineCard();
+        Invoke("RestartGame", 2f);
     }
     void RestartGame()
     {
+        foreach (GameObject card in cards)
+        {
+        
+            Renderer renderer = card.GetComponent<Renderer>();
+            renderer.material.color = Color.white;
+        }
         StartGame(); // Reinitialize the game state
     }
 }
