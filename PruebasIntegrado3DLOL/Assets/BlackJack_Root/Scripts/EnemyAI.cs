@@ -29,6 +29,7 @@ public class EnemyAI : MonoBehaviour
     {
         // Llamamos la corutina del BJManager correctamente
         bjManager.StartCoroutine(bjManager.EnemyTurnRoutine());  // Llama a la corutina desde BJManager
+            Debug.Log("f");
     }
     else
     {

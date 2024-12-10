@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,7 +58,7 @@ public class BJManager : MonoBehaviour
         if (currentTurn != Turn.Player) return;
 
         int cardValue = GenerateCard();
-        playerTotal += cardValue; // Acumular el valor de la carta al total del jugador
+        playerTotal = playerTotal + cardValue; // Acumular el valor de la carta al total del jugador
         UpdatePlayerTotalUI();
 
         GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
@@ -86,10 +87,10 @@ public class BJManager : MonoBehaviour
 
         // Ahora es el turno del enemigo
         // Verificar que el turno haya cambiado a enemigo antes de llamar a EnemyTurn()
-        if (currentTurn == Turn.Enemy)
+        /*if (currentTurn == Turn.Enemy)
         {
             enemyAI.EnemyTurn();  // Llamamos al turno del enemigo directamente
-        }
+        }*/
     }
 
     public int GenerateCard()
@@ -109,6 +110,7 @@ public class BJManager : MonoBehaviour
             currentTurn = Turn.Player;
             StartPlayerTurn();
         }
+
     }
 
     private void StartPlayerTurn()
@@ -129,10 +131,11 @@ public class BJManager : MonoBehaviour
 
     public IEnumerator EnemyTurnRoutine()
     {
+        
         Debug.Log("Turno del enemigo comenzado.");
 
         yield return new WaitForSeconds(1f); // Pausa simulada para el turno del enemigo
-
+        Debug.Log("Eres tonto");
         // Generar carta
         int cardValue = GenerateCard();
         enemyTotal += cardValue;
@@ -157,13 +160,16 @@ public class BJManager : MonoBehaviour
 
         // Finalizar el turno del enemigo
         Debug.Log("El enemigo termina su turno.");
+        
         EndTurn(); // Cambiar al turno del jugador
+        
     }
 
     private void UpdateEnemyTotalUI()
     {
         if (enemyAI != null && enemyAI.enemyTotalText != null)
         {
+            Debug.Log("Cabron");
             enemyAI.enemyTotalText.text = $"{enemyTotal}/21";
         }
         else
@@ -176,7 +182,8 @@ public class BJManager : MonoBehaviour
     {
         if (playerTotalText != null)
         {
-            playerTotalText.text = $"{playerTotal}/21";
+            playerTotalText.text = playerTotal.ToString() + "/21";
+            //playerTotalText.text = $"{playerTotal}/21";
         }
         else
         {
