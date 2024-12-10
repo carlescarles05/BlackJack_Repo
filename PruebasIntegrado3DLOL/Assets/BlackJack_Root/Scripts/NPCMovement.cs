@@ -11,6 +11,7 @@ public class NPCMovement : MonoBehaviour
 
     private NavMeshAgent agent;  // Referencia al NavMeshAgent
     private Vector3 startPosition;  // Posición inicial del NPC
+    public bool canMove = true;
 
     void Start()
     {
@@ -19,11 +20,27 @@ public class NPCMovement : MonoBehaviour
         startPosition = transform.position;
 
         // Elegir el primer destino
-        ChooseNewDestination();
+        if (canMove) ChooseNewDestination();
     }
 
     void Update()
     {
+        if (!canMove)
+        {
+            if (agent.enabled)
+            {
+                agent.isStopped = true; // Detener al agente
+                agent.velocity = Vector3.zero; // Asegurarse de que no tenga velocidad residual
+            }
+            return;
+        }
+
+        // Reactivar el movimiento si el agente estaba detenido
+        if (agent.isStopped)
+        {
+            agent.isStopped = false;
+        }
+
         // Verifica si el NPC llegó al destino
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
@@ -34,6 +51,8 @@ public class NPCMovement : MonoBehaviour
 
     void ChooseNewDestination()
     {
+        if (!canMove) return;
+
         // Generar un destino aleatorio dentro del rango
         Vector3 randomDirection = new Vector3(
             Random.Range(-movementRange, movementRange),
@@ -49,4 +68,26 @@ public class NPCMovement : MonoBehaviour
             agent.SetDestination(hit.position);
         }
     }
+
+    public void SetMovement(bool state)
+    {
+        canMove = state;
+
+        if (!state)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
+        else
+        {
+            if (!agent.enabled)
+            {
+                agent.enabled = true; // Reactivar el agente si estaba desactivado
+            }
+
+            agent.isStopped = false;
+            ChooseNewDestination(); // Forzar una nueva ruta al reactivar el movimiento
+        }
+    }
+
 }
