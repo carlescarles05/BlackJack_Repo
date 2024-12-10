@@ -46,7 +46,6 @@ public class NPCInteractio : MonoBehaviour
             isDialogueActive = true;
             currentLineIndex = 0; // Empezar desde la primera línea
             dialoguePanel.SetActive(true); // Mostrar el panel de diálogo
-            dialogueText.text = dialogueLines[currentLineIndex]; // Mostrar la primera línea
 
             // Desactivar el movimiento del NPC
             if (Move != null)
@@ -58,6 +57,20 @@ public class NPCInteractio : MonoBehaviour
             {
                 Debug.LogError("El componente NPCMovement no está asignado.");
             }
+
+            // Iniciar la animación del texto
+            StartCoroutine(TypeSentence(dialogueLines[currentLineIndex]));
+        }
+    }
+
+    private IEnumerator TypeSentence(string sentence)
+    {
+        dialogueText.text = ""; // Limpiar el texto actual
+
+        foreach (char letter in sentence)
+        {
+            dialogueText.text += letter; // Agregar letra por letra
+            yield return new WaitForSeconds(0.05f); // Espera antes de mostrar la siguiente letra
         }
     }
 
@@ -66,7 +79,7 @@ public class NPCInteractio : MonoBehaviour
         currentLineIndex++;
         if (currentLineIndex < dialogueLines.Length)
         {
-            dialogueText.text = dialogueLines[currentLineIndex]; // Mostrar la siguiente línea
+            StartCoroutine(TypeSentence(dialogueLines[currentLineIndex])); // Mostrar la siguiente línea
         }
         else
         {
@@ -83,7 +96,7 @@ public class NPCInteractio : MonoBehaviour
         if (Move != null)
         {
             Debug.Log("Reactivando movimiento del NPC.");
-            Move.enabled = true;
+            Move.SetMovement(true); // Reactivar el movimiento
         }
         else
         {
@@ -115,17 +128,10 @@ public class NPCInteractio : MonoBehaviour
                 interactionIndicator.SetActive(false); // Desactivar el indicador
             }
 
-            // Si el jugador sale del rango, cerrar el diálogo
+            // Si el jugador sale del rango, cerrar el diálogo y reactivar el movimiento
             if (isDialogueActive)
             {
                 EndDialogue();
-            }
-
-            // Reactivar el movimiento del NPC
-            if (Move != null)
-            {
-                Debug.Log("Reactivando movimiento del NPC al salir del Trigger.");
-                Move.SetMovement(true); // Reactivar movimiento
             }
         }
     }
