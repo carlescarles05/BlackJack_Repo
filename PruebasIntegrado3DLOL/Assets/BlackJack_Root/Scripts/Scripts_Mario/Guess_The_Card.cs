@@ -170,7 +170,7 @@ public class GuessTheCard : MonoBehaviour
             resultText.text = $"Por poco. Pierdes tiempo (-2 minutos).";
         
         }
-        else if (difference <= 10)
+        else if (difference <= 8)
         {
             player_Points.AddPoints(-30);
             player_Clock.AddTime(-5 * 60);
