@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParticleOnce : MonoBehaviour
 {
-    private ParticleSystem ps;
+    public ParticleSystem ps;
 
     /*void Start()
     {
@@ -21,11 +21,19 @@ public class ParticleOnce : MonoBehaviour
     }*/
     void Start()
     {
-        ps = GetComponentInChildren<ParticleSystem>(); // Busca en los hijos
-                                                       // O usa GetComponentInParent si está en un padre.
+        // Busca en el mismo GameObject primero
+        ps = GetComponent<ParticleSystem>();
+
+        // Si no lo encuentra, busca en los hijos
         if (ps == null)
         {
-            Debug.LogError("No se encontró un ParticleSystem en el GameObject o en sus hijos/padres.");
+            ps = GetComponentInChildren<ParticleSystem>();
+        }
+
+        // Log de error si sigue sin encontrarlo
+        if (ps == null)
+        {
+            Debug.LogError("No se encontró un ParticleSystem en el GameObject ni en sus hijos.");
         }
     }
 

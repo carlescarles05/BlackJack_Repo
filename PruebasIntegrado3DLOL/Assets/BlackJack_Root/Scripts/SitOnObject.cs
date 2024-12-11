@@ -27,7 +27,6 @@ public class SitOnObject : MonoBehaviour
     public TextMeshProUGUI enemyTotalText; // Total de cartas del enemigo
     public EnemyManager enemyManager; // Arrastra el GameObject con el EnemyManager en el Inspector
 
-
     private bool isSitting = false;
     private bool isTransitioning = false;
     private Transform playerTransform;
@@ -75,7 +74,7 @@ public class SitOnObject : MonoBehaviour
             Collider[] nearbyObjects = Physics.OverlapSphere(playerTransform.position, 2f);
             foreach (Collider obj in nearbyObjects)
             {
-                if (obj.CompareTag("Chair"))
+                if (obj != null && obj.CompareTag("Chair"))
                 {
                     if (Input.GetKeyDown(interactKey))
                     {
@@ -91,12 +90,26 @@ public class SitOnObject : MonoBehaviour
     {
         isTransitioning = true;
 
+        // Desactivar movimiento y rotación del jugador
         if (playerMovement != null) playerMovement.enabled = false;
         if (characterController != null) characterController.enabled = false;
 
+        // Desactivar el Rigidbody para evitar movimiento por física
+        Rigidbody playerRigidbody = playerTransform.GetComponent<Rigidbody>();
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.isKinematic = true; // Desactivar la física
+            playerRigidbody.detectCollisions = false; // Desactivar las colisiones
+        }
+
+        // Fijar la rotación del jugador para que no gire durante el movimiento
+        playerTransform.rotation = Quaternion.Euler(0f, playerTransform.rotation.eulerAngles.y, 0f); // Mantener solo la rotación en Y
+
+        // Mover al jugador suavemente hacia la silla
         float elapsedTime = 0f;
         Vector3 startPosition = playerTransform.position;
 
+        // Movimiento suave hacia la silla sin salto
         while (elapsedTime < 1f)
         {
             playerTransform.position = Vector3.Lerp(startPosition, seatPoint.position, elapsedTime);
@@ -104,7 +117,20 @@ public class SitOnObject : MonoBehaviour
             yield return null;
         }
 
+        // Asegurarse de que el jugador está exactamente en la silla al final
         playerTransform.position = seatPoint.position;
+
+        // Reactivar el Rigidbody y habilitar la colisión después de sentarse
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.isKinematic = false; // Volver a activar la física
+            playerRigidbody.detectCollisions = true; // Activar colisiones
+        }
+
+        // Reactivar el movimiento del jugador
+        if (playerMovement != null) playerMovement.enabled = true;
+        if (characterController != null) characterController.enabled = true;
+
         isSitting = true;
         isTransitioning = false;
 
@@ -132,7 +158,6 @@ public class SitOnObject : MonoBehaviour
         {
             enemyCanvasObject.gameObject.SetActive(true);
         }
-
     }
 
     IEnumerator ActivateEffect(GameObject smoke, GameObject card)
@@ -211,4 +236,5 @@ public class SitOnObject : MonoBehaviour
         playerTotal = 0;
         UpdatePlayerCanvas();
     }
+
 }

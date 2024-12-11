@@ -16,9 +16,12 @@ public class PlayerMovement : MonoBehaviour
     private float stepTimer; // Temporizador para los pasos
     private AudioSource audioSource; // Componente de audio
 
+    private CharacterController characterController; // Controlador de personaje
+
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>(); // Añadir AudioSource si no existe
+        characterController = GetComponent<CharacterController>(); // Obtener el CharacterController
     }
 
     void Update()
@@ -38,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = (transform.right * horizontal + transform.forward * vertical).normalized;
 
         // Mover al jugador
-        transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
+        characterController.Move(movement * moveSpeed * Time.deltaTime);
     }
 
     void RotateCamera()
