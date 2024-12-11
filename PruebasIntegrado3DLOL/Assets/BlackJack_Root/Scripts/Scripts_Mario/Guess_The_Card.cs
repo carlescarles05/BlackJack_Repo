@@ -30,7 +30,8 @@ public class GuessTheCard : MonoBehaviour
     void StartGame()
     {
         //INIT
-        MachineNumber = Random.Range(1, 14); // AI selects a random number between 1 and 21
+        MachineNumber = Random.Range(1, 14); // carda between 1 and 13 selection.
+        HighLightCard(selectedCardIndexPos,true);
         resultText.text = "Elige una carta.";
         Debug.Log($"Machine has picked card number: {MachineNumber}");
     }
