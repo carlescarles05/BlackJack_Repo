@@ -62244,7 +62244,6 @@ GameObject:
   - component: {fileID: 2049512163}
   - component: {fileID: 2049512162}
   - component: {fileID: 2049512161}
-  - component: {fileID: 2049512165}
   m_Layer: 0
   m_Name: Silla
   m_TagString: Untagged
@@ -62338,36 +62337,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2049512165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049512160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ca232a6309e2824b8eb93abe867914e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seatPoint: {fileID: 1939691119}
-  canvasObject: {fileID: 791713286}
-  enemyCanvasObject: {fileID: 1378816758}
-  interactKey: 101
-  transitionSpeed: 2
-  playerTotalText: {fileID: 430878245}
-  PlayerCards: []
-  IsPlayerTurn: 1
-  smokeObject: {fileID: 163383697}
-  smokeObject2: {fileID: 1370062917}
-  cardObject: {fileID: 1627590882}
-  cardObject2: {fileID: 736077440}
-  enemyCardObject1: {fileID: 381189583}
-  enemyCardObject2: {fileID: 1174261039}
-  enemyTotalText: {fileID: 2111720492}
-  enemyManager: {fileID: 1187731358}
-  playerTotal: 0
-  enemyTotal: 0
 --- !u!1 &2111497435
 GameObject:
   m_ObjectHideFlags: 0
