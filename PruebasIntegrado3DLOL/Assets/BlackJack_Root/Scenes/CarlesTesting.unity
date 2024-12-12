@@ -20902,6 +20902,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1978435526}
+    - targetCorrespondingSourceObject: {fileID: -1814210835703894820, guid: aeeedd54360ccc04dbc250e9616f74ee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1889638239}
+    - targetCorrespondingSourceObject: {fileID: -1814210835703894820, guid: aeeedd54360ccc04dbc250e9616f74ee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1889638238}
     - targetCorrespondingSourceObject: {fileID: 4767400413853537203, guid: aeeedd54360ccc04dbc250e9616f74ee,
         type: 3}
       insertIndex: -1
@@ -41985,7 +41993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1187731354
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -58207,6 +58215,50 @@ RectTransform:
   m_AnchoredPosition: {x: 25, y: 174}
   m_SizeDelta: {x: 1210.59, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1889638237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1814210835703894820, guid: aeeedd54360ccc04dbc250e9616f74ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 660531248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1889638238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889638237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a276ca8f9b996f34fb2fa2410e95bb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bjManager: {fileID: 1218172600}
+  enemyCardSpawnPoint: {fileID: 381189584}
+  cardPrefab: {fileID: 7042065486897809914, guid: d4afb20f413628a42b3fd3430b12f746,
+    type: 3}
+  enemyTotalText: {fileID: 2111720492}
+  enemyTotal: 0
+  enemyCards: []
+--- !u!114 &1889638239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889638237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b1b3ce2e2e6c1478cec63bfa814631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTotalText: {fileID: 2111720492}
+  enemyCard1: {fileID: 381189583}
+  enemyCard2: {fileID: 1174261039}
+  enemySmoke1: {fileID: 1124852528}
+  enemySmoke2: {fileID: 1109237606}
+  cardValues: 010000000200000003000000040000000500000006000000
+  enemyTotal: 0
 --- !u!1 &1939691118
 GameObject:
   m_ObjectHideFlags: 0
