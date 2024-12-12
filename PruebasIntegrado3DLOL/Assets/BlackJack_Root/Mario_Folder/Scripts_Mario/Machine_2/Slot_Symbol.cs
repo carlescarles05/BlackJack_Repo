@@ -9,7 +9,7 @@ public class Slot_Symbol : MonoBehaviour
     public bool isWild;
     public bool isJackpot;
 
-    bool isWinningLine(List<SlotSymbol> symbols)
+   /* bool isWinningLine(List<SlotSymbol> symbols)
     {
         string firstSymbol = null;
         foreach (var symbol in symbols)
@@ -19,5 +19,5 @@ public class Slot_Symbol : MonoBehaviour
             if(symbol.symbolName != firstSymbol)return false;
         }
       }return true;
-    }
+    }*/
 }
