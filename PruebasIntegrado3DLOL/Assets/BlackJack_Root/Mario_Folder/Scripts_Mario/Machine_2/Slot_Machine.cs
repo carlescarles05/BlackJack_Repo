@@ -9,6 +9,8 @@ public class Slot_Machine : MonoBehaviour
     public string Name;
     public int Rarity; //1(common) to 5(legendary)
     public int Payout;
+    public bool isWild;
+    public bool isJackpot;
     public GameObject[] symbolPrefabs;
     public GridLayoutGroup gridLayoutGroup;
     private List<GameObject> currentSymbols = new List<GameObject>();
