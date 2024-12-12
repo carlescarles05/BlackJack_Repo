@@ -9,15 +9,18 @@ public class Slot_Symbol : MonoBehaviour
     public bool isWild;
     public bool isJackpot;
 
-   /* bool isWinningLine(List<SlotSymbol> symbols)
+    public static bool IsWinningLine(List<Slot_Symbol> symbols)
     {
         string firstSymbol = null;
+
         foreach (var symbol in symbols)
         {
-            if (symbol.isWild) continue;
-            if (firstSymbol == null) firstSymbol = symbol.symbolName;
-            if(symbol.symbolName != firstSymbol)return false;
+            if (symbol.isWild) continue; // Wild symbols can match any other symbol
+            if (firstSymbol == null) firstSymbol = symbol.symbolName; // Set the first symbol
+            if (symbol.symbolName != firstSymbol) return false; // Mismatch means it's not a winning line
         }
-      }return true;
-    }*/
+
+        return true; // All symbols match or are wild
+    }
 }
+
