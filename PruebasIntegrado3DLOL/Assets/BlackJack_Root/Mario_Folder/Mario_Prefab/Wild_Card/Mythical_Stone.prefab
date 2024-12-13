@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 7715990223432414417}
   - component: {fileID: 6962576916116248097}
+  - component: {fileID: 2851693782337813153}
   m_Layer: 0
   m_Name: Mythical_Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7715990223432414417
 Transform:
   m_ObjectHideFlags: 0
@@ -84,3 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2851693782337813153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092889376610795402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 118c813e5e8803340aaffbf02dbc137e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  symbolName: Mythical_Stone
+  payoutValue: 0
+  isWild: 1
+  isJackpot: 0
