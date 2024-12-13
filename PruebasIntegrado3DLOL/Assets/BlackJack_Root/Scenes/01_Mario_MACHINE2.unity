@@ -3480,15 +3480,15 @@ MonoBehaviour:
   isWild: 0
   isJackpot: 0
   symbolPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6994874799705320192, guid: 430efd3af8e6bca48896a535f4e106de, type: 3}
+  - {fileID: 8855698021997232841, guid: a71f66e7587afa048a21fe6d12369c40, type: 3}
+  - {fileID: 4068026503673301073, guid: c3f0b88025a72eb489063c034415c5c8, type: 3}
+  - {fileID: 6182275769566869425, guid: c7f3f4e47f9294949a2bda8e7f10a041, type: 3}
+  - {fileID: 8532962485421355208, guid: 5a8677f939f0eb64d9f7bba54cbad8cd, type: 3}
+  - {fileID: 7447611182357351438, guid: c0335941e95b5ce4196199b95202bb12, type: 3}
+  - {fileID: 8855045868802989331, guid: 908475dbb8b67474088a9bc4ff5de19f, type: 3}
+  - {fileID: 2092889376610795402, guid: eefd82aaaa70d3346a51fe9cb00d9069, type: 3}
+  - {fileID: 2242001048577527613, guid: 4a17a2fc6ea80734999e8f107052784e, type: 3}
   gridLayoutGroup: {fileID: 1427448901}
 --- !u!4 &1060999796
 Transform:
