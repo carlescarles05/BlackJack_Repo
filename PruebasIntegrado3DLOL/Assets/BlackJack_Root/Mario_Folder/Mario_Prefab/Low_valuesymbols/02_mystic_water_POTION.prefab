@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4811386797933209686}
   - component: {fileID: 6002284370869623610}
   m_Layer: 0
-  m_Name: mystic_water_POTION
+  m_Name: 02_mystic_water_POTION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

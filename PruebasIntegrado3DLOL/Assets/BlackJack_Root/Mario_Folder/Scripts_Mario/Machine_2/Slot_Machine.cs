@@ -63,7 +63,7 @@ public class Slot_Machine : MonoBehaviour
 
             foreach (int index in line)
             {
-                Slot_Symbol symbolScript = currentSymbols[index].GetComponent<Slot_Symbol>();
+                Slot_Symbol symbolScript = currentSymbols[index].GetComponent<Slot_Symbol>();//low --mid -- high -- wild -- jackpot
                 if (symbolScript != null)
                 {
                     lineSymbols.Add(symbolScript);
