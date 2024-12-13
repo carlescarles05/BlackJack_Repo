@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolName: FAIRY_level1_wand
-  payoutValue: 0
+  payoutValue: 20
   isWild: 0
   isJackpot: 0

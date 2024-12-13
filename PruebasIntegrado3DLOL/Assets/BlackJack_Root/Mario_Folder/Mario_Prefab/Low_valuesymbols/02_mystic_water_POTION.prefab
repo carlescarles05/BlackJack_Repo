@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolName: mystic_water_POTION
-  payoutValue: 0
+  payoutValue: 25
   isWild: 0
   isJackpot: 0

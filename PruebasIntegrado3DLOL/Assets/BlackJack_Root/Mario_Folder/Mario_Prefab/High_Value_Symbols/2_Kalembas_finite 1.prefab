@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolName: Kalembas_finite
-  payoutValue: 0
+  payoutValue: 45
   isWild: 0
   isJackpot: 0

@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolName: Ancients_Dragon_TAIL
-  payoutValue: 0
+  payoutValue: 40
   isWild: 0
   isJackpot: 0

@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolName: death_ancient_POTION
-  payoutValue: 0
+  payoutValue: 30
   isWild: 0
   isJackpot: 0

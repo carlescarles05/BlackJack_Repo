@@ -6,15 +6,11 @@ using UnityEngine.UI;
 
 public class Slot_Machine : MonoBehaviour
 {
-    
-    public string Name;
-    public int Rarity; //1(common) to 5(legendary)
-    public int Payout;
-    public bool isWild;
-    public bool isJackpot;
-    public GameObject[] symbolPrefabs;
-    public GridLayoutGroup gridLayoutGroup;
+
+    public GameObject[] symbolPrefabs;          // Array of symbol prefabs to instantiate
+    public GridLayoutGroup gridLayoutGroup;    // Reference to the GridLayoutGroup component
     private List<GameObject> currentSymbols = new List<GameObject>();
+
     // Start is called before the first frame update
     public void SpinReel()
     {

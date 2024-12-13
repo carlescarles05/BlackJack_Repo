@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolName: healers_VERSUM
-  payoutValue: 0
+  payoutValue: 70
   isWild: 0
   isJackpot: 0

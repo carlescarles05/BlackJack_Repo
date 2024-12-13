@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolName: sky_eternals_WRATH
-  payoutValue: 0
+  payoutValue: 35
   isWild: 0
   isJackpot: 0
