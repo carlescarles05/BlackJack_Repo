@@ -3,63 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class Slot_Machine : MonoBehaviour
 {
+    public GameObject[] symbolPrefabs; // Array of symbol prefabs
+    public GridLayoutGroup gridLayoutGroup; // The grid layout for displaying symbols
 
-    public GameObject[] symbolPrefabs;          // Array of symbol prefabs to instantiate
-    public GridLayoutGroup gridLayoutGroup;    // Reference to the GridLayoutGroup component
-    private List<GameObject> currentSymbols = new List<GameObject>();
+    private List<GameObject> currentSymbols = new List<GameObject>(); // List of instantiated symbols
 
-    // Start is called before the first frame update
+    // Function to spin the reels
     public void SpinReel()
     {
-        // Clear the grid and destroy previous symbols
+        Debug.Log("Spinning the reels...");
+
+        // Clear the grid first
         foreach (GameObject symbol in currentSymbols)
         {
             Destroy(symbol);
         }
         currentSymbols.Clear();
 
-        // Fill the grid with new random symbols
-        for (int i = 0; i < gridLayoutGroup.transform.childCount; i++)
+        // Populate the grid with random symbols
+        int maxSlots = gridLayoutGroup.constraintCount * gridLayoutGroup.constraintCount; // Adjust based on your grid setup
+        for (int i = 0; i < maxSlots; i++)
         {
-            int randomIndex = Random.Range(0, symbolPrefabs.Length); // Pick a random symbol prefab
-            GameObject randomSymbol = Instantiate(symbolPrefabs[randomIndex], gridLayoutGroup.transform); // Instantiate in grid
-            currentSymbols.Add(randomSymbol); // Add to the list for reference
+            int randomIndex = Random.Range(0, symbolPrefabs.Length);
+            GameObject randomSymbol = Instantiate(symbolPrefabs[randomIndex], gridLayoutGroup.transform);
+
+            // Get the Slot_Symbol script and log the symbol's name
+            Slot_Symbol symbolScript = randomSymbol.GetComponent<Slot_Symbol>();
+            if (symbolScript != null)
+            {
+                Debug.Log($"Spawned symbol: {symbolScript.symbolName}");
+            }
+
+            currentSymbols.Add(randomSymbol);
         }
 
-        // Check results after spinning
+        // Start checking results after spinning
         StartCoroutine(CheckResults());
     }
+
     private IEnumerator CheckResults()
     {
-        yield return new WaitForSeconds(1); // Wait for visual purposes (e.g., animations)
+        // Simulate delay for visual effect
+        yield return new WaitForSeconds(1);
 
-        Debug.Log("Checking Results...");
+        Debug.Log("Checking results...");
 
-        // Check each line for wins
+        // Check for matches
         CheckMatch();
     }
+
     private void CheckMatch()
     {
-        // Define winning lines based on the grid indices
+        // Define winning lines
         List<int[]> selectedLines = new List<int[]>
         {
-            new int[] { 0, 1, 2, 3, 4 },    // Top row
-            new int[] { 5, 6, 7, 8, 9 },    // Middle row
-            new int[] { 10, 11, 12, 13, 14 }, // Bottom row
-            new int[] { 0, 6, 12, 8, 4 },  // Diagonal top-left to bottom-right
-            new int[] { 10, 6, 2, 8, 14 }  // Diagonal bottom-left to top-right
+            new int[] { 0, 1, 2, 3, 4 },  // Horizontal line 1
+            new int[] { 5, 6, 7, 8, 9 },  // Horizontal line 2
+            new int[] { 10, 11, 12, 13, 14 },  // Horizontal line 3
+            new int[] { 0, 6, 12, 8, 4 },  // Diagonal 1
+            new int[] { 10, 6, 2, 8, 14 }  // Diagonal 2
         };
 
+        // Loop through each line to check for matches
         foreach (int[] line in selectedLines)
         {
             List<Slot_Symbol> lineSymbols = new List<Slot_Symbol>();
 
+            // Collect symbols in the line
             foreach (int index in line)
             {
-                Slot_Symbol symbolScript = currentSymbols[index].GetComponent<Slot_Symbol>();//low --mid -- high -- wild -- jackpot
+                if (index >= currentSymbols.Count) continue; // Boundary check
+                Slot_Symbol symbolScript = currentSymbols[index].GetComponent<Slot_Symbol>();
                 if (symbolScript != null)
                 {
                     lineSymbols.Add(symbolScript);
@@ -67,14 +83,14 @@ public class Slot_Machine : MonoBehaviour
             }
 
             // Check if the line is a winning line
-            if (lineSymbols.Count > 0 &&
+            if (lineSymbols.Count == line.Length &&
                 (lineSymbols[0].isWild || lineSymbols[0].isJackpot || Slot_Symbol.IsWinningLine(lineSymbols)))
             {
                 Debug.Log("You win! Line: " + string.Join(",", line));
-
-                // Add your reward logic here
+                return; // Exit once a winning line is found
             }
         }
-    }
 
+        Debug.Log("No winning lines.");
+    }
 }
