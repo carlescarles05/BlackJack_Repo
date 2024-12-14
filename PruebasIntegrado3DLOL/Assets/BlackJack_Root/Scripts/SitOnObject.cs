@@ -198,10 +198,25 @@ public class SitOnObject : MonoBehaviour
 
     void GenerateCards()
     {
-        int playerCard1 = cardValues[Random.Range(0, cardValues.Length)];
+        /*int playerCard1 = cardValues[Random.Range(0, cardValues.Length)];
         int playerCard2 = cardValues[Random.Range(0, cardValues.Length)];
         playerTotal = playerCard1 + playerCard2;
 
+        if (playerTotalText != null)
+        {
+            playerTotalText.text = playerTotal + "/21";
+        }*/
+        // Generar dos cartas al azar para el jugador
+        int playerCard1 = cardValues[Random.Range(0, cardValues.Length)];
+        int playerCard2 = cardValues[Random.Range(0, cardValues.Length)];
+
+        // Reinicia el total del jugador antes de sumar las nuevas cartas
+        playerTotal = 0;
+
+        // Suma ambas cartas al total
+        playerTotal += playerCard1 + playerCard2;
+
+        // Actualiza el texto del total en el canvas
         if (playerTotalText != null)
         {
             playerTotalText.text = playerTotal + "/21";
@@ -222,8 +237,17 @@ public class SitOnObject : MonoBehaviour
 
     public int GenerateCard()
     {
+        /*int newCard = cardValues[Random.Range(0, cardValues.Length)];
+        return newCard;*/
         int newCard = cardValues[Random.Range(0, cardValues.Length)];
-        return newCard;
+
+        // Sumar la nueva carta al total del jugador
+        playerTotal += newCard;
+
+        // Actualizar el texto del total en el canvas
+        UpdatePlayerCanvas();
+
+        return newCard; // Devuelve la nueva carta si es necesario usarla
     }
 
     public void UpdatePlayerCanvas()
