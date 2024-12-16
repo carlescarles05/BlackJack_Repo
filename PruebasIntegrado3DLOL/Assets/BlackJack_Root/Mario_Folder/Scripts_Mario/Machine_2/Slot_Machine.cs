@@ -13,34 +13,61 @@ public class Slot_Machine : MonoBehaviour
     // Function to spin the reels
     public void SpinReel()
     {
-        Debug.Log("Spinning the reels...");
+         Debug.Log("Spinning the reels...");
 
-        // Clear the grid first
-        foreach (GameObject symbol in currentSymbols)
-        {
-            Destroy(symbol);
-        }
-        currentSymbols.Clear();
+          // Clear the grid first
+          foreach (GameObject symbol in currentSymbols)
+          {
+              Destroy(symbol);
+          }
+          currentSymbols.Clear();
 
-        // Populate the grid with random symbols
-        int maxSlots = gridLayoutGroup.constraintCount * gridLayoutGroup.constraintCount; // Adjust based on your grid setup
-        for (int i = 0; i < maxSlots; i++)
-        {
-            int randomIndex = Random.Range(0, symbolPrefabs.Length);
-            GameObject randomSymbol = Instantiate(symbolPrefabs[randomIndex], gridLayoutGroup.transform);
+          // Populate the grid with random symbols
+          int maxSlots = gridLayoutGroup.constraintCount * gridLayoutGroup.constraintCount; // Adjust based on your grid setup
+          for (int i = 0; i < maxSlots; i++)
+          {
+              int randomIndex = Random.Range(0, symbolPrefabs.Length);
+              GameObject randomSymbol = Instantiate(symbolPrefabs[randomIndex], gridLayoutGroup.transform);
 
-            // Get the Slot_Symbol script and log the symbol's name
-            Slot_Symbol symbolScript = randomSymbol.GetComponent<Slot_Symbol>();
-            if (symbolScript != null)
+              // Get the Slot_Symbol script and log the symbol's name
+              Slot_Symbol symbolScript = randomSymbol.GetComponent<Slot_Symbol>();
+              if (symbolScript != null)
+              {
+                  Debug.Log($"Spawned symbol: {symbolScript.symbolName}");
+              }
+
+              currentSymbols.Add(randomSymbol);
+          }
+
+          // Start checking results after spinning
+          StartCoroutine(CheckResults());
+        
+            // Destroy existing symbols
+           /* foreach (GameObject symbol in currentSymbols)
             {
-                Debug.Log($"Spawned symbol: {symbolScript.symbolName}");
+                Destroy(symbol);
+            }
+            currentSymbols.Clear();
+
+            // Generate new symbols
+            int childCount = gridLayoutGroup.transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                // Select a random symbol prefab
+                int randomIndex = Random.Range(0, symbolPrefabs.Length);
+                GameObject randomSymbol = Instantiate(symbolPrefabs[randomIndex]);
+
+                // Ensure correct parenting
+                randomSymbol.transform.SetParent(gridLayoutGroup.transform, false); // Set parent to Grid, keep default layout
+
+                // Store for future reference
+                currentSymbols.Add(randomSymbol);
             }
 
-            currentSymbols.Add(randomSymbol);
-        }
+            // Check results after a delay
+            StartCoroutine(CheckResults());*/
+        
 
-        // Start checking results after spinning
-        StartCoroutine(CheckResults());
     }
 
     private IEnumerator CheckResults()
