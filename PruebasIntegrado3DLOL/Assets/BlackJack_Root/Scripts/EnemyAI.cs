@@ -16,25 +16,54 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        // Asegúrate de que el BJManager esté correctamente asignado
         if (bjManager == null)
         {
             bjManager = FindObjectOfType<BJManager>();
         }
     }
 
+    // Método que inicia el turno del enemigo
     public void EnemyTurn()
     {
         // Verificar si bjManager está asignado correctamente
-    if (bjManager != null)
-    {
-        // Llamamos la corutina del BJManager correctamente
-        bjManager.StartCoroutine(bjManager.EnemyTurnRoutine());  // Llama a la corutina desde BJManager
-            Debug.Log("f");
+        if (bjManager != null)
+        {
+            // Llamamos la corutina de EnemyTurnRoutine del BJManager
+            bjManager.StartCoroutine(EnemyTurnRoutine());
+        }
+        else
+        {
+            Debug.LogError("BJManager no está asignado en EnemyAI.");
+        }
     }
-    else
+
+    // Esta corutina maneja el turno del enemigo
+    IEnumerator EnemyTurnRoutine()
     {
-        Debug.LogError("BJManager no está asignado en EnemyAI.");
+        // Mientras el total del enemigo sea menor que 17, el enemigo sigue pidiendo cartas
+        while (enemyTotal < 17)
+        {
+            yield return new WaitForSeconds(1f); // Espera un segundo entre cada carta
+
+            // Llamamos al método EnemyHit del BJManager para que el enemigo pida una carta
+            bjManager.EnemyHit(); // Hace que el enemigo pida una carta
+
+            // Esperamos un poco antes de continuar
+            yield return new WaitForSeconds(1f); // Se puede ajustar este tiempo si lo deseas
+        }
+
+        // Al finalizar el turno del enemigo, cambia al turno del jugador
+        bjManager.EndTurn();
     }
-    }  
+
+    // Método para actualizar la UI del total de cartas del enemigo
+    public void UpdateEnemyTotalUI()
+    {
+        if (enemyTotalText != null)
+        {
+            enemyTotalText.text = enemyTotal + "/21"; // Actualiza el texto con el total
+        }
+    }
 
 }

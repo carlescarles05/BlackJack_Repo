@@ -27,6 +27,13 @@ public class BJManager : MonoBehaviour
 
     [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
 
+    // Verifica si StartGame se llama al principio
+    private void Awake()
+    {
+        Debug.Log("Iniciando juego...");
+        StartGame(); // Asegúrate de que se llame correctamente.
+    }
+
     public enum Turn
     {
         Player,
@@ -51,11 +58,13 @@ public class BJManager : MonoBehaviour
 
         UpdatePlayerTotalUI();
         StartPlayerTurn(); // Asegurarnos de que empiece el turno del jugador
+
+        StartGame(); // Inicializar el juego
     }
 
     public void PlayerHit()
     {
-        if (currentTurn != Turn.Player) return;
+        /*if (currentTurn != Turn.Player) return;
 
         int cardValue = GenerateCard();
         playerTotal = playerTotal + cardValue; // Acumular el valor de la carta al total del jugador
@@ -73,7 +82,29 @@ public class BJManager : MonoBehaviour
         }
 
         // Al final de tu turno, cambia al turno del enemigo
-        EndTurn(); // Ahora pasamos el control al enemigo
+        EndTurn(); // Ahora pasamos el control al enemigo*/
+        if (currentTurn != Turn.Player) return;
+
+        // Generar y agregar nueva carta
+        int cardValue = GenerateCard();
+        playerTotal += cardValue; // Sumar el valor de la carta
+        UpdatePlayerTotalUI();
+
+        // Instanciar carta en la posición correspondiente
+        GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
+        card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
+        playerCards.Add(card);
+
+        // Verificar si el jugador se pasó de 21
+        if (playerTotal > maxPoints)
+        {
+            Debug.Log("¡Te pasaste de 21!");
+            EndGame(false); // Finaliza el juego si el jugador se pasa de 21
+            return;
+        }
+
+        // Cambiar turno al enemigo
+        EndTurn();
     }
 
     public void PlayerStand()
@@ -95,7 +126,9 @@ public class BJManager : MonoBehaviour
 
     public int GenerateCard()
     {
-        return Random.Range(1, 7); // Cambia a (1, 7)
+        int cardValue = Random.Range(1, 11); // Genera un valor entre 1 y 10
+        Debug.Log("Carta generada: " + cardValue);
+        return cardValue;
     }
 
     public void EndTurn()
@@ -176,6 +209,7 @@ public class BJManager : MonoBehaviour
         {
             Debug.LogError("enemyAI o enemyTotalText no está asignado en el Inspector.");
         }
+
     }
 
     private void UpdatePlayerTotalUI()
@@ -198,17 +232,97 @@ public class BJManager : MonoBehaviour
         hitButton.interactable = false;
         standButton.interactable = false;
 
-        if (playerWins == true)
+        if (currentTurn == Turn.Player)
         {
-            Debug.Log("El jugador ganó la partida.");
+            currentTurn = Turn.Enemy;
+
+            // Llamamos al método EnemyTurn del EnemyAI
+            if (enemyAI != null)
+            {
+                enemyAI.EnemyTurn(); // Inicia el turno del enemigo
+            }
+
+            // Aquí se asegura de cambiar al turno del enemigo
         }
-        else if (playerWins == false)
+    }
+
+    public void StartGame()
+    {
+        // Reiniciar totales
+        playerTotal = 0;
+        enemyAI.enemyTotal = 0;
+
+        // Limpiar las cartas
+        foreach (var card in playerCards)
         {
-            Debug.Log("El jugador perdió la partida.");
+            Destroy(card);
         }
-        else
+        playerCards.Clear();
+
+        foreach (var card in enemyAI.enemyCards)
         {
-            Debug.Log("El juego terminó en empate.");
+            Destroy(card);
         }
+        enemyAI.enemyCards.Clear();
+
+        Debug.Log("Juego iniciado: Totales reiniciados. playerTotal = 0, enemyTotal = 0");
+
+        // Generar cartas iniciales para el jugador
+        for (int i = 0; i < 2; i++)
+        {
+            int cardValue = GenerateCard();
+            Debug.Log($"Jugador recibe carta inicial {i + 1}: {cardValue}");
+            playerTotal += cardValue;
+            GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
+            card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
+            playerCards.Add(card);
+        }
+        Debug.Log("Total inicial del jugador: " + playerTotal);
+
+        // Generar cartas iniciales para el enemigo
+        for (int i = 0; i < 2; i++)
+        {
+            int cardValue = GenerateCard();
+            Debug.Log($"Enemigo recibe carta inicial {i + 1}: {cardValue}");
+            enemyAI.enemyTotal += cardValue;
+            GameObject card = Instantiate(cardPrefab, enemyAI.enemyCardSpawnPoint);
+            card.transform.localPosition += new Vector3(cardOffset * enemyAI.enemyCards.Count, 0, 0);
+            enemyAI.enemyCards.Add(card);
+        }
+        Debug.Log("Total inicial del enemigo: " + enemyAI.enemyTotal);
+
+        // Actualizar las UI
+        UpdatePlayerTotalUI();
+        enemyAI.UpdateEnemyTotalUI();
+
+        // Aseguramos que el turno del jugador comienza
+        currentTurn = Turn.Player;
+        Debug.Log("Turno inicial: Jugador.");
+    }
+
+    public void EnemyHit()
+    {
+        // Generar carta para el enemigo
+    int cardValue = GenerateCard();
+    Debug.Log($"Enemigo recibe carta: {cardValue}");
+    
+    // Acumular el valor de la carta
+    enemyAI.enemyTotal += cardValue;
+    Debug.Log($"Nuevo total del enemigo después de la carta: {enemyAI.enemyTotal}");
+
+    // Instanciar la carta visualmente
+    GameObject card = Instantiate(cardPrefab, enemyAI.enemyCardSpawnPoint);
+    card.transform.localPosition += new Vector3(cardOffset * enemyAI.enemyCards.Count, 0, 0);
+    enemyAI.enemyCards.Add(card);
+
+    // Actualizar la UI del enemigo
+    enemyAI.UpdateEnemyTotalUI();
+
+    // Verificar si el enemigo se pasa de 21
+    if (enemyAI.enemyTotal > maxPoints)
+    {
+        Debug.Log("El enemigo se pasó de 21. ¡Has ganado!");
+        bjManager.EndGame(true); // Notificar al BJManager que el jugador ganó
+    }
     }
 }

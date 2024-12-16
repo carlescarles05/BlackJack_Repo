@@ -70,7 +70,7 @@ public class NPCInteractio : MonoBehaviour
         foreach (char letter in sentence)
         {
             dialogueText.text += letter; // Agregar letra por letra
-            yield return new WaitForSeconds(0.05f); // Espera antes de mostrar la siguiente letra
+            yield return new WaitForSeconds(0.02f); // Espera antes de mostrar la siguiente letra
         }
     }
 
