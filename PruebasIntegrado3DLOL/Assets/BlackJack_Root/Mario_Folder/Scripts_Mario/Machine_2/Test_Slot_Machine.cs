@@ -13,6 +13,31 @@ public class TestSlot_Machine : MonoBehaviour
     private int columns = 5; // Number of columns
 
     // Function to spin the reels
+    private void Start()
+    {
+        PopulateGrid();
+    }
+    public void PopulateGrid() 
+    {
+        Debug.Log("Initializing the grid...");
+
+        //destroy current
+        foreach (Transform child in gridLayoutGroup.transform)
+        {
+         Destroy(child.gameObject);
+        }
+        currentSymbols.Clear();
+
+        //Generate new symbols for the grid (3*5)
+        int totalSlots = rows * columns;
+        for (int i =0;i < totalSlots;i++ )
+        {
+            int randomIndex = Random.Range(0, symbolPrefabs.Length); //choose a random prefab
+            GameObject newSymbol = Instantiate(symbolPrefabs[randomIndex],gridLayoutGroup.transform);
+            currentSymbols.Add(newSymbol);//keep track for match-checking
+        }
+
+    }
     public void SpinReel()
     {
         Debug.Log("Spinning the reels...");

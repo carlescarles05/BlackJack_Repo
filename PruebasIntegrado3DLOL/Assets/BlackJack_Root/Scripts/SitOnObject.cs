@@ -228,7 +228,7 @@ public class SitOnObject : MonoBehaviour
         int enemyCard1 = cardValues[Random.Range(0, cardValues.Length)];
         int enemyCard2 = cardValues[Random.Range(0, cardValues.Length)];
         enemyTotal = enemyCard1 + enemyCard2;
-        enemyTotalText.text = enemyTotal + "/21";
+        //enemyTotalText.text = enemyTotal + "/21";
 
         // Mostrar las cartas del enemigo
         if (enemyCardObject1 != null) enemyCardObject1.SetActive(true);
