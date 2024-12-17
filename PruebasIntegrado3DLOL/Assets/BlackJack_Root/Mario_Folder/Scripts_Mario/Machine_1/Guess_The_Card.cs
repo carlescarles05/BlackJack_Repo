@@ -8,22 +8,27 @@ using UnityEngine.InputSystem;
 
 public class GuessTheCard : MonoBehaviour
 {
-    public GameObject[] cards;
-    public Text resultText;
-    public Text winText;
-    private int MachineNumber;
+   
+    [SerializeField]
+    [Header("UI ELEMENTS")]
     public Player_Points player_Points;
     public Player_Clock player_Clock;
-
+    public GameObject winPanel;
+    public Text resultText;
+    public Text winText;
+    ///
+    public GameObject[] cards;
+    ///
+    private int MachineNumber;
     private int selectedCardIndexPos = 0; // Selected card index
     private int turnCount = 0;            // New: Turn counter
-
     private GameInputActions inputActions;
     private Vector2 navigationInput;
-
+    ///
     void Start()
     {
         StartGame();
+        winPanel.gameObject.SetActive(false);
     }
 
     void Awake()
@@ -119,7 +124,9 @@ public class GuessTheCard : MonoBehaviour
         {
             player_Points.AddPoints(+250);
             player_Clock.AddTime(8 * 60);
-            resultText.text = $"¡Adivinaste la carta! Tienes +8 minutos de vida. Reiniciando...";
+            resultText.text = "+8 minutos de vida";
+            winPanel.gameObject.SetActive(true);
+            winText.text = "You won";
         }
         else if (difference == 1)
         {
@@ -162,7 +169,7 @@ public class GuessTheCard : MonoBehaviour
             Renderer renderer = card.GetComponent<Renderer>();
             renderer.material.color = Color.white;
         }
-
+        winPanel.gameObject.SetActive(false);
         StartGame(); // Reinitialize the game state
     }
 
