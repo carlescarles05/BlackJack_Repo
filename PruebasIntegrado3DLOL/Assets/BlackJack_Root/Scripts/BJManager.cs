@@ -171,7 +171,7 @@ public class BJManager : MonoBehaviour
         Debug.Log("Eres tonto");
         // Generar carta
         int cardValue = GenerateCard();
-        enemyTotal += cardValue;
+        enemyAI.enemyTotal += cardValue;
         Debug.Log($"Valor de la carta: {cardValue}, Total enemigo: {enemyTotal}");
 
         UpdateEnemyTotalUI();
@@ -184,7 +184,7 @@ public class BJManager : MonoBehaviour
         Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
 
         // Verificar si el enemigo se pasó de 21
-        if (enemyTotal > 21)
+        if (enemyAI.enemyTotal > 21)
         {
             Debug.Log("¡El enemigo se pasó de 21!");
             EndGame(true); // El jugador gana
@@ -203,7 +203,7 @@ public class BJManager : MonoBehaviour
         if (enemyAI != null && enemyAI.enemyTotalText != null)
         {
             Debug.Log("Cabron");
-            enemyAI.enemyTotalText.text = $"{enemyTotal}/21";
+            enemyAI.enemyTotalText.text = $"{enemyAI.enemyTotal}/21";
         }
         else
         {
@@ -284,7 +284,9 @@ public class BJManager : MonoBehaviour
         {
             int cardValue = GenerateCard();
             Debug.Log($"Enemigo recibe carta inicial {i + 1}: {cardValue}");
-            enemyAI.enemyTotal += cardValue;
+            Debug.Log("Valor de enemy total = " + enemyAI.enemyTotal.ToString());
+            enemyAI.enemyTotal = enemyAI.enemyTotal + cardValue;
+            Debug.Log("Valor de enemy total = " + enemyAI.enemyTotal.ToString());
             GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
             card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
             enemyCards.Add(card);
