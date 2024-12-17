@@ -11,7 +11,7 @@ public class TestSlot_Machine : MonoBehaviour
     private List<GameObject> currentSymbols = new List<GameObject>(); // List of instantiated symbols
     private int rows = 3; // Number of rows
     private int columns = 5; // Number of columns
-
+    public Text Winning_Text;
     // Function to spin the reels
     private void Start()
     {
@@ -118,6 +118,7 @@ public class TestSlot_Machine : MonoBehaviour
             if (lineSymbols.Count == line.Length &&
                 (lineSymbols[0].isWild || lineSymbols[0].isJackpot || Slot_Symbol.IsWinningLine(lineSymbols)))
             {
+                Winning_Text.text = "You win! Line: " + string.Join(",", line);
                 Debug.Log("You win! Line: " + string.Join(",", line));
                 return; // Exit once a winning line is found
             }
