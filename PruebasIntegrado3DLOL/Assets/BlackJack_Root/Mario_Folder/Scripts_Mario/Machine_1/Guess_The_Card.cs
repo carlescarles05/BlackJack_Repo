@@ -18,7 +18,8 @@ public class GuessTheCard : MonoBehaviour
     public Text winText;
     ///
     public GameObject[] cards;
-    ///
+    //
+ 
     private int MachineNumber;
     private int selectedCardIndexPos = 0; // Selected card index
     private int turnCount = 0;            // New: Turn counter
@@ -29,6 +30,7 @@ public class GuessTheCard : MonoBehaviour
     {
         StartGame();
         winPanel.gameObject.SetActive(false);
+     //  cardDeck.gameObject.SetActive(false);
     }
 
     void Awake()

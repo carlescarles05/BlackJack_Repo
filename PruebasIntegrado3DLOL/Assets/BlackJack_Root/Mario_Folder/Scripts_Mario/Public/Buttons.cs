@@ -5,20 +5,29 @@ using UnityEngine;
 
 public class Buttons : MonoBehaviour
 {
-    public GameObject MenuCanvas;
+    [Header("This Scene Canvas Event Handler")]
+    public GameObject Register;
     public GameObject Game1Canvas;
     public GameObject cardDeck;
-    // Start is called before the first frame update
+  
+
+    //ACTIVATE CANVAS0 OR REGISTER MENU
     public void SwitchToMENUCanvas() 
     {
+
         Game1Canvas.gameObject.SetActive(false);
-        MenuCanvas.SetActive(true);
-        cardDeck.gameObject.SetActive(false); 
+        Register.SetActive(true);
+        cardDeck.gameObject.SetActive(false);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    //ACTIVATE CANVAS1
+    public void ButtonGameCardCANVA() 
     {
-        
+        Game1Canvas.gameObject.SetActive(true);
+        Register.gameObject.SetActive(false);
+        cardDeck.gameObject.SetActive(true);
     }
+    
 }
+
