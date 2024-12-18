@@ -11,33 +11,37 @@ public class TestSlot_Machine : MonoBehaviour
     private List<GameObject> currentSymbols = new List<GameObject>(); // List of instantiated symbols
     private int rows = 3; // Number of rows
     private int columns = 5; // Number of columns
-    public Text Winning_Text;
-    // Function to spin the reels
+    public Text Winning_Text; // Text component to display the winning message
+
+    // Function to populate the grid at the start
     private void Start()
     {
         PopulateGrid();
     }
-    public void PopulateGrid() 
+
+    // Function to populate the grid with symbols
+    public void PopulateGrid()
     {
         Debug.Log("Initializing the grid...");
 
-        //destroy current
+        // Destroy current symbols in the grid
         foreach (Transform child in gridLayoutGroup.transform)
         {
-         Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
         currentSymbols.Clear();
 
-        //Generate new symbols for the grid (3*5)
+        // Generate new symbols for the grid (3x5)
         int totalSlots = rows * columns;
-        for (int i =0;i < totalSlots;i++ )
+        for (int i = 0; i < totalSlots; i++)
         {
-            int randomIndex = Random.Range(0, symbolPrefabs.Length); //choose a random prefab
-            GameObject newSymbol = Instantiate(symbolPrefabs[randomIndex],gridLayoutGroup.transform);
-            currentSymbols.Add(newSymbol);//keep track for match-checking
+            int randomIndex = Random.Range(0, symbolPrefabs.Length); // Choose a random prefab
+            GameObject newSymbol = Instantiate(symbolPrefabs[randomIndex], gridLayoutGroup.transform);
+            currentSymbols.Add(newSymbol); // Keep track for match-checking
         }
-
     }
+
+    // Function to spin the reels
     public void SpinReel()
     {
         Debug.Log("Spinning the reels...");
@@ -70,6 +74,7 @@ public class TestSlot_Machine : MonoBehaviour
         StartCoroutine(CheckResults());
     }
 
+    // Coroutine to check results after a delay
     private IEnumerator CheckResults()
     {
         // Simulate delay for visual effect
@@ -81,6 +86,7 @@ public class TestSlot_Machine : MonoBehaviour
         CheckMatch();
     }
 
+    // Function to check for winning lines
     private void CheckMatch()
     {
         // Define winning lines for a 3x5 grid (horizontal and diagonals)
@@ -120,10 +126,21 @@ public class TestSlot_Machine : MonoBehaviour
             {
                 Winning_Text.text = "You win! Line: " + string.Join(",", line);
                 Debug.Log("You win! Line: " + string.Join(",", line));
+
+                // Start Coroutine to hide the winning text after 3 seconds
+                StartCoroutine(HideWinningTextAfterDelay(3f));
+
                 return; // Exit once a winning line is found
             }
         }
 
         Debug.Log("No winning lines.");
+    }//
+
+    // Coroutine to hide winning text after a delay
+    private IEnumerator HideWinningTextAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Winning_Text.text = ""; // Clear the winning message
     }
 }

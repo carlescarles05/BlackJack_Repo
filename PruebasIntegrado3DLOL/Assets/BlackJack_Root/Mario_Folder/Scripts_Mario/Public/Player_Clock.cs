@@ -5,55 +5,45 @@ using UnityEngine.UI;
 
 public class Player_Clock : MonoBehaviour
 {
-    public int StartMinutes = 1;
-    public int startSeconds = 30;
+    public int StartMinutes = 1; // Minutes set in the Inspector
+    public int StartSeconds = 30; // Seconds set in the Inspector
     private int totalTime;
 
+    public Text timer; // The UI Text to display the time
 
-    public Text timer;
-    private bool isTimerRunning = true;
-    // Start is called before the first frame update
     void Start()
     {
-        totalTime = (StartMinutes * 60) + startSeconds;
+        // Calculate the total time in seconds from the Inspector values
+        totalTime = (StartMinutes * 60) + StartSeconds;
         UpdateTimer_UI_TXT();
-        StartCoroutine(CountdownCoroutine());
-    }
-  
-    IEnumerator CountdownCoroutine()
-    {
-     while(isTimerRunning && totalTime > 0) 
-        {
-         yield return new WaitForSeconds(1);
-         totalTime--;
-            UpdateTimer_UI_TXT();
-            if (totalTime < 0) 
-            {
-                totalTime = 0;
-            }
-            if (totalTime <= 0) 
-            {
-               timer.text = string.Format("{0:D2}:{1:D2}", 00,00);
-                isTimerRunning = false;
-            Debug.Log("Time's up!"); //new action to trigger when time is up
-            }
-        }
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Updates the timer text on the UI with the current total time.
+    /// </summary>
     void UpdateTimer_UI_TXT()
     {
         int minutes = totalTime / 60;
         int seconds = totalTime % 60;
-        timer.text = string.Format("{0:D2}:{1:D2}", minutes,seconds);
-    }
-    public void StopTimer() 
+        timer.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+    }//
+
+    /// <summary>
+    /// Adds or subtracts time (in seconds) based on external logic.
+    /// </summary>
+    /// <param name="seconds">Time in seconds to add (use negative values to subtract).</param>
+    public void AddTime(int seconds)
     {
-        isTimerRunning=false;
+        totalTime = Mathf.Max(0, totalTime + seconds); // Ensure total time doesn't go below zero
+        UpdateTimer_UI_TXT(); // Update the UI
     }
-    public void AddTime(int seconds)   
+
+    /// <summary>
+    /// Resets the clock to the initial time set in the Inspector.
+    /// </summary>
+    public void ResetClock()
     {
-        totalTime = Mathf.Max(0, totalTime + seconds);
-        UpdateTimer_UI_TXT();
+        totalTime = (StartMinutes * 60) + StartSeconds; // Reset total time
+        UpdateTimer_UI_TXT(); // Update the UI
     }
 }
