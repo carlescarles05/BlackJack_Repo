@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
-namespace DemoImage_WeaponBundle1
+/*namespace DemoImage_WeaponBundle1
 {
     public class SetDemoImage : MonoBehaviour
     {
@@ -59,4 +59,4 @@ namespace DemoImage_WeaponBundle1
             }
         }
     }
-}
+}*/
