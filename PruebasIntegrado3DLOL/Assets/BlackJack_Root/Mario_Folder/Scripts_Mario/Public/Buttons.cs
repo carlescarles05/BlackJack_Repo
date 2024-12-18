@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Buttons : MonoBehaviour
@@ -9,25 +8,37 @@ public class Buttons : MonoBehaviour
     public GameObject Register;
     public GameObject Game1Canvas;
     public GameObject cardDeck;
-  
 
-    //ACTIVATE CANVAS0 OR REGISTER MENU
-    public void SwitchToMENUCanvas() 
+    private GuessTheCard guessTheCard;
+
+    void Start()
     {
+        // Get the GuessTheCard component from the cardDeck GameObject
+        if (cardDeck != null)
+        {
+            guessTheCard = cardDeck.GetComponent<GuessTheCard>();
+        }
+    }
 
-        Game1Canvas.gameObject.SetActive(false);
+    // Activate the menu canvas
+    public void SwitchToMENUCanvas()
+    {
+        Game1Canvas.SetActive(false);
         Register.SetActive(true);
-        cardDeck.gameObject.SetActive(false);
-
+        cardDeck.SetActive(false);
     }
 
-    //ACTIVATE CANVAS1
-    public void ButtonGameCardCANVA() 
+    // Activate the game canvas
+    public void ButtonGameCardCANVA()
     {
-        Game1Canvas.gameObject.SetActive(true);
-        Register.gameObject.SetActive(false);
-        cardDeck.gameObject.SetActive(true);
-    }
-    
-}
+        Game1Canvas.SetActive(true);
+        Register.SetActive(false);
+        cardDeck.SetActive(true);
 
+        // Reset the game state
+        if (guessTheCard != null)
+        {
+            guessTheCard.ResetGame();
+        }
+    }
+}
