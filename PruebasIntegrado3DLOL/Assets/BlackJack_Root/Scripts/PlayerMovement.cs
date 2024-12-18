@@ -89,4 +89,5 @@ public class PlayerMovement : MonoBehaviour
             audioSource.PlayOneShot(footstepClips[clipIndex]); // Reproduce el clip
         }
     }
+
 }
