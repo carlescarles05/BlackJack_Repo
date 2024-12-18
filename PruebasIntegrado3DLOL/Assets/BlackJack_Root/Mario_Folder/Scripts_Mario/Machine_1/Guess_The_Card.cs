@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GuessTheCard : MonoBehaviour
 {
@@ -128,14 +129,15 @@ public class GuessTheCard : MonoBehaviour
 
     void SelectedCardAction(GameObject clickedCard)
     {
-        // Deduct points at the beginning of each turn (once per turn)
+        // Deduce puntos al inicio de cada turno
         player_Points.DeductPoints();
 
-        // Check if player has enough points to continue
-        if (player_Points.GetPoints() < 50) // Example: Check if player has enough points
+        // Verifica si el jugador tiene suficientes puntos para continuar
+        if (player_Points.GetPoints() < 50) // Por ejemplo: verifica si el jugador tiene menos de 50 puntos
         {
-            resultText.text = "Not enough points to continue!";
-            return; // Stop further logic if not enough points
+            resultText.text = "¡No tienes suficientes puntos para continuar!";
+            Invoke("LoadGameOverScene", 2f); // Llama al método para cambiar de escena después de 2 segundos
+            return; // Detiene la lógica adicional si no hay suficientes puntos
         }
 
         // Process the player's card selection
@@ -206,6 +208,11 @@ public class GuessTheCard : MonoBehaviour
         }
 
         HighLightCard(selectedCardIndexPos, true);
+    }
+
+    void LoadGameOverScene()
+    {
+        SceneManager.LoadScene("CarlesTesting"); // Reemplaza "NombreDeLaEscena" con el nombre de la escena que deseas cargar
     }
 }
 //
