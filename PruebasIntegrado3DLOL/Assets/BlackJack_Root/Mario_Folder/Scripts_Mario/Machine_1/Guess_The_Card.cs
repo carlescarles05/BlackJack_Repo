@@ -133,7 +133,7 @@ public class GuessTheCard : MonoBehaviour
         player_Points.DeductPoints();
 
         // Verifica si el jugador tiene suficientes puntos para continuar
-        if (player_Points.GetPoints() < 50) // Por ejemplo: verifica si el jugador tiene menos de 50 puntos
+        if (player_Points.GetPoints() < 50) //  verifica si el jugador tiene menos de 50 puntos
         {
             resultText.text = "¡No tienes suficientes puntos para continuar!";
             Invoke("LoadGameOverScene", 2f); // Llama al método para cambiar de escena después de 2 segundos
@@ -147,7 +147,7 @@ public class GuessTheCard : MonoBehaviour
         // Logic for card selection
         if (difference == 0) // Winning case
         {
-            player_Points.AddPoints(250); // Add points if the player wins
+           // player_Points.AddPoints(250); // Add points if the player wins
             player_Clock.AddTime(8 * 60);
             resultText.text = "+8 minutos de vida";
             winPanel.gameObject.SetActive(true);
@@ -155,7 +155,7 @@ public class GuessTheCard : MonoBehaviour
         }
         else if (difference == 1) // Close but not correct
         {
-            player_Points.AddPoints(200); // Add points for a close guess
+           // player_Points.AddPoints(200); // Add points for a close guess
             player_Clock.AddTime(5 * 60);
             resultText.text = $"¡Casi aciertas! Tienes +5 minutos.";
         }
@@ -165,7 +165,7 @@ public class GuessTheCard : MonoBehaviour
         }
         else // Losing case
         {
-            player_Points.AddPoints(-200); // Deduct points for a further guess
+          //  player_Points.AddPoints(-200); // Deduct points for a further guess
             player_Clock.AddTime(-2 * 60);
             resultText.text = $"Por poco. Pierdes tiempo (-2 minutos).";
         }
