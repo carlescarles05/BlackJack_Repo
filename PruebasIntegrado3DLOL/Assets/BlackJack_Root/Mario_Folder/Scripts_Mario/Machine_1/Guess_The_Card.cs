@@ -39,7 +39,7 @@ public class GuessTheCard : MonoBehaviour
         // Initialize the game logic
         MachineNumber = Random.Range(1, 14); // Random card number between 1 and 13
         ResetCardHighlightByTurn();         // Reset card highlights
-        resultText.text = "Elige una carta.";
+       // resultText.text = "Elige una carta.";
         Debug.Log($"Machine has picked card number: {MachineNumber}");
     }
 
@@ -174,10 +174,6 @@ public class GuessTheCard : MonoBehaviour
         turnCount++; // Increment the turn counter
         Invoke("RestartGame", 2f); // Restart the game after a short delay
     }
-
-
-
-
 
     void RestartGame()
     {

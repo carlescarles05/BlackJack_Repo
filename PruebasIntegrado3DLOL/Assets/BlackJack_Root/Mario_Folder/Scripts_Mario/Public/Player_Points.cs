@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class Player_Points : MonoBehaviour
 {
     [Header("Points Settings")]
-    public int startingPoints = 1000; // Starting points (default to 1000)
-    public int deductionAmount = 50;  // Amount to deduct after each card selection (default to 50)
+    public int startingPoints ; // Starting points (default to 1000)
+    public int deductionAmount ;  // Amount to deduct after each card selection (default to 50)
 
     public int points; // Player's current points
     public Text playerPointsText; // Reference to the Text UI element for displaying points
@@ -28,9 +28,9 @@ public class Player_Points : MonoBehaviour
     // Deduct a fixed amount of points from the player's balance
     public void DeductPoints()
     {
-        points -= deductionAmount; // Deduct the specified amount (e.g., 50 points)
-        if (points < 0) points = 0; // Prevent negative points
-        UpdatePlayerPointsText(); // Update the UI text with the new points
+        points -= deductionAmount; // Deduct the specified amount (ex 50 points)
+        if (points < 0) points = 0; 
+        UpdatePlayerPointsText(); 
     }
 
 
