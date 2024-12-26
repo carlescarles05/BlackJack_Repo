@@ -304,15 +304,17 @@ public class BJManager : MonoBehaviour
 
     public void EnemyHit()
     {
+        // Asegurarse de que es el turno del enemigo
+        if (currentTurn != Turn.Enemy) return;
+
         // Generar una carta para el enemigo
         int cardValue = GenerateCard();
-
-        // Validar que el valor de la carta es correcto
         Debug.Log($"Enemigo recibe carta: {cardValue}");
 
-        // Sumar el valor de la carta al total del enemigo
-        enemyTotal += cardValue; // Usamos directamente enemyTotal
-        Debug.Log($"Nuevo total del enemigo después de la carta: {enemyTotal}");
+        // Sumar el valor de la carta al total del enemigo (usando enemyAI.enemyTotal)
+        enemyAI.enemyTotal += cardValue; // Usamos enemyAI.enemyTotal
+
+        Debug.Log($"Nuevo total del enemigo después de la carta: {enemyAI.enemyTotal}");
 
         // Instanciar la carta visualmente
         GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
@@ -323,7 +325,7 @@ public class BJManager : MonoBehaviour
         UpdateEnemyTotalUI();
 
         // Verificar si el enemigo se pasa de 21
-        if (enemyTotal > maxPoints)
+        if (enemyAI.enemyTotal > maxPoints)
         {
             Debug.Log("El enemigo se pasó de 21. ¡Has ganado!");
             bjManager.EndGame(true); // Notificar al BJManager que el jugador ganó
