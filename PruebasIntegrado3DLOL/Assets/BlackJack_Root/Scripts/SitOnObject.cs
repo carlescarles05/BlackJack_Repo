@@ -120,17 +120,6 @@ public class SitOnObject : MonoBehaviour
         // Asegurarse de que el jugador está exactamente en la silla al final
         playerTransform.position = seatPoint.position;
 
-        // Reactivar el Rigidbody y habilitar la colisión después de sentarse
-        if (playerRigidbody != null)
-        {
-            playerRigidbody.isKinematic = false; // Volver a activar la física
-            playerRigidbody.detectCollisions = true; // Activar colisiones
-        }
-
-        // Reactivar el movimiento del jugador
-        if (playerMovement != null) playerMovement.enabled = true;
-        if (characterController != null) characterController.enabled = true;
-
         isSitting = true;
         isTransitioning = false;
 
