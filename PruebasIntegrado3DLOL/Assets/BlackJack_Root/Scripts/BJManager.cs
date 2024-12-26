@@ -116,12 +116,6 @@ public class BJManager : MonoBehaviour
         // Finalizar el turno del jugador
         EndTurn();
 
-        // Ahora es el turno del enemigo
-        // Verificar que el turno haya cambiado a enemigo antes de llamar a EnemyTurn()
-        /*if (currentTurn == Turn.Enemy)
-        {
-            enemyAI.EnemyTurn();  // Llamamos al turno del enemigo directamente
-        }*/
     }
 
     public int GenerateCard()
@@ -136,12 +130,12 @@ public class BJManager : MonoBehaviour
         if (currentTurn == Turn.Player)
         {
             currentTurn = Turn.Enemy;
-            StartEnemyTurn();
+            StartEnemyTurn(); // Comienza el turno del enemigo
         }
         else if (currentTurn == Turn.Enemy)
         {
             currentTurn = Turn.Player;
-            StartPlayerTurn();
+            StartPlayerTurn(); // Comienza el turno del jugador
         }
 
     }
