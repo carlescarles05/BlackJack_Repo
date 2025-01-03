@@ -56929,6 +56929,7 @@ GameObject:
   - component: {fileID: 1454314007}
   - component: {fileID: 1454314006}
   - component: {fileID: 1454314010}
+  - component: {fileID: 1454314011}
   m_Layer: 0
   m_Name: CAMARERO1
   m_TagString: Untagged
@@ -57039,11 +57040,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionIndicator: {fileID: 174321860}
-  dialoguePanel: {fileID: 888976939}
-  dialogueText: {fileID: 1881194361}
+  dialoguePanel: {fileID: 1184706940}
+  dialogueText: {fileID: 50243632}
   Move: {fileID: 889465676}
   dialogueLines:
-  - "HOLA \xBFQUE TAL? SOLO SOY UN SIMPLE CAMARERO EN MODO BETA"
+  - "BIENVENIDO AL CASINO, AQU\xCD PODR\xC1S DISFRUTAR DE DIVERSOS MINIJUEGOS Y CONVERSAR
+    CON DEM\xC1S PERSONAS"
+--- !u!65 &1454314011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454314005}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.2916946, y: 2, z: 5.814499}
+  m_Center: {x: -1.7055817, y: 0, z: -0.003730774}
 --- !u!1 &1468192854 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8997957747647851277, guid: aeeedd54360ccc04dbc250e9616f74ee,
