@@ -24,7 +24,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     ""name"": ""GameInputActions"",
     ""maps"": [
         {
-            ""name"": ""Navigate"",
+            ""name"": ""Navigate3D_Bcontrol"",
             ""id"": ""13bf7b62-8a91-4fc7-97b2-1768e0453261"",
             ""actions"": [
                 {
@@ -40,6 +40,15 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""a4e7fcc0-b01e-4622-8ea0-30d6401f0caa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""c62c2c7a-4f4b-41a7-9f0b-2dfd19e78484"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -112,16 +121,123 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e2a8118-b1d7-4197-8292-064fec930947"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac14cc25-9966-40fc-aeb5-ecac5e00d695"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""XboxControl"",
+            ""id"": ""59aa31d1-58dc-4636-b7b6-0decd1ecfc6b"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""61542743-bdf3-43f0-891d-96ad37d4aaad"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""b07dfeca-8236-48a2-aeaa-61bbde47fbe1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a81a34a-473a-46cc-9665-b3adac48fb17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""10b985e4-eec7-4f74-8b20-fc36610cb276"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b9e945b-0170-4f03-9ba9-196dec201bb2"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3227f7c-63b0-47df-9369-44d44fae4fc9"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d8c411b-5911-473b-8a9f-e93ae52d9b56"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // Navigate
-        m_Navigate = asset.FindActionMap("Navigate", throwIfNotFound: true);
-        m_Navigate_Navigate = m_Navigate.FindAction("Navigate", throwIfNotFound: true);
-        m_Navigate_Submit = m_Navigate.FindAction("Submit", throwIfNotFound: true);
+        // Navigate3D_Bcontrol
+        m_Navigate3D_Bcontrol = asset.FindActionMap("Navigate3D_Bcontrol", throwIfNotFound: true);
+        m_Navigate3D_Bcontrol_Navigate = m_Navigate3D_Bcontrol.FindAction("Navigate", throwIfNotFound: true);
+        m_Navigate3D_Bcontrol_Submit = m_Navigate3D_Bcontrol.FindAction("Submit", throwIfNotFound: true);
+        m_Navigate3D_Bcontrol_Interact = m_Navigate3D_Bcontrol.FindAction("Interact", throwIfNotFound: true);
+        // XboxControl
+        m_XboxControl = asset.FindActionMap("XboxControl", throwIfNotFound: true);
+        m_XboxControl_Move = m_XboxControl.FindAction("Move", throwIfNotFound: true);
+        m_XboxControl_Look = m_XboxControl.FindAction("Look", throwIfNotFound: true);
+        m_XboxControl_Interact = m_XboxControl.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,35 +296,40 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Navigate
-    private readonly InputActionMap m_Navigate;
-    private List<INavigateActions> m_NavigateActionsCallbackInterfaces = new List<INavigateActions>();
-    private readonly InputAction m_Navigate_Navigate;
-    private readonly InputAction m_Navigate_Submit;
-    public struct NavigateActions
+    // Navigate3D_Bcontrol
+    private readonly InputActionMap m_Navigate3D_Bcontrol;
+    private List<INavigate3D_BcontrolActions> m_Navigate3D_BcontrolActionsCallbackInterfaces = new List<INavigate3D_BcontrolActions>();
+    private readonly InputAction m_Navigate3D_Bcontrol_Navigate;
+    private readonly InputAction m_Navigate3D_Bcontrol_Submit;
+    private readonly InputAction m_Navigate3D_Bcontrol_Interact;
+    public struct Navigate3D_BcontrolActions
     {
         private @GameInputActions m_Wrapper;
-        public NavigateActions(@GameInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Navigate => m_Wrapper.m_Navigate_Navigate;
-        public InputAction @Submit => m_Wrapper.m_Navigate_Submit;
-        public InputActionMap Get() { return m_Wrapper.m_Navigate; }
+        public Navigate3D_BcontrolActions(@GameInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Navigate => m_Wrapper.m_Navigate3D_Bcontrol_Navigate;
+        public InputAction @Submit => m_Wrapper.m_Navigate3D_Bcontrol_Submit;
+        public InputAction @Interact => m_Wrapper.m_Navigate3D_Bcontrol_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Navigate3D_Bcontrol; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(NavigateActions set) { return set.Get(); }
-        public void AddCallbacks(INavigateActions instance)
+        public static implicit operator InputActionMap(Navigate3D_BcontrolActions set) { return set.Get(); }
+        public void AddCallbacks(INavigate3D_BcontrolActions instance)
         {
-            if (instance == null || m_Wrapper.m_NavigateActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_NavigateActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_Navigate3D_BcontrolActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Navigate3D_BcontrolActionsCallbackInterfaces.Add(instance);
             @Navigate.started += instance.OnNavigate;
             @Navigate.performed += instance.OnNavigate;
             @Navigate.canceled += instance.OnNavigate;
             @Submit.started += instance.OnSubmit;
             @Submit.performed += instance.OnSubmit;
             @Submit.canceled += instance.OnSubmit;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
-        private void UnregisterCallbacks(INavigateActions instance)
+        private void UnregisterCallbacks(INavigate3D_BcontrolActions instance)
         {
             @Navigate.started -= instance.OnNavigate;
             @Navigate.performed -= instance.OnNavigate;
@@ -216,26 +337,98 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @Submit.started -= instance.OnSubmit;
             @Submit.performed -= instance.OnSubmit;
             @Submit.canceled -= instance.OnSubmit;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
-        public void RemoveCallbacks(INavigateActions instance)
+        public void RemoveCallbacks(INavigate3D_BcontrolActions instance)
         {
-            if (m_Wrapper.m_NavigateActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_Navigate3D_BcontrolActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(INavigateActions instance)
+        public void SetCallbacks(INavigate3D_BcontrolActions instance)
         {
-            foreach (var item in m_Wrapper.m_NavigateActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_Navigate3D_BcontrolActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_NavigateActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_Navigate3D_BcontrolActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public NavigateActions @Navigate => new NavigateActions(this);
-    public interface INavigateActions
+    public Navigate3D_BcontrolActions @Navigate3D_Bcontrol => new Navigate3D_BcontrolActions(this);
+
+    // XboxControl
+    private readonly InputActionMap m_XboxControl;
+    private List<IXboxControlActions> m_XboxControlActionsCallbackInterfaces = new List<IXboxControlActions>();
+    private readonly InputAction m_XboxControl_Move;
+    private readonly InputAction m_XboxControl_Look;
+    private readonly InputAction m_XboxControl_Interact;
+    public struct XboxControlActions
+    {
+        private @GameInputActions m_Wrapper;
+        public XboxControlActions(@GameInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_XboxControl_Move;
+        public InputAction @Look => m_Wrapper.m_XboxControl_Look;
+        public InputAction @Interact => m_Wrapper.m_XboxControl_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_XboxControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(XboxControlActions set) { return set.Get(); }
+        public void AddCallbacks(IXboxControlActions instance)
+        {
+            if (instance == null || m_Wrapper.m_XboxControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_XboxControlActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        private void UnregisterCallbacks(IXboxControlActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        public void RemoveCallbacks(IXboxControlActions instance)
+        {
+            if (m_Wrapper.m_XboxControlActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IXboxControlActions instance)
+        {
+            foreach (var item in m_Wrapper.m_XboxControlActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_XboxControlActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public XboxControlActions @XboxControl => new XboxControlActions(this);
+    public interface INavigate3D_BcontrolActions
     {
         void OnNavigate(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IXboxControlActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
