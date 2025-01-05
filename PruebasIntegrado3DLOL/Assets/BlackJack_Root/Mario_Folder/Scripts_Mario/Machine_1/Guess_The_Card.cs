@@ -21,16 +21,16 @@ public class GuessTheCard : MonoBehaviour
     private int selectedCardIndexPos = 0; // Selected card index
     private int turnCount = 0;            // Turn counter
     //
-    private void OnEnable()
+   /* private void OnEnable()
     {
         Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Navigate.performed += OnNavigate;
         Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Submit.performed += OnSubmit;
-    }
-    private void OnDisable()
+    }*/
+  /*  private void OnDisable()
     {
         Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Navigate.performed -= OnNavigate;
         Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Submit.performed -= OnSubmit;
-    }
+    }*/
   
     /* void Awake()
      {

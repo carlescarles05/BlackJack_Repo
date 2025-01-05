@@ -23,7 +23,7 @@ public class Input_Manager : MonoBehaviour
         }
     }
 
-    private void Awake()
+  /*  private void Awake()
     {
         if (instance != null && instance != this)
         {
@@ -44,7 +44,7 @@ public class Input_Manager : MonoBehaviour
         InputActions.XboxControl.Look.canceled += ctx => lookInput = Vector2.zero;
 
         Debug.Log("Input_Manager successfully initialized.");
-    }
+    }*/
 
     public Vector2 GetMoveInput()
     {
