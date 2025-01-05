@@ -6,7 +6,7 @@ public class Buttons : MonoBehaviour
 {
     [Header("This Scene Canvas Event Handler")]
     public GameObject Register;
-    public GameObject Game1Canvas;
+    public GameObject GamePANEL;
     public GameObject cardDeck;
 
     private GuessTheCard guessTheCard;
@@ -18,20 +18,22 @@ public class Buttons : MonoBehaviour
         {
             guessTheCard = cardDeck.GetComponent<GuessTheCard>();
         }
+        cardDeck.SetActive(false);
+        GamePANEL.SetActive(false);
     }
 
     // Activate the menu canvas
-    public void SwitchToMENUCanvas()
+    public void SwitchToRegisterPANEL()
     {
-        Game1Canvas.SetActive(false);
+        GamePANEL.SetActive(false);
         Register.SetActive(true);
         cardDeck.SetActive(false);
     }
 
-    // Activate the game canvas
-    public void ButtonGameCardCANVA()
+    // Activate the gameANDUI canvas
+    public void ButtonGameCardPANEL()
     {
-        Game1Canvas.SetActive(true);
+        GamePANEL.SetActive(true);
         Register.SetActive(false);
         cardDeck.SetActive(true);
 

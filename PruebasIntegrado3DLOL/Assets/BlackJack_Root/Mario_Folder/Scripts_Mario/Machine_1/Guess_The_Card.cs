@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEditor.ShaderGraph;
+// I wont use Input_Manager here.
 
 public class GuessTheCard : MonoBehaviour
 {
@@ -18,16 +20,26 @@ public class GuessTheCard : MonoBehaviour
     private int MachineNumber;
     private int selectedCardIndexPos = 0; // Selected card index
     private int turnCount = 0;            // Turn counter
-    private GameInputActions inputActions;
-
-    void Awake()
+    //
+    private void OnEnable()
     {
-        // Initialize input actions for navigation and selection
-        inputActions = new GameInputActions();
-        inputActions.Navigate.Navigate.performed += OnNavigate;
-        inputActions.Navigate.Submit.performed += OnSubmit;
-        inputActions.Navigate.Enable();
+        Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Navigate.performed += OnNavigate;
+        Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Submit.performed += OnSubmit;
     }
+    private void OnDisable()
+    {
+        Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Navigate.performed -= OnNavigate;
+        Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Submit.performed -= OnSubmit;
+    }
+  
+    /* void Awake()
+     {
+         // Initialize input actions for navigation and selection
+         inputActions = new GameInputActions();
+         inputActions.Navigate.Navigate.performed += OnNavigate;
+         inputActions.Navigate.Submit.performed += OnSubmit;
+         inputActions.Navigate.Enable();
+     }*/
 
     void Start()
     {
@@ -46,27 +58,19 @@ public class GuessTheCard : MonoBehaviour
     public void ResetGame()
     {
         // Reset player points and clock
-        if (player_Points != null)
-        {
-            player_Points.ResetPoints();
-        }
-        if (player_Clock != null)
-        {
-            player_Clock.ResetClock();
-        }
+        player_Points?.ResetPoints();
+        player_Clock?.ResetClock();
 
         // Reset turn counter and card highlights
-        turnCount = 0;
-        selectedCardIndexPos = 0;
+        turnCount = 0; //every 3
+        selectedCardIndexPos = 0; //HL
         foreach (GameObject card in cards)
         {
             Renderer renderer = card.GetComponent<Renderer>();
             renderer.material.color = Color.white; // Reset card colors
         }
-
         // Hide win panel
         winPanel.gameObject.SetActive(false);
-
         // Restart game logic
         StartGame();
     }
@@ -82,17 +86,19 @@ public class GuessTheCard : MonoBehaviour
         {
             MoveSelection(-1);
         }
+        Debug.Log("CURRENT CARD IS " + selectedCardIndexPos);
     }
 
     void OnSubmit(InputAction.CallbackContext context)
     {
+        
         SelectedCardAction(cards[selectedCardIndexPos]);
     }
 
     void MoveSelection(int direction)
     {
-        HighLightCard(selectedCardIndexPos, false); // Remove highlight from the previous card
-
+          HighLightCard(selectedCardIndexPos, false); // Remove highlight from the previous card
+     
         // Update the selected card index
         selectedCardIndexPos += direction;
         if (selectedCardIndexPos >= cards.Length)
@@ -103,8 +109,8 @@ public class GuessTheCard : MonoBehaviour
         {
             selectedCardIndexPos = cards.Length - 1;
         }
-
-        HighLightCard(selectedCardIndexPos, true); // Highlight the new card
+    
+       HighLightCard(selectedCardIndexPos, true); // Highlight the new card
     }
 
     void HighLightCard(int index, bool highlight)
@@ -113,7 +119,8 @@ public class GuessTheCard : MonoBehaviour
         renderer.material.color = highlight ? Color.yellow : Color.white;
     }
 
-    void HighlightMachineCard()
+     //RED
+     void HighlightMachineCard()
     {
         foreach (var card in cards)
         {
@@ -130,13 +137,13 @@ public class GuessTheCard : MonoBehaviour
     void SelectedCardAction(GameObject clickedCard)
     {
         // Deduce puntos al inicio de cada turno
-        player_Points.DeductPoints();
+       // player_Points.DeductPoints();
 
         // Verifica si el jugador tiene suficientes puntos para continuar
         if (player_Points.GetPoints() < 50) //  verifica si el jugador tiene menos de 50 puntos
         {
             resultText.text = "¡No tienes suficientes puntos para continuar!";
-            Invoke("LoadGameOverScene", 2f); // Llama al método para cambiar de escena después de 2 segundos
+            Invoke("LoadGameOverScene", 2f); // Llama al método para cambiar de escena 
             return; // Detiene la lógica adicional si no hay suficientes puntos
         }
 
@@ -188,7 +195,7 @@ public class GuessTheCard : MonoBehaviour
 
     void ResetCardHighlightByTurn()
     {
-        turnCount %= 3; // Cycle every 3 turns
+        turnCount %= 3;
 
         if (turnCount == 0) // First turn: Highlight first card
         {
@@ -196,7 +203,7 @@ public class GuessTheCard : MonoBehaviour
         }
         else if (turnCount == 1) // Second turn: Highlight middle card
         {
-            selectedCardIndexPos = 4; // Example: Middle index
+            selectedCardIndexPos = 4; // Middle index
         }
         else if (turnCount == 2) // Third turn: Highlight last card
         {
