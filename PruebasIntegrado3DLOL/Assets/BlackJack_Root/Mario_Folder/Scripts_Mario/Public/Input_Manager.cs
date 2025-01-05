@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class Input_Manager : MonoBehaviour
 {
     public static Input_Manager instance;
-    public GameInputActions InputActions { get; private set; }
+  //  public GameInputActions InputActions { get; private set; }
     public float speed = 5f;
     public float lookSensitivity = 3f;
 
