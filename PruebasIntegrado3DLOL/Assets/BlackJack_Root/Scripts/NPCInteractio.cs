@@ -16,6 +16,10 @@ public class NPCInteractio : MonoBehaviour
     private bool playerInRange = false; // Para saber si el jugador está en rango
     private bool isDialogueActive = false; // Para saber si un diálogo está activo
 
+    private bool isTyping = false; // Indica si el texto se está escribiendo
+
+    public MonoBehaviour playerMovementScript; // El script de movimiento del jugador
+
     private void Start()
     {
         // Asegurarnos de que el indicador y el panel de diálogo estén apagados al inicio
@@ -25,8 +29,8 @@ public class NPCInteractio : MonoBehaviour
 
     private void Update()
     {
-        // Si el jugador está en rango y presiona "E"
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        // Si el jugador está en rango, presiona "E" y no está escribiendo
+        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !isTyping)
         {
             if (!isDialogueActive)
             {
@@ -44,27 +48,28 @@ public class NPCInteractio : MonoBehaviour
         if (dialogueLines.Length > 0)
         {
             isDialogueActive = true;
-            currentLineIndex = 0; // Empezar desde la primera línea
-            dialoguePanel.SetActive(true); // Mostrar el panel de diálogo
+            currentLineIndex = 0;
+            dialoguePanel.SetActive(true);
+
+            // Desactivar movimiento del jugador
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = false;
+            }
 
             // Desactivar el movimiento del NPC
             if (Move != null)
             {
-                Debug.Log("Desactivando movimiento del NPC.");
-                Move.SetMovement(false); // Pausar movimiento
-            }
-            else
-            {
-                Debug.LogError("El componente NPCMovement no está asignado.");
+                Move.SetMovement(false);
             }
 
-            // Iniciar la animación del texto
             StartCoroutine(TypeSentence(dialogueLines[currentLineIndex]));
         }
     }
 
     private IEnumerator TypeSentence(string sentence)
     {
+        isTyping = true; // Comienza a escribir
         dialogueText.text = ""; // Limpiar el texto actual
 
         foreach (char letter in sentence)
@@ -72,6 +77,8 @@ public class NPCInteractio : MonoBehaviour
             dialogueText.text += letter; // Agregar letra por letra
             yield return new WaitForSeconds(0.02f); // Espera antes de mostrar la siguiente letra
         }
+
+        isTyping = false; // Termina de escribir
     }
 
     private void AdvanceDialogue()
@@ -90,17 +97,18 @@ public class NPCInteractio : MonoBehaviour
     private void EndDialogue()
     {
         isDialogueActive = false;
-        dialoguePanel.SetActive(false); // Ocultar el panel de diálogo
+        dialoguePanel.SetActive(false);
+
+        // Reactivar movimiento del jugador
+        if (playerMovementScript != null)
+        {
+            playerMovementScript.enabled = true;
+        }
 
         // Reactivar el movimiento del NPC
         if (Move != null)
         {
-            Debug.Log("Reactivando movimiento del NPC.");
-            Move.SetMovement(true); // Reactivar el movimiento
-        }
-        else
-        {
-            Debug.LogError("El componente NPCMovement no está asignado.");
+            Move.SetMovement(true);
         }
     }
 
