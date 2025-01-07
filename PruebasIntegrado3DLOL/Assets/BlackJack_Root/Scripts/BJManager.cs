@@ -57,7 +57,7 @@ public class BJManager : MonoBehaviour
         standButton.onClick.AddListener(PlayerStand);
 
         UpdatePlayerTotalUI();
-        StartPlayerTurn(); // Asegurarnos de que empiece el turno del jugador
+        //StartPlayerTurn(); // Asegurarnos de que empiece el turno del jugador
 
         StartGame(); // Inicializar el juego
     }
@@ -125,7 +125,66 @@ public class BJManager : MonoBehaviour
         return cardValue;
     }
 
+    private void HandleRounds()
+    {
+        if (isGameOver) return; // Detener las rondas si el juego ha terminado.
+
+        // Control del turno actual
+        switch (currentTurn)
+        {
+            case Turn.Player:
+                Debug.Log("Es el turno del jugador.");
+                hitButton.interactable = true; // Permitir interacción del jugador
+                standButton.interactable = true;
+                break;
+
+            case Turn.Enemy:
+                Debug.Log("Es el turno del enemigo.");
+                hitButton.interactable = false; // Desactivar botones del jugador
+                standButton.interactable = false;
+
+                StartCoroutine(EnemyTurnRoutine());
+                break;
+        }
+    }
+
     public void EndTurn()
+    {
+        if (currentTurn == Turn.Player)
+        {
+            Debug.Log("El jugador termina su turno.");
+            currentTurn = Turn.Enemy; // Cambiar turno al enemigo.
+        }
+        else if (currentTurn == Turn.Enemy)
+        {
+            Debug.Log("El enemigo termina su turno.");
+            currentTurn = Turn.Player; // Cambiar turno al jugador.
+        }
+
+        HandleRounds(); // Llamar al método de manejo de rondas.
+    }
+
+    public void EndGame(bool? playerWins)
+    {
+        isGameOver = true;
+
+        hitButton.interactable = false;
+        standButton.interactable = false;
+
+        if (playerWins == true)
+        {
+            Debug.Log("¡Has ganado!");
+        }
+        else if (playerWins == false)
+        {
+            Debug.Log("Has perdido.");
+        }
+        else
+        {
+            Debug.Log("Empate.");
+        }
+    }
+    /*public void EndTurn()
     {
         if (currentTurn == Turn.Player)
         {
@@ -154,7 +213,7 @@ public class BJManager : MonoBehaviour
     {
         if (currentTurn != Turn.Enemy || isGameOver) return;
         StartCoroutine(EnemyTurnRoutine());
-    }
+    }*/
 
     public IEnumerator EnemyTurnRoutine()
     {
@@ -219,7 +278,7 @@ public class BJManager : MonoBehaviour
         }
     }
 
-    public void EndGame(bool? playerWins)
+    /*public void EndGame(bool? playerWins)
     {
         isGameOver = true;
 
@@ -238,7 +297,7 @@ public class BJManager : MonoBehaviour
 
             // Aquí se asegura de cambiar al turno del enemigo
         }
-    }
+    }*/
 
     public void StartGame()
     {
