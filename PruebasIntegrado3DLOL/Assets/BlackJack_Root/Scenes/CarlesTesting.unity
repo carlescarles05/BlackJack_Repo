@@ -22258,11 +22258,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introCanvas: {fileID: 437235582}
+  introPanel: {fileID: 1570375952}
   introText: {fileID: 1584137792}
   introSentence: "HABLA CON TODOS LOS CAMAREROS PARA ENTENDER TODO A LA PERFECCI\xD3N"
-  typingSpeed: 0.05
-  initialDelay: 2
-  endDelay: 2
+  textSpeed: 0.05
+  waitTimeAfterText: 2
 --- !u!4 &507056934
 Transform:
   m_ObjectHideFlags: 0
