@@ -130,5 +130,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    public void SetMovementEnabled(bool enabled)
+    {
+        characterController.enabled = enabled; // Activar o desactivar el CharacterController
+    }
 }
