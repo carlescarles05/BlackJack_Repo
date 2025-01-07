@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f; // Velocidad de movimiento
     public float mouseSensitivity = 100f; // Sensibilidad del ratón
     public Transform cameraTransform; // Transform de la cámara del jugador
+
+    private float _gravity = -9.81f;
+    [SerializeField] private float gravityMultiplier = 3.0f;
+    private float _velocity;
+    private float _direction;
+    private float verticalVelocity;            // Velocidad vertical
 
     private float pitch = 0f; // Rotación vertical de la cámara
 
@@ -15,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     public float stepInterval = 0.5f; // Intervalo entre pasos
     private float stepTimer; // Temporizador para los pasos
     private AudioSource audioSource; // Componente de audio
+    public float jumpHeight = 2f;              // Altura de salto
+    public float gravity = -9.81f;             // Fuerza de gravedad
 
     private CharacterController characterController; // Controlador de personaje
 
@@ -29,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
         RotateCamera();
         HandleFootsteps();
+        ApplyGravity();
     }
 
     void MovePlayer()
@@ -89,5 +101,34 @@ public class PlayerMovement : MonoBehaviour
             audioSource.PlayOneShot(footstepClips[clipIndex]); // Reproduce el clip
         }
     }
+
+    void ApplyGravity()
+    {
+        // Si el personaje está en el suelo, resetear velocidad vertical y permitir salto
+        if (characterController.isGrounded)
+        {
+            verticalVelocity = -0.5f; // Mantenerlo pegado al suelo
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calcular velocidad de salto
+            }
+        }
+        else
+        {
+            // Aplicar gravedad si el personaje no está en el suelo
+            verticalVelocity += gravity * Time.deltaTime;
+        }
+
+        // Aplicar velocidad vertical al movimiento
+        Vector3 gravityMovement = new Vector3(0f, verticalVelocity, 0f);
+        characterController.Move(gravityMovement * Time.deltaTime);
+
+        if (characterController.isGrounded)
+        {
+            verticalVelocity = -0.5f; // Mantener al personaje pegado al suelo
+        }
+    }
+
 
 }
