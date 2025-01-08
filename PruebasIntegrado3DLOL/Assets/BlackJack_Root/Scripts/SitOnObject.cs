@@ -38,6 +38,9 @@ public class SitOnObject : MonoBehaviour
     int[] cardValues = new int[] { 1, 2, 3, 4, 5 };
 
     public Canvas timerCanvas; // Canvas del temporizador
+    public Cronometro cronometro; // Referencia al script del temporizador
+    public Canvas timerCanvasEnemy; //Temporizador enemigo
+    public Cronometro cronometroEnemigo; //Cronometro enemigo
 
     void Start()
     {
@@ -153,7 +156,29 @@ public class SitOnObject : MonoBehaviour
         if (timerCanvas != null)
         {
             timerCanvas.gameObject.SetActive(true); // Activar el canvas del temporizador
-            /*StartCoroutine(StartCountdown());       // Iniciar el cronómetro*/
+
+            if (cronometro != null)
+            {
+                cronometro.gameObject.SetActive(true); // Activar el GameObject del cronómetro
+                cronometro.StartCountdown(() =>
+                {
+                    timerCanvas.gameObject.SetActive(false); // Ocultar el canvas al terminar la cuenta regresiva
+                });
+            }
+        }
+
+        if (timerCanvasEnemy != null)
+        {
+            timerCanvasEnemy.gameObject.SetActive(true); // Activar el canvas del segundo temporizador
+
+            if (cronometroEnemigo != null)
+            {
+                cronometroEnemigo.gameObject.SetActive(true); // Activar el segundo cronómetro
+                cronometroEnemigo.StartCountdown(() =>
+                {
+                    timerCanvasEnemy.gameObject.SetActive(false); // Ocultar el canvas del segundo temporizador al terminar
+                });
+            }
         }
     }
 

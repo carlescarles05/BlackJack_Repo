@@ -75,8 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleFootsteps()
     {
-        // Verificar si el jugador se está moviendo
-        bool isMoving = Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0;
+        bool isMoving = (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && IsOnGround();
 
         if (isMoving)
         {
@@ -84,13 +83,24 @@ public class PlayerMovement : MonoBehaviour
             if (stepTimer >= stepInterval)
             {
                 PlayFootstep();
-                stepTimer = 0f; // Reinicia el temporizador
+                stepTimer = 0f;
             }
         }
         else
         {
-            stepTimer = 0f; // Reinicia si el jugador está quieto
+            stepTimer = 0f;
         }
+    }
+
+    bool IsOnGround()
+    {
+        // Radio de la esfera para el SphereCast
+        float sphereRadius = 0.2f;
+        // Distancia ligeramente mayor que el radio para asegurar la detección
+        float sphereDistance = characterController.height / 2 + 0.1f;
+
+        // Lanza un SphereCast desde el centro del jugador hacia abajo
+        return Physics.SphereCast(transform.position, sphereRadius, Vector3.down, out RaycastHit hit, sphereDistance);
     }
 
     void PlayFootstep()
@@ -109,10 +119,13 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalVelocity = -0.5f; // Mantenerlo pegado al suelo
 
+            // Eliminar o comentar esta parte para deshabilitar el salto
+            /*
             if (Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calcular velocidad de salto
             }
+            */
         }
         else
         {
