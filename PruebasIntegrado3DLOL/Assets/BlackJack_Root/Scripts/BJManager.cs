@@ -24,6 +24,8 @@ public class BJManager : MonoBehaviour
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
     private int enemyTotal;
+    private int roundCount = 0; // Contador de rondas
+    private const int maxRounds = 8; // Número máximo de rondas
 
     [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
 
@@ -162,6 +164,62 @@ public class BJManager : MonoBehaviour
         }
 
         HandleRounds(); // Llamar al método de manejo de rondas.
+
+        /*roundCount++; // Incrementar contador de rondas
+
+        // Verificar si hemos llegado a la cantidad máxima de rondas
+        if (roundCount >= maxRounds)
+        {
+            EndGameRoundLimit(); // Finalizar el juego si llegamos al límite de rondas
+        }
+        else
+        {
+            HandleRounds(); // Llamar al método de manejo de rondas si no hemos llegado al límite
+        }*/
+    }
+
+    public void EndRound(bool playerWins)
+    {
+        // Si el jugador gana o pierde, se muestra el resultado
+        if (playerWins)
+        {
+            Debug.Log("¡Has ganado esta ronda!");
+        }
+        else
+        {
+            Debug.Log("Has perdido esta ronda.");
+        }
+
+        HandleRounds();
+
+        // Incrementar el contador de rondas
+        roundCount++;
+
+        // Comprobar si hemos llegado al límite de rondas
+        if (roundCount >= maxRounds)
+        {
+            Debug.Log("¡Se han jugado 8 rondas! El juego ha terminado.");
+            EndGameRoundLimit();
+        }
+        else
+        {
+            // Reiniciar la partida para la siguiente ronda
+            StartGame();
+        }
+    }
+
+    private void EndGameRoundLimit()
+    {
+        Debug.Log("¡Se han jugado 8 rondas! El juego ha terminado.");
+
+        // Desactivar los botones
+        hitButton.interactable = false;
+        standButton.interactable = false;
+
+        // Mostrar mensaje de fin de juego
+        Debug.Log("Fin del juego. Han transcurrido 8 rondas.");
+
+        // Aquí puedes agregar más lógica, como mostrar un UI de fin de juego si lo deseas.
     }
 
     public void EndGame(bool? playerWins)
@@ -235,7 +293,7 @@ public class BJManager : MonoBehaviour
 
     public IEnumerator EnemyTurnRoutine()
     {
-        
+
         Debug.Log("Turno del enemigo comenzado.");
 
         yield return new WaitForSeconds(1f); // Pausa simulada para el turno del enemigo
@@ -264,9 +322,9 @@ public class BJManager : MonoBehaviour
 
         // Finalizar el turno del enemigo
         Debug.Log("El enemigo termina su turno.");
-        
+
         EndTurn(); // Cambiar al turno del jugador
-        
+
     }
 
     private void UpdateEnemyTotalUI()
