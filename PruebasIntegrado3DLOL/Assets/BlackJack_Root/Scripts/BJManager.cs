@@ -183,7 +183,25 @@ public class BJManager : MonoBehaviour
         {
             Debug.Log("Empate.");
         }
+
+        // Esperamos un poco antes de reiniciar el juego para dar tiempo a que el jugador vea el resultado.
+        StartCoroutine(WaitForEndOfGame());
     }
+
+    private IEnumerator WaitForEndOfGame()
+    {
+        // Esperar 2 segundos para que el jugador vea el mensaje
+        yield return new WaitForSeconds(2f);
+
+        // Llamar a StartGame para reiniciar el juego
+        StartGame();
+        isGameOver = false; // Resetear el estado del juego
+
+        // Opcional: podrías restablecer la interfaz de usuario u otros elementos aquí si es necesario
+
+        Debug.Log("Comenzando una nueva ronda...");
+    }
+
     /*public void EndTurn()
     {
         if (currentTurn == Turn.Player)
@@ -353,6 +371,10 @@ public class BJManager : MonoBehaviour
         // Aseguramos que el turno del jugador comienza
         currentTurn = Turn.Player;
         Debug.Log("Turno inicial: Jugador.");
+
+        // Activar los botones al reiniciar la ronda
+        hitButton.interactable = true;
+        standButton.interactable = true;
     }
 
     public void EnemyHit()
