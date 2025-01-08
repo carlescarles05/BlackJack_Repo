@@ -59269,7 +59269,7 @@ MonoBehaviour:
   dialogueLines:
   - "BIENVENIDO AL CASINO, AQU\xCD PODR\xC1S DISFRUTAR DE DIVERSOS MINIJUEGOS Y CONVERSAR
     CON DEM\xC1S PERSONAS"
-  playerMovementScript: {fileID: 0}
+  playerMovementScript: {fileID: 1501265935}
 --- !u!65 &1454314011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67693,10 +67693,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3af4fbb25f94e804fa5fd2a962d76a2d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1904066427}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3af4fbb25f94e804fa5fd2a962d76a2d,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1904066432}
   m_SourcePrefab: {fileID: 100100000, guid: 3af4fbb25f94e804fa5fd2a962d76a2d, type: 3}
 --- !u!1 &1904066425 stripped
@@ -67717,28 +67713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee46c13696b1bb944851b96a74caeefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nombreEscena: 00_Mario_MACHINE#1
---- !u!65 &1904066427
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904066425}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.74921113, y: 1.9999999, z: 0.69972426}
-  m_Center: {x: 0.02539438, y: 0.99999994, z: -3.7840575e-10}
+  nombreEscena: 
 --- !u!65 &1904066428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67758,8 +67733,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.760851, y: 1.9999999, z: 1.4495622}
-  m_Center: {x: -0.98041767, y: 0.99999994, z: 0.065511085}
+  m_Size: {x: 0.8321254, y: 1.9999999, z: 0.8777522}
+  m_Center: {x: -0.016053323, y: 0.99999994, z: 0.04542784}
 --- !u!208 &1904066432
 NavMeshObstacle:
   m_ObjectHideFlags: 0
