@@ -37,6 +37,8 @@ public class SitOnObject : MonoBehaviour
     public int enemyTotal = 0;
     int[] cardValues = new int[] { 1, 2, 3, 4, 5 };
 
+    public Canvas timerCanvas; // Canvas del temporizador
+
     void Start()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
@@ -147,6 +149,12 @@ public class SitOnObject : MonoBehaviour
         {
             enemyCanvasObject.gameObject.SetActive(true);
         }
+
+        if (timerCanvas != null)
+        {
+            timerCanvas.gameObject.SetActive(true); // Activar el canvas del temporizador
+            /*StartCoroutine(StartCountdown());       // Iniciar el cronómetro*/
+        }
     }
 
     IEnumerator ActivateEffect(GameObject smoke, GameObject card)
@@ -187,14 +195,7 @@ public class SitOnObject : MonoBehaviour
 
     void GenerateCards()
     {
-        /*int playerCard1 = cardValues[Random.Range(0, cardValues.Length)];
-        int playerCard2 = cardValues[Random.Range(0, cardValues.Length)];
-        playerTotal = playerCard1 + playerCard2;
-
-        if (playerTotalText != null)
-        {
-            playerTotalText.text = playerTotal + "/21";
-        }*/
+        
         // Generar dos cartas al azar para el jugador
         int playerCard1 = cardValues[Random.Range(0, cardValues.Length)];
         int playerCard2 = cardValues[Random.Range(0, cardValues.Length)];
@@ -226,8 +227,6 @@ public class SitOnObject : MonoBehaviour
 
     public int GenerateCard()
     {
-        /*int newCard = cardValues[Random.Range(0, cardValues.Length)];
-        return newCard;*/
         int newCard = cardValues[Random.Range(0, cardValues.Length)];
 
         // Sumar la nueva carta al total del jugador
@@ -249,5 +248,6 @@ public class SitOnObject : MonoBehaviour
         playerTotal = 0;
         UpdatePlayerCanvas();
     }
+
 
 }
