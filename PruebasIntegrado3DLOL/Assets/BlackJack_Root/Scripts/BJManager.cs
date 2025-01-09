@@ -66,7 +66,8 @@ public class BJManager : MonoBehaviour
 
     public void PlayerHit()
     {
-        
+
+        // Al final de tu turno, cambia al turno del enemigo
         EndTurn(); // Ahora pasamos el control al enemigo*/
         if (currentTurn != Turn.Player) return;
 
@@ -159,6 +160,7 @@ public class BJManager : MonoBehaviour
         {
             HandleRounds(); // Llamar al método de manejo de rondas si no hemos llegado al límite
         }*/
+
     }
 
     public void EndRound(bool playerWins)
@@ -242,6 +244,7 @@ public class BJManager : MonoBehaviour
 
         Debug.Log("Comenzando una nueva ronda...");
     }
+
 
     public IEnumerator EnemyTurnRoutine()
     {
