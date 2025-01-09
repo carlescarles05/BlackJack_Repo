@@ -22027,7 +22027,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -351.493, y: 0, z: 0, w: 0}
+  m_margin: {x: -692.09247, y: -304.47855, z: -857.57556, w: -219.90381}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -65324,7 +65324,7 @@ Transform:
   m_GameObject: {fileID: 1501265930}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.83769137, z: -0, w: 0.54614395}
-  m_LocalPosition: {x: -11.7, y: -1.41, z: 27.8}
+  m_LocalPosition: {x: -0.22, y: 1.12, z: -19.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -75399,7 +75399,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -351.493, y: 0, z: 0, w: 0}
+  m_margin: {x: -644.31635, y: -304.62778, z: -889.12787, w: -281.57806}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

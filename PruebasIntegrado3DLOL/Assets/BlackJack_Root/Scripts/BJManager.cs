@@ -66,6 +66,7 @@ public class BJManager : MonoBehaviour
 
     public void PlayerHit()
     {
+
         // Al final de tu turno, cambia al turno del enemigo
         EndTurn(); // Ahora pasamos el control al enemigo*/
         if (currentTurn != Turn.Player) return;
@@ -147,6 +148,18 @@ public class BJManager : MonoBehaviour
         }
 
         HandleRounds(); // Llamar al método de manejo de rondas.
+
+        /*roundCount++; // Incrementar contador de rondas
+
+        Verificar si hemos llegado a la cantidad máxima de rondas
+        if (roundCount >= maxRounds)
+        {
+            EndGameRoundLimit(); // Finalizar el juego si llegamos al límite de rondas
+        }
+        else
+        {
+            HandleRounds(); // Llamar al método de manejo de rondas si no hemos llegado al límite
+        }*/
 
     }
 
@@ -235,7 +248,6 @@ public class BJManager : MonoBehaviour
     }
 
 
-
     public IEnumerator EnemyTurnRoutine()
     {
 
@@ -262,14 +274,14 @@ public class BJManager : MonoBehaviour
         {
             Debug.Log("¡El enemigo se pasó de 21!");
             EndGame(true); // El jugador gana
-            yield break;
+            
         }
 
         // Finalizar el turno del enemigo
         Debug.Log("El enemigo termina su turno.");
 
         EndTurn(); // Cambiar al turno del jugador
-
+        yield break;
     }
 
     private void UpdateEnemyTotalUI()
@@ -298,7 +310,6 @@ public class BJManager : MonoBehaviour
             Debug.LogError("PlayerTotalText no está asignado en el Inspector.");
         }
     }
-
 
     public void StartGame()
     {
