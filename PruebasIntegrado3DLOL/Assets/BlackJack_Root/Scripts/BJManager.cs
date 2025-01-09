@@ -178,7 +178,9 @@ public class BJManager : MonoBehaviour
             // Reiniciar la partida para la siguiente ronda
             StartGame();
         }
+        
     }
+
 
     private void EndGameRoundLimit()
     {
@@ -387,4 +389,6 @@ public class BJManager : MonoBehaviour
             bjManager.EndGame(true); // Notificar al BJManager que el jugador ganó
         }
     }
+
+
 }
