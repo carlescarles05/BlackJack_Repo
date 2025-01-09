@@ -68,7 +68,7 @@ public class BJManager : MonoBehaviour
     {
 
         // Al final de tu turno, cambia al turno del enemigo
-        EndTurn(); // Ahora pasamos el control al enemigo*/
+        //EndTurn(); // Ahora pasamos el control al enemigo*/
         if (currentTurn != Turn.Player) return;
 
         // Generar y agregar nueva carta
