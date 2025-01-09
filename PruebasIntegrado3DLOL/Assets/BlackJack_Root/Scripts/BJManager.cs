@@ -106,7 +106,7 @@ public class BJManager : MonoBehaviour
 
     public int GenerateCard()
     {
-        int cardValue = Random.Range(1, 11); // Genera un valor entre 1 y 10
+        int cardValue = Random.Range(1, 5); // Genera un valor entre 1 y 10
         Debug.Log("Carta generada: " + cardValue);
         return cardValue;
     }
