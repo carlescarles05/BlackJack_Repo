@@ -24,8 +24,9 @@ public class BJManager : MonoBehaviour
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
     private int enemyTotal;
-    private int roundCount = 0; // Contador de rondas
+    public int roundCount = 0; // Contador de rondas
     private const int maxRounds = 8; // Número máximo de rondas
+    bool blockDobleEnd=false;
 
     [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
 
@@ -69,7 +70,7 @@ public class BJManager : MonoBehaviour
 
         // Al final de tu turno, cambia al turno del enemigo
         //EndTurn(); // Ahora pasamos el control al enemigo*/
-        if (currentTurn != Turn.Player) return;
+        if (currentTurn != Turn.Player || blockDobleEnd) return;
 
         // Generar y agregar nueva carta
         int cardValue = GenerateCard();
@@ -106,7 +107,7 @@ public class BJManager : MonoBehaviour
 
     public int GenerateCard()
     {
-        int cardValue = Random.Range(1, 5); // Genera un valor entre 1 y 10
+        int cardValue = Random.Range(1, 7); // Genera un valor entre 1 y 10
         Debug.Log("Carta generada: " + cardValue);
         return cardValue;
     }
@@ -175,22 +176,12 @@ public class BJManager : MonoBehaviour
             Debug.Log("Has perdido esta ronda.");
         }
 
-        HandleRounds();
+        //HandleRounds();
 
         // Incrementar el contador de rondas
-        roundCount++;
+        //roundCount++;
 
         // Comprobar si hemos llegado al límite de rondas
-        if (roundCount >= maxRounds)
-        {
-            Debug.Log("¡Se han jugado 8 rondas! El juego ha terminado.");
-            EndGameRoundLimit();
-        }
-        else
-        {
-            // Reiniciar la partida para la siguiente ronda
-            StartGame();
-        }
         
     }
 
@@ -229,12 +220,24 @@ public class BJManager : MonoBehaviour
             Debug.Log("Empate.");
         }
 
-        // Esperamos un poco antes de reiniciar el juego para dar tiempo a que el jugador vea el resultado.
-        StartCoroutine(WaitForEndOfGame());
+        roundCount++;
+
+        if (roundCount >= maxRounds)
+        {
+            Debug.Log("¡Se han jugado 8 rondas! El juego ha terminado.");
+            EndGameRoundLimit();
+        }
+        else
+        {
+            // Esperamos un poco antes de reiniciar el juego para dar tiempo a que el jugador vea el resultado.
+            StartCoroutine(WaitForEndOfGame());
+        }
+
     }
 
     private IEnumerator WaitForEndOfGame()
     {
+        blockDobleEnd = true;
         // Esperar 2 segundos para que el jugador vea el mensaje
         yield return new WaitForSeconds(2f);
 
@@ -244,6 +247,7 @@ public class BJManager : MonoBehaviour
 
         // Opcional: podrías restablecer la interfaz de usuario u otros elementos aquí si es necesario
 
+        blockDobleEnd = false;
         Debug.Log("Comenzando una nueva ronda...");
     }
 
