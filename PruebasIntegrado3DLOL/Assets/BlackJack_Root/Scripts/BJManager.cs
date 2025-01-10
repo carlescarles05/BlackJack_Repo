@@ -75,12 +75,14 @@ public class BJManager : MonoBehaviour
         // Generar y agregar nueva carta
         int cardValue = GenerateCard();
         playerTotal += cardValue; // Sumar el valor de la carta
-        UpdatePlayerTotalUI();
+        //UpdatePlayerTotalUI();
 
         // Instanciar carta en la posición correspondiente
         GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
         card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
         playerCards.Add(card);
+
+        UpdatePlayerTotalUI();
 
         // Verificar si el jugador se pasó de 21
         if (playerTotal > maxPoints)
@@ -107,7 +109,7 @@ public class BJManager : MonoBehaviour
 
     public int GenerateCard()
     {
-        int cardValue = Random.Range(1, 7); // Genera un valor entre 1 y 10
+        int cardValue = Random.Range(1, 7); // Genera un valor entre 1 y 7
         Debug.Log("Carta generada: " + cardValue);
         return cardValue;
     }
@@ -341,7 +343,8 @@ public class BJManager : MonoBehaviour
         {
             int cardValue = GenerateCard();
             Debug.Log($"Jugador recibe carta inicial {i + 1}: {cardValue}");
-            playerTotal += cardValue;
+            //playerTotal += cardValue;
+            playerTotal = playerTotal + cardValue;
             GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
             card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
             playerCards.Add(card);
