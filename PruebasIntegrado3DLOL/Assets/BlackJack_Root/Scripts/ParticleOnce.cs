@@ -6,19 +6,6 @@ public class ParticleOnce : MonoBehaviour
 {
     public ParticleSystem ps;
 
-    /*void Start()
-    {
-        ps = GetComponent<ParticleSystem>();
-    }
-
-    // Método para reproducir el ParticleSystem solo una vez
-    public void PlayOnce()
-    {
-        if (!ps.isPlaying)
-        {
-            ps.Play();
-        }
-    }*/
     void Start()
     {
         // Busca en el mismo GameObject primero

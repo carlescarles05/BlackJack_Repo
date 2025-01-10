@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class DeckManager : MonoBehaviour
 {
-    public GameObject[] Deck; // Array de prefabs de cartas
+    public List<GameObject> Deck; // Lista de prefabs de cartas
     public Transform[] PlayerCardSpawns; // Spawn Points para las cartas del jugador
     public Transform[] EnemyCardSpawns;  // Spawn Points para las cartas del enemigo
-
-    private int currentIndex = 0;
 
     public void DrawCards()
     {
@@ -27,14 +25,19 @@ public class DeckManager : MonoBehaviour
 
     private void SpawnCard(Transform spawnPoint)
     {
-        if (currentIndex >= Deck.Length)
+        if (Deck.Count == 0)
         {
             Debug.Log("No quedan cartas en el mazo.");
             return;
         }
 
+        // Seleccionar la primera carta de la lista
+        GameObject card = Deck[0];
+
         // Instanciar la carta en el Spawn Point
-        GameObject card = Instantiate(Deck[currentIndex], spawnPoint.position, spawnPoint.rotation);
-        currentIndex++;
+        Instantiate(card, spawnPoint.position, spawnPoint.rotation);
+
+        // Eliminar la carta de la lista para que no se use de nuevo
+        Deck.RemoveAt(0);
     }
 }
