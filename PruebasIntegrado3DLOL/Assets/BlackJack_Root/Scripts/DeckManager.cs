@@ -51,6 +51,13 @@ public class DeckManager : MonoBehaviour
         GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPoint.position, Quaternion.identity);
         MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
         renderer.material = drawnCard.material;
+
+        // Añadir el valor de la carta como texto
+        TMPro.TextMeshPro text = cardInstance.GetComponentInChildren<TMPro.TextMeshPro>();
+        if (text != null)
+        {
+            text.text = drawnCard.value.ToString();
+        }
     }
 }
 
