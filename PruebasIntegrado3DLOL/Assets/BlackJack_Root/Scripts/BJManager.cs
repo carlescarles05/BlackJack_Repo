@@ -418,6 +418,8 @@ public class BJManager : MonoBehaviour
 
     [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
 
+    public List<Material> cardMaterials; // Materiales para representar los valores
+
     // Verifica si StartGame se llama al principio
     private void Awake()
     {
@@ -494,7 +496,7 @@ public class BJManager : MonoBehaviour
         Renderer cardRenderer = card.GetComponent<Renderer>();
         if (cardRenderer != null)
         {
-            //cardRenderer.material = playerCards[cardValue -1]; // newMaterial es el material que quieres aplicar
+            cardRenderer.material = cardMaterials[cardValue -1]; // newMaterial es el material que quieres aplicar
         }
 
         playerCards.Add(card);
