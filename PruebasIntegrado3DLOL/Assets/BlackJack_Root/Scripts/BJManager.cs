@@ -76,10 +76,6 @@ public class BJManager : MonoBehaviour
         playerTotal += cardValue; // Sumar el valor de la carta
         //UpdatePlayerTotalUI();
 
-        // Instanciar carta en la posición correspondiente
-        GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
-        card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
-        playerCards.Add(card);
 
         UpdatePlayerTotalUI();
 
@@ -109,6 +105,19 @@ public class BJManager : MonoBehaviour
     public int GenerateCard()
     {
         int cardValue = Random.Range(1, 7); // Genera un valor entre 1 y 7
+                                            // Instanciar carta en la posición correspondiente
+        GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
+        card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
+
+        // Cambiar el material de la carta
+        Renderer cardRenderer = card.GetComponent<Renderer>();
+        if (cardRenderer != null)
+        {
+            //cardRenderer.material = playerCards[cardValue -1]; // newMaterial es el material que quieres aplicar
+        }
+
+        playerCards.Add(card);
+
         Debug.Log("Carta generada: " + cardValue);
         return cardValue;
     }

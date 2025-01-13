@@ -1,43 +1,67 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DeckManager : MonoBehaviour
 {
-    public List<GameObject> Deck; // Lista de prefabs de cartas
-    public Transform[] PlayerCardSpawns; // Spawn Points para las cartas del jugador
-    public Transform[] EnemyCardSpawns;  // Spawn Points para las cartas del enemigo
+    public List<Card> deck = new List<Card>();
+    public List<Material> cardMaterials; // Materiales para representar los valores
+    public GameObject cardPrefab;        // Prefab de la carta para mostrar en la escena
+    public Transform cardSpawnPoint;     // Punto donde se instanciará la carta
 
-    public void DrawCards()
+    private void Start()
     {
-        // Robar dos cartas para el jugador
-        for (int i = 0; i < PlayerCardSpawns.Length; i++)
+        GenerateDeck();
+    }
+
+    private void GenerateDeck()
+    {
+        // Crear cartas con valores del 1 al 7
+        for (int i = 1; i <= 7; i++)
         {
-            SpawnCard(PlayerCardSpawns[i]);
+            Card newCard = new Card(i, cardMaterials[i - 1]); // Asignar material según el valor
+            deck.Add(newCard);
         }
 
-        // Robar dos cartas para el enemigo
-        for (int i = 0; i < EnemyCardSpawns.Length; i++)
+        ShuffleDeck(); // Barajar el mazo
+    }
+
+    private void ShuffleDeck()
+    {
+        for (int i = 0; i < deck.Count; i++)
         {
-            SpawnCard(EnemyCardSpawns[i]);
+            Card temp = deck[i];
+            int randomIndex = Random.Range(0, deck.Count);
+            deck[i] = deck[randomIndex];
+            deck[randomIndex] = temp;
         }
     }
 
-    private void SpawnCard(Transform spawnPoint)
+    public void DrawCard()
     {
-        if (Deck.Count == 0)
+        if (deck.Count == 0)
         {
-            Debug.Log("No quedan cartas en el mazo.");
+            Debug.LogWarning("El mazo está vacío.");
             return;
         }
 
-        // Seleccionar la primera carta de la lista
-        GameObject card = Deck[0];
+        Card drawnCard = deck[0];
+        deck.RemoveAt(0); // Eliminar la carta del mazo
 
-        // Instanciar la carta en el Spawn Point
-        Instantiate(card, spawnPoint.position, spawnPoint.rotation);
+        // Instanciar el prefab y aplicar el material correspondiente
+        GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPoint.position, Quaternion.identity);
+        MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
+        renderer.material = drawnCard.material;
+    }
+}
 
-        // Eliminar la carta de la lista para que no se use de nuevo
-        Deck.RemoveAt(0);
+public class Card
+{
+    public int value;
+    public Material material;
+
+    public Card(int value, Material material)
+    {
+        this.value = value;
+        this.material = material;
     }
 }

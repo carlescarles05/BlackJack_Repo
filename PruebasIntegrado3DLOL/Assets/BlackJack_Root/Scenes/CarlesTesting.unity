@@ -25856,16 +25856,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4035726c4eed63b4ba074645789c6300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Deck:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  PlayerCardSpawns: []
-  EnemyCardSpawns: []
+  cardMaterials:
+  - {fileID: 2100000, guid: 93286b6d65040ce4fb5d863d127a2c31, type: 2}
+  - {fileID: 2100000, guid: 3c84f5870915e0c468a1945f92311f3d, type: 2}
+  - {fileID: 2100000, guid: e9bb557b685bb8845ab4c3c70eaa13ee, type: 2}
+  - {fileID: 2100000, guid: 61bb7b228c0f6444e975017665e99240, type: 2}
+  - {fileID: 2100000, guid: 9addc16d4d58a3749b19648238ff4679, type: 2}
+  - {fileID: 2100000, guid: f41b5a09b80896b4c98cc83a7b6033b9, type: 2}
+  - {fileID: 2100000, guid: c975fc71e614cc84d8dc3ea92bfad0a3, type: 2}
+  cardPrefab: {fileID: 1627590882}
+  cardSpawnPoint: {fileID: 1216803549}
 --- !u!4 &749706561
 Transform:
   m_ObjectHideFlags: 0
