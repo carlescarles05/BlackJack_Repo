@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -42,7 +43,7 @@ public class EnemyAI : MonoBehaviour
     IEnumerator EnemyTurnRoutine()
     {
         // Mientras el total del enemigo sea menor que 17, el enemigo sigue pidiendo cartas
-        while (enemyTotal < 17)
+        if (enemyTotal < 17)
         {
             yield return new WaitForSeconds(1f); // Espera un segundo entre cada carta
 
@@ -52,6 +53,11 @@ public class EnemyAI : MonoBehaviour
             // Esperamos un poco antes de continuar
             yield return new WaitForSeconds(1f); // Se puede ajustar este tiempo si lo deseas
         }
+        else
+        {
+            bjManager.EnemyStand();
+        }
+        
 
         // Al finalizar el turno del enemigo, cambia al turno del jugador
         bjManager.EndTurn();

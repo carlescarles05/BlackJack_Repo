@@ -23,7 +23,6 @@ public class BJManager : MonoBehaviour
 
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
-    private int enemyTotal;
     public int roundCount = 0; // Contador de rondas
     private const int maxRounds = 8; // Número máximo de rondas
     bool blockDobleEnd=false;
@@ -264,7 +263,7 @@ public class BJManager : MonoBehaviour
         // Generar carta
         int cardValue = GenerateCard();
         enemyAI.enemyTotal += cardValue;
-        Debug.Log($"Valor de la carta: {cardValue}, Total enemigo: {enemyTotal}");
+        Debug.Log($"Valor de la carta: {cardValue}, Total enemigo: {enemyAI.enemyTotal}");
 
         UpdateEnemyTotalUI();
 
@@ -273,7 +272,7 @@ public class BJManager : MonoBehaviour
         card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
         enemyCards.Add(card);
 
-        Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyTotal}");
+        Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyAI.enemyTotal}");
 
         // Verificar si el enemigo se pasó de 21
         if (enemyAI.enemyTotal > 21)
@@ -408,5 +407,13 @@ public class BJManager : MonoBehaviour
         }
     }
 
+    public void EnemyStand()
+    {
+        if (currentTurn != Turn.Enemy || isGameOver) return;
 
+        Debug.Log("Enemy se planta.");
+
+        // Finalizar el turno del enemigo
+        EndTurn();
+    }
 }
