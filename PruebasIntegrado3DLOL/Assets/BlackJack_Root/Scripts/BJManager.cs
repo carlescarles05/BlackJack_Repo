@@ -493,6 +493,7 @@ public class BJManager : MonoBehaviour
         // Instanciar carta en la posición correspondiente
         GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
         card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
+        card.transform.localRotation = Quaternion.Euler(0, 0, 0); // Ajustar rotación a 90 grados si es necesario
 
         // Cambiar el material de la carta
         Renderer cardRenderer = card.GetComponent<Renderer>();

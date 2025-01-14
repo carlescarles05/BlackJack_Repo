@@ -56,6 +56,7 @@ public class DeckManager : MonoBehaviour
         Card drawnCard = deck[0];
         deck.RemoveAt(0); // Eliminar la carta del mazo
 
+
         // Instanciar el prefab y aplicar el material correspondiente
         GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPosition[cardsAlreadyDrawn].position, Quaternion.identity);
         MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
