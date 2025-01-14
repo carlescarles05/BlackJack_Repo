@@ -763,9 +763,9 @@ public class BJManager : MonoBehaviour
         Debug.Log($"Nuevo total del enemigo después de la carta: {enemyAI.enemyTotal}");
 
         // Instanciar la carta visualmente
-        GameObject card = Instantiate(deckManager.cardPrefab, enemyCardSpawnPoint);
+        GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
         card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
-        enemyCards.Add(deckManager.cardPrefab);
+        enemyCards.Add(cardPrefab);
 
         // Actualizar la UI del enemigo
         UpdateEnemyTotalUI();
