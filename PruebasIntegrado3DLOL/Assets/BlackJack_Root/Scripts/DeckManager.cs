@@ -60,9 +60,11 @@ public class DeckManager : MonoBehaviour
         GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPosition[cardsAlreadyDrawn].position, Quaternion.identity);
         MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
         renderer.material = drawnCard.material;
+        Debug.Log("Has robado una carta");
 
-        if (cardsAlreadyDrawn <= 7) cardsAlreadyDrawn++;
-        else cardsAlreadyDrawn = 0;
+        cardsAlreadyDrawn++;
+
+        if (cardsAlreadyDrawn > 7) cardsAlreadyDrawn = 0;
 
         // Añadir el valor de la carta como texto
         TMPro.TextMeshPro text = cardInstance.GetComponentInChildren<TMPro.TextMeshPro>();

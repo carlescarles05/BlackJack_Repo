@@ -459,6 +459,7 @@ public class BJManager : MonoBehaviour
 
         // Generar y agregar nueva carta
         int cardValue = GenerateCard();
+        deckManager.DrawCard();
         playerTotal += cardValue; // Sumar el valor de la carta
         UpdatePlayerTotalUI();
 
@@ -501,7 +502,7 @@ public class BJManager : MonoBehaviour
             cardRenderer.material = deckManager.cardMaterials[cardValue - 1]; // Usar cardMaterials del DeckManager
         }
 
-        playerCards.Add(card);
+        playerCards.Add(deckManager.cardPrefab);
 
         Debug.Log("Carta generada: " + cardValue);
         return cardValue;
@@ -693,6 +694,7 @@ public class BJManager : MonoBehaviour
         // Reiniciar totales
         playerTotal = 0;
         enemyAI.enemyTotal = 0;
+        deckManager.cardsAlreadyDrawn = 0;
 
         // Limpiar las cartas
         foreach (var card in playerCards)
