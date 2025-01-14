@@ -16,7 +16,7 @@ public class DeckManager : MonoBehaviour
         GenerateDeck();
     }
 
-    private void GenerateDeck()
+    public void GenerateDeck()
     {
         // Crear cartas con valores del 1 al 7
         for (int i = 1; i <= 7; i++)
