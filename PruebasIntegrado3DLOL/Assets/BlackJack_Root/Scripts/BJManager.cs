@@ -418,7 +418,7 @@ public class BJManager : MonoBehaviour
 
     [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
 
-    public List<Material> cardMaterials; // Materiales para representar los valores
+    public DeckManager deckManager;
 
     // Verifica si StartGame se llama al principio
     private void Awake()
@@ -487,8 +487,9 @@ public class BJManager : MonoBehaviour
 
     public int GenerateCard()
     {
-        int cardValue = Random.Range(1, 7); // Genera un valor entre 1 y 7
-                                            // Instanciar carta en la posición correspondiente
+        int cardValue = Random.Range(1, deckManager.cardMaterials.Count); // Genera un valor entre 1 y el tamaño de cardMaterials
+
+        // Instanciar carta en la posición correspondiente
         GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
         card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
 
@@ -496,7 +497,8 @@ public class BJManager : MonoBehaviour
         Renderer cardRenderer = card.GetComponent<Renderer>();
         if (cardRenderer != null)
         {
-            cardRenderer.material = cardMaterials[cardValue -1]; // newMaterial es el material que quieres aplicar
+            Debug.Log(cardValue + " Valor actual de la carta");
+            cardRenderer.material = deckManager.cardMaterials[cardValue - 1]; // Usar cardMaterials del DeckManager
         }
 
         playerCards.Add(card);

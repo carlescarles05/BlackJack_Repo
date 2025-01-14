@@ -5,8 +5,11 @@ public class DeckManager : MonoBehaviour
 {
     public List<Card> deck = new List<Card>();
     public List<Material> cardMaterials; // Materiales para representar los valores
+    public Transform[] cardSpawnPosition = new Transform[7]; // Array de 7 posiciones para las cartas
     public GameObject cardPrefab;        // Prefab de la carta para mostrar en la escena
-    public Transform cardSpawnPoint;     // Punto donde se instanciará la carta
+    //public Transform cardSpawnPoint;     // Punto donde se instanciará la carta
+    public int cardsAlreadyDrawn;
+
 
     private void Start()
     {
@@ -44,13 +47,22 @@ public class DeckManager : MonoBehaviour
             return;
         }
 
+        if (cardsAlreadyDrawn >= cardSpawnPosition.Length)
+        {
+            Debug.LogWarning("cardsAlreadyDrawn está fuera de rango.");
+            return;
+        }
+
         Card drawnCard = deck[0];
         deck.RemoveAt(0); // Eliminar la carta del mazo
 
         // Instanciar el prefab y aplicar el material correspondiente
-        GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPoint.position, Quaternion.identity);
+        GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPosition[cardsAlreadyDrawn].position, Quaternion.identity);
         MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
         renderer.material = drawnCard.material;
+
+        if (cardsAlreadyDrawn <= 7) cardsAlreadyDrawn++;
+        else cardsAlreadyDrawn = 0;
 
         // Añadir el valor de la carta como texto
         TMPro.TextMeshPro text = cardInstance.GetComponentInChildren<TMPro.TextMeshPro>();

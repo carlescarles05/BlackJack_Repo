@@ -21062,37 +21062,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1501265934}
   mouseSensitivity: 100
---- !u!1 &333932904
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 333932905}
-  m_Layer: 0
-  m_Name: CardSpawn8
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &333932905
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333932904}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -30.961, y: 74.24342, z: 61.137}
-  m_LocalScale: {x: 0.32536873, y: 0.08818842, z: 0.15612572}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1496761539}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &337789077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21622,7 +21591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &381189584
 Transform:
   m_ObjectHideFlags: 0
@@ -25833,7 +25802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &736077441
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25957,8 +25926,16 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9addc16d4d58a3749b19648238ff4679, type: 2}
   - {fileID: 2100000, guid: f41b5a09b80896b4c98cc83a7b6033b9, type: 2}
   - {fileID: 2100000, guid: c975fc71e614cc84d8dc3ea92bfad0a3, type: 2}
+  cardSpawnPosition:
+  - {fileID: 1216803549}
+  - {fileID: 1428963864}
+  - {fileID: 383755390}
+  - {fileID: 195527331}
+  - {fileID: 1245803381}
+  - {fileID: 1633411866}
+  - {fileID: 1346747979}
   cardPrefab: {fileID: 1627590882}
-  cardSpawnPoint: {fileID: 1216803549}
+  cardsAlreadyDrawn: 0
 --- !u!4 &749706561
 Transform:
   m_ObjectHideFlags: 0
@@ -48701,7 +48678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1174261040
 Transform:
   m_ObjectHideFlags: 0
@@ -49151,8 +49128,7 @@ MonoBehaviour:
   enemyCards: []
   playerCardSpawnPoint: {fileID: 1216803549}
   enemyCardSpawnPoint: {fileID: 1144083035}
-  cardPrefab: {fileID: 7042065486897809914, guid: d4afb20f413628a42b3fd3430b12f746,
-    type: 3}
+  cardPrefab: {fileID: 1627590882}
   cardOffset: 30
   playerTotalText: {fileID: 430878245}
   hitButton: {fileID: 2004203359}
@@ -49161,7 +49137,7 @@ MonoBehaviour:
   bjManager: {fileID: 1218172600}
   roundCount: 0
   EnemyAI: {fileID: 1889638238}
-  cardMaterials: []
+  deckManager: {fileID: 749706560}
   currentTurn: 0
 --- !u!4 &1218172601
 Transform:
@@ -65455,7 +65431,6 @@ Transform:
   - {fileID: 1245803381}
   - {fileID: 1633411866}
   - {fileID: 1346747979}
-  - {fileID: 333932905}
   m_Father: {fileID: 1807823552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1498700450
@@ -66827,7 +66802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1627590883
 BoxCollider:
   m_ObjectHideFlags: 0
