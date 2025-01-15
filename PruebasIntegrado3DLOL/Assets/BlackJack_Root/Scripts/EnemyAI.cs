@@ -57,8 +57,6 @@ public class EnemyAI : MonoBehaviour
         {
             bjManager.EnemyStand();
         }
-        
-
         // Al finalizar el turno del enemigo, cambia al turno del jugador
         bjManager.EndTurn();
     }
