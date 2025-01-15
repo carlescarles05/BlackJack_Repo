@@ -11,31 +11,13 @@ public class SitOnObject : MonoBehaviour
     public Canvas enemyCanvasObject;   // Canvas del enemigo
     public KeyCode interactKey = KeyCode.E;
     public float transitionSpeed = 2f;
-    public TextMeshProUGUI playerTotalText;  // Referencia al texto del jugador
 
     public List<GameObject> PlayerCards = new List<GameObject>(); // Lista para las cartas del jugador
-    public bool IsPlayerTurn = true; // Controla si es el turno del jugador
-
-    public GameObject smokeObject;
-    public GameObject smokeObject2;
-    public GameObject cardObject;      // Carta 1 del jugador
-    public GameObject cardObject2;     // Carta 2 del jugador
-
-    // Cartas y canvas del enemigo
-    public GameObject enemyCardObject1;
-    public GameObject enemyCardObject2;
-    public TextMeshProUGUI enemyTotalText; // Total de cartas del enemigo
-    public EnemyManager enemyManager; // Arrastra el GameObject con el EnemyManager en el Inspector
-
     private bool isSitting = false;
     private bool isTransitioning = false;
     private Transform playerTransform;
     private PlayerMovement playerMovement;
     private CharacterController characterController;
-
-    public int playerTotal = 0;
-    public int enemyTotal = 0;
-    int[] cardValues = new int[] { 1, 2, 3, 4, 5 };
 
     public Canvas timerCanvas; // Canvas del temporizador
     public Cronometro cronometro; // Referencia al script del temporizador
@@ -57,20 +39,8 @@ public class SitOnObject : MonoBehaviour
         {
             enemyCanvasObject.gameObject.SetActive(false);  // Desactivar canvas enemigo inicialmente
         }
-
-        if (cardObject != null) cardObject.SetActive(false);
-        if (cardObject2 != null) cardObject2.SetActive(false);
-        if (smokeObject != null) smokeObject.SetActive(false);
-        if (smokeObject2 != null) smokeObject2.SetActive(false);
-        if (enemyCardObject1 != null) enemyCardObject1.SetActive(false);
-        if (enemyCardObject2 != null) enemyCardObject2.SetActive(false);
     }
 
-    public int PlayerTotal
-    {
-        get { return playerTotal; }
-        set { playerTotal = value; }
-    }
 
     void Update()
     {
@@ -134,14 +104,9 @@ public class SitOnObject : MonoBehaviour
             canvasObject.gameObject.SetActive(true);
         }
 
-        // Generar cartas del jugador
-        GenerateCards();
-
         // Activar cartas y Canvas del enemigo después de un retraso
         yield return new WaitForSeconds(2f);  // Esperar 2 segundos antes de mostrar las cartas del enemigo
 
-        // Generar cartas del enemigo
-        GenerateEnemyCards();
 
         // Activar Canvas del enemigo
         if (enemyCanvasObject != null)
@@ -177,56 +142,4 @@ public class SitOnObject : MonoBehaviour
             }
         }
     }
-
-
-    void GenerateCards()
-    {
-        
-        // Generar dos cartas al azar para el jugador
-        int playerCard1 = cardValues[Random.Range(0, cardValues.Length)];
-        int playerCard2 = cardValues[Random.Range(0, cardValues.Length)];
-
-        // Reinicia el total del jugador antes de sumar las nuevas cartas
-        playerTotal = 0;
-
-        // Suma ambas cartas al total
-        playerTotal += playerCard1 + playerCard2;
-    }
-
-    public void GenerateEnemyCards()
-    {
-        int enemyCard1 = cardValues[Random.Range(0, cardValues.Length)];
-        int enemyCard2 = cardValues[Random.Range(0, cardValues.Length)];
-        enemyTotal = enemyCard1 + enemyCard2;
-
-        // Mostrar las cartas del enemigo
-        if (enemyCardObject1 != null) enemyCardObject1.SetActive(true);
-        if (enemyCardObject2 != null) enemyCardObject2.SetActive(true);
-    }
-
-    public int GenerateCard()
-    {
-        int newCard = cardValues[Random.Range(0, cardValues.Length)];
-
-        // Sumar la nueva carta al total del jugador
-        playerTotal += newCard;
-
-        // Actualizar el texto del total en el canvas
-        UpdatePlayerCanvas();
-
-        return newCard; // Devuelve la nueva carta si es necesario usarla
-    }
-
-    public void UpdatePlayerCanvas()
-    {
-        playerTotalText.text = playerTotal + "/21";
-    }
-
-    public void ResetPlayer()
-    {
-        playerTotal = 0;
-        UpdatePlayerCanvas();
-    }
-
-
 }
