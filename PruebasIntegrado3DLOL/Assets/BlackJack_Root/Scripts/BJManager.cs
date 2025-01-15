@@ -785,8 +785,6 @@ public class BJManager : MonoBehaviour
                 bjManager.EndGame(true); // Notificar al BJManager que el jugador ganó
             }
         }
-
-       
     }
 
     public void EnemyStand()
