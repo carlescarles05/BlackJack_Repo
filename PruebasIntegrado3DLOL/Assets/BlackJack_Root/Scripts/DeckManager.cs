@@ -49,23 +49,36 @@ public class DeckManager : MonoBehaviour
 
         if (cardsAlreadyDrawn >= cardSpawnPosition.Length)
         {
-            Debug.LogWarning("cardsAlreadyDrawn está fuera de rango.");
+            Debug.LogWarning("No hay más posiciones disponibles para las cartas.");
             return;
         }
 
+        if (cardSpawnPosition[cardsAlreadyDrawn] == null)
+        {
+            Debug.LogError($"La posición {cardsAlreadyDrawn} no está asignada en el Inspector.");
+            return;
+        }
+
+        // Obtener la carta
         Card drawnCard = deck[0];
         deck.RemoveAt(0); // Eliminar la carta del mazo
 
-
-        // Instanciar el prefab y aplicar el material correspondiente
+        // Instanciar el prefab en la posición correspondiente
         GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPosition[cardsAlreadyDrawn].position, Quaternion.identity);
+
+        // Aplicar el material correspondiente al valor de la carta
         MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
-        renderer.material = drawnCard.material;
-        Debug.Log("Has robado una carta");
+        if (renderer != null && drawnCard.value >= 1 && drawnCard.value <= cardMaterials.Count)
+        {
+            renderer.material = cardMaterials[drawnCard.value - 1]; // Asignar el material correcto
+        }
+        else
+        {
+            Debug.LogWarning($"Material no encontrado para el valor {drawnCard.value}.");
+        }
 
+        // Incrementar el contador
         cardsAlreadyDrawn++;
-
-        if (cardsAlreadyDrawn > 7) cardsAlreadyDrawn = 0;
 
         // Añadir el valor de la carta como texto
         TMPro.TextMeshPro text = cardInstance.GetComponentInChildren<TMPro.TextMeshPro>();

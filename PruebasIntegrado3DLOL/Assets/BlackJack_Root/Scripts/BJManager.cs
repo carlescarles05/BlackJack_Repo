@@ -713,7 +713,7 @@ public class BJManager : MonoBehaviour
         Debug.Log("Juego iniciado: Totales reiniciados. playerTotal = 0, enemyTotal = 0");
 
         // Generar cartas iniciales para el jugador
-        for (int i = 0; i < 2; i++)
+        /*for (int i = 0; i < 2; i++)
         {
             int cardValue = Random.Range(3, 5); // Cartas aleatorias entre 3 y 4
             Debug.Log($"Jugador recibe carta inicial {i + 1}: {cardValue}");
@@ -734,7 +734,7 @@ public class BJManager : MonoBehaviour
             card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
             enemyCards.Add(card);
         }
-        Debug.Log("Total inicial del enemigo: " + enemyAI.enemyTotal);
+        Debug.Log("Total inicial del enemigo: " + enemyAI.enemyTotal);*/
 
         // Actualizar las UI
         UpdatePlayerTotalUI();

@@ -232,10 +232,10 @@ public class SitOnObject : MonoBehaviour
         playerTotal += playerCard1 + playerCard2;
 
         // Actualiza el texto del total en el canvas
-        if (playerTotalText != null)
+        /*if (playerTotalText != null)
         {
             playerTotalText.text = playerTotal + "/21";
-        }
+        }*/
     }
 
     public void GenerateEnemyCards()

@@ -10,7 +10,7 @@ public class EnemyAI : MonoBehaviour
     public Transform enemyCardSpawnPoint; // Punto donde aparecen las cartas del enemigo
     public GameObject cardPrefab; // Prefab de las cartas
     public TextMeshProUGUI enemyTotalText; // Texto para mostrar el total de puntos del enemigo
-    public int enemyTotal = 0; // Total de puntos del enemigo
+    public int enemyTotal; // Total de puntos del enemigo
 
     private int cardOffset = 30; // Espaciado entre cartas visibles del enemigo
     public List<GameObject> enemyCards = new List<GameObject>(); // Lista de cartas del enemigo
@@ -55,7 +55,12 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
+            Debug.Log("Carles");
+            yield return new WaitForSeconds(1f); // Espera un segundo entre cada carta
+
             bjManager.EnemyStand();
+
+            yield return new WaitForSeconds(1f); // Se puede ajustar este tiempo si lo deseas
         }
         
 
