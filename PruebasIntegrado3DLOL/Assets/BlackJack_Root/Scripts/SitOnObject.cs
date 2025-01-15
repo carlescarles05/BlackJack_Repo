@@ -128,10 +128,6 @@ public class SitOnObject : MonoBehaviour
         isSitting = true;
         isTransitioning = false;
 
-        // Activar humo y cartas del jugador
-        yield return ActivateEffect(smokeObject, cardObject);
-        yield return ActivateEffect(smokeObject2, cardObject2);
-
         // Activar Canvas del jugador
         if (canvasObject != null)
         {
@@ -182,41 +178,6 @@ public class SitOnObject : MonoBehaviour
         }
     }
 
-    IEnumerator ActivateEffect(GameObject smoke, GameObject card)
-    {
-        if (smoke != null)
-        {
-            smoke.SetActive(true);
-            ParticleOnce smokeParticleScript = smoke.GetComponent<ParticleOnce>();
-            if (smokeParticleScript != null)
-            {
-                smokeParticleScript.PlayOnce();
-            }
-        }
-
-        yield return new WaitForSeconds(1f);
-
-        if (card != null)
-        {
-            card.SetActive(true);
-        }
-
-        if (smoke != null)
-        {
-            DeactivateParticleSystem(smoke);
-        }
-    }
-
-    void DeactivateParticleSystem(GameObject smoke)
-    {
-        ParticleSystem ps = smoke.GetComponent<ParticleSystem>();
-        if (ps != null)
-        {
-            ps.Stop();
-            ps.Clear();
-            smoke.SetActive(false);
-        }
-    }
 
     void GenerateCards()
     {
@@ -230,12 +191,6 @@ public class SitOnObject : MonoBehaviour
 
         // Suma ambas cartas al total
         playerTotal += playerCard1 + playerCard2;
-
-        // Actualiza el texto del total en el canvas
-        /*if (playerTotalText != null)
-        {
-            playerTotalText.text = playerTotal + "/21";
-        }*/
     }
 
     public void GenerateEnemyCards()
@@ -243,7 +198,6 @@ public class SitOnObject : MonoBehaviour
         int enemyCard1 = cardValues[Random.Range(0, cardValues.Length)];
         int enemyCard2 = cardValues[Random.Range(0, cardValues.Length)];
         enemyTotal = enemyCard1 + enemyCard2;
-        //enemyTotalText.text = enemyTotal + "/21";
 
         // Mostrar las cartas del enemigo
         if (enemyCardObject1 != null) enemyCardObject1.SetActive(true);
