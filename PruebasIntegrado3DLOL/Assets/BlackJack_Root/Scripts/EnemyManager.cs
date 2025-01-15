@@ -65,26 +65,5 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public int GetEnemyTotal()
-    {
-        return enemyTotal;
-    }
-
-    public int GenerateCard()
-    {
-        int newCard = cardValues[Random.Range(0, cardValues.Length)];
-        return newCard;
-    }
-
-    /*public void UpdateEnemyCanvas()
-    {
-        enemyTotalText.text = enemyTotal + "/21";
-    }
-
-    public void ResetEnemy()
-    {
-        enemyTotal = 0;
-        UpdateEnemyCanvas();
-    }*/
 
 }
