@@ -62,8 +62,6 @@ public class EnemyAI : MonoBehaviour
 
             yield return new WaitForSeconds(1f); // Se puede ajustar este tiempo si lo deseas
         }
-        
-
         // Al finalizar el turno del enemigo, cambia al turno del jugador
         bjManager.EndTurn();
     }

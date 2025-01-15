@@ -474,7 +474,10 @@ public class BJManager : MonoBehaviour
         // Cambiar turno al enemigo
         EndTurn();
     }
-
+    public void nothing() 
+    {
+        
+    }
     public void PlayerStand()
     {
         if (currentTurn != Turn.Player || isGameOver) return;
@@ -630,6 +633,7 @@ public class BJManager : MonoBehaviour
     public IEnumerator EnemyTurnRoutine()
     {
 
+        Debug.Log(21 - playerTotal < 21 - enemyAI.enemyTotal || 21 - enemyAI.enemyTotal >= 10);
         Debug.Log("Turno del enemigo comenzado.");
 
         yield return new WaitForSeconds(1f); // Pausa simulada para el turno del enemigo
@@ -751,32 +755,38 @@ public class BJManager : MonoBehaviour
 
     public void EnemyHit()
     {
+
         // Asegurarse de que es el turno del enemigo
         if (currentTurn != Turn.Enemy) return;
 
-        // Generar una carta para el enemigo
-        int cardValue = GenerateCard();
-        Debug.Log($"Enemigo recibe carta: {cardValue}");
-
-        // Sumar el valor de la carta al total del enemigo (usando enemyAI.enemyTotal)
-        enemyAI.enemyTotal += cardValue; // Usamos enemyAI.enemyTotal
-
-        Debug.Log($"Nuevo total del enemigo después de la carta: {enemyAI.enemyTotal}");
-
-        // Instanciar la carta visualmente
-        GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
-        card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
-        enemyCards.Add(cardPrefab);
-
-        // Actualizar la UI del enemigo
-        UpdateEnemyTotalUI();
-
-        // Verificar si el enemigo se pasa de 21
-        if (enemyAI.enemyTotal > maxPoints)
+        if (21 - playerTotal < 21 - enemyAI.enemyTotal || 21 - enemyAI.enemyTotal >= 10)
         {
-            Debug.Log("El enemigo se pasó de 21. ¡Has ganado!");
-            bjManager.EndGame(true); // Notificar al BJManager que el jugador ganó
+            // Generar una carta para el enemigo
+            int cardValue = GenerateCard();
+            Debug.Log($"Enemigo recibe carta: {cardValue}");
+
+            // Sumar el valor de la carta al total del enemigo (usando enemyAI.enemyTotal)
+            enemyAI.enemyTotal += cardValue; // Usamos enemyAI.enemyTotal
+
+            Debug.Log($"Nuevo total del enemigo después de la carta: {enemyAI.enemyTotal}");
+
+            // Instanciar la carta visualmente
+            GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
+            card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
+            enemyCards.Add(cardPrefab);
+
+            // Actualizar la UI del enemigo
+            UpdateEnemyTotalUI();
+
+            // Verificar si el enemigo se pasa de 21
+            if (enemyAI.enemyTotal > maxPoints)
+            {
+                Debug.Log("El enemigo se pasó de 21. ¡Has ganado!");
+                bjManager.EndGame(true); // Notificar al BJManager que el jugador ganó
+            }
         }
+
+       
     }
 
     public void EnemyStand()
