@@ -228,19 +228,16 @@ public class BJManager : MonoBehaviour
 
         if ((21 - enemyAI.enemyTotal) >= 5)
         {
-            UpdateEnemyTotalUI();
             Debug.Log("Turno del enemigo comenzado.");
-
-
             int cardValue = GenerateCard();
             enemyAI.enemyTotal += cardValue;
             Debug.Log($"Valor de la carta: {cardValue}, Total enemigo: {enemyAI.enemyTotal}");
-
 
             // Instanciar la carta visualmente
             GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
             card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
             enemyCards.Add(card);
+            UpdateEnemyTotalUI();
 
             Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyAI.enemyTotal}");
 
@@ -258,7 +255,7 @@ public class BJManager : MonoBehaviour
 
             if (21 - playerTotal < 21 - enemyAI.enemyTotal || Random.Range (1, 11) <= 3 )
             {
-                UpdateEnemyTotalUI();
+                //UpdateEnemyTotalUI();
                 Debug.Log("Turno del enemigo comenzado.");
 
 
@@ -271,6 +268,7 @@ public class BJManager : MonoBehaviour
                 GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
                 card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
                 enemyCards.Add(card);
+                UpdateEnemyTotalUI();
 
                 Debug.Log($"El enemigo pidió una carta: {cardValue}. Total del enemigo: {enemyAI.enemyTotal}");
 
@@ -287,8 +285,6 @@ public class BJManager : MonoBehaviour
             {
                 EnemyStand();
             }
-        
-
         }
     }
 
