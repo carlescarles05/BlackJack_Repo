@@ -6,6 +6,7 @@ public class DeckManager : MonoBehaviour
     public List<Card> deck = new List<Card>();
     public List<Material> cardMaterials; // Materiales para representar los valores
     public Transform[] cardSpawnPosition = new Transform[7]; // Array de 7 posiciones para las cartas
+    public Transform[] cardSpawnPositionEnemy = new Transform[7]; // Array de 7 posiciones para las cartas
     public GameObject cardPrefab;        // Prefab de la carta para mostrar en la escena
     public int cardsAlreadyDrawn;
     public int cardV;
