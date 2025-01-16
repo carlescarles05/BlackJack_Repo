@@ -8,9 +8,13 @@ public class DeckManager : MonoBehaviour
     public Transform[] cardSpawnPosition = new Transform[7]; // Array de 7 posiciones para las cartas
     public GameObject cardPrefab;        // Prefab de la carta para mostrar en la escena
     public int cardsAlreadyDrawn;
+    public int cardV;
+    
+    
 
     private void Start()
     {
+        
         GenerateDeck();
     }
 
@@ -68,7 +72,7 @@ public class DeckManager : MonoBehaviour
         MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
         if (renderer != null && drawnCard.value >= 1 && drawnCard.value <= cardMaterials.Count)
         {
-            renderer.material = cardMaterials[drawnCard.value - 1]; // Asignar el material correcto
+            renderer.material = cardMaterials[cardV - 1]; // Asignar el material correcto
         }
         else
         {

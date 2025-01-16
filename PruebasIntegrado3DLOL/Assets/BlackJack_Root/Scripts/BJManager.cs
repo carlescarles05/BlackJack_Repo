@@ -19,6 +19,7 @@ public class BJManager : MonoBehaviour
     public Button hitButton; // Botón "Robar carta"
     public Button standButton; // Botón "Plantarse"
     public BJManager bjManager; // Asegúrate de tener esta variable pública en el script
+    
 
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
@@ -34,6 +35,7 @@ public class BJManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("Iniciando juego...");
+        deckManager = FindObjectOfType<DeckManager>();
         StartGame(); // Asegúrate de que se llame correctamente.
     }
 
@@ -99,6 +101,7 @@ public class BJManager : MonoBehaviour
     public int GenerateCard()
     {
         int cardValue = Random.Range(1, deckManager.cardMaterials.Count); // Genera un valor entre 1 y el tamaño de cardMaterials
+        deckManager.cardV = cardValue;
 
         // Instanciar carta en la posición correspondiente
         GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
