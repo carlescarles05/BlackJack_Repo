@@ -15464,7 +15464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299641666e1adb04a860b441f26e0228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 163383700}
 --- !u!1 &172532313 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1599826595754709761, guid: aeeedd54360ccc04dbc250e9616f74ee,
@@ -25020,19 +25019,7 @@ MonoBehaviour:
   enemyCanvasObject: {fileID: 1378816758}
   interactKey: 101
   transitionSpeed: 2
-  playerTotalText: {fileID: 430878245}
   PlayerCards: []
-  IsPlayerTurn: 1
-  smokeObject: {fileID: 163383697}
-  smokeObject2: {fileID: 1370062917}
-  cardObject: {fileID: 1627590882}
-  cardObject2: {fileID: 736077440}
-  enemyCardObject1: {fileID: 381189583}
-  enemyCardObject2: {fileID: 1174261039}
-  enemyTotalText: {fileID: 2111720492}
-  enemyManager: {fileID: 1889638239}
-  playerTotal: 0
-  enemyTotal: 0
   timerCanvas: {fileID: 250983285}
   cronometro: {fileID: 261056856}
   timerCanvasEnemy: {fileID: 1051694895}
@@ -25928,6 +25915,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9addc16d4d58a3749b19648238ff4679, type: 2}
   - {fileID: 2100000, guid: f41b5a09b80896b4c98cc83a7b6033b9, type: 2}
   - {fileID: 2100000, guid: c975fc71e614cc84d8dc3ea92bfad0a3, type: 2}
+  - {fileID: 2100000, guid: 41902434410724c4395e422a525229b6, type: 2}
+  - {fileID: 2100000, guid: fd6533df18177fc43a9159c1e47b9f82, type: 2}
+  - {fileID: 2100000, guid: 2127381d08ddcd7469fad9ff8da9ddbb, type: 2}
+  - {fileID: 2100000, guid: a72c4dfcb8f040b439fdfe34531a3264, type: 2}
   cardSpawnPosition:
   - {fileID: 1216803549}
   - {fileID: 1428963864}
@@ -25939,6 +25930,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 2758609584893099199, guid: c7a05b69759216b468862f2f39a1b960,
     type: 3}
   cardsAlreadyDrawn: 0
+  cardV: 0
 --- !u!4 &749706561
 Transform:
   m_ObjectHideFlags: 0
@@ -38517,7 +38509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299641666e1adb04a860b441f26e0228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 1109237610}
 --- !u!199 &1109237609
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -43592,7 +43583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299641666e1adb04a860b441f26e0228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 1124852532}
 --- !u!199 &1124852531
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -49039,13 +49029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b1b3ce2e2e6c1478cec63bfa814631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTotalText: {fileID: 2111720492}
-  enemyCard1: {fileID: 381189583}
-  enemyCard2: {fileID: 1174261039}
-  enemySmoke1: {fileID: 1124852528}
-  enemySmoke2: {fileID: 1109237606}
-  cardValues: 010000000200000003000000040000000500000006000000
-  enemyTotal: 0
 --- !u!114 &1187731359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49136,7 +49119,6 @@ MonoBehaviour:
   playerTotalText: {fileID: 430878245}
   hitButton: {fileID: 2004203359}
   standButton: {fileID: 2111497437}
-  isPlayerStanding: 0
   bjManager: {fileID: 1218172600}
   roundCount: 0
   EnemyAI: {fileID: 1889638238}
@@ -49801,7 +49783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299641666e1adb04a860b441f26e0228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 1370062920}
 --- !u!199 &1370062919
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -68862,13 +68843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b1b3ce2e2e6c1478cec63bfa814631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTotalText: {fileID: 2111720492}
-  enemyCard1: {fileID: 381189583}
-  enemyCard2: {fileID: 1174261039}
-  enemySmoke1: {fileID: 1124852528}
-  enemySmoke2: {fileID: 1109237606}
-  cardValues: 010000000200000003000000040000000500000006000000
-  enemyTotal: 0
 --- !u!1001 &1904066424
 PrefabInstance:
   m_ObjectHideFlags: 0
