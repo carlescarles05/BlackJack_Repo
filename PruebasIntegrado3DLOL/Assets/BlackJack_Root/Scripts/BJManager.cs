@@ -162,7 +162,6 @@ public class BJManager : MonoBehaviour
 
     }
 
-
     private void EndGameRoundLimit()
     {
         Debug.Log("¡Se han jugado 8 rondas! El juego ha terminado.");
