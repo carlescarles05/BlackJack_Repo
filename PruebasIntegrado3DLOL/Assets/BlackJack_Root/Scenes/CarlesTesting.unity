@@ -5524,6 +5524,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 993530481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &119256787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 119256788}
+  m_Layer: 0
+  m_Name: EnemyCardSpawn6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &119256788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119256787}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -30.683, y: 74.23343, z: 59.489}
+  m_LocalScale: {x: 0.32536873, y: 0.08818842, z: 0.15612572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 290696400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &133915234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15464,7 +15495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299641666e1adb04a860b441f26e0228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 163383700}
 --- !u!1 &172532313 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1599826595754709761, guid: aeeedd54360ccc04dbc250e9616f74ee,
@@ -20705,6 +20735,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1144083035}
+  - {fileID: 1316362248}
+  - {fileID: 1172218097}
+  - {fileID: 1533973422}
+  - {fileID: 445275712}
+  - {fileID: 119256788}
+  - {fileID: 1942909322}
   m_Father: {fileID: 1807823552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &293130093
@@ -22300,6 +22336,37 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.223, y: -0.597, z: -0.77500004}
   m_TimeToStationary: 0.5
+--- !u!1 &445275711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 445275712}
+  m_Layer: 0
+  m_Name: EnemyCardSpawn5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &445275712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445275711}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -30.882, y: 74.23343, z: 59.462}
+  m_LocalScale: {x: 0.32536873, y: 0.08818842, z: 0.15612572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 290696400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &448893275 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6014503084441653313, guid: aeeedd54360ccc04dbc250e9616f74ee,
@@ -25020,19 +25087,7 @@ MonoBehaviour:
   enemyCanvasObject: {fileID: 1378816758}
   interactKey: 101
   transitionSpeed: 2
-  playerTotalText: {fileID: 430878245}
   PlayerCards: []
-  IsPlayerTurn: 1
-  smokeObject: {fileID: 163383697}
-  smokeObject2: {fileID: 1370062917}
-  cardObject: {fileID: 1627590882}
-  cardObject2: {fileID: 736077440}
-  enemyCardObject1: {fileID: 381189583}
-  enemyCardObject2: {fileID: 1174261039}
-  enemyTotalText: {fileID: 2111720492}
-  enemyManager: {fileID: 1889638239}
-  playerTotal: 0
-  enemyTotal: 0
   timerCanvas: {fileID: 250983285}
   cronometro: {fileID: 261056856}
   timerCanvasEnemy: {fileID: 1051694895}
@@ -25939,6 +25994,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 2758609584893099199, guid: c7a05b69759216b468862f2f39a1b960,
     type: 3}
   cardsAlreadyDrawn: 0
+  cardV: 0
 --- !u!4 &749706561
 Transform:
   m_ObjectHideFlags: 0
@@ -38517,7 +38573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299641666e1adb04a860b441f26e0228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 1109237610}
 --- !u!199 &1109237609
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -43592,7 +43647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299641666e1adb04a860b441f26e0228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 1124852532}
 --- !u!199 &1124852531
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -48604,7 +48658,7 @@ Transform:
   m_GameObject: {fileID: 1144083034}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -30.48113, y: 74.23343, z: 59.713806}
+  m_LocalPosition: {x: -30.882, y: 74.23343, z: 59.683}
   m_LocalScale: {x: 0.32536873, y: 0.08818842, z: 0.15612572}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48663,6 +48717,37 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.48700002, y: 0.143, z: -1.3470001}
   m_TimeToStationary: 0.5
+--- !u!1 &1172218096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1172218097}
+  m_Layer: 0
+  m_Name: EnemyCardSpawn3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172218097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172218096}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -30.484, y: 74.23343, z: 59.683}
+  m_LocalScale: {x: 0.32536873, y: 0.08818842, z: 0.15612572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 290696400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174261039
 GameObject:
   m_ObjectHideFlags: 0
@@ -49039,13 +49124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b1b3ce2e2e6c1478cec63bfa814631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTotalText: {fileID: 2111720492}
-  enemyCard1: {fileID: 381189583}
-  enemyCard2: {fileID: 1174261039}
-  enemySmoke1: {fileID: 1124852528}
-  enemySmoke2: {fileID: 1109237606}
-  cardValues: 010000000200000003000000040000000500000006000000
-  enemyTotal: 0
 --- !u!114 &1187731359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49136,7 +49214,6 @@ MonoBehaviour:
   playerTotalText: {fileID: 430878245}
   hitButton: {fileID: 2004203359}
   standButton: {fileID: 2111497437}
-  isPlayerStanding: 0
   bjManager: {fileID: 1218172600}
   roundCount: 0
   EnemyAI: {fileID: 1889638238}
@@ -49511,6 +49588,37 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.48700002, y: 0.143, z: -1.3470001}
   m_TimeToStationary: 0.5
+--- !u!1 &1316362247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1316362248}
+  m_Layer: 0
+  m_Name: EnemyCardSpawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1316362248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316362247}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -30.683, y: 74.23343, z: 59.683}
+  m_LocalScale: {x: 0.32536873, y: 0.08818842, z: 0.15612572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 290696400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321611454
 GameObject:
   m_ObjectHideFlags: 0
@@ -49801,7 +49909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299641666e1adb04a860b441f26e0228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 1370062920}
 --- !u!199 &1370062919
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -65822,6 +65929,37 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.223, y: -0.597, z: -0.77500004}
   m_TimeToStationary: 0.5
+--- !u!1 &1533973421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1533973422}
+  m_Layer: 0
+  m_Name: EnemyCardSpawn4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1533973422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533973421}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -30.324, y: 74.23343, z: 59.683}
+  m_LocalScale: {x: 0.32536873, y: 0.08818842, z: 0.15612572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 290696400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &1536821080
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -68087,7 +68225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1807823552}
   m_Layer: 0
-  m_Name: SpawnPoints
+  m_Name: SpawnPointsPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68862,13 +69000,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b1b3ce2e2e6c1478cec63bfa814631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTotalText: {fileID: 2111720492}
-  enemyCard1: {fileID: 381189583}
-  enemyCard2: {fileID: 1174261039}
-  enemySmoke1: {fileID: 1124852528}
-  enemySmoke2: {fileID: 1109237606}
-  cardValues: 010000000200000003000000040000000500000006000000
-  enemyTotal: 0
 --- !u!1001 &1904066424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69379,6 +69510,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939691118}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1942909321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1942909322}
+  m_Layer: 0
+  m_Name: EnemyCardSpawn7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1942909322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942909321}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -30.484, y: 74.23343, z: 59.489}
+  m_LocalScale: {x: 0.32536873, y: 0.08818842, z: 0.15612572}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 290696400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &1945122557
 NavMeshObstacle:
   m_ObjectHideFlags: 0

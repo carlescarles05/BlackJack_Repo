@@ -13,8 +13,7 @@ public class DeckManager : MonoBehaviour
     
 
     private void Start()
-    {
-        
+    {    
         GenerateDeck();
     }
 
