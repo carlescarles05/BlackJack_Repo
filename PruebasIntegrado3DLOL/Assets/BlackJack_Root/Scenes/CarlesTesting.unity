@@ -25983,6 +25983,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9addc16d4d58a3749b19648238ff4679, type: 2}
   - {fileID: 2100000, guid: f41b5a09b80896b4c98cc83a7b6033b9, type: 2}
   - {fileID: 2100000, guid: c975fc71e614cc84d8dc3ea92bfad0a3, type: 2}
+  - {fileID: 2100000, guid: 41902434410724c4395e422a525229b6, type: 2}
+  - {fileID: 2100000, guid: fd6533df18177fc43a9159c1e47b9f82, type: 2}
+  - {fileID: 2100000, guid: 2127381d08ddcd7469fad9ff8da9ddbb, type: 2}
+  - {fileID: 2100000, guid: a72c4dfcb8f040b439fdfe34531a3264, type: 2}
   cardSpawnPosition:
   - {fileID: 1216803549}
   - {fileID: 1428963864}
