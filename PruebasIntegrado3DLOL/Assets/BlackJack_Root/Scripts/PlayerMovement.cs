@@ -13,8 +13,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float _gravity = -9.81f;
     [SerializeField] private float gravityMultiplier = 3.0f;
-    private float _velocity;
-    private float _direction;
     private float verticalVelocity;            // Velocidad vertical
 
     private float pitch = 0f; // Rotación vertical de la cámara

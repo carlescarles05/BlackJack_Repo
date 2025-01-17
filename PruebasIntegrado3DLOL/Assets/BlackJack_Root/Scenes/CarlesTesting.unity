@@ -22882,7 +22882,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Plantarse
+  m_text: 'Pasar
 
 '
   m_isRightToLeft: 0
@@ -67783,7 +67783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1807823552}
   m_Layer: 0
-  m_Name: SpawnPointsPlayer
+  m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75231,7 +75231,7 @@ GameObject:
   - component: {fileID: 2111497438}
   - component: {fileID: 2111497437}
   m_Layer: 5
-  m_Name: Plantarse
+  m_Name: Pasar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
