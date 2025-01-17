@@ -9,6 +9,7 @@ public class DeckManager : MonoBehaviour
     public Transform[] cardSpawnPositionEnemy = new Transform[7]; // Array de 7 posiciones para las cartas
     public GameObject cardPrefab;        // Prefab de la carta para mostrar en la escena
     public int cardsAlreadyDrawn;
+    public int cardsAlreadyDrawnEnemy;
     public int cardV;
     
     
@@ -81,6 +82,55 @@ public class DeckManager : MonoBehaviour
 
         // Incrementar el contador
         cardsAlreadyDrawn++;
+
+        // Añadir el valor de la carta como texto
+        TMPro.TextMeshPro text = cardInstance.GetComponentInChildren<TMPro.TextMeshPro>();
+        if (text != null)
+        {
+            text.text = drawnCard.value.ToString();
+        }
+    }
+
+    public void DrawCardEnemy()
+    {
+        if (deck.Count == 0)
+        {
+            Debug.LogWarning("El mazo está vacío.");
+            return;
+        }
+
+        if (cardsAlreadyDrawnEnemy >= cardSpawnPositionEnemy.Length)
+        {
+            Debug.LogWarning("No hay más posiciones disponibles para las cartas.");
+            return;
+        }
+
+        if (cardSpawnPositionEnemy[cardsAlreadyDrawnEnemy] == null)
+        {
+            Debug.LogError($"La posición {cardsAlreadyDrawnEnemy} no está asignada en el Inspector.");
+            return;
+        }
+
+        // Obtener la carta
+        Card drawnCard = deck[0];
+        deck.RemoveAt(0); // Eliminar la carta del mazo
+
+        // Instanciar el prefab en la posición correspondiente
+        GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPositionEnemy[cardsAlreadyDrawnEnemy].position, Quaternion.identity);
+
+        // Aplicar el material correspondiente al valor de la carta
+        MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
+        if (renderer != null && drawnCard.value >= 1 && drawnCard.value <= cardMaterials.Count)
+        {
+            renderer.material = cardMaterials[cardV - 1]; // Asignar el material correcto
+        }
+        else
+        {
+            Debug.LogWarning($"Material no encontrado para el valor {drawnCard.value}.");
+        }
+
+        // Incrementar el contador
+        cardsAlreadyDrawnEnemy++;
 
         // Añadir el valor de la carta como texto
         TMPro.TextMeshPro text = cardInstance.GetComponentInChildren<TMPro.TextMeshPro>();
