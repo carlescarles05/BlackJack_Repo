@@ -232,15 +232,16 @@ public class BJManager : MonoBehaviour
         if ((21 - enemyAI.enemyTotal) >= 5)
         {
             Debug.Log("Turno del enemigo comenzado.");
-            int cardValue = GenerateCard();
-            deckManager.GenerateDeck();
+            int cardValue = Random.Range(1, deckManager.cardMaterials.Count); // Genera un valor entre 1 y el tamaño de cardMaterials;
+            deckManager.cardV = cardValue;
+            deckManager.DrawCardEnemy();
             enemyAI.enemyTotal += cardValue;
             Debug.Log($"Valor de la carta: {cardValue}, Total enemigo: {enemyAI.enemyTotal}");
 
             // Instanciar la carta visualmente
             GameObject card = Instantiate(cardPrefab, enemyCardSpawnPoint);
             card.transform.localPosition += new Vector3(cardOffset * enemyCards.Count, 0, 0);
-            enemyCards.Add(card);
+            enemyCards.Add(deckManager.cardPrefab);
             UpdateEnemyTotalUI();
 
 
@@ -301,6 +302,8 @@ public class BJManager : MonoBehaviour
         playerTotal = 0;
         enemyAI.enemyTotal = 0;
         deckManager.cardsAlreadyDrawn = 0;
+        deckManager.cardsAlreadyDrawn = 0;
+        deckManager.cardsAlreadyDrawnEnemy = 0;
 
         // Limpiar las cartas
         foreach (var card in playerCards)
