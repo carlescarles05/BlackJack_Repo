@@ -116,14 +116,6 @@ public class PlayerMovement : MonoBehaviour
         if (characterController.isGrounded)
         {
             verticalVelocity = -0.5f; // Mantenerlo pegado al suelo
-
-            // Eliminar o comentar esta parte para deshabilitar el salto
-            /*
-            if (Input.GetButtonDown("Jump"))
-            {
-                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calcular velocidad de salto
-            }
-            */
         }
         else
         {

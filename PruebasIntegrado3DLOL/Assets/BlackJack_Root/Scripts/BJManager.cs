@@ -384,7 +384,13 @@ public class BJManager : MonoBehaviour
         // Finalizar el turno del enemigo
         EndTurn();
     }
+<<<<<<< HEAD
 } 
 
+=======
+
+
+}
+>>>>>>> c5d9ece8080a463ac42d26fe35f6892eff5a24d2
 
 
