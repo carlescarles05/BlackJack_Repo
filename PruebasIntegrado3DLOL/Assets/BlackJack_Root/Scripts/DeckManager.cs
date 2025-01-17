@@ -11,18 +11,18 @@ public class DeckManager : MonoBehaviour
     public int cardsAlreadyDrawn;
     public int cardsAlreadyDrawnEnemy;
     public int cardV;
-
-
+    
+    
 
     private void Start()
-    {
+    {    
         GenerateDeck();
     }
 
     public void GenerateDeck()
     {
         // Crear cartas con valores del 1 al 7
-        for (int i = 1; i <= 7; i++)
+        for (int i = 1; i <= 11; i++)
         {
             Card newCard = new Card(i, cardMaterials[i - 1]); // Asignar material según el valor
             deck.Add(newCard);
@@ -41,6 +41,55 @@ public class DeckManager : MonoBehaviour
             deck[randomIndex] = temp;
         }
     }
+
+    /*public void DrawCard()
+    {
+        if (deck.Count == 0)
+        {
+            Debug.LogWarning("El mazo está vacío.");
+            return;
+        }
+
+        if (cardsAlreadyDrawn >= cardSpawnPosition.Length)
+        {
+            Debug.LogWarning("No hay más posiciones disponibles para las cartas.");
+            return;
+        }
+
+        if (cardSpawnPosition[cardsAlreadyDrawn] == null)
+        {
+            Debug.LogError($"La posición {cardsAlreadyDrawn} no está asignada en el Inspector.");
+            return;
+        }
+
+        // Obtener la carta
+        Card drawnCard = deck[0];
+        deck.RemoveAt(0); // Eliminar la carta del mazo
+
+        // Instanciar el prefab en la posición correspondiente
+        GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPosition[cardsAlreadyDrawn].position, Quaternion.identity);
+
+        // Aplicar el material correspondiente al valor de la carta
+        MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
+        if (renderer != null && drawnCard.value >= 1 && drawnCard.value <= cardMaterials.Count)
+        {
+            renderer.material = cardMaterials[cardV - 1]; // Asignar el material correcto
+        }
+        else
+        {
+            Debug.LogWarning($"Material no encontrado para el valor {drawnCard.value}.");
+        }
+
+        // Incrementar el contador
+        cardsAlreadyDrawn++;
+
+        // Añadir el valor de la carta como texto
+        TMPro.TextMeshPro text = cardInstance.GetComponentInChildren<TMPro.TextMeshPro>();
+        if (text != null)
+        {
+            text.text = drawnCard.value.ToString();
+        }
+    }*/
 
     public void DrawCard()
     {
@@ -64,7 +113,7 @@ public class DeckManager : MonoBehaviour
 
         // Obtener la carta
         Card drawnCard = deck[0];
-        deck.RemoveAt(0); // Eliminar la carta del mazo
+        //deck.RemoveAt(0); // Eliminar la carta del mazo
 
         // Instanciar el prefab en la posición correspondiente
         GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPosition[cardsAlreadyDrawn].position, Quaternion.identity);
@@ -113,7 +162,7 @@ public class DeckManager : MonoBehaviour
 
         // Obtener la carta
         Card drawnCard = deck[0];
-        deck.RemoveAt(0); // Eliminar la carta del mazo
+        //deck.RemoveAt(0); // Eliminar la carta del mazo
 
         // Instanciar el prefab en la posición correspondiente
         GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPositionEnemy[cardsAlreadyDrawnEnemy].position, Quaternion.identity);
