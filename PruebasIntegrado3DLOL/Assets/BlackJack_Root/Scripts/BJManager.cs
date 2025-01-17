@@ -189,6 +189,7 @@ public class BJManager : MonoBehaviour
             Debug.Log("Has perdido.");
         }
 
+
         roundCount++;
 
         if (roundCount >= maxRounds)
@@ -314,16 +315,16 @@ public class BJManager : MonoBehaviour
         deckManager.cardsAlreadyDrawnEnemy = 0;
 
         // Limpiar las cartas
-        foreach (var card in playerCards)
+        /*foreach (var card in playerCards)
         {
             Destroy(card);
-        }
+        }*/
         playerCards.Clear();
 
-        foreach (var card in enemyCards)
+        /*foreach (var card in enemyCards)
         {
             Destroy(card);
-        }
+        }*/
         enemyCards.Clear();
 
         Debug.Log("Juego iniciado: Totales reiniciados. playerTotal = 0, enemyTotal = 0");
@@ -383,6 +384,7 @@ public class BJManager : MonoBehaviour
         // Finalizar el turno del enemigo
         EndTurn();
     }
+
 
 }
 

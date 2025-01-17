@@ -25761,6 +25761,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 2758609584893099199, guid: c7a05b69759216b468862f2f39a1b960,
     type: 3}
   cardsAlreadyDrawn: 0
+  cardsAlreadyDrawnEnemy: 0
   cardV: 0
 --- !u!4 &749706561
 Transform:
