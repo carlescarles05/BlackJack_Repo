@@ -11,11 +11,11 @@ public class DeckManager : MonoBehaviour
     public int cardsAlreadyDrawn;
     public int cardsAlreadyDrawnEnemy;
     public int cardV;
-    
-    
+
+
 
     private void Start()
-    {    
+    {
         GenerateDeck();
     }
 

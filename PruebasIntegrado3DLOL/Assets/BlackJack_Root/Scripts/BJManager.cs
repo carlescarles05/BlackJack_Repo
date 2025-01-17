@@ -19,7 +19,7 @@ public class BJManager : MonoBehaviour
     public Button hitButton; // Botón "Robar carta"
     public Button standButton; // Botón "Plantarse"
     public BJManager bjManager; // Asegúrate de tener esta variable pública en el script
-    
+
 
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
@@ -258,7 +258,7 @@ public class BJManager : MonoBehaviour
         else
         {
 
-            if (21 - playerTotal < 21 - enemyAI.enemyTotal || Random.Range (1, 11) <= 3 )
+            if (21 - playerTotal < 21 - enemyAI.enemyTotal || Random.Range(1, 11) <= 3)
             {
                 //UpdateEnemyTotalUI();
                 Debug.Log("Turno del enemigo comenzado.");
@@ -385,3 +385,5 @@ public class BJManager : MonoBehaviour
     }
 
 }
+
+
