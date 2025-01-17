@@ -295,12 +295,21 @@ public class BJManager : MonoBehaviour
         }
     }
 
+    // Método para eliminar los prefabs generados
+    public void ClearGeneratedPrefabs()
+    {
+        if (cardPrefab != null)
+        {
+            Destroy(cardPrefab);
+            cardPrefab = null; // Opcional, si necesitas liberar la referencia
+        }
+    }
+
     public void StartGame()
     {
         // Reiniciar totales
         playerTotal = 0;
         enemyAI.enemyTotal = 0;
-        deckManager.cardsAlreadyDrawn = 0;
         deckManager.cardsAlreadyDrawn = 0;
         deckManager.cardsAlreadyDrawnEnemy = 0;
 
@@ -311,11 +320,11 @@ public class BJManager : MonoBehaviour
         }
         playerCards.Clear();
 
-        foreach (var card in enemyAI.enemyCards)
+        foreach (var card in enemyCards)
         {
             Destroy(card);
         }
-        enemyAI.enemyCards.Clear();
+        enemyCards.Clear();
 
         Debug.Log("Juego iniciado: Totales reiniciados. playerTotal = 0, enemyTotal = 0");
 
@@ -374,4 +383,5 @@ public class BJManager : MonoBehaviour
         // Finalizar el turno del enemigo
         EndTurn();
     }
+
 }
