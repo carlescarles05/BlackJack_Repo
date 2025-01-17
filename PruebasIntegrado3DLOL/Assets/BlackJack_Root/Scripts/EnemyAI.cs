@@ -12,7 +12,6 @@ public class EnemyAI : MonoBehaviour
     public TextMeshProUGUI enemyTotalText; // Texto para mostrar el total de puntos del enemigo
     public int enemyTotal; // Total de puntos del enemigo
 
-    private int cardOffset = 30; // Espaciado entre cartas visibles del enemigo
     public List<GameObject> enemyCards = new List<GameObject>(); // Lista de cartas del enemigo
 
     void Start()
