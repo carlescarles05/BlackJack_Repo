@@ -314,17 +314,7 @@ public class BJManager : MonoBehaviour
         deckManager.cardsAlreadyDrawn = 0;
         deckManager.cardsAlreadyDrawnEnemy = 0;
 
-        // Limpiar las cartas
-        /*foreach (var card in playerCards)
-        {
-            Destroy(card);
-        }*/
         playerCards.Clear();
-
-        /*foreach (var card in enemyCards)
-        {
-            Destroy(card);
-        }*/
         enemyCards.Clear();
 
         Debug.Log("Juego iniciado: Totales reiniciados. playerTotal = 0, enemyTotal = 0");

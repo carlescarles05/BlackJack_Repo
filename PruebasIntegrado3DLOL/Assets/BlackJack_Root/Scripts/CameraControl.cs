@@ -33,7 +33,6 @@ public class CameraControl : MonoBehaviour
     // Método para restaurar el control normal de la cámara
     public void ResetCameraAngle()
     {
-        // Esto restablece el control de la cámara a su movimiento normal
-        // Normalmente, cuando el jugador se levanta, la cámara debería seguir funcionando normalmente
+        
     }
 }

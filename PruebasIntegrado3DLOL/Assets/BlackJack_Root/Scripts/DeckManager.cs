@@ -12,8 +12,6 @@ public class DeckManager : MonoBehaviour
     public int cardsAlreadyDrawnEnemy;
     public int cardV;
     
-    
-
     private void Start()
     {    
         GenerateDeck();
