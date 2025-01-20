@@ -193,6 +193,7 @@ public class BJManager : MonoBehaviour
             cronometro.SubtractYears(200);
         }
 
+        deckManager.ResetInstance();
 
         roundCount++;
 

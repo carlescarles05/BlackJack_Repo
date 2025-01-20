@@ -5,6 +5,7 @@ public class DeckManager : MonoBehaviour
 {
     public List<Card> deck = new List<Card>();
     public List<Material> cardMaterials; // Materiales para representar los valores
+    public List<GameObject> instancesManager = new List<GameObject>();
     public Transform[] cardSpawnPosition = new Transform[7]; // Array de 7 posiciones para las cartas
     public Transform[] cardSpawnPositionEnemy = new Transform[7]; // Array de 7 posiciones para las cartas
     public GameObject cardPrefab;        // Prefab de la carta para mostrar en la escena
@@ -115,6 +116,7 @@ public class DeckManager : MonoBehaviour
 
         // Instanciar el prefab en la posición correspondiente
         GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPosition[cardsAlreadyDrawn].position, Quaternion.identity);
+        instancesManager.Add(cardInstance);
 
         // Aplicar el material correspondiente al valor de la carta
         MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
@@ -136,6 +138,15 @@ public class DeckManager : MonoBehaviour
         {
             text.text = drawnCard.value.ToString();
         }
+    }
+
+    public void ResetInstance()
+    {
+        foreach (GameObject a in instancesManager) 
+        {
+            Destroy(a);
+        }
+        instancesManager.Clear();
     }
 
     public void DrawCardEnemy()
@@ -164,6 +175,7 @@ public class DeckManager : MonoBehaviour
 
         // Instanciar el prefab en la posición correspondiente
         GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPositionEnemy[cardsAlreadyDrawnEnemy].position, Quaternion.identity);
+        instancesManager.Add(cardInstance);
 
         // Aplicar el material correspondiente al valor de la carta
         MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
