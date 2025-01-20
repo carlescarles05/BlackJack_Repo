@@ -19,6 +19,8 @@ public class BJManager : MonoBehaviour
     public Button hitButton; // Botón "Robar carta"
     public Button standButton; // Botón "Plantarse"
     public BJManager bjManager; // Asegúrate de tener esta variable pública en el script
+    public Cronometro cronometro;
+    public Cronometro cronometroEnemy;
 
 
     private bool isGameOver = false;
@@ -183,10 +185,12 @@ public class BJManager : MonoBehaviour
         if (playerWins == true)
         {
             Debug.Log("¡Has ganado!");
+            cronometroEnemy.SubtractYearsEnemy(200);
         }
         else if (playerWins == false)
         {
             Debug.Log("Has perdido.");
+            cronometro.SubtractYears(200);
         }
 
 
@@ -249,7 +253,6 @@ public class BJManager : MonoBehaviour
             if (enemyAI.enemyTotal > 21)
             {
                 EndGame(true); // El jugador gana
-
             }
             EndTurn(); // Cambiar al turno del jugador
             yield break;

@@ -173,6 +173,7 @@ public class SitOnObject : MonoBehaviour
 
         if (cronometro != null) cronometro.gameObject.SetActive(false);
         if (cronometroEnemigo != null) cronometroEnemigo.gameObject.SetActive(false);
+
     }
 
     void Update()
