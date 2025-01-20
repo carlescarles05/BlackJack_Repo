@@ -114,4 +114,5 @@ public class Cronometro : MonoBehaviour
         yearText.text = currentYear.ToString(); // Actualizar el texto del contador
     }
 
+
 }
