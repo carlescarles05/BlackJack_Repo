@@ -93,4 +93,25 @@ public class Cronometro : MonoBehaviour
         yearText.text = currentYear.ToString(); // Actualizar el texto del contador
     }
 
+    // Método para restar años al contador
+    public void SubtractYears(int years)
+    {
+        currentYear -= years;
+        if (currentYear < endYear)
+        {
+            currentYear = endYear; // Limitar al valor mínimo (endYear)
+        }
+        yearText.text = currentYear.ToString(); // Actualizar el texto del contador
+    }
+
+    public void SubtractYearsEnemy(int years)
+    {
+        currentYear -= years;
+        if (currentYear < endYear)
+        {
+            currentYear = endYear; // Limitar al valor mínimo (endYear)
+        }
+        yearText.text = currentYear.ToString(); // Actualizar el texto del contador
+    }
+
 }
