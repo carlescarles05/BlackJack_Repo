@@ -24954,7 +24954,7 @@ MonoBehaviour:
   timerCanvas: {fileID: 250983285}
   cronometro: {fileID: 261056856}
   timerCanvasEnemy: {fileID: 1051694895}
-  cronometroEnemigo: {fileID: 0}
+  cronometroEnemigo: {fileID: 1824794197}
 --- !u!65 &660531255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48883,7 +48883,7 @@ MonoBehaviour:
   standButton: {fileID: 2111497437}
   bjManager: {fileID: 1218172600}
   cronometro: {fileID: 261056856}
-  cronometroEnemy: {fileID: 0}
+  cronometroEnemy: {fileID: 1824794197}
   roundCount: 0
   EnemyAI: {fileID: 1889638238}
   deckManager: {fileID: 749706560}
@@ -68104,6 +68104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824794196}
+  - component: {fileID: 1824794197}
   m_Layer: 0
   m_Name: CountdownTimer2
   m_TagString: Untagged
@@ -68127,6 +68128,24 @@ Transform:
   - {fileID: 1051694892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1824794197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824794194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628540e216260624b827748f72a23d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startYear: 5000
+  endYear: 0
+  countdownInterval: 1
+  yearText: {fileID: 2057528135}
+  audioSource: {fileID: 1682336079}
+  tickSound: {fileID: 8300000, guid: 5b8d547a6ea0d4742a95a79552cc1838, type: 3}
 --- !u!65 &1827411582
 BoxCollider:
   m_ObjectHideFlags: 0
