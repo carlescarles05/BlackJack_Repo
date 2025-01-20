@@ -215,8 +215,6 @@ public class BJManager : MonoBehaviour
         StartGame();
         isGameOver = false; // Resetear el estado del juego
 
-        // Opcional: podrías restablecer la interfaz de usuario u otros elementos aquí si es necesario
-
         blockDobleEnd = false;
         Debug.Log("Comenzando una nueva ronda...");
     }
@@ -330,7 +328,9 @@ public class BJManager : MonoBehaviour
         // Activar los botones al reiniciar la ronda
         hitButton.interactable = true;
         standButton.interactable = true;
+
     }
+
 
     public void EnemyHit()
     {
