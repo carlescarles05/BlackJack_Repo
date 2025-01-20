@@ -24952,9 +24952,9 @@ MonoBehaviour:
   transitionSpeed: 2
   PlayerCards: []
   timerCanvas: {fileID: 250983285}
-  cronometro: {fileID: 0}
+  cronometro: {fileID: 261056856}
   timerCanvasEnemy: {fileID: 1051694895}
-  cronometroEnemigo: {fileID: 0}
+  cronometroEnemigo: {fileID: 1824794195}
 --- !u!65 &660531255
 BoxCollider:
   m_ObjectHideFlags: 0
