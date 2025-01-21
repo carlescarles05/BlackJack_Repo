@@ -22,8 +22,6 @@ public class BJManager : MonoBehaviour
     public Cronometro cronometro;
     public Cronometro cronometroEnemy;
 
-
-
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
     public int roundCount = 0; // Contador de rondas
@@ -109,18 +107,18 @@ public class BJManager : MonoBehaviour
             hitButton.interactable = false;
             standButton.interactable = false;
         }
-
     }
 
     public int GenerateCard()
     {
         int cardValue = Random.Range(1, deckManager.cardMaterials.Count); // Genera un valor entre 1 y el tamaño de cardMaterials
-        deckManager.cardV = cardValue;
+        deckManager.cardV = cardValue; 
 
         // Instanciar carta en la posición correspondiente
         GameObject card = Instantiate(cardPrefab, playerCardSpawnPoint);
         card.transform.localPosition += new Vector3(cardOffset * playerCards.Count, 0, 0);
         card.transform.localRotation = Quaternion.Euler(0, 0, 0); // Ajustar rotación a 90 grados si es necesario
+                                                                  // cardRenderer.material = deckManager.                                                          
 
         // Cambiar el material de la carta
         Renderer cardRenderer = card.GetComponent<Renderer>();
@@ -147,7 +145,7 @@ public class BJManager : MonoBehaviour
                 Debug.Log("Es el turno del jugador.");
                 hitButton.interactable = true; // Permitir interacción del jugador
                 standButton.interactable = true;
-                break;
+                break; 
 
             case Turn.Enemy:
                 Debug.Log("Es el turno del enemigo.");
@@ -258,7 +256,6 @@ public class BJManager : MonoBehaviour
         blockDobleEnd = false;
         Debug.Log("Comenzando una nueva ronda...");
     }
-
 
     public IEnumerator EnemyTurnRoutine()
     {
