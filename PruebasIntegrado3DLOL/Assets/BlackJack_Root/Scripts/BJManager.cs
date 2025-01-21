@@ -28,6 +28,8 @@ public class BJManager : MonoBehaviour
     public int roundCount = 0; // Contador de rondas
     private const int maxRounds = 8; // Número máximo de rondas
     bool blockDobleEnd = false;
+    public bool enemyStand = false;
+    public bool playerStand = false;
 
     [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
 
@@ -82,7 +84,7 @@ public class BJManager : MonoBehaviour
         {
             Debug.Log("¡Te pasaste de 21!");
             EndGame(false); // Finaliza el juego si el jugador se pasa de 21
-            return;
+            return;           
         }
 
         // Cambiar turno al enemigo
@@ -95,8 +97,17 @@ public class BJManager : MonoBehaviour
 
         Debug.Log("Jugador se planta.");
 
-        // Finalizar el turno del jugador
-        EndTurn();
+        if (enemyStand == true) 
+        { 
+            EndGame(null);            
+        }
+        else
+        {
+            playerStand = true;
+            EndTurn();
+            hitButton.interactable = false;
+            standButton.interactable = false;
+        }
 
     }
 
@@ -181,16 +192,36 @@ public class BJManager : MonoBehaviour
         isGameOver = true;
         hitButton.interactable = false;
         standButton.interactable = false;
-
-        if (playerWins == true)
+        if (playerWins != null) 
         {
-            Debug.Log("¡Has ganado!");
-            cronometroEnemy.SubtractYearsEnemy(200);
+            if (playerWins == true)
+            {
+                Debug.Log("¡Has ganado!");
+                cronometroEnemy.SubtractYearsEnemy(200);
+            }
+            else if (playerWins == false)
+            {
+                Debug.Log("Has perdido.");
+                cronometro.SubtractYears(200);
+            }
         }
-        else if (playerWins == false)
+        else
         {
-            Debug.Log("Has perdido.");
-            cronometro.SubtractYears(200);
+            if ((21 - playerTotal) > (21 - enemyAI.enemyTotal))
+            {
+                Debug.Log("Has perdido.");
+                cronometro.SubtractYears(200);
+            }
+            else if ((21 - playerTotal) < (21 - enemyAI.enemyTotal))
+            {
+                Debug.Log("¡Has ganado!");
+                cronometro.SubtractYearsEnemy(200);
+            }
+            else
+            {
+                cronometro.SubtractYears(200);
+                cronometro.SubtractYearsEnemy(200);
+            }
         }
 
         deckManager.ResetInstance();
@@ -207,7 +238,6 @@ public class BJManager : MonoBehaviour
             // Esperamos un poco antes de reiniciar el juego para dar tiempo a que el jugador vea el resultado.
             StartCoroutine(WaitForEndOfGame());
         }
-
     }
 
     private IEnumerator WaitForEndOfGame()
@@ -231,6 +261,11 @@ public class BJManager : MonoBehaviour
         // Debug.Log(21 - playerTotal < 21 - enemyAI.enemyTotal || 21 - enemyAI.enemyTotal >= 10);       
 
         yield return new WaitForSeconds(1f);
+
+        if (enemyStand)
+        {
+            yield return null;
+        }
 
         if ((21 - enemyAI.enemyTotal) >= 5)
         {
@@ -256,6 +291,10 @@ public class BJManager : MonoBehaviour
                 EndGame(true); // El jugador gana
             }
             EndTurn(); // Cambiar al turno del jugador
+            if (playerStand)
+            {
+                EndTurn();
+            }
             yield break;
         }
         else
@@ -263,21 +302,34 @@ public class BJManager : MonoBehaviour
 
             if (21 - playerTotal < 21 - enemyAI.enemyTotal || Random.Range(1, 11) <= 3)
             {
-                //UpdateEnemyTotalUI();
                 Debug.Log("Turno del enemigo comenzado.");
 
                 // Verificar si el enemigo se pasó de 21
                 if (enemyAI.enemyTotal > 21)
                 {
                     EndGame(true); // El jugador gana
-
                 }
-                EndTurn(); // Cambiar al turno del jugador
+                if (playerStand == true)
+                {
+                    EndGame(null);
+                }
+                else
+                {
+                    EndTurn();
+                }
                 yield break;
             }
             else
             {
-                EnemyStand();
+                if (playerStand == true)
+                {
+                    EndGame(null);
+                }
+                else
+                {
+                    enemyStand = true;
+                    EnemyStand();
+                }     
             }
         }
     }
@@ -332,6 +384,9 @@ public class BJManager : MonoBehaviour
         // Activar los botones al reiniciar la ronda
         hitButton.interactable = true;
         standButton.interactable = true;
+
+        playerStand = false;
+        enemyStand = false;
 
     }
 

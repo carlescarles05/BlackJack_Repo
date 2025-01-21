@@ -22885,7 +22885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Pasar
+  m_text: 'PLANTARSE
 
 '
   m_isRightToLeft: 0
@@ -25745,6 +25745,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: fd6533df18177fc43a9159c1e47b9f82, type: 2}
   - {fileID: 2100000, guid: 2127381d08ddcd7469fad9ff8da9ddbb, type: 2}
   - {fileID: 2100000, guid: a72c4dfcb8f040b439fdfe34531a3264, type: 2}
+  instancesManager: []
   cardSpawnPosition:
   - {fileID: 1216803549}
   - {fileID: 1428963864}
@@ -48885,6 +48886,8 @@ MonoBehaviour:
   cronometro: {fileID: 261056856}
   cronometroEnemy: {fileID: 1824794197}
   roundCount: 0
+  enemyStand: 0
+  playerStand: 0
   EnemyAI: {fileID: 1889638238}
   deckManager: {fileID: 749706560}
   currentTurn: 0
