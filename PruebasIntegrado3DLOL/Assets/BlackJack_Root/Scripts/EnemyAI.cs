@@ -10,6 +10,11 @@ public class EnemyAI : MonoBehaviour
     public Transform enemyCardSpawnPoint; // Punto donde aparecen las cartas del enemigo
     public GameObject cardPrefab; // Prefab de las cartas
     public TextMeshProUGUI enemyTotalText; // Texto para mostrar el total de puntos del enemigo
+
+    public int enemyFirstCardValue;//valor de la primera carta
+    public int enemyRestCardTotalValue; //valor de la suma del resto de cartas
+    public bool enemyStand=false;
+
     public int enemyTotal; // Total de puntos del enemigo
 
     public List<GameObject> enemyCards = new List<GameObject>(); // Lista de cartas del enemigo
@@ -38,6 +43,28 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+
+    public void enemyAddValueToTotal(int value) 
+    {
+        if (enemyTotal == 0) 
+        {
+            enemyFirstCardValue= value;
+            enemyTotal+=value;
+        }
+        else 
+        {
+            enemyRestCardTotalValue += value;
+            enemyTotal+=value;
+        }
+    }
+
+    public void ResetValues() 
+    {
+        enemyTotal = 0;
+        enemyFirstCardValue = 0;
+        enemyRestCardTotalValue = 0;
+        enemyStand = false;
+    }
     // Esta corutina maneja el turno del enemigo
     IEnumerator EnemyTurnRoutine()
     {
@@ -70,7 +97,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (enemyTotalText != null)
         {
-            enemyTotalText.text = enemyTotal + "/21"; // Actualiza el texto con el total
+            if(enemyStand==false) enemyTotalText.text = "? +"+ enemyRestCardTotalValue + "/21"; // Actualiza el texto con el total
+            else enemyTotalText.text = enemyTotal + "/21";
         }
     }
 

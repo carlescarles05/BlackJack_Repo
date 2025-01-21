@@ -23,6 +23,7 @@ public class BJManager : MonoBehaviour
     public Cronometro cronometroEnemy;
 
 
+
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
     public int roundCount = 0; // Contador de rondas
@@ -192,6 +193,10 @@ public class BJManager : MonoBehaviour
         isGameOver = true;
         hitButton.interactable = false;
         standButton.interactable = false;
+
+        enemyAI.enemyStand = true;
+        UpdateEnemyTotalUI();
+        
         if (playerWins != null) 
         {
             if (playerWins == true)
@@ -273,7 +278,7 @@ public class BJManager : MonoBehaviour
             int cardValue = Random.Range(1, deckManager.cardMaterials.Count); // Genera un valor entre 1 y el tamaño de cardMaterials;
             deckManager.cardV = cardValue;
             deckManager.DrawCardEnemy();
-            enemyAI.enemyTotal += cardValue;
+            enemyAI.enemyAddValueToTotal(cardValue);
             Debug.Log($"Valor de la carta: {cardValue}, Total enemigo: {enemyAI.enemyTotal}");
 
             // Instanciar la carta visualmente
@@ -338,7 +343,7 @@ public class BJManager : MonoBehaviour
     {
         if (enemyAI != null && enemyAI.enemyTotalText != null)
         {
-            enemyAI.enemyTotalText.text = $"{enemyAI.enemyTotal}/21";
+            enemyAI.UpdateEnemyTotalUI();
         }
     }
 
@@ -364,7 +369,7 @@ public class BJManager : MonoBehaviour
     {
         // Reiniciar totales
         playerTotal = 0;
-        enemyAI.enemyTotal = 0;
+        enemyAI.ResetValues();
         deckManager.cardsAlreadyDrawn = 0;
         deckManager.cardsAlreadyDrawnEnemy = 0;
 
