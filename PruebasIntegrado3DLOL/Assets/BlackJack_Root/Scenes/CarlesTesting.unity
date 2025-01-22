@@ -23316,6 +23316,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4806218, y: 1.2716745, z: 2.8321195}
   m_Center: {x: 0.22310108, y: -0.59669405, z: -0.77477753}
+--- !u!1 &534022527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 534022528}
+  m_Layer: 0
+  m_Name: NPCView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &534022528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534022527}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1501265934}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &541111055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6089230017005357068, guid: aeeedd54360ccc04dbc250e9616f74ee,
@@ -38339,6 +38370,9 @@ MonoBehaviour:
   dialogueLines:
   - "HOLA \xBFQUE TAL? SOLO SOY UN SIMPLE CAMARERO EN MODO BETA"
   playerMovementScript: {fileID: 1501265935}
+  npcTransform: {fileID: 889465675}
+  playerTransform: {fileID: 1501265934}
+  rotationSpeed: 5
 --- !u!65 &889465679
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61729,6 +61763,9 @@ MonoBehaviour:
   Move: {fileID: 0}
   dialogueLines: []
   playerMovementScript: {fileID: 0}
+  npcTransform: {fileID: 0}
+  playerTransform: {fileID: 0}
+  rotationSpeed: 5
 --- !u!65 &1454314011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67065,6 +67102,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
+  - {fileID: 534022528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 113.794, z: 0}
 --- !u!114 &1501265935

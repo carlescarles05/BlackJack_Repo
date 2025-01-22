@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SocialPlatforms;
+using UnityEngine.UIElements;
 
 public class NPCInteractio : MonoBehaviour
 {
+    [SerializeField] GameObject NPCView;
+    private Position NPCview;
+
     public GameObject interactionIndicator; // El indicador (cubo) que se activa/desactiva
     public GameObject dialoguePanel; // Panel de diálogo de la UI
     public TextMeshProUGUI dialogueText; // Texto del diálogo en el panel
@@ -20,6 +25,11 @@ public class NPCInteractio : MonoBehaviour
 
     public MonoBehaviour playerMovementScript; // El script de movimiento del jugador
 
+    // Nuevas referencias para rotación
+    public Transform npcTransform; // El transform del NPC que debe girar (cuerpo o cabeza)
+    public Transform playerTransform; // Transform del jugador
+    public float rotationSpeed = 5f; // Velocidad de rotación del NPC
+
     private void Start()
     {
         // Asegurarnos de que el indicador y el panel de diálogo estén apagados al inicio
@@ -32,13 +42,19 @@ public class NPCInteractio : MonoBehaviour
         // Si el jugador está en rango, presiona "E" y no está escribiendo
         if (playerInRange && Input.GetKeyDown(KeyCode.E) && !isTyping)
         {
-            if (!isDialogueActive)
+            if (!isDialogueActive) 
             {
                 StartDialogue();
+                
             }
             else
             {
                 AdvanceDialogue();
+            }
+            // Girar hacia el jugador durante el diálogo
+            if (isDialogueActive && npcTransform != null && playerTransform != null)
+            {
+                RotateToFacePlayer();
             }
         }
     }
@@ -142,6 +158,20 @@ public class NPCInteractio : MonoBehaviour
                 EndDialogue();
             }
         }
+    }
+    private void RotateToFacePlayer()
+    {
+        // Calcular la dirección hacia el jugador
+        Vector3 directionToPlayer = (playerTransform.position - npcTransform.position).normalized;
+
+        // Asegurarnos de que no haya inclinaciones en el eje Y
+        directionToPlayer.y = 0f;
+
+        // Calcular la rotación objetivo
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+        // Rotar suavemente hacia el jugador
+        npcTransform.rotation = Quaternion.Slerp(npcTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
 }
