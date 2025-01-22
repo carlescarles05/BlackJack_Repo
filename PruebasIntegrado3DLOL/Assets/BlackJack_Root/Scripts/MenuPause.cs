@@ -20,4 +20,10 @@ public class MenuPause : MonoBehaviour
         botonPausa.SetActive(true);
         menuPausa.SetActive(false);
     }
+
+    public void Cerrar()
+    {
+        Debug.Log("Cerrando juego");
+        Application.Quit();
+    }
 }
