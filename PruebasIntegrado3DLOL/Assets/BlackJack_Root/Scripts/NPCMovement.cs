@@ -5,9 +5,16 @@ using UnityEngine.AI;
 
 public class NPCMovement : MonoBehaviour
 {
+<<<<<<< HEAD
     public float minWaitTime;  // Tiempo mínimo antes de cambiar de destino
     public float maxWaitTime;  // Tiempo máximo antes de cambiar de destino
     public float movementRange; // Rango de movimiento desde la posición actual
+=======
+    public float minWaitTime = 1f;  // Tiempo mínimo antes de cambiar de destino
+    public float maxWaitTime = 3f;  // Tiempo máximo antes de cambiar de destino
+    public float movementRange = 5f; // Rango de movimiento desde la posición actual
+    public float rotationSpeed = 5f; // Velocidad de rotación, configurable desde el Inspector
+>>>>>>> f378ee65f87417b6b6ef887087f6973985ee04aa
 
     private NavMeshAgent agent;  // Referencia al NavMeshAgent
     private Vector3 startPosition;  // Posición inicial del NPC
@@ -91,11 +98,23 @@ public class NPCMovement : MonoBehaviour
 
     void LookAtDestination(Vector3 destination)
     {
-        // Crear una posición destino que tenga la misma altura que el NPC
+        /*// Crear una posición destino que tenga la misma altura que el NPC
         Vector3 lookAtPosition = new Vector3(destination.x, transform.position.y, destination.z);
 
         // Usar LookAt para girar directamente hacia el destino
-        transform.LookAt(lookAtPosition);
+        transform.LookAt(lookAtPosition);*/
+        // Crear una posición destino que tenga la misma altura que el NPC
+        Vector3 lookAtPosition = new Vector3(destination.x, transform.position.y, destination.z);
+
+        // Calcular la rotación objetivo
+        Quaternion targetRotation = Quaternion.LookRotation(lookAtPosition - transform.position);
+
+        // Interpolar suavemente hacia la rotación objetivo
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,        // Rotación actual
+            targetRotation,            // Rotación objetivo
+            Time.deltaTime * rotationSpeed // Suavidad controlada por rotationSpeed
+        );
     }
 
     public void SetMovement(bool state)

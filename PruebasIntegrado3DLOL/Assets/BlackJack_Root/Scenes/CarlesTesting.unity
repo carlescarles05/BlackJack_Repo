@@ -24431,6 +24431,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Chair
       objectReference: {fileID: 0}
+    - target: {fileID: 8528914401623509639, guid: aeeedd54360ccc04dbc250e9616f74ee,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -38325,9 +38330,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c22ec130fdea634a8b9052ca5b3ac3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   minWaitTime: 0
   maxWaitTime: 0
   movementRange: 10
+=======
+  minWaitTime: 1
+  maxWaitTime: 3
+  movementRange: 5
+  rotationSpeed: 5
+>>>>>>> f378ee65f87417b6b6ef887087f6973985ee04aa
   canMove: 1
 --- !u!195 &889465677
 NavMeshAgent:
@@ -69054,7 +69066,7 @@ Transform:
   m_GameObject: {fileID: 1713863576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.44, y: 0.14, z: -1.9}
+  m_LocalPosition: {x: 2.44, y: 0.1, z: -1.9}
   m_LocalScale: {x: 3.6223, y: 1, z: 3.4994614}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71788,7 +71800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &2025604679
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71869,8 +71881,8 @@ Transform:
   m_GameObject: {fileID: 2025604678}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.047922}
+  m_LocalPosition: {x: 0, y: 1.457, z: 0}
+  m_LocalScale: {x: 0.38053, y: 0.40731746, z: 0.047922}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 889465675}
