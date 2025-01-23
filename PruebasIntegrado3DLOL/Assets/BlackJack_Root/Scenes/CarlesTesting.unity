@@ -38325,9 +38325,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c22ec130fdea634a8b9052ca5b3ac3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minWaitTime: 1
-  maxWaitTime: 3
-  movementRange: 5
+  minWaitTime: 0
+  maxWaitTime: 0
+  movementRange: 10
   canMove: 1
 --- !u!195 &889465677
 NavMeshAgent:

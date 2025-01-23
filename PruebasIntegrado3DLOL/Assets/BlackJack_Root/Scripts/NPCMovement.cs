@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public class NPCMovement : MonoBehaviour
 {
-    public float minWaitTime = 1f;  // Tiempo mínimo antes de cambiar de destino
-    public float maxWaitTime = 3f;  // Tiempo máximo antes de cambiar de destino
-    public float movementRange = 5f; // Rango de movimiento desde la posición actual
+    public float minWaitTime;  // Tiempo mínimo antes de cambiar de destino
+    public float maxWaitTime;  // Tiempo máximo antes de cambiar de destino
+    public float movementRange; // Rango de movimiento desde la posición actual
 
     private NavMeshAgent agent;  // Referencia al NavMeshAgent
     private Vector3 startPosition;  // Posición inicial del NPC
