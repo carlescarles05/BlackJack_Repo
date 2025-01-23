@@ -38330,16 +38330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c22ec130fdea634a8b9052ca5b3ac3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  minWaitTime: 0
-  maxWaitTime: 0
-  movementRange: 10
-=======
   minWaitTime: 1
   maxWaitTime: 3
   movementRange: 5
   rotationSpeed: 5
->>>>>>> f378ee65f87417b6b6ef887087f6973985ee04aa
   canMove: 1
 --- !u!195 &889465677
 NavMeshAgent:
@@ -71800,7 +71794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2025604679
 BoxCollider:
   m_ObjectHideFlags: 0
