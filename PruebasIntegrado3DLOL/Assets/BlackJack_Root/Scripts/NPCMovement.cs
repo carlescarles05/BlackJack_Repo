@@ -51,7 +51,7 @@ public class NPCMovement : MonoBehaviour
 
     void ChooseNewDestination()
     {
-        if (!canMove) return;
+        /*if (!canMove) return;
 
         // Generar un destino aleatorio dentro del rango
         Vector3 randomDirection = new Vector3(
@@ -66,7 +66,36 @@ public class NPCMovement : MonoBehaviour
         if (NavMesh.SamplePosition(newDestination, out NavMeshHit hit, movementRange, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
+        }*/
+        if (!canMove) return;
+
+        // Generar un destino aleatorio dentro del rango
+        Vector3 randomDirection = new Vector3(
+            Random.Range(-movementRange, movementRange),
+            0f,
+            Random.Range(-movementRange, movementRange)
+        );
+
+        Vector3 newDestination = startPosition + randomDirection;
+
+        // Establecer el destino en el NavMeshAgent
+        if (NavMesh.SamplePosition(newDestination, out NavMeshHit hit, movementRange, NavMesh.AllAreas))
+        {
+            // Establecer la posición de destino en el NavMeshAgent
+            agent.SetDestination(hit.position);
+
+            // Hacer que el NPC mire hacia el punto de destino
+            LookAtDestination(hit.position);
         }
+    }
+
+    void LookAtDestination(Vector3 destination)
+    {
+        // Crear una posición destino que tenga la misma altura que el NPC
+        Vector3 lookAtPosition = new Vector3(destination.x, transform.position.y, destination.z);
+
+        // Usar LookAt para girar directamente hacia el destino
+        transform.LookAt(lookAtPosition);
     }
 
     public void SetMovement(bool state)

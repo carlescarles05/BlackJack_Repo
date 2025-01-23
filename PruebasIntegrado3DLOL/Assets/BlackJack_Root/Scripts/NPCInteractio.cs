@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UIElements;
+using UnityEngine.Animations;
 
 public class NPCInteractio : MonoBehaviour
 {
     [SerializeField] GameObject NPCView;
-    private Position NPCview;
+    private Transform npcViewTransform; // Transform del NPCView
 
     public GameObject interactionIndicator; // El indicador (cubo) que se activa/desactiva
     public GameObject dialoguePanel; // Panel de diálogo de la UI
@@ -29,10 +30,25 @@ public class NPCInteractio : MonoBehaviour
     public Transform npcTransform; // El transform del NPC que debe girar (cuerpo o cabeza)
     public Transform playerTransform; // Transform del jugador
     public float rotationSpeed = 5f; // Velocidad de rotación del NPC
+    public Transform detect;
 
     private void Start()
     {
-        // Asegurarnos de que el indicador y el panel de diálogo estén apagados al inicio
+        if (NPCView == null)
+        {
+            NPCView = GameObject.FindGameObjectWithTag("NPCView"); // Asegúrate de asignar el tag "NPCView"
+        }
+
+        if (NPCView != null)
+        {
+            npcViewTransform = NPCView.transform;
+            Debug.Log("NPCView asignado automáticamente por tag: " + NPCView.name);
+        }
+        else
+        {
+            Debug.LogError("NPCView no encontrado por tag. Asegúrate de que el objeto tenga el tag 'NPCView'.");
+        }
+
         if (interactionIndicator != null) interactionIndicator.SetActive(false);
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
     }
@@ -45,7 +61,8 @@ public class NPCInteractio : MonoBehaviour
             if (!isDialogueActive) 
             {
                 StartDialogue();
-                
+                detect.LookAt(playerTransform);
+                interactionIndicator.SetActive(false);
             }
             else
             {
@@ -54,7 +71,7 @@ public class NPCInteractio : MonoBehaviour
             // Girar hacia el jugador durante el diálogo
             if (isDialogueActive && npcTransform != null && playerTransform != null)
             {
-                RotateToFacePlayer();
+                RotateToFaceNPCView();
             }
         }
     }
@@ -159,19 +176,22 @@ public class NPCInteractio : MonoBehaviour
             }
         }
     }
-    private void RotateToFacePlayer()
+    private void RotateToFaceNPCView()
     {
-        // Calcular la dirección hacia el jugador
-        Vector3 directionToPlayer = (playerTransform.position - npcTransform.position).normalized;
+        // Calcular la dirección hacia el NPCView
+        Vector3 directionToNPCView = (npcViewTransform.position - npcTransform.position).normalized;
 
-        // Asegurarnos de que no haya inclinaciones en el eje Y
-        directionToPlayer.y = 0f;
+        // Evitar que el NPC rote hacia arriba o abajo
+        directionToNPCView.y = 0f;
 
         // Calcular la rotación objetivo
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+        Quaternion targetRotation = Quaternion.LookRotation(directionToNPCView);
 
-        // Rotar suavemente hacia el jugador
-        npcTransform.rotation = Quaternion.Slerp(npcTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        // Rotar el NPC suavemente hacia el NPCView
+        npcTransform.rotation = Quaternion.Slerp(npcTransform.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime);
+
     }
 
 }
