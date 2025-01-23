@@ -30,7 +30,7 @@ public class BJManager : MonoBehaviour
     public bool enemyStand = false;
     public bool playerStand = false;
 
-    [SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
+    //[SerializeField] private EnemyAI EnemyAI;  // Si prefieres mantener la variable privada
 
     public DeckManager deckManager;
 

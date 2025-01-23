@@ -23,7 +23,7 @@ public class IntroDialogue : MonoBehaviour
         // Desactivar el movimiento del jugador al inicio
         if (playerMovement != null)
         {
-            playerMovement.enabled = false;
+            playerMovement.canMove = false;
         }
 
         // Iniciar la secuencia de introducción
@@ -47,7 +47,7 @@ public class IntroDialogue : MonoBehaviour
         // Reactivar el movimiento del jugador
         if (playerMovement != null)
         {
-            playerMovement.enabled = true;
+            playerMovement.canMove = true;
         }
     }
 

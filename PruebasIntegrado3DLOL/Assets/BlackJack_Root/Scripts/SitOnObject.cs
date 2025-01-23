@@ -200,8 +200,9 @@ public class SitOnObject : MonoBehaviour
         isTransitioning = true;
 
         // Desactivar movimiento y rotación del jugador
-        if (playerMovement != null) playerMovement.enabled = false;
+        if (playerMovement != null) playerMovement.canMove = false;
         if (characterController != null) characterController.enabled = false;
+        if (playerMovement != null) playerMovement.isSitting = true;
 
         // Desactivar el Rigidbody para evitar movimiento por física
         Rigidbody playerRigidbody = playerTransform.GetComponent<Rigidbody>();
