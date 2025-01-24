@@ -70435,7 +70435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628540e216260624b827748f72a23d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startYear: 5000
+  startYear: 2000
   endYear: 0
   countdownInterval: 1
   yearText: {fileID: 2057528135}
@@ -77811,7 +77811,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5000
+  m_text: 2000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adf1d9dbc6b7fab448dd63a92dcc1d56, type: 2}
   m_sharedMaterial: {fileID: -3776066928931237464, guid: adf1d9dbc6b7fab448dd63a92dcc1d56,

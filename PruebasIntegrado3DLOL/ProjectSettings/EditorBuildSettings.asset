@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BlackJack_Root/Scenes/Mario_Scenes/01_Mario_MACHINE2.unity
     guid: d4b72583ab8c6d54e81dae4a26581b02
+  - enabled: 1
+    path: Assets/BlackJack_Root/Scenes/WINSCENE.unity
+    guid: a622ed88840e95a46bd05c6e0f73e436
+  - enabled: 1
+    path: Assets/BlackJack_Root/Scenes/LOSESCENE.unity
+    guid: bf5fcedea1f310b4e8fce354e778bb69
   m_configObjects: {}
