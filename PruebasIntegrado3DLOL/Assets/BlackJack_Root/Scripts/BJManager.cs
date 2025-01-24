@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BJManager : MonoBehaviour
 {
@@ -237,6 +238,14 @@ public class BJManager : MonoBehaviour
         {
             Debug.Log("¡Se han jugado 8 rondas! El juego ha terminado.");
             EndGameRoundLimit();
+            if (cronometro.currentYear > cronometro.currentYearEnemy)
+            {
+                SceneManager.LoadScene(5);
+            }
+            else
+            {
+                SceneManager.LoadScene(6);
+            }
         }
         else
         {

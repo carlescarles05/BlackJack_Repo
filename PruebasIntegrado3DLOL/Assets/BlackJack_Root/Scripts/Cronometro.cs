@@ -10,7 +10,8 @@ public class Cronometro : MonoBehaviour
     public float countdownInterval = 1f;
     public TextMeshProUGUI yearText;
 
-    private int currentYear;
+    public int currentYear;
+    public int currentYearEnemy;
 
     // Variables para el sonido
     public AudioSource audioSource; // Fuente de audio
@@ -19,8 +20,10 @@ public class Cronometro : MonoBehaviour
     public void StartCountdown(System.Action onComplete)
     {
         currentYear = startYear;
+        currentYearEnemy = startYear;
         StartCoroutine(CountdownCoroutine(onComplete));
     }
+
 
     private IEnumerator CountdownCoroutine(System.Action onComplete)
     {
@@ -43,6 +46,7 @@ public class Cronometro : MonoBehaviour
 
         onComplete?.Invoke(); // Llamar al callback cuando termine la cuenta regresiva
     }
+
 
     // Método para sumar años al contador
     public void AddYears(int years)
@@ -75,6 +79,4 @@ public class Cronometro : MonoBehaviour
         }
         yearText.text = currentYear.ToString(); // Actualizar el texto del contador
     }
-
-
 }
