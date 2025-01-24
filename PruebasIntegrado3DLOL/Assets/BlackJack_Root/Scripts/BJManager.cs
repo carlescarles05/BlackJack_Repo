@@ -16,6 +16,7 @@ public class BJManager : MonoBehaviour
     public GameObject cardPrefab; // Prefab de las cartas
     public int cardOffset = 30; // Espaciado entre cartas visibles
     public TextMeshProUGUI playerTotalText; // Referencia al texto del canvas
+    public TextMeshProUGUI roundsTotalText; 
     public Button hitButton; // Botón "Robar carta"
     public Button standButton; // Botón "Plantarse"
     public BJManager bjManager; // Asegúrate de tener esta variable pública en el script
@@ -24,8 +25,8 @@ public class BJManager : MonoBehaviour
 
     private bool isGameOver = false;
     private const int maxPoints = 21; // Puntaje máximo (21)
-    public int roundCount = 0; // Contador de rondas
-    private const int maxRounds = 8; // Número máximo de rondas
+    public int roundCount = 1; // Contador de rondas
+    private const int maxRounds = 9; // Número máximo de rondas
     bool blockDobleEnd = false;
     public bool enemyStand = false;
     public bool playerStand = false;
@@ -242,6 +243,8 @@ public class BJManager : MonoBehaviour
             // Esperamos un poco antes de reiniciar el juego para dar tiempo a que el jugador vea el resultado.
             StartCoroutine(WaitForEndOfGame());
         }
+
+        UpdateRoundsText();
     }
 
     private IEnumerator WaitForEndOfGame()
@@ -435,6 +438,18 @@ public class BJManager : MonoBehaviour
 
         // Finalizar el turno del enemigo
         EndTurn();
+    }
+
+    public void UpdateRoundsText()
+    {
+        if(roundsTotalText != null)
+        {
+            if(roundCount<8)roundsTotalText.text = "ROUND  " + roundCount.ToString() + "/8";
+        }
+        else 
+        {
+            roundsTotalText.text = "FIN DEL JUEGO";
+        }
     }
 } 
 
