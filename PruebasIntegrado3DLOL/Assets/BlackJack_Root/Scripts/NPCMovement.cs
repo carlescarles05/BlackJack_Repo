@@ -10,6 +10,7 @@ public class NPCMovement : MonoBehaviour
     public float movementRange; // Rango de movimiento desde la posición actual
     public float rotationSpeed = 5f; // Velocidad de rotación, configurable desde el Inspector
 
+    bool choosingDestination;
 
     private NavMeshAgent agent;  // Referencia al NavMeshAgent
     private Vector3 startPosition;  // Posición inicial del NPC
@@ -31,6 +32,7 @@ public class NPCMovement : MonoBehaviour
         {
             if (agent.enabled)
             {
+                
                 agent.isStopped = true; // Detener al agente
                 agent.velocity = Vector3.zero; // Asegurarse de que no tenga velocidad residual
             }
@@ -44,9 +46,11 @@ public class NPCMovement : MonoBehaviour
         }
 
         // Verifica si el NPC llegó al destino
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && choosingDestination == false)
         {
             // Espera antes de elegir un nuevo destino
+            Debug.Log("Eligiendo nuevo destino");
+            choosingDestination = true;
             Invoke(nameof(ChooseNewDestination), Random.Range(minWaitTime, maxWaitTime));
         }
     }
@@ -89,6 +93,7 @@ public class NPCMovement : MonoBehaviour
             // Hacer que el NPC mire hacia el punto de destino
             LookAtDestination(hit.position);
         }
+        choosingDestination = false;
     }
 
     void LookAtDestination(Vector3 destination)

@@ -20,6 +20,7 @@ public class BJManager : MonoBehaviour
     public TextMeshProUGUI roundsTotalText; 
     public Button hitButton; // Botón "Robar carta"
     public Button standButton; // Botón "Plantarse"
+    public Button standUpButton;
     public BJManager bjManager; // Asegúrate de tener esta variable pública en el script
     public Cronometro cronometro;
     public Cronometro cronometroEnemy;
@@ -36,9 +37,31 @@ public class BJManager : MonoBehaviour
 
     public DeckManager deckManager;
 
+    private static BJManager instance;
+
+    public static BJManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.LogError("BJManager is null!");
+            }
+            return instance;
+        }
+    }
+
     // Verifica si StartGame se llama al principio
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         Debug.Log("Iniciando juego...");
         deckManager = FindObjectOfType<DeckManager>();
         StartGame(); // Asegúrate de que se llame correctamente.
@@ -54,6 +77,10 @@ public class BJManager : MonoBehaviour
 
     private void Start()
     {
+        // Bloquear el cursor al centro de la pantalla
+        //Cursor.lockState = CursorLockMode.Locked;
+        // Hacer el cursor invisible
+        //Cursor.visible = false;
         if (enemyAI == null)
         {
             enemyAI = FindObjectOfType<EnemyAI>();
@@ -65,6 +92,7 @@ public class BJManager : MonoBehaviour
 
         hitButton.onClick.AddListener(PlayerHit);
         standButton.onClick.AddListener(PlayerStand);
+        //standButton.onClick.AddListener();
 
         UpdatePlayerTotalUI();
         StartGame(); // Inicializar el juego
@@ -106,8 +134,7 @@ public class BJManager : MonoBehaviour
         {
             playerStand = true;
             EndTurn();
-            hitButton.interactable = false;
-            standButton.interactable = false;
+            ToggleButtons(false);
         }
     }
 
@@ -145,15 +172,12 @@ public class BJManager : MonoBehaviour
         {
             case Turn.Player:
                 Debug.Log("Es el turno del jugador.");
-                hitButton.interactable = true; // Permitir interacción del jugador
-                standButton.interactable = true;
+                ToggleButtons(true);
                 break; 
 
             case Turn.Enemy:
                 Debug.Log("Es el turno del enemigo.");
-                hitButton.interactable = false; // Desactivar botones del jugador
-                standButton.interactable = false;
-
+                ToggleButtons(false);
                 StartCoroutine(EnemyTurnRoutine());
                 break;
         }
@@ -181,8 +205,7 @@ public class BJManager : MonoBehaviour
         Debug.Log("¡Se han jugado 8 rondas! El juego ha terminado.");
 
         // Desactivar los botones
-        hitButton.interactable = false;
-        standButton.interactable = false;
+        ToggleButtons(false);
 
         // Mostrar mensaje de fin de juego
         Debug.Log("Fin del juego. Han transcurrido 8 rondas.");
@@ -191,9 +214,7 @@ public class BJManager : MonoBehaviour
     public void EndGame(bool? playerWins)
     {
         isGameOver = true;
-        hitButton.interactable = false;
-        standButton.interactable = false;
-
+        ToggleButtons(false);
         enemyAI.enemyStand = true;
         UpdateEnemyTotalUI();
         
@@ -202,12 +223,14 @@ public class BJManager : MonoBehaviour
             if (playerWins == true)
             {
                 Debug.Log("¡Has ganado!");
-                cronometroEnemy.SubtractYearsEnemy(200);
+                bool isEnd = cronometroEnemy.SubtractYears(200);
+                if (isEnd) gameDead();
             }
             else if (playerWins == false)
             {
                 Debug.Log("Has perdido.");
-                cronometro.SubtractYears(200);
+                bool isEnd = cronometro.SubtractYears(200);
+                if (isEnd) gameDead();
             }
         }
         else
@@ -215,45 +238,43 @@ public class BJManager : MonoBehaviour
             if ((21 - playerTotal) > (21 - enemyAI.enemyTotal))
             {
                 Debug.Log("LOSE");
-                cronometro.SubtractYears(200);
+                bool isEnd = cronometro.SubtractYears(200);
+                if (isEnd)gameDead();
             }
             else if ((21 - playerTotal) < (21 - enemyAI.enemyTotal))
             {
                 Debug.Log("WIN");
-                cronometroEnemy.SubtractYearsEnemy(200);
+                bool isEnd = cronometroEnemy.SubtractYears(200);
+                if (isEnd) gameDead();
             }
             else
             {
                 Debug.Log("EMPATE LOKO");
-                cronometro.SubtractYears(200);
-                cronometroEnemy.SubtractYearsEnemy(200);
+                bool isEnd = cronometro.SubtractYears(200);
+                isEnd = cronometroEnemy.SubtractYears(200);
+                if (isEnd) gameDead();
             }
         }
 
         deckManager.ResetInstance();
 
-        roundCount++;
+        roundCount++;        
+        // Esperamos un poco antes de reiniciar el juego para dar tiempo a que el jugador vea el resultado.
+        StartCoroutine(WaitForEndOfGame());
+        UpdateRoundsText();
+    }
 
-        if (roundCount >= maxRounds)
+    public void gameDead()
+    {
+        StopAllCoroutines();
+        if (cronometroEnemy.currentYear <= 0)
         {
-            Debug.Log("¡Se han jugado 8 rondas! El juego ha terminado.");
-            EndGameRoundLimit();
-            if (cronometro.currentYear > cronometro.currentYearEnemy)
-            {
-                SceneManager.LoadScene(5);
-            }
-            else
-            {
-                SceneManager.LoadScene(6);
-            }
+            SceneManager.LoadScene(5);
         }
         else
         {
-            // Esperamos un poco antes de reiniciar el juego para dar tiempo a que el jugador vea el resultado.
-            StartCoroutine(WaitForEndOfGame());
+            SceneManager.LoadScene(6);
         }
-
-        UpdateRoundsText();
     }
 
     private IEnumerator WaitForEndOfGame()
@@ -397,8 +418,7 @@ public class BJManager : MonoBehaviour
         Debug.Log("Turno inicial: Jugador.");
 
         // Activar los botones al reiniciar la ronda
-        hitButton.interactable = true;
-        standButton.interactable = true;
+        ToggleButtons(true);
 
         playerStand = false;
         enemyStand = false;
@@ -460,6 +480,13 @@ public class BJManager : MonoBehaviour
         {
             roundsTotalText.text = "FIN DEL JUEGO";
         }
+    }
+
+    public void ToggleButtons(bool mode)
+    {
+        hitButton.interactable = mode;
+        standButton.interactable = mode;
+        standUpButton.interactable = mode;
     }
 } 
 

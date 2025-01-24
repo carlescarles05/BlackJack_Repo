@@ -10,18 +10,34 @@ public class Cronometro : MonoBehaviour
     public float countdownInterval = 1f;
     public TextMeshProUGUI yearText;
 
+    public bool isCorutineActive = false;
+    public bool isPause = false;
+
     public int currentYear;
-    public int currentYearEnemy;
 
     // Variables para el sonido
     public AudioSource audioSource; // Fuente de audio
     public AudioClip tickSound;     // Sonido de cada segundo
 
-    public void StartCountdown(System.Action onComplete)
+    public void InteractiveCountdown(System.Action onComplete, int newStartYear = 0)
+    { 
+        
+            isCorutineActive = true;
+            if (newStartYear != 0)
+            {
+                currentYear = newStartYear;
+            }
+            else
+            {
+                currentYear = startYear;
+            }      
+            StartCoroutine(CountdownCoroutine(onComplete));
+                 
+    }
+
+    public void toggleCountdown()
     {
-        currentYear = startYear;
-        currentYearEnemy = startYear;
-        StartCoroutine(CountdownCoroutine(onComplete));
+        isPause = !isPause;
     }
 
 
@@ -38,13 +54,14 @@ public class Cronometro : MonoBehaviour
             }
 
             yield return new WaitForSeconds(countdownInterval);
-            currentYear--;
+            if (isPause == false) currentYear--;
         }
 
         yearText.text = "¡Llegaste al año " + endYear + "!";
         yield return new WaitForSeconds(2f);
 
         onComplete?.Invoke(); // Llamar al callback cuando termine la cuenta regresiva
+        BJManager.Instance.gameDead();
     }
 
 
@@ -60,23 +77,20 @@ public class Cronometro : MonoBehaviour
     }
 
     // Método para restar años al contador
-    public void SubtractYears(int years)
+    public bool SubtractYears(int years)
     {
+        if (currentYear - years <= 0) {
+          currentYear = 0;
+            yearText.text = currentYear.ToString();
+            return true; 
+        }     
         currentYear -= years;
         if (currentYear < endYear)
         {
             currentYear = endYear; // Limitar al valor mínimo (endYear)
         }
         yearText.text = currentYear.ToString(); // Actualizar el texto del contador
+        return false;
     }
 
-    public void SubtractYearsEnemy(int years)
-    {
-        currentYear -= years;
-        if (currentYear < endYear)
-        {
-            currentYear = endYear; // Limitar al valor mínimo (endYear)
-        }
-        yearText.text = currentYear.ToString(); // Actualizar el texto del contador
-    }
 }
