@@ -453,7 +453,8 @@ public class BJManager : MonoBehaviour
     {
         if(roundsTotalText != null)
         {
-            if(roundCount<8)roundsTotalText.text = "ROUND  " + roundCount.ToString() + "/8";
+            if(roundCount<=8)roundsTotalText.text = "ROUND  " + roundCount + "/8";
+            Debug.Log("Se suma una ronda");
         }
         else 
         {
