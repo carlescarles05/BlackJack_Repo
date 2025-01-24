@@ -212,18 +212,19 @@ public class BJManager : MonoBehaviour
         {
             if ((21 - playerTotal) > (21 - enemyAI.enemyTotal))
             {
-                Debug.Log("Has perdido.");
+                Debug.Log("LOSE");
                 cronometro.SubtractYears(200);
             }
             else if ((21 - playerTotal) < (21 - enemyAI.enemyTotal))
             {
-                Debug.Log("¡Has ganado!");
-                cronometro.SubtractYearsEnemy(200);
+                Debug.Log("WIN");
+                cronometroEnemy.SubtractYearsEnemy(200);
             }
             else
             {
+                Debug.Log("EMPATE LOKO");
                 cronometro.SubtractYears(200);
-                cronometro.SubtractYearsEnemy(200);
+                cronometroEnemy.SubtractYearsEnemy(200);
             }
         }
 
