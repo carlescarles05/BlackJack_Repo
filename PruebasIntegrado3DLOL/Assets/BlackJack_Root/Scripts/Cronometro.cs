@@ -21,18 +21,16 @@ public class Cronometro : MonoBehaviour
 
     public void InteractiveCountdown(System.Action onComplete, int newStartYear = 0)
     { 
-        
-            isCorutineActive = true;
-            if (newStartYear != 0)
-            {
-                currentYear = newStartYear;
-            }
-            else
-            {
-                currentYear = startYear;
-            }      
-            StartCoroutine(CountdownCoroutine(onComplete));
-                 
+        isCorutineActive = true;
+        if (newStartYear != 0)
+        {
+           currentYear = newStartYear;
+        }
+        else
+        {
+           currentYear = startYear;
+        }      
+        StartCoroutine(CountdownCoroutine(onComplete));         
     }
 
     public void toggleCountdown()
