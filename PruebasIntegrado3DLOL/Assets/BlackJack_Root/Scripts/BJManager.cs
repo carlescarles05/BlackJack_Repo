@@ -78,9 +78,9 @@ public class BJManager : MonoBehaviour
     private void Start()
     {
         // Bloquear el cursor al centro de la pantalla
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         // Hacer el cursor invisible
-        //Cursor.visible = false;
+        Cursor.visible = false;
         if (enemyAI == null)
         {
             enemyAI = FindObjectOfType<EnemyAI>();
@@ -97,6 +97,8 @@ public class BJManager : MonoBehaviour
         UpdatePlayerTotalUI();
         StartGame(); // Inicializar el juego
     }
+
+
 
     public void PlayerHit()
     {
@@ -487,6 +489,7 @@ public class BJManager : MonoBehaviour
         hitButton.interactable = mode;
         standButton.interactable = mode;
         standUpButton.interactable = mode;
+        
     }
 } 
 

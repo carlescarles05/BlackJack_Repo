@@ -57,11 +57,30 @@ public class SitOnObject : MonoBehaviour
                 }
             }
         }
+        HandleCursorState();
     }
 
     public void StandUp()
     {
         StartCoroutine(SitDownSmooth());
+    }
+
+    private void HandleCursorState()
+    {
+        if (isSitting)
+        {
+            // Mostrar el cursor y desbloquearlo
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+        }
+        else
+        {
+            // Ocultar el cursor y bloquearlo
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+        }
     }
 
     IEnumerator SitDownSmooth()

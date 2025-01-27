@@ -63,36 +63,51 @@ public class PlayerMovement : MonoBehaviour
 
     public void RotateCamera()
     {
-        // Entrada del ratón
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-        if (!isSitting)
+        if ((Input.GetMouseButton(1)))
         {
-            // Control normal del jugador (sin restricciones adicionales)
-            yaw += mouseX; // Acumulamos la rotación horizontal
-            pitch -= mouseY; // Acumulamos la rotación vertical
-            pitch = Mathf.Clamp(pitch, -90f, 90f); // Limitar la rotación vertical entre -90° y 90°
+            // Bloquear el cursor al centro de la pantalla
+            Cursor.lockState = CursorLockMode.Locked;
+            // Hacer el cursor invisible
+            Cursor.visible = false;
+            // Entrada del ratón
 
-            // Aplicar rotaciones
-            transform.localRotation = Quaternion.Euler(0f, yaw, 0f); // Girar al jugador (horizontalmente)
-            cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f); // Rotar la cámara (verticalmente)
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+            if (!isSitting)
+            {
+                // Control normal del jugador (sin restricciones adicionales)
+                yaw += mouseX; // Acumulamos la rotación horizontal
+                pitch -= mouseY; // Acumulamos la rotación vertical
+                pitch = Mathf.Clamp(pitch, -90f, 90f); // Limitar la rotación vertical entre -90° y 90°
+
+                // Aplicar rotaciones
+                transform.localRotation = Quaternion.Euler(0f, yaw, 0f); // Girar al jugador (horizontalmente)
+                cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f); // Rotar la cámara (verticalmente)
+            }
+            else
+            {
+                // Restricción de rotación cuando el personaje está sentado
+                yaw += mouseX; // Acumulamos la rotación horizontal
+                pitch -= mouseY; // Acumulamos la rotación vertical
+
+                // Limitar la rotación vertical entre -90° y 90° (mirar hacia arriba y hacia abajo)
+                pitch = Mathf.Clamp(pitch, -60f, 60f);
+
+                // Limitar la rotación horizontal (yaw) dentro de un rango específico (por ejemplo, -45° a 45°)
+                yaw = Mathf.Clamp(yaw, 130f, 190f);
+
+                // Aplicar rotaciones con límites
+                transform.localRotation = Quaternion.Euler(0f, yaw, 0f); // Rotar al jugador (horizontalmente, limitado)
+                cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f); // Rotar la cámara (verticalmente)
+            }
         }
         else
         {
-            // Restricción de rotación cuando el personaje está sentado
-            yaw += mouseX; // Acumulamos la rotación horizontal
-            pitch -= mouseY; // Acumulamos la rotación vertical
-
-            // Limitar la rotación vertical entre -90° y 90° (mirar hacia arriba y hacia abajo)
-            pitch = Mathf.Clamp(pitch, -60f, 60f);
-
-            // Limitar la rotación horizontal (yaw) dentro de un rango específico (por ejemplo, -45° a 45°)
-            yaw = Mathf.Clamp(yaw, 130f, 190f);
-
-            // Aplicar rotaciones con límites
-            transform.localRotation = Quaternion.Euler(0f, yaw, 0f); // Rotar al jugador (horizontalmente, limitado)
-            cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f); // Rotar la cámara (verticalmente)
+            // Bloquear el cursor al centro de la pantalla
+            Cursor.lockState = CursorLockMode.None;
+            // Hacer el cursor invisible
+            Cursor.visible = true;
         }
 
 

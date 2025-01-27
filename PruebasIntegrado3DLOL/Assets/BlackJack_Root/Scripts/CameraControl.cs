@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour
     private float xRotation = 0f;
 
     void Update()
-    {
+    {/*
         if (player != null)
         {
             // Aquí va el código normal para mover la cámara
@@ -21,7 +21,7 @@ public class CameraControl : MonoBehaviour
 
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
             player.Rotate(Vector3.up * mouseX);
-        }
+        }*/
     }
 
     // Método para fijar la cámara en un ángulo específico (usado cuando el jugador se siente)
