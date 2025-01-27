@@ -77,7 +77,8 @@ public class Cronometro : MonoBehaviour
     // Método para restar años al contador
     public bool SubtractYears(int years)
     {
-        if (currentYear - years <= 0) {
+        if (currentYear - years <= 0) 
+        {
           currentYear = 0;
             yearText.text = currentYear.ToString();
             return true; 
