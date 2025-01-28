@@ -3,18 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Chair
-  - Ground
-  - NPCView
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
-  - Interactable
+  - 
   - 
   - 
   - 
@@ -43,13 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: hhhh
-    uniqueID: 1864482203
-    locked: 0
-  - name: lll
-    uniqueID: 2836712563
-    locked: 0
-  - name: llkjh
-    uniqueID: 2803804285
     locked: 0

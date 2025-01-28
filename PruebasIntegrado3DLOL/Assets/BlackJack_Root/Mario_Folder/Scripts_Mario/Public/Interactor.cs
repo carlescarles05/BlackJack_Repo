@@ -1,38 +1,48 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class Interactor : MonoBehaviour
 {
     public Camera playerCamera;
     public GameObject MainMenuPanel;       // Panel for the menu to display
-    public GameObject interactionUI;      // UI that shows interaction prompt
+    public GameObject SM1interactionUI;
+    public GameObject SM2interactionUI;
+    // UI that shows interaction prompt
     public float raycastDistance = 5f;    // Distance to check for interactable objects
     public LayerMask interactableLayer;   // Layer for interactable objects
 
-    private Transform currentTarget;      // Current target object in view
+    private Transform currentTarget;      // Current target object in view. TRANSFORM
     private bool isInteractionEnabled = false;
-
-    // Input System
+    public Scene_Manager sceneManager;
+    // Input System.
     [SerializeField] private InputActionAsset gameInputActions;  // Reference to InputActionAsset
     private InputAction interactAction;
 
     private void Awake()
     {
+        sceneManager = FindObjectOfType<Scene_Manager>();
+        if (sceneManager == null)
+        {
+            Debug.LogError("Scene_Manager script not found in the scene.");
+        }
         if (gameInputActions == null)
         {
             Debug.LogError("InputActionAsset is not assigned in the inspector.");
             return;
         }
 
-        // Find the "XboxControl" action map and "Interact" action
+        // Find the "XboxControl" action map 
         var actionMap = gameInputActions.FindActionMap("XboxControl");
         if (actionMap == null)
         {
             Debug.LogError("ActionMap 'XboxControl' not found in InputActionAsset.");
             return;
         }
-
+        // and "Interact" action
         interactAction = actionMap.FindAction("Interact");
         if (interactAction == null)
         {
@@ -40,7 +50,7 @@ public class Interactor : MonoBehaviour
             return;
         }
 
-        interactAction.performed += OnInteractPerformed;  // Subscribe to interaction event
+        interactAction.performed += OnInteractPerformed;  // Subscribe to input interaction event
     }
 
     private void OnEnable()
@@ -55,55 +65,96 @@ public class Interactor : MonoBehaviour
     }
 
     private void Update()
-    {
+    {//
         // Cast a ray from the center of the screen
-        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-
+        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2)); //Set
+       
         if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, interactableLayer))
         {
-            if (currentTarget == null || hit.transform != currentTarget)
+           
+
+            if (hit.transform.CompareTag("Machine1")) //Then
             {
-                currentTarget = hit.transform;  // Update the current target
-                ShowInteractionUI();           // Show the interaction UI
+                if (currentTarget != hit.transform)
+                {
+                    ShowInteractionUI(hit.transform);
+                    currentTarget = hit.transform;  // Update the current target
+                   
+                }
+            }
+            ///////////////
+            else if (hit.transform.CompareTag("Machine2"))
+            {
+                if (currentTarget != hit.transform)
+                {
+                    ShowInteractionUI(hit.transform);
+                    currentTarget = hit.transform;
+                }
+            }
+            else
+            {
+                HideInteractionUI();  //no tag matched,hide UI
+                currentTarget = null;
             }
         }
         else
         {
-            if (currentTarget != null)
-            {
-                HideInteractionUI();           // Hide the interaction UI
-                currentTarget = null;          // Clear the current target
-            }
+            HideInteractionUI();
+            currentTarget = null;
         }
+        ////////////
     }
 
-    private void ShowInteractionUI()
+    private void ShowInteractionUI(Transform interactedObject)
     {
-        interactionUI.SetActive(true);  // Show the interaction UI
-        isInteractionEnabled = true;   // Interaction is enabled
+        if (interactedObject.CompareTag("Machine1"))
+        {
+            Debug.Log("UI 1 displayed");
+            SM1interactionUI.SetActive(true);
+            SM2interactionUI.SetActive(false);
+        }
+        else if (interactedObject.CompareTag("Machine2"))
+        {
+            Debug.Log("UI 2 displayed");
+            SM1interactionUI.SetActive(false);
+            SM2interactionUI.SetActive(true);
+        }
+        ////////////////////
     }
 
     private void HideInteractionUI()
     {
-        interactionUI.SetActive(false); // Hide the interaction UI
+        SM1interactionUI.SetActive(false); // Hide the interaction UI
+        SM2interactionUI.SetActive(false);
         isInteractionEnabled = false;  // Interaction is disabled
     }
-
+//
     private void OnInteractPerformed(InputAction.CallbackContext context)
     {
         if (currentTarget != null)
         {
             Debug.Log("Interact action triggered.");
-            PerformInteraction();
-        }
+            if (currentTarget.CompareTag("Machine1"))
+            {
+                ActivateMachine1();
+            }
+            if (currentTarget.CompareTag("Machine2")) 
+            {
+                ActivateMachine2();
+            }
+        }//
     }
-
-    public void PerformInteraction()
+    //
+    private void ActivateMachine1()
     {
-        Debug.Log("Interaction performed!");
-        if (MainMenuPanel != null)
-        {
-            MainMenuPanel.SetActive(true); // Show the menu panel
-        }
+        Debug.Log("Scene#1,Machine1 loaded");
+        sceneManager.LoadScene1();
+
     }
+    private void ActivateMachine2() 
+    {
+        Debug.Log("Scene#2,Machine2 loaded");
+        sceneManager.LoadScene3();
+
+    }//
 }

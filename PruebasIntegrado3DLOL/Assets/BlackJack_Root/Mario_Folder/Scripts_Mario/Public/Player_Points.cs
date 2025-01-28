@@ -4,47 +4,25 @@ using UnityEngine.UI;
 public class Player_Points : MonoBehaviour
 {
     [Header("Points Settings")]
+    bool enoughBalance = true;
     public int startingPoints ; // Starting points (default to 1000)
     public int deductionAmount ;  // Amount to deduct after each card selection (default to 50)
-
-    public int points; // Player's current points
+    public int minPoints = 50;
     public Text playerPointsText; // Reference to the Text UI element for displaying points
-
+    private Buttons buttonsScript;
     // Initialize points at the start of the game
     void Start()
     {
-        points = startingPoints; // Set starting points
-        UpdatePlayerPointsText(); // Update the displayed points text
-    }
-
-    // Add points to the player's balance
-    public void AddPoints(int value)
-    {
-        points += value;
-        if (points < 0) points = 0; // Prevent negative points
         UpdatePlayerPointsText(); // Update the displayed points text
     }
 
     // Deduct a fixed amount of points from the player's balance
     public void DeductPoints()
     {
-        points -= deductionAmount; // Deduct the specified amount (ex 50 points)
-        if (points < 0) points = 0; 
+        startingPoints -= deductionAmount; // Deduct the specified amount (ex 50 points)
+        if (startingPoints < 0) startingPoints = 0; 
+
         UpdatePlayerPointsText(); 
-    }
-
-
-    // Get the player's current points
-    public int GetPoints()
-    {
-        return points;
-    }
-    //
-    // Reset the player's points to the starting value
-    public void ResetPoints()
-    {
-        points = startingPoints; // Reset to the starting points
-        UpdatePlayerPointsText(); // Update the displayed points text
     }
 
     // Update the points text component
@@ -52,7 +30,8 @@ public class Player_Points : MonoBehaviour
     {
         if (playerPointsText != null)
         {
-            playerPointsText.text = points.ToString(); // Set the points value in the text
+            playerPointsText.text = startingPoints.ToString(); // Set the points value in the text
+           
         }
         else
         {
@@ -61,8 +40,9 @@ public class Player_Points : MonoBehaviour
     }
 
     // Check if the player has enough points to perform an action (e.g., to play the game)
-    public bool HasEnoughPoints(int requiredPoints)
+    public bool HasEnoughPoints(int requiredPoints)//call on Button script
     {
-        return points >= requiredPoints;
+        Debug.Log($"Checking points:{startingPoints}vs required{requiredPoints }");
+        return startingPoints >= requiredPoints;
     }
 }
