@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:PruebasIntegrado3DLOL/Assets/Animations/Dinosaur.controller.meta
 guid: a8ccd977d0102db4eafb452b8420a991
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 9100000
+========
+guid: d03ed43fc9d8a4f2e9fa70c1c7916eb9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+>>>>>>>> Stashed changes:PruebasIntegrado3DLOL/Assets/Settings/Lit2DSceneTemplate.scenetemplate.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

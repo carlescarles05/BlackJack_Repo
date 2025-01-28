@@ -1,9 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:PruebasIntegrado3DLOL/Assets/BlackJack_Root/Scenes/Mario_Scenes/01_Machine#1.unity.meta
 guid: ee21c83f027fdcd449f99e925e084f44
 ========
 guid: 580d647ee39d28c46b9c50585a0afabc
 >>>>>>>> Stashed changes:PruebasIntegrado3DLOL/Assets/BlackJack_Root/Scenes/Mario_Scenes/02_Machine#2.unity.meta
+=======
+<<<<<<<< Updated upstream:PruebasIntegrado3DLOL/Assets/BlackJack_Root/Scenes/Mario_Scenes/02_Machine#2.unity.meta
+guid: 580d647ee39d28c46b9c50585a0afabc
+========
+guid: ee21c83f027fdcd449f99e925e084f44
+>>>>>>>> Stashed changes:PruebasIntegrado3DLOL/Assets/BlackJack_Root/Scenes/Mario_Scenes/01_Machine#1.unity.meta
+>>>>>>> Stashed changes
 DefaultImporter:
   externalObjects: {}
   userData: 

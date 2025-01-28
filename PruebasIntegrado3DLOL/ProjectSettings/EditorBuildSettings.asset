@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BlackJack_Root/Scenes/Mario_Scenes/NoUse.unity
     guid: badac30ab6d20a6408646b470d205e43
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_configObjects: {}
