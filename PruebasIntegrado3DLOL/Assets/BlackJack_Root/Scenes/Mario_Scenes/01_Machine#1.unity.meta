@@ -3,6 +3,7 @@ fileFormatVersion: 2
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:PruebasIntegrado3DLOL/Assets/BlackJack_Root/Scenes/Mario_Scenes/01_Machine#1.unity.meta
 guid: ee21c83f027fdcd449f99e925e084f44
 ========
@@ -32,10 +33,17 @@ guid: ee21c83f027fdcd449f99e925e084f44
 =======
 <<<<<<<< Updated upstream:PruebasIntegrado3DLOL/Assets/BlackJack_Root/Mario_Folder/Prefab/2ndSceneGuessthecardGame.meta
 guid: 5ca9a3e3f6be6bf428e763e687f27d76
+=======
+<<<<<<<< Updated upstream:PruebasIntegrado3DLOL/Assets/BlackJack_Root/Mario_Folder/Prefab/NoUse_CardsArray.meta
+guid: 3faf3ec21f8338e46a5c5278a6f77e60
+>>>>>>> Stashed changes
 folderAsset: yes
 ========
 guid: ee21c83f027fdcd449f99e925e084f44
 >>>>>>>> Stashed changes:PruebasIntegrado3DLOL/Assets/BlackJack_Root/Scenes/Mario_Scenes/01_Machine#1.unity.meta
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 DefaultImporter:
   externalObjects: {}
