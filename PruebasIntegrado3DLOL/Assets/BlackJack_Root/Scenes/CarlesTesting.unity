@@ -5188,7 +5188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &54843971
 Transform:
   m_ObjectHideFlags: 0
@@ -21297,7 +21297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &302406534
 Transform:
   m_ObjectHideFlags: 0
@@ -21375,7 +21375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &309291481
 Transform:
   m_ObjectHideFlags: 0
@@ -22297,7 +22297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &364112209
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25154,7 +25154,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aeeedd54360ccc04dbc250e9616f74ee,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1066235068171334618, guid: aeeedd54360ccc04dbc250e9616f74ee,
         type: 3}
@@ -27079,7 +27079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &674311876
 Transform:
   m_ObjectHideFlags: 0
@@ -27444,7 +27444,7 @@ PrefabInstance:
     - target: {fileID: 1438272863775474349, guid: dad361745d9b51a4b845074d2edd74d9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3276760166433916874, guid: dad361745d9b51a4b845074d2edd74d9,
         type: 3}
@@ -27926,7 +27926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &751958160
 Transform:
   m_ObjectHideFlags: 0
@@ -32962,7 +32962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &782521714
 Transform:
   m_ObjectHideFlags: 0
@@ -34058,7 +34058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &839064370
 AudioSource:
   m_ObjectHideFlags: 0
@@ -39367,7 +39367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &889465672
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -63249,7 +63249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &1454314006
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -68611,7 +68611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &1501265931
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -71467,7 +71467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1807823552
 Transform:
   m_ObjectHideFlags: 0
@@ -72021,7 +72021,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1866590252
 Transform:
   m_ObjectHideFlags: 0
