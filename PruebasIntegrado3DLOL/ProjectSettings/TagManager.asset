@@ -11,6 +11,9 @@ TagManager:
   - Ground
   - Machine1
   - Machine2
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   layers:
   - Default
