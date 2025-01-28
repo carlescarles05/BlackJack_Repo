@@ -15,7 +15,7 @@ public class StartDinoGame : MonoBehaviour
 
     void Update()
     {
-        if (!gameStarted) return; // No hacer nada hasta que el juego empiece
+        if (!gameStarted) return; // No hacer nada hasta que se presione Start
     }
 
     public void StartMiniGame()

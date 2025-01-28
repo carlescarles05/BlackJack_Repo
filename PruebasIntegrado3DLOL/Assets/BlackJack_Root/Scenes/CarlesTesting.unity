@@ -27451,6 +27451,76 @@ PrefabInstance:
       propertyPath: ground.m_Bits
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293883123080910233, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332309107260869668, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.6420898
+      objectReference: {fileID: 0}
     - target: {fileID: 5377267265505155150, guid: dad361745d9b51a4b845074d2edd74d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27499,6 +27569,37 @@ PrefabInstance:
     - target: {fileID: 5377267265505155150, guid: dad361745d9b51a4b845074d2edd74d9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808465312573096123, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808465312573096123, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808465312573096123, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 5c0555064454c4442846041560c037d1,
+        type: 3}
+    - target: {fileID: 5808465312573096123, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6056642833955136858, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7325728180325466950, guid: dad361745d9b51a4b845074d2edd74d9,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
