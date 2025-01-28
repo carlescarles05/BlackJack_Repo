@@ -27,18 +27,23 @@ public class Scene_Manager : MonoBehaviour
     }
     public void LoadScene2()
     {
+        //00_Mario_Object_MACHINE#1
         if (!string.IsNullOrEmpty(sceneName2))
         {
-            SceneManager.LoadScene(sceneName2, LoadSceneMode.Single);
+            SceneManager.LoadScene(sceneName2, LoadSceneMode.Single); //
         }
         else 
         {
             Debug.Log("Invalid Scene Name");
         }
     }
-    private void LoadMENU() 
+    /// <summary>
+    /// /////
+    /// </summary>
+    ////
+    public void LoadScene3() 
     {
-    if (string.IsNullOrEmpty(sceneName3))
+    if (!string.IsNullOrEmpty(sceneName3))
         {
             SceneManager.LoadScene(sceneName3,LoadSceneMode.Single);
         }
@@ -47,6 +52,6 @@ public class Scene_Manager : MonoBehaviour
     {
      Debug.Log("Invalid SceneName");
     }
-}
+    }
 
 }

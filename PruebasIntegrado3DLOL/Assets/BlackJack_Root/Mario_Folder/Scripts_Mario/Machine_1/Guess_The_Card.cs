@@ -14,35 +14,56 @@ public class GuessTheCard : MonoBehaviour
     public GameObject winPanel;
     public Text resultText;
     public Text winText;
+    public GuessCardInputActions inputActions;
 
     public GameObject[] cards;
 
     private int MachineNumber;
     private int selectedCardIndexPos = 0; // Selected card index
     private int turnCount = 0;            // Turn counter
-    //
-   /* private void OnEnable()
+                                       
+    void Awake()
     {
-        Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Navigate.performed += OnNavigate;
-        Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Submit.performed += OnSubmit;
-    }*/
-  /*  private void OnDisable()
+        // Initialize input actions for navigation and selection
+        inputActions = new GuessCardInputActions();
+        inputActions.GuessTheCardGame.Enable();
+        inputActions.GuessTheCardGame.Navigation.performed += OnNavigate;
+        inputActions.GuessTheCardGame.Submition.performed += OnSubmit;
+
+    }
+    private void OnEnable()
     {
-        Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Navigate.performed -= OnNavigate;
-        Input_Manager.Instance.InputActions.Navigate3D_Bcontrol.Submit.performed -= OnSubmit;
-    }*/
-  
-    /* void Awake()
-     {
-         // Initialize input actions for navigation and selection
-         inputActions = new GameInputActions();
-         inputActions.Navigate.Navigate.performed += OnNavigate;
-         inputActions.Navigate.Submit.performed += OnSubmit;
-         inputActions.Navigate.Enable();
-     }*/
+        inputActions.GuessTheCardGame.Navigation.performed += OnNavigate;
+        // inputActions.Navigate3D_Bcontrol.Submit.performed += OnSubmit;
+        var inputAction = inputActions.GuessTheCardGame.Submition;
+        inputAction.performed += OnSubmit;
+        inputAction.Enable();
+    }
+    private void OnDisable()
+    {
+        inputActions.GuessTheCardGame.Navigation.performed -= OnNavigate;
+        // inputActions.Navigate3D_Bcontrol.Submit.performed -= OnSubmit;
+        var inputAction = inputActions.GuessTheCardGame.Submition;
+        inputAction.performed -= OnSubmit;
+        inputAction.Disable();
+    }
+
+    //Reference fo Buttons script
+    public void EnableInputActions(bool enable)
+    {
+        if (enable)
+        {
+            inputActions.GuessTheCardGame.Enable();
+        }
+        else 
+        {
+            inputActions.GuessTheCardGame.Disable();
+        }
+    }
 
     void Start()
     {
+        EnableInputActions(false);
         StartGame(); // Initialize the game when the script starts
     }
 
@@ -51,14 +72,14 @@ public class GuessTheCard : MonoBehaviour
         // Initialize the game logic
         MachineNumber = Random.Range(1, 14); // Random card number between 1 and 13
         ResetCardHighlightByTurn();         // Reset card highlights
-       // resultText.text = "Elige una carta.";
+                                        
         Debug.Log($"Machine has picked card number: {MachineNumber}");
     }
 
     public void ResetGame()
     {
         // Reset player points and clock
-        player_Points?.ResetPoints();
+        //player_Points?.ResetPoints();
         player_Clock?.ResetClock();
 
         // Reset turn counter and card highlights
@@ -91,14 +112,37 @@ public class GuessTheCard : MonoBehaviour
 
     void OnSubmit(InputAction.CallbackContext context)
     {
-        
-        SelectedCardAction(cards[selectedCardIndexPos]);
+        Debug.Log("Submit action triggered!"); // Test if the action works
+        Debug.Log($"Selected Card Index: {selectedCardIndexPos}");
+
+        if (cards == null || cards.Length == 0)
+        {
+            Debug.LogError("Cards array is null or empty!");
+            return;
+        }
+
+        if (selectedCardIndexPos < 0 || selectedCardIndexPos >= cards.Length)
+        {
+            Debug.LogError($"Invalid selectedCardIndexPos: {selectedCardIndexPos}");
+            return;
+        }
+
+        GameObject selectedCard = cards[selectedCardIndexPos];
+        if (selectedCard == null)
+        {
+            Debug.LogError("Selected card is null!");
+            return;
+        }
+
+        Debug.Log($"Submitting card: {selectedCard.name}");
+        SelectedCardAction(selectedCard);
+        // SelectedCardAction(cards[selectedCardIndexPos]);
     }
 
     void MoveSelection(int direction)
     {
-          HighLightCard(selectedCardIndexPos, false); // Remove highlight from the previous card
-     
+        HighLightCard(selectedCardIndexPos, false); // Remove highlight from the previous card
+
         // Update the selected card index
         selectedCardIndexPos += direction;
         if (selectedCardIndexPos >= cards.Length)
@@ -109,8 +153,8 @@ public class GuessTheCard : MonoBehaviour
         {
             selectedCardIndexPos = cards.Length - 1;
         }
-    
-       HighLightCard(selectedCardIndexPos, true); // Highlight the new card
+
+        HighLightCard(selectedCardIndexPos, true); // Highlight the new card
     }
 
     void HighLightCard(int index, bool highlight)
@@ -119,8 +163,8 @@ public class GuessTheCard : MonoBehaviour
         renderer.material.color = highlight ? Color.yellow : Color.white;
     }
 
-     //RED
-     void HighlightMachineCard()
+    //RED
+    void HighlightMachineCard()
     {
         foreach (var card in cards)
         {
@@ -136,15 +180,16 @@ public class GuessTheCard : MonoBehaviour
 
     void SelectedCardAction(GameObject clickedCard)
     {
-        // Deduce puntos al inicio de cada turno
-       // player_Points.DeductPoints();
+        // Deduct points at the start of the turn
+        player_Points.DeductPoints();
 
-        // Verifica si el jugador tiene suficientes puntos para continuar
-        if (player_Points.GetPoints() < 50) //  verifica si el jugador tiene menos de 50 puntos
+        // Check if the player has enough points to continue
+
+        if (!player_Points.HasEnoughPoints(player_Points.minPoints)) 
         {
-            resultText.text = "¡No tienes suficientes puntos para continuar!";
-            Invoke("LoadGameOverScene", 2f); // Llama al método para cambiar de escena 
-            return; // Detiene la lógica adicional si no hay suficientes puntos
+            resultText.text = "¡Not enough points to continue!";
+            Invoke("LoadGameOverScene", 2f); // GameOVer Scene
+            return; // Stop further processing if not enough points
         }
 
         // Process the player's card selection
@@ -154,15 +199,15 @@ public class GuessTheCard : MonoBehaviour
         // Logic for card selection
         if (difference == 0) // Winning case
         {
-           // player_Points.AddPoints(250); // Add points if the player wins
+            
             player_Clock.AddTime(8 * 60);
-            resultText.text = "+8 minutos de vida";
+            resultText.text = "";
             winPanel.gameObject.SetActive(true);
             winText.text = "You won";
         }
         else if (difference == 1) // Close but not correct
         {
-           // player_Points.AddPoints(200); // Add points for a close guess
+          
             player_Clock.AddTime(5 * 60);
             resultText.text = $"¡Casi aciertas! Tienes +5 minutos.";
         }
@@ -170,9 +215,19 @@ public class GuessTheCard : MonoBehaviour
         {
             resultText.text = "No recibes nada esta vez.";
         }
-        else // Losing case
+        else if (difference <= 5) // Losing case
         {
-          //  player_Points.AddPoints(-200); // Deduct points for a further guess
+            player_Clock.AddTime(-5 * 60);
+            resultText.text = "That was Close";
+        }
+        else if (difference == 10) 
+        {
+            player_Clock.AddTime(-8*60);
+            resultText.text = "Too far";
+        }
+        else
+        {
+         
             player_Clock.AddTime(-2 * 60);
             resultText.text = $"Por poco. Pierdes tiempo (-2 minutos).";
         }
@@ -218,4 +273,3 @@ public class GuessTheCard : MonoBehaviour
         SceneManager.LoadScene("CarlesTesting"); // Reemplaza "NombreDeLaEscena" con el nombre de la escena que deseas cargar
     }
 }
-//
