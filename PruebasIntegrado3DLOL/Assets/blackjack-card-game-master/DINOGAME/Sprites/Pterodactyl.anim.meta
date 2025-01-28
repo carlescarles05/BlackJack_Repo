@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:PruebasIntegrado3DLOL/Assets/blackjack-card-game-master/DINOGAME/Sprites/Pterodactyl.anim.meta
 guid: 50b6c74c41e3aa5429dbc3d29b038f30
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 7400000
+========
+guid: d03ed43fc9d8a4f2e9fa70c1c7916eb9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+>>>>>>>> Stashed changes:PruebasIntegrado3DLOL/Assets/Settings/Lit2DSceneTemplate.scenetemplate.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
