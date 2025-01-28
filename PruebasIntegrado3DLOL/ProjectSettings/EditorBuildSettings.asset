@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< Updated upstream
+=======
+    path: Assets/BlackJack_Root/Scenes/MENU.unity
+    guid: b05ea5519889c7b47bf760702df41e21
+  - enabled: 1
+    path: Assets/BlackJack_Root/Scenes/CarlesTesting.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+>>>>>>> Stashed changes
     path: Assets/BlackJack_Root/Scenes/Mario_Scenes/00_Scenario.unity
     guid: 97e816c1959a9b84580329423f266477
   - enabled: 1
@@ -14,4 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BlackJack_Root/Scenes/Mario_Scenes/02_Machine#2.unity
     guid: 580d647ee39d28c46b9c50585a0afabc
+<<<<<<< Updated upstream
+=======
+  - enabled: 1
+    path: Assets/BlackJack_Root/Scenes/Mario_Scenes/Nouse02_Machine#2.unity
+    guid: d4b72583ab8c6d54e81dae4a26581b02
+  - enabled: 1
+    path: Assets/BlackJack_Root/Scenes/Mario_Scenes/NoUse.unity
+    guid: badac30ab6d20a6408646b470d205e43
+>>>>>>> Stashed changes
   m_configObjects: {}
