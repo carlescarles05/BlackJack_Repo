@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< Updated upstream
   tags: []
+=======
+  tags:
+  - Chair
+  - Ground
+  - Machine1
+  - Machine2
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
