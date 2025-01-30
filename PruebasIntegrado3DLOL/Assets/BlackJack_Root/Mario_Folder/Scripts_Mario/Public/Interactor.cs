@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class Interactor : MonoBehaviour
 {
     public Camera playerCamera;
-    public GameObject MainMenuPanel;       // Panel for the menu to display
+  //  public GameObject MainMenuPanel;       // Panel for the menu to display
     public GameObject SM1interactionUI;
     public GameObject SM2interactionUI;
     // UI that shows interaction prompt

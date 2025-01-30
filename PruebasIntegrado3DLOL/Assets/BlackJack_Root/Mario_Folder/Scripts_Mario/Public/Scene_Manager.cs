@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Scene_Manager : MonoBehaviour
 {
     [Header("Scene Names")]
-    [SerializeField] private string sceneName1 = "00_Scenario";  // Main Menu
+    [SerializeField] private string sceneName1 ;  // Main Menu
     [SerializeField] private string sceneName2 = "01_Machine#1"; // Machine Game Scene
     [SerializeField] private string sceneName3 = "02_GuessTheCardGame"; // Card Game Scene
 

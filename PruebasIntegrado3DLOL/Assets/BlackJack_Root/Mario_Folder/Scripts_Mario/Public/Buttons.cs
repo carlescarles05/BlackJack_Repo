@@ -28,14 +28,18 @@ public class Buttons : MonoBehaviour
         mainScreenCanvas.SetActive(false);
         guessTheCardGameCanvas.SetActive(true);
     }
-
+ 
     public void GoBackToMainScene()
     {
-        sceneManager.GoBackToMainScreen(); // Return to "00_Scenario"
+        mainScreenCanvas.SetActive(false);
+        guessTheCardGameCanvas.SetActive(false);
+        sceneManager.GoBackToMainScreen(); // Return to "00_Scenario"or another
     }
 
     public void LoadMachineGame()
     {
+        mainScreenCanvas.SetActive(false);
+        guessTheCardGameCanvas.SetActive(true);
         sceneManager.LoadScene2(); // Load "01_Machine#1"
     }
 
