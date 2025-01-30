@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Velocidad de movimiento
+    /*public float moveSpeed = 5f; // Velocidad de movimiento
     public float mouseSensitivity = 100f; // Sensibilidad del ratón
     public Transform cameraTransform; // Transform de la cámara del jugador
 
@@ -173,10 +174,151 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalVelocity = -0.5f; // Mantener al personaje pegado al suelo
         }
+    }*/
+    public float moveSpeed = 5f;
+    public float mouseSensitivity = 100f;
+    public Transform cameraTransform;
+
+    private float verticalVelocity;
+    private CharacterController characterController;
+    private GameInputActions playerInput; // New Input System
+
+    private Vector2 moveInput;  // Stores movement input
+    private Vector2 lookInput;  // Stores camera look input
+
+    private float pitch = 0f;
+    private float yaw = 0f;
+    //
+    public AudioClip[] footstepClips;
+    public float stepInterval = 0.5f;
+    private float stepTimer;
+    private AudioSource audioSource;
+    public float jumpHeight = 2f;
+    public bool isSitting;
+    public bool canMove = true;
+
+    void Awake()
+    {
+        playerInput = new GameInputActions(); // Initialize Input System
     }
 
-    /*public void SetMovementEnabled(bool enabled)
+    void OnEnable()
     {
-        characterController.enabled = enabled; // Activar o desactivar el CharacterController
-    }*/
+        playerInput.XboxControl.Enable();
+        playerInput.XboxControl.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        playerInput.XboxControl.Move.canceled += ctx => moveInput = Vector2.zero;
+
+        playerInput.XboxControl.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
+        playerInput.XboxControl.Look.canceled += ctx => lookInput = Vector2.zero;
+
+      //  playerInput.XboxControl.Jump.performed += ctx => Jump();
+    }
+
+    void OnDisable()
+    {
+        playerInput.XboxControl.Disable();
+    }
+
+    void Start()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        characterController = GetComponent<CharacterController>();
+        isSitting = false;
+    }
+
+    void Update()
+    {
+        if (canMove)
+        {
+            MovePlayer();
+        }
+        RotateCamera();
+        HandleFootsteps();
+        ApplyGravity();
+    }
+
+    void MovePlayer()
+    {
+        // Convert input to movement direction
+        Vector3 movement = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
+        characterController.Move(movement * moveSpeed * Time.deltaTime);
+    }
+
+    public void RotateCamera()
+    {
+        if (Mouse.current.rightButton.isPressed) // Right-click check
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            yaw += lookInput.x * mouseSensitivity * Time.deltaTime;
+            pitch -= lookInput.y * mouseSensitivity * Time.deltaTime;
+            pitch = Mathf.Clamp(pitch, -90f, 90f);
+
+            transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
+            cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    void HandleFootsteps()
+    {
+        bool isMoving = (moveInput.x != 0 || moveInput.y != 0) && IsOnGround();
+
+        if (isMoving)
+        {
+            stepTimer += Time.deltaTime;
+            if (stepTimer >= stepInterval)
+            {
+                PlayFootstep();
+                stepTimer = 0f;
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+        }
+    }
+
+    bool IsOnGround()
+    {
+        float sphereRadius = 0.2f;
+        float sphereDistance = characterController.height / 2 + 0.1f;
+        return Physics.SphereCast(transform.position, sphereRadius, Vector3.down, out _, sphereDistance);
+    }
+
+    void PlayFootstep()
+    {
+        if (footstepClips.Length > 0)
+        {
+            int clipIndex = Random.Range(0, footstepClips.Length);
+            audioSource.PlayOneShot(footstepClips[clipIndex]);
+        }
+    }
+
+    void ApplyGravity()
+    {
+        if (characterController.isGrounded)
+        {
+            verticalVelocity = -0.5f;
+        }
+        else
+        {
+            verticalVelocity += Physics.gravity.y * Time.deltaTime;
+        }
+
+        characterController.Move(new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
+    }
+
+    void Jump()
+    {
+        if (IsOnGround())
+        {
+            verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+        }
+    }
 }
