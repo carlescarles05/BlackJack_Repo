@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player_Points : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class Player_Points : MonoBehaviour
     public int startingPoints; // Starting points (default to 1000)
     public int deductionAmount; // Amount to deduct after each card selection (default to 50)
     public int minPoints = 50;
-    public Text playerPointsText; // Reference to the Text UI element for displaying points
+    public TextMeshProUGUI playerPointsText; // Reference to the Text UI element for displaying points
 
     void Start()
     {

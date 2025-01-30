@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
-    /*public float moveSpeed = 5f; // Velocidad de movimiento
+    public float moveSpeed = 5f; // Velocidad de movimiento
     public float mouseSensitivity = 100f; // Sensibilidad del ratón
     public Transform cameraTransform; // Transform de la cámara del jugador
 
@@ -174,8 +174,8 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalVelocity = -0.5f; // Mantener al personaje pegado al suelo
         }
-    }*/
-    public float moveSpeed = 5f;
+    }
+    /*public float moveSpeed = 5f;
     public float mouseSensitivity = 100f;
     public Transform cameraTransform;
 
@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput = new GameInputActions(); // Initialize Input System
     }
 
-    void OnEnable()
+    /*void OnEnable()
     {
         playerInput.XboxControl.Enable();
         playerInput.XboxControl.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
@@ -320,5 +320,5 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
         }
-    }
+    }*/
 }

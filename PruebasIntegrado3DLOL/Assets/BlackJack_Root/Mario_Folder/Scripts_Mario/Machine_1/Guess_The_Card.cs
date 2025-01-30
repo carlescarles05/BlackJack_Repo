@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GuessTheCard : MonoBehaviour
 {
     [Header("UI ELEMENTS")]
     public GameObject winPanel;
-    public Text resultText;
-    public Text winText;
+    public TextMeshProUGUI resultText;
+    public TextMeshProUGUI winText;
 
     [Header("Input Actions")]
     public GuessCardInputActions inputActions;
