@@ -268,11 +268,11 @@ public class BJManager : MonoBehaviour
         StopAllCoroutines();
         if (cronometroEnemy.currentYear <= 0)
         {
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(3);
         }
         else
         {
-            SceneManager.LoadScene(6);
+            SceneManager.LoadScene(4);
         }
     }
 
