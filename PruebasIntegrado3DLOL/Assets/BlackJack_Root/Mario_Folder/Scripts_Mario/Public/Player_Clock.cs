@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+using TMPro;
 public class Player_Clock : MonoBehaviour
 {
     public int StartYears; // Initial years
     private int totalYears;
-    private Text timer;
+    private TextMeshProUGUI timer;
     private bool isTimerActive = true;
     private Coroutine timerCoroutine;
 
@@ -14,7 +14,7 @@ public class Player_Clock : MonoBehaviour
 
     void Start()
     {
-        timer = GetComponent<Text>();
+        timer = GetComponent<TextMeshProUGUI>();
         if (timer == null)
         {
             Debug.LogError("No Text component found on this GameObject.");
