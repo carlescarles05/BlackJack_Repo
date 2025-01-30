@@ -899,28 +899,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1844381970}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &208526772
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208526771}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2709505304352925948, guid: 3af4fbb25f94e804fa5fd2a962d76a2d, type: 3}
 --- !u!65 &208526777
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -936,12 +914,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7581746, y: 2.1562936, z: 0.6672559}
-  m_Center: {x: 0.020911967, y: 1.0781468, z: -0.011885404}
+  m_Size: {x: 0.9467248, y: 2.1562936, z: 1.0978371}
+  m_Center: {x: -0.073363416, y: 1.0781468, z: 0.042336207}
 --- !u!4 &208526780 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3af4fbb25f94e804fa5fd2a962d76a2d,
@@ -2389,8 +2367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ef814252138c941af94216c6bcfa2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName1: 01_Machine#1
-  sceneName2: 00_Scenario
+  sceneName1: 00_Scenario
+  sceneName2: 01_Machine#1
   sceneName3: 02_Machine#2
 --- !u!4 &641606966
 Transform:
@@ -7475,12 +7453,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.6650016, y: 5.9, z: 2.6136012}
-  m_Center: {x: 0.3324998, y: 2.95, z: 0.0000000012386578}
+  m_Size: {x: 4.416417, y: 5.9, z: 4.1065784}
+  m_Center: {x: 0.2272656, y: 2.95, z: -0.093544036}
 --- !u!1 &1733047076
 GameObject:
   m_ObjectHideFlags: 0
@@ -8433,10 +8411,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3af4fbb25f94e804fa5fd2a962d76a2d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 208526772}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3af4fbb25f94e804fa5fd2a962d76a2d,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 208526777}
   m_SourcePrefab: {fileID: 100100000, guid: 3af4fbb25f94e804fa5fd2a962d76a2d, type: 3}
 --- !u!1 &1851426700
@@ -9042,18 +9016,6 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: ab3bbf02-82cb-4f6e-96ad-3398dc90cf06
-    m_ActionName: Navigate3D_Bcontrol/Navigate[/XInputControllerWindows/dpad,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a4e7fcc0-b01e-4622-8ea0-30d6401f0caa
-    m_ActionName: Navigate3D_Bcontrol/Submit[/XInputControllerWindows/buttonSouth,/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c62c2c7a-4f4b-41a7-9f0b-2dfd19e78484
-    m_ActionName: Navigate3D_Bcontrol/Interact[/Keyboard/enter,/XInputControllerWindows/buttonEast]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 61542743-bdf3-43f0-891d-96ad37d4aaad
     m_ActionName: XboxControl/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -9072,6 +9034,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 78138d08-715c-4982-bd6b-5722aa8485a0
     m_ActionName: XboxControl/Sprint[/XInputControllerWindows/leftShoulder,/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6722d02-553d-4ea3-b17f-2f8e100068f7
+    m_ActionName: SlotMachine/PullHandle[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: XboxControl
@@ -9702,22 +9668,22 @@ PrefabInstance:
     - target: {fileID: 172016584383166698, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 172016584383166698, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 172016584383166698, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 172016584383166698, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 394913894043384820, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
@@ -9732,12 +9698,12 @@ PrefabInstance:
     - target: {fileID: 795082607558923791, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 795082607558923791, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1312214641875429008, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
@@ -9867,12 +9833,12 @@ PrefabInstance:
     - target: {fileID: 2747868557011073918, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2747868557011073918, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3168321421091225077, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
@@ -9897,37 +9863,37 @@ PrefabInstance:
     - target: {fileID: 4351570127304375074, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4351570127304375074, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4890182983104827403, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4890182983104827403, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4890182983104827403, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5761703
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5915971330288353975, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5915971330288353975, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6456075657115700320, guid: 0fed5bd4b20199c4da12ecdfb78695ab,
         type: 3}

@@ -1,47 +1,114 @@
 using UnityEngine;
-using UnityEngine.UI; // Use this namespace for legacy Text
+using UnityEngine.UI;
+using System.Collections;
 
 public class Player_Clock : MonoBehaviour
 {
-    public int StartMinutes = 1; // Minutes set in the Inspector
-    public int StartSeconds = 30; // Seconds set in the Inspector
-    private int totalTime;
+    public int StartYears; // Initial years
+    private int totalYears;
+    private Text timer;
+    private bool isTimerActive = true;
+    private Coroutine timerCoroutine;
 
-    private Text timer; // Legacy Unity Text component
+    public GuessTheCard gameManager; // Reference to GuessTheCard script
 
     void Start()
     {
-        // Get the Text component attached to this GameObject
         timer = GetComponent<Text>();
-
-        // Check if the timer is null
         if (timer == null)
         {
-            Debug.LogError("No Text component found on this GameObject. Make sure Player_Clock is attached to the correct object.");
+            Debug.LogError("No Text component found on this GameObject.");
             return;
         }
 
-        // Calculate total time in seconds
-        totalTime = (StartMinutes * 60) + StartSeconds;
+        gameManager = FindObjectOfType<GuessTheCard>(); // Assign reference
+        if (gameManager == null)
+        {
+            Debug.Log("Game Manger (GuessTheCard) is missin");
+        }
+        totalYears = StartYears;
         UpdateTimer_UI_TXT();
+
+        if (totalYears > 0)
+        {
+            timerCoroutine = StartCoroutine(TimerCountdown());
+        }
+        else
+        {
+            OnTimeOut();
+        }
     }
 
     void UpdateTimer_UI_TXT()
     {
-        int minutes = totalTime / 60;
-        int seconds = totalTime % 60;
-        timer.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+        timer.text = $"{totalYears} Year(s) Remaining";
     }
 
-    public void AddTime(int seconds)
+    public void AddYears(int years)
     {
-        totalTime = Mathf.Max(0, totalTime + seconds);
+        totalYears = Mathf.Max(0, totalYears + years);
         UpdateTimer_UI_TXT();
+
+        if (totalYears <= 0 && isTimerActive)//force
+        {
+            isTimerActive = false;
+            OnTimeOut();
+        }
     }
 
     public void ResetClock()
     {
-        totalTime = (StartMinutes * 60) + StartSeconds;
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+        }
+        totalYears = StartYears;
         UpdateTimer_UI_TXT();
+        if (totalYears > 0)
+        {
+            isTimerActive = true;
+            timerCoroutine = StartCoroutine(TimerCountdown());
+        }
+        else
+        {
+            OnTimeOut();
+        }
+    }
+
+    private IEnumerator TimerCountdown()
+    {
+        while (isTimerActive && totalYears > 0)
+        {
+            yield return new WaitForSeconds(4f); // Each year lasts 4 seconds
+            totalYears--;
+            UpdateTimer_UI_TXT();
+
+            if (totalYears <= 0)
+            {
+                totalYears = 0;
+                isTimerActive = false;
+                OnTimeOut();
+                yield break;
+            }
+        }
+    }
+
+    public void OnTimeOut()
+    {
+        isTimerActive = false;
+
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(TimerCountdown());
+            timerCoroutine = null;
+        }
+        if (gameManager != null)
+        {
+            gameManager.LoadGameOverScene();
+        }
+        else
+        {
+            Debug.LogError("Game Manager is not assigned to Player_Clock!");
+        }
     }
 }

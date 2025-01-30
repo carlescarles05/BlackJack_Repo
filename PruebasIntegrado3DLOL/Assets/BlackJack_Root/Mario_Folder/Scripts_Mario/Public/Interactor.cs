@@ -71,17 +71,20 @@ public class Interactor : MonoBehaviour
        
         if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, interactableLayer))
         {
-           
+
 
             if (hit.transform.CompareTag("Machine1")) //Then
             {
+
                 if (currentTarget != hit.transform)
                 {
+
                     ShowInteractionUI(hit.transform);
                     currentTarget = hit.transform;  // Update the current target
-                   
                 }
+               
             }
+           
             ///////////////
             else if (hit.transform.CompareTag("Machine2"))
             {
@@ -113,6 +116,7 @@ public class Interactor : MonoBehaviour
             SM1interactionUI.SetActive(true);
             SM2interactionUI.SetActive(false);
         }
+
         else if (interactedObject.CompareTag("Machine2"))
         {
             Debug.Log("UI 2 displayed");
@@ -148,7 +152,7 @@ public class Interactor : MonoBehaviour
     private void ActivateMachine1()
     {
         Debug.Log("Scene#1,Machine1 loaded");
-        sceneManager.LoadScene1();
+        sceneManager.LoadScene2();
 
     }
     private void ActivateMachine2() 

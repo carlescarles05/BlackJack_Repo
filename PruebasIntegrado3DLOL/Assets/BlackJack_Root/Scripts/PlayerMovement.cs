@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         // Mover al jugador
         characterController.Move(movement * moveSpeed * Time.deltaTime);
     }
-
+    //
     public void RotateCamera()
     {
         if ((Input.GetMouseButton(1)))
