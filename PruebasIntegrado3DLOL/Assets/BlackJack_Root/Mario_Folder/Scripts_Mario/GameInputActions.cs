@@ -71,6 +71,15 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SitOnObject"",
+                    ""type"": ""Button"",
+                    ""id"": ""aec1fb8e-841c-4a67-a321-a7bb3a77ba48"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,17 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24c4d4a3-2043-4da7-b06d-66a65a740556"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SitOnObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -323,6 +343,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         m_XboxControl_Interact = m_XboxControl.FindAction("Interact", throwIfNotFound: true);
         m_XboxControl_Jump = m_XboxControl.FindAction("Jump", throwIfNotFound: true);
         m_XboxControl_Sprint = m_XboxControl.FindAction("Sprint", throwIfNotFound: true);
+        m_XboxControl_SitOnObject = m_XboxControl.FindAction("SitOnObject", throwIfNotFound: true);
         // SlotMachine
         m_SlotMachine = asset.FindActionMap("SlotMachine", throwIfNotFound: true);
         m_SlotMachine_PullHandle = m_SlotMachine.FindAction("PullHandle", throwIfNotFound: true);
@@ -392,6 +413,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_XboxControl_Interact;
     private readonly InputAction m_XboxControl_Jump;
     private readonly InputAction m_XboxControl_Sprint;
+    private readonly InputAction m_XboxControl_SitOnObject;
     public struct XboxControlActions
     {
         private @GameInputActions m_Wrapper;
@@ -401,6 +423,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_XboxControl_Interact;
         public InputAction @Jump => m_Wrapper.m_XboxControl_Jump;
         public InputAction @Sprint => m_Wrapper.m_XboxControl_Sprint;
+        public InputAction @SitOnObject => m_Wrapper.m_XboxControl_SitOnObject;
         public InputActionMap Get() { return m_Wrapper.m_XboxControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -425,6 +448,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @SitOnObject.started += instance.OnSitOnObject;
+            @SitOnObject.performed += instance.OnSitOnObject;
+            @SitOnObject.canceled += instance.OnSitOnObject;
         }
 
         private void UnregisterCallbacks(IXboxControlActions instance)
@@ -444,6 +470,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @SitOnObject.started -= instance.OnSitOnObject;
+            @SitOnObject.performed -= instance.OnSitOnObject;
+            @SitOnObject.canceled -= instance.OnSitOnObject;
         }
 
         public void RemoveCallbacks(IXboxControlActions instance)
@@ -514,6 +543,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnSitOnObject(InputAction.CallbackContext context);
     }
     public interface ISlotMachineActions
     {
