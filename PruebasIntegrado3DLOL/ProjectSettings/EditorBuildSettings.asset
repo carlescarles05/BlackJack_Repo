@@ -4,6 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
+<<<<<<< HEAD
   m_Scenes:
   - enabled: 1
     path: Assets/BlackJack_Root/Scenes/Mario_Scenes/00_Scenario.unity
@@ -17,4 +18,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BlackJack_Root/Scenes/CarlesTesting.unity
     guid: 99c9720ab356a0642a771bea13969a05
+=======
+  m_Scenes: []
+>>>>>>> bafa01c235849ceabbd310fd37f1466be564592f
   m_configObjects: {}

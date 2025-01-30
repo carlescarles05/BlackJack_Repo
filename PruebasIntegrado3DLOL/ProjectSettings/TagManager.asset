@@ -4,14 +4,22 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - Ground
   - Machine2
   - Machine1
+=======
+  - NPCView
+  - Ground
+  - Chair
+  - Obstacle
+  - PickUp
+>>>>>>> bafa01c235849ceabbd310fd37f1466be564592f
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - Interactable

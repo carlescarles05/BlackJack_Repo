@@ -74,7 +74,6 @@ public class BJManager : MonoBehaviour
     }
 
     public Turn currentTurn = Turn.Player;
-
     private void Start()
     {
         // Bloquear el cursor al centro de la pantalla
@@ -97,8 +96,6 @@ public class BJManager : MonoBehaviour
         UpdatePlayerTotalUI();
         StartGame(); // Inicializar el juego
     }
-
-
 
     public void PlayerHit()
     {
