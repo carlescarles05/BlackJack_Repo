@@ -18,7 +18,6 @@ public class Interactor : MonoBehaviour
     private Transform currentTarget;      // Current target object in view. TRANSFORM
     private bool isInteractionEnabled = false;
     public Scene_Manager sceneManager;
-    // Input System.
     [SerializeField] private InputActionAsset gameInputActions;  // Reference to InputActionAsset
     private InputAction interactAction;
 
