@@ -1042,8 +1042,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winPanel: {fileID: 564070024}
-  resultText: {fileID: 0}
-  winText: {fileID: 0}
+  resultText: {fileID: 1277219038}
+  winText: {fileID: 1628916854}
   cards:
   - {fileID: 1982922241}
   - {fileID: 1753521775}
@@ -1572,7 +1572,10 @@ CanvasRenderer:
   m_GameObject: {fileID: 1209053421}
   m_CullTransparentMesh: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of bf8ecaa (l)
 --- !u!1 &1277219036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,7 +1588,11 @@ GameObject:
   - component: {fileID: 1277219039}
   - component: {fileID: 1277219038}
   m_Layer: 5
+<<<<<<< HEAD
   m_Name: Result
+=======
+  m_Name: Text (TMP)
+>>>>>>> parent of bf8ecaa (l)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1607,7 +1614,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: -433.8028}
+=======
+  m_AnchoredPosition: {x: 0, y: 0}
+>>>>>>> parent of bf8ecaa (l)
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1277219038
@@ -1707,7 +1718,10 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277219036}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 >>>>>>> 0ed7a232edc7960dc105eac49175f62db7e0559e
+=======
+>>>>>>> parent of bf8ecaa (l)
 --- !u!1 &1290364176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2698,7 +2712,10 @@ GameObject:
   m_PrefabInstance: {fileID: 667702685}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of bf8ecaa (l)
 --- !u!1 &1628916852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2711,12 +2728,20 @@ GameObject:
   - component: {fileID: 1628916855}
   - component: {fileID: 1628916854}
   m_Layer: 5
+<<<<<<< HEAD
   m_Name: Win (TMP)
+=======
+  m_Name: Text (TMP)
+>>>>>>> parent of bf8ecaa (l)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+<<<<<<< HEAD
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> parent of bf8ecaa (l)
 --- !u!224 &1628916853
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2833,7 +2858,10 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628916852}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 >>>>>>> 0ed7a232edc7960dc105eac49175f62db7e0559e
+=======
+>>>>>>> parent of bf8ecaa (l)
 --- !u!224 &1632980287 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2297738230580574279, guid: 67629945101ae92458d2d1f36d90cfe6,
@@ -3838,7 +3866,7 @@ PrefabInstance:
     - target: {fileID: 4413083924406464820, guid: b8799feb3d1ff6d48a8a0b0c351aef48,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4504742575136677886, guid: b8799feb3d1ff6d48a8a0b0c351aef48,
         type: 3}
@@ -4364,6 +4392,14 @@ PrefabInstance:
     - {fileID: 1088321336752355428, guid: b8799feb3d1ff6d48a8a0b0c351aef48, type: 3}
     - {fileID: 7006247511694281478, guid: b8799feb3d1ff6d48a8a0b0c351aef48, type: 3}
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4808523734511660617, guid: b8799feb3d1ff6d48a8a0b0c351aef48,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1628916853}
+    - targetCorrespondingSourceObject: {fileID: 4808523734511660617, guid: b8799feb3d1ff6d48a8a0b0c351aef48,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1277219037}
     - targetCorrespondingSourceObject: {fileID: 7590796561796725139, guid: b8799feb3d1ff6d48a8a0b0c351aef48,
         type: 3}
       insertIndex: -1
@@ -4433,6 +4469,12 @@ PrefabInstance:
 --- !u!224 &5864513682470435449 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2376572671854393042, guid: b8799feb3d1ff6d48a8a0b0c351aef48,
+    type: 3}
+  m_PrefabInstance: {fileID: 5864513682470435448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &5864513682470435450 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4808523734511660617, guid: b8799feb3d1ff6d48a8a0b0c351aef48,
     type: 3}
   m_PrefabInstance: {fileID: 5864513682470435448}
   m_PrefabAsset: {fileID: 0}
