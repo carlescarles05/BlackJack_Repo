@@ -15847,7 +15847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &212255817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20928,7 +20928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628540e216260624b827748f72a23d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startYear: 500
+  startYear: 2000
   endYear: 0
   countdownInterval: 1
   yearText: {fileID: 681636215}
@@ -27039,6 +27039,7 @@ MonoBehaviour:
   seatPoint: {fileID: 1939691119}
   canvasObject: {fileID: 791713286}
   enemyCanvasObject: {fileID: 1378816758}
+  interactKey: 101
   transitionSpeed: 2
   PlayerCards: []
   timerCanvas: {fileID: 250983285}
