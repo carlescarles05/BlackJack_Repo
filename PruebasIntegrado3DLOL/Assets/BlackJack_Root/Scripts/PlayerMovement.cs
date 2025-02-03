@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f; // Velocidad de movimiento
     public float mouseSensitivity = 100f; // Sensibilidad del ratón
     public Transform cameraTransform; // Transform de la cámara del jugador
-    public Slider slider;
 
     private float _gravity = -9.81f;
     [SerializeField] private float gravityMultiplier = 3.0f;
@@ -34,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        mouseSensitivity = PlayerPrefs.GetFloat("CurrentSensivity", 100);
-        slider.value = mouseSensitivity / 10;
         audioSource = gameObject.AddComponent<AudioSource>(); // Añadir AudioSource si no existe
         characterController = GetComponent<CharacterController>(); // Obtener el CharacterController
         isSitting = false;
@@ -65,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         // Mover al jugador
         characterController.Move(movement * moveSpeed * Time.deltaTime);
     }
-    //
+    
     public void RotateCamera()
     {
         if ((Input.GetMouseButton(1)))
@@ -76,7 +73,6 @@ public class PlayerMovement : MonoBehaviour
             Cursor.visible = false;
             // Entrada del ratón
 
-            mouseSensitivity = PlayerPrefs.GetFloat("CurrentSensivity", mouseSensitivity);
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -117,11 +113,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-    }
-
-    public void AdjustSpeed(float newSpeed)
-    {
-        mouseSensitivity = newSpeed * 10;
     }
 
     void HandleFootsteps()

@@ -69076,7 +69076,6 @@ MonoBehaviour:
   moveSpeed: 5
   mouseSensitivity: 100
   cameraTransform: {fileID: 330585546}
-  slider: {fileID: 794583692}
   gravityMultiplier: 3
   footstepClips:
   - {fileID: 8300000, guid: ba2ba93fd8cd87e4a96e50ce00367fbb, type: 3}
