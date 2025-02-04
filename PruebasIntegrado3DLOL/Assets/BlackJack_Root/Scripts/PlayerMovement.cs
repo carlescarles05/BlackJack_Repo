@@ -30,12 +30,17 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove;
 
     private CharacterController characterController; // Controlador de personaje
+    private AdivinaLaCarta adivinaLaCarta;
 
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>(); // Añadir AudioSource si no existe
         characterController = GetComponent<CharacterController>(); // Obtener el CharacterController
         isSitting = false;
+        if (GameManager.Instance != null)
+        {
+            transform.position = GameManager.Instance.GetPlayerPosition();
+        }
     }
 
     void Update()

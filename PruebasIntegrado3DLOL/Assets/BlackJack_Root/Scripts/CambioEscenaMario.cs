@@ -5,17 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class CambioEscenaMario : MonoBehaviour
 {
-    // Nombre de la escena a la que deseas cambiar
-    public string nombreEscena;
+    //public string nombreEscena; // Nombre de la escena a cargar
+    
+    private bool jugadorCerca = false; // Variable para detectar si el jugador está en el trigger
 
-    // Se llama cuando otro collider entra en el trigger
     private void OnTriggerEnter(Collider other)
     {
-        // Verifica si el objeto que entra es el jugador
         if (other.CompareTag("Player"))
         {
-            // Cambia a la escena especificada
-            SceneManager.LoadScene(nombreEscena);
+            jugadorCerca = true; // Activa la bandera cuando el jugador entra
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            jugadorCerca = false; // Desactiva la bandera cuando el jugador sale
+        }
+    }
+
+    private void Update()
+    {
+        if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene(1); // Cambia de escena al presionar 'E'
         }
     }
 }

@@ -9,6 +9,7 @@ public class Cronometro : MonoBehaviour
     public int endYear = 0;
     public float countdownInterval = 1f;
     public TextMeshProUGUI yearText;
+    public TextMeshProUGUI yearTextMinijuego;
 
     public bool isCorutineActive = false;
     public bool isPause = false;
@@ -44,7 +45,7 @@ public class Cronometro : MonoBehaviour
         while (currentYear >= endYear)
         {
             yearText.text = currentYear.ToString();
-
+            if (yearTextMinijuego != null) yearTextMinijuego.text = currentYear.ToString();
             // Reproducir sonido
             if (audioSource != null && tickSound != null)
             {
