@@ -79,7 +79,9 @@ public class AdivinaLaCarta : MonoBehaviour
     private int cartaCorrecta; // Carta correcta en forma de número
     private Transform playerTransform;
     private bool jugadorCerca = false; // Detecta si el jugador está en el área
+    private bool isMinigameActive = false;
     private Cronometro cronometro; // Referencia al script Cronometro
+    public bool canPlay;
 
     public KeyCode interactKey = KeyCode.E; // Tecla de interacción
 
@@ -100,9 +102,17 @@ public class AdivinaLaCarta : MonoBehaviour
     {
         if (jugadorCerca && Input.GetKeyDown(interactKey))
         {
-            canvasJuego.SetActive(true); // Activa el Canvas al presionar E
+            Playgame();
+            
         }
     }
+
+    void Playgame()
+    {
+        if (canPlay == false) return;
+        canvasJuego.SetActive(true); // Activa el Canvas al presionar E
+    }
+    
 
     private void SeleccionarCartaAleatoria()
     {

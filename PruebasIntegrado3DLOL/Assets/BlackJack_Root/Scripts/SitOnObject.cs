@@ -21,6 +21,7 @@ public class SitOnObject : MonoBehaviour
     private Transform playerTransform;
     private PlayerMovement playerMovement;
     private CharacterController characterController;
+    public AdivinaLaCarta adivinaLaCarta;
 
     public Canvas timerCanvas; // Canvas del temporizador
     public Cronometro cronometro; // Referencia al script del temporizador
@@ -54,11 +55,14 @@ public class SitOnObject : MonoBehaviour
                 {
                     if (Input.GetKeyDown(interactKey))
                     {
+                        adivinaLaCarta.canPlay = true;
                         StartCoroutine(SitDownSmooth());
                         break;
                     }
                 }
             }
+
+            
         }
         HandleCursorState();
     }
@@ -95,6 +99,7 @@ public class SitOnObject : MonoBehaviour
             if (playerMovement != null) playerMovement.canMove = true;
             if (characterController != null) characterController.enabled = true;
             if (playerMovement != null) playerMovement.isSitting = false;
+            
 
             // Desactivar el Rigidbody para evitar movimiento por física
             Rigidbody playerRigidbody = playerTransform.GetComponent<Rigidbody>();
