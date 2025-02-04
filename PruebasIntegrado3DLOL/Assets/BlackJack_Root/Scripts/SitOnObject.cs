@@ -5,8 +5,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 
-
-
 public class SitOnObject : MonoBehaviour
 {
     public Transform seatPoint;
