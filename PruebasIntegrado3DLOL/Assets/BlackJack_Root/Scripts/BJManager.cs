@@ -424,8 +424,17 @@ public class BJManager : MonoBehaviour
 
     }
 
+    public void AddTime(int years)
+    {
+        cronometro.AddYears(years);
+    }
 
-    public void EnemyHit()
+    public void SubstractTime(int years)
+    {
+        cronometro.SubtractYears(years);
+    }
+
+        public void EnemyHit()
     {
         // Asegurarse de que es el turno del enemigo
         if (currentTurn != Turn.Enemy) return;
