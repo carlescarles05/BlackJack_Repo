@@ -15,6 +15,8 @@ public class AdivinaLaCarta : MonoBehaviour
     public bool canPlay;
     public TextMeshProUGUI roundsTotalText;
     public PlayerMovement playerMovement;
+    public GameObject InGame;
+    public GameObject EndGame;
 
     public KeyCode interactKey = KeyCode.E; // Tecla de interacción
 
@@ -38,14 +40,21 @@ public class AdivinaLaCarta : MonoBehaviour
     {
         if (jugadorCerca && Input.GetKeyDown(interactKey))
         {
-            Playgame();
-            playerMovement.canMove = false;
+            if (canPlay)
+            {
+                Playgame();
+                playerMovement.canMove = false;
+            }
+            else
+            {
+                Debug.Log("YA HAS JUGADO PICHON");
+            }     
         }
     }
 
     void Playgame()
     {
-        if (canPlay == false) return;
+        if (!canPlay) return;
         canvasJuego.SetActive(true); // Activa el Canvas al presionar E
     }
     
@@ -118,22 +127,27 @@ public class AdivinaLaCarta : MonoBehaviour
 
     public void ExitButton()
     {
-        canPlay = false;
+          // Desactiva permanentemente el juego
         playerMovement.canMove = true;
+        jugadorCerca = false;
+        isMinigameActive = false;
+        canvasJuego.SetActive(false); // Asegura que el Canvas se cierre
     }
 
     public void UpdateRoundsText()
     {
-        if (roundsTotalText != null)
+        if (canPlay && roundsTotalText != null)
         {
-            if (roundCount <= 10) roundsTotalText.text = "ROUND  " + roundCount + "/10";
+            if (roundCount < 10) roundsTotalText.text = "ROUND  " + roundCount + "/10";
+            else
+            {
+                canPlay = false;
+                InGame.SetActive(false);
+                EndGame.SetActive(true);
+            }
             Debug.Log("Se suma una ronda al minijuego");
-        }
-        else
-        {
-            roundsTotalText.text = "FIN DEL JUEGO";
-            // forzar el salir
-            // bloquear la maquina
+            Playgame();
+            playerMovement.canMove = false;
         }
     }
 }
