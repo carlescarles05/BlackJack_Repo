@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove;
 
     private CharacterController characterController; // Controlador de personaje
-    private AdivinaLaCarta adivinaLaCarta;
 
     void Start()
     {
