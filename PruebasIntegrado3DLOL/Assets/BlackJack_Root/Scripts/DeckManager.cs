@@ -41,57 +41,10 @@ public class DeckManager : MonoBehaviour
         }
     }
 
-    /*public void DrawCard()
-    {
-        if (deck.Count == 0)
-        {
-            Debug.LogWarning("El mazo está vacío.");
-            return;
-        }
-
-        if (cardsAlreadyDrawn >= cardSpawnPosition.Length)
-        {
-            Debug.LogWarning("No hay más posiciones disponibles para las cartas.");
-            return;
-        }
-
-        if (cardSpawnPosition[cardsAlreadyDrawn] == null)
-        {
-            Debug.LogError($"La posición {cardsAlreadyDrawn} no está asignada en el Inspector.");
-            return;
-        }
-
-        // Obtener la carta
-        Card drawnCard = deck[0];
-        deck.RemoveAt(0); // Eliminar la carta del mazo
-
-        // Instanciar el prefab en la posición correspondiente
-        GameObject cardInstance = Instantiate(cardPrefab, cardSpawnPosition[cardsAlreadyDrawn].position, Quaternion.identity);
-
-        // Aplicar el material correspondiente al valor de la carta
-        MeshRenderer renderer = cardInstance.GetComponent<MeshRenderer>();
-        if (renderer != null && drawnCard.value >= 1 && drawnCard.value <= cardMaterials.Count)
-        {
-            renderer.material = cardMaterials[cardV - 1]; // Asignar el material correcto
-        }
-        else
-        {
-            Debug.LogWarning($"Material no encontrado para el valor {drawnCard.value}.");
-        }
-
-        // Incrementar el contador
-        cardsAlreadyDrawn++;
-
-        // Añadir el valor de la carta como texto
-        TMPro.TextMeshPro text = cardInstance.GetComponentInChildren<TMPro.TextMeshPro>();
-        if (text != null)
-        {
-            text.text = drawnCard.value.ToString();
-        }
-    }*/
-
     public void DrawCard()
     {
+        //Animacion spawnear carta
+
         if (deck.Count == 0)
         {
             Debug.LogWarning("El mazo está vacío.");

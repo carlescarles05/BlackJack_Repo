@@ -224,12 +224,14 @@ public class BJManager : MonoBehaviour
                 Debug.Log("¡Has ganado!");
                 bool isEnd = cronometroEnemy.SubtractYears(300);
                 if (isEnd) gameDead();
+                //Animacion derrota Lucius
             }
             else if (playerWins == false)
             {
                 Debug.Log("Has perdido.");
                 bool isEnd = cronometro.SubtractYears(300);
                 if (isEnd) gameDead();
+                //Victoria Lucius Animacion
             }
         }
         else
@@ -239,12 +241,14 @@ public class BJManager : MonoBehaviour
                 Debug.Log("LOSE");
                 bool isEnd = cronometro.SubtractYears(300);
                 if (isEnd)gameDead();
+                //Victoria Lucius Animacion
             }
             else if ((21 - playerTotal) < (21 - enemyAI.enemyTotal))
             {
                 Debug.Log("WIN");
                 bool isEnd = cronometroEnemy.SubtractYears(300);
                 if (isEnd) gameDead();
+                //Animacion derrota Lucius
             }
             else
             {
@@ -252,6 +256,7 @@ public class BJManager : MonoBehaviour
                 bool isEnd = cronometro.SubtractYears(300);
                 isEnd = cronometroEnemy.SubtractYears(300);
                 if (isEnd) gameDead();
+                //Animacion derrota Lucius
             }
         }
 
