@@ -26648,6 +26648,7 @@ MonoBehaviour:
   botonPausa: {fileID: 430315189}
   menuPausa: {fileID: 801646465}
   interactKey: 27
+  cronometro: {fileID: 261056858}
   volumenSlider: {fileID: 318262592}
 --- !u!1 &634860434 stripped
 GameObject:

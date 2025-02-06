@@ -53,6 +53,7 @@ public class MenuPause : MonoBehaviour
     [SerializeField] private GameObject botonPausa;
     [SerializeField] private GameObject menuPausa;
     public KeyCode interactKey = KeyCode.Escape; // Tecla de interacción
+    private Cronometro cronometro;
 
     [Header("Volumen")]
     [SerializeField] private Slider volumenSlider; // Slider de volumen
@@ -96,6 +97,7 @@ public class MenuPause : MonoBehaviour
         juegoPausado = true;
         menuPausa.SetActive(true);
         botonPausa.SetActive(false);
+        cronometro.countdownInterval = 0;
     }
 
     public void Reanudar()
