@@ -222,13 +222,13 @@ public class BJManager : MonoBehaviour
             if (playerWins == true)
             {
                 Debug.Log("¡Has ganado!");
-                bool isEnd = cronometroEnemy.SubtractYears(200);
+                bool isEnd = cronometroEnemy.SubtractYears(300);
                 if (isEnd) gameDead();
             }
             else if (playerWins == false)
             {
                 Debug.Log("Has perdido.");
-                bool isEnd = cronometro.SubtractYears(200);
+                bool isEnd = cronometro.SubtractYears(300);
                 if (isEnd) gameDead();
             }
         }
@@ -237,20 +237,20 @@ public class BJManager : MonoBehaviour
             if ((21 - playerTotal) > (21 - enemyAI.enemyTotal))
             {
                 Debug.Log("LOSE");
-                bool isEnd = cronometro.SubtractYears(200);
+                bool isEnd = cronometro.SubtractYears(300);
                 if (isEnd)gameDead();
             }
             else if ((21 - playerTotal) < (21 - enemyAI.enemyTotal))
             {
                 Debug.Log("WIN");
-                bool isEnd = cronometroEnemy.SubtractYears(200);
+                bool isEnd = cronometroEnemy.SubtractYears(300);
                 if (isEnd) gameDead();
             }
             else
             {
                 Debug.Log("EMPATE LOKO");
-                bool isEnd = cronometro.SubtractYears(200);
-                isEnd = cronometroEnemy.SubtractYears(200);
+                bool isEnd = cronometro.SubtractYears(300);
+                isEnd = cronometroEnemy.SubtractYears(300);
                 if (isEnd) gameDead();
             }
         }

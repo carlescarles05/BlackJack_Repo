@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class AdivinaLaCarta : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class AdivinaLaCarta : MonoBehaviour
     public PlayerMovement playerMovement;
     public GameObject InGame;
     public GameObject EndGame;
+
+    public List<Button> botonesCartas; // Lista de botones en el juego
 
     public KeyCode interactKey = KeyCode.E; // Tecla de interacción
 
@@ -68,30 +71,37 @@ public class AdivinaLaCarta : MonoBehaviour
 
     public void VerificarCarta(string cartaSeleccionada)
     {
+        // Desactivar botones temporalmente
+        StartCoroutine(DesactivarBotonesTemporalmente());
+
         int numeroSeleccionado = int.Parse(cartaSeleccionada);
         int diferencia = Mathf.Abs(cartaCorrecta - numeroSeleccionado); // Calcula qué tan cerca está
 
         if (numeroSeleccionado == cartaCorrecta)
         {
             resultadoText.text = "¡Correcto! Era " + cartaCorrecta;
-            bM.AddTime(20); // Si es exacta, suma 10 años
+            bM.AddTime(100); // Si es exacta, suma 10 años
+
         }
         else
         {
             if (diferencia == 1)
             {
                 resultadoText.text = "¡Casi! Solo fallaste por 1 número.";
-                bM.AddTime(10); // Si está a 1 número de diferencia, suma 5 años
+                bM.AddTime(50); // Si está a 1 número de diferencia, suma 5 años
+
             }
             else if (diferencia <= 3)
             {
                 resultadoText.text = "Cerca, sigue intentando.";
-                bM.AddTime(5); // Si está a 3 números o menos, suma 3 años
+                bM.AddTime(25); // Si está a 3 números o menos, suma 3 años
+
             }
             else
             {
                 resultadoText.text = "Lejos, intenta de nuevo.";
                 bM.AddTime(0); // Si está muy lejos, solo suma 1 año
+
             }
         }
 
@@ -99,8 +109,50 @@ public class AdivinaLaCarta : MonoBehaviour
 
         UpdateRoundsText();
 
+        StartCoroutine(ResaltarBotonCorrecto());
+
         // Reiniciar el juego después de 2 segundos
         Invoke("ReiniciarJuego", 5f);
+    }
+
+    private IEnumerator DesactivarBotonesTemporalmente()
+    {
+        // Desactivar botones
+        foreach (Button btn in botonesCartas)
+        {
+            btn.interactable = false;
+        }
+
+        // Esperar 2 segundos
+        yield return new WaitForSeconds(5f);
+
+        // Reactivar botones
+        foreach (Button btn in botonesCartas)
+        {
+            btn.interactable = true;
+        }
+    }
+
+    private IEnumerator ResaltarBotonCorrecto()
+    {
+        Button botonCorrecto = ObtenerBotonPorNumero(cartaCorrecta);
+        Color originalColor = botonCorrecto.image.color;
+
+        botonCorrecto.image.color = Color.red; // Iluminar en rojo
+        yield return new WaitForSeconds(2f); // Esperar 2 segundos
+        botonCorrecto.image.color = originalColor; // Restaurar el color original
+    }
+
+    private Button ObtenerBotonPorNumero(int numero)
+    {
+        foreach (Button boton in botonesCartas)
+        {
+            if (boton.GetComponentInChildren<TextMeshProUGUI>().text == numero.ToString())
+            {
+                return boton;
+            }
+        }
+        return null;
     }
 
     private void ReiniciarJuego()
@@ -141,13 +193,24 @@ public class AdivinaLaCarta : MonoBehaviour
             if (roundCount < 10) roundsTotalText.text = "ROUND  " + roundCount + "/10";
             else
             {
+                roundsTotalText.text = "ROUND  " + roundCount + "/10";
                 canPlay = false;
-                InGame.SetActive(false);
-                EndGame.SetActive(true);
+                StartCoroutine(FinalizarJuego()); // Espera 5 segundos antes de terminar
             }
             Debug.Log("Se suma una ronda al minijuego");
             Playgame();
             playerMovement.canMove = false;
         }
+    }
+
+    private IEnumerator FinalizarJuego()
+    {
+        Debug.Log("El juego terminará en 5 segundos...");
+        yield return new WaitForSeconds(5f); // Espera 5 segundos
+
+        InGame.SetActive(false);  // Oculta el panel del juego
+        EndGame.SetActive(true);  // Muestra el panel de fin del juego
+
+        Debug.Log("El juego ha terminado.");
     }
 }

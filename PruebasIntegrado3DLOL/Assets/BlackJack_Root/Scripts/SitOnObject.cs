@@ -197,7 +197,7 @@ public class SitOnObject : MonoBehaviour
                  cronometroEnemigo.InteractiveCountdown(() =>
                  {
                      StartCoroutine(FadeCanvas(timerCanvasEnemy.gameObject, false, 1f)); // Ocultar el Canvas enemigo cuando termine el cronómetro
-                 }, 8000);
+                 }, 2000);
              }
          }
      }
