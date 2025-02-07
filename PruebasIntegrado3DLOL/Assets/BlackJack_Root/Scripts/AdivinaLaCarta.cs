@@ -9,7 +9,7 @@ public class AdivinaLaCarta : MonoBehaviour
     public TextMeshProUGUI resultadoText; // Texto para mostrar el resultado
     public GameObject canvasJuego; // Referencia al Canvas que debe activarse
     private bool triggerDesactivado = false;
-    public TextMeshProUGUI text;
+    public GameObject text;
     private int cartaCorrecta; // Carta correcta en forma de número
     private Transform playerTransform;
     public bool jugadorCerca = false; // Detecta si el jugador está en el área
@@ -223,4 +223,5 @@ public class AdivinaLaCarta : MonoBehaviour
 
         Debug.Log("El juego ha terminado.");
     }
+
 }
