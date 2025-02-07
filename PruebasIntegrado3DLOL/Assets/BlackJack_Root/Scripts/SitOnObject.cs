@@ -58,7 +58,7 @@ public class SitOnObject : MonoBehaviour
                     {
                         adivinaLaCarta.canPlay = true;
                         StartCoroutine(SitDownSmooth());
-                        //LuciusEnemy.transform.position = puntoB.position;
+                        //Animacion del centro lucius para tepearse
                         StartCoroutine(TeletransporteLucius());
                         break;
                     }
