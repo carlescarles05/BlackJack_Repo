@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
+    public GameObject panel;
+
     public void CambiarEscena(string nombreEscena)
     {
         SceneManager.LoadScene(nombreEscena);
+    }
+
+    public void PanelDificultad()
+    {
+        panel.SetActive(true);
     }
 
     public void SalirDelJuego()
