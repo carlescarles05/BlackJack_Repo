@@ -8,9 +8,11 @@ public class AdivinaLaCarta : MonoBehaviour
 {
     public TextMeshProUGUI resultadoText; // Texto para mostrar el resultado
     public GameObject canvasJuego; // Referencia al Canvas que debe activarse
+    private bool triggerDesactivado = false;
+    public TextMeshProUGUI text;
     private int cartaCorrecta; // Carta correcta en forma de número
     private Transform playerTransform;
-    private bool jugadorCerca = false; // Detecta si el jugador está en el área
+    public bool jugadorCerca = false; // Detecta si el jugador está en el área
     private bool isMinigameActive = false;
     public BJManager bM; // Referencia al script Cronometro
     public bool canPlay;
@@ -37,6 +39,7 @@ public class AdivinaLaCarta : MonoBehaviour
         bM = BJManager.Instance;
         canvasJuego.SetActive(false); // Asegura que el Canvas esté oculto al inicio
         SeleccionarCartaAleatoria();
+        text.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -47,6 +50,7 @@ public class AdivinaLaCarta : MonoBehaviour
             {
                 Playgame();
                 playerMovement.canMove = false;
+                text.gameObject.SetActive(false);
             }
             else
             {
@@ -162,9 +166,11 @@ public class AdivinaLaCarta : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !triggerDesactivado)
         {
             jugadorCerca = true; // Detecta que el jugador está cerca
+            //interaction.SetActive(true);
+            text.gameObject.SetActive(true);
         }
     }
 
@@ -174,6 +180,8 @@ public class AdivinaLaCarta : MonoBehaviour
         {
             jugadorCerca = false; // El jugador sale del área
             canvasJuego.SetActive(false); // Oculta el Canvas al salir
+            //interaction.SetActive(false);
+            text.gameObject.SetActive(false);
         }
     }
 
@@ -196,6 +204,8 @@ public class AdivinaLaCarta : MonoBehaviour
                 roundsTotalText.text = "ROUND  " + roundCount + "/10";
                 canPlay = false;
                 StartCoroutine(FinalizarJuego()); // Espera 5 segundos antes de terminar
+                text.gameObject.SetActive(false);
+                triggerDesactivado = true;
             }
             Debug.Log("Se suma una ronda al minijuego");
             Playgame();

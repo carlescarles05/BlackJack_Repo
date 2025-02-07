@@ -16,6 +16,7 @@ public class SitOnObject : MonoBehaviour
     public List<GameObject> PlayerCards = new List<GameObject>(); // Lista para las cartas del jugador
     private bool isSitting = false;
     private bool isTransitioning = false;
+    private bool triggerDesactivado = false;
     private Transform playerTransform;
     private PlayerMovement playerMovement;
     private CharacterController characterController;
@@ -52,11 +53,14 @@ public class SitOnObject : MonoBehaviour
             Collider[] nearbyObjects = Physics.OverlapSphere(playerTransform.position, 2f);
             foreach (Collider obj in nearbyObjects)
             {
-                if (obj != null && obj.CompareTag("Chair"))
+                if (obj != null && obj.CompareTag("Chair") && adivinaLaCarta.jugadorCerca)
                 {
+                    adivinaLaCarta.text.gameObject.SetActive(true);
+
                     if (Input.GetKeyDown(interactKey))
                     {
                         adivinaLaCarta.canPlay = true;
+                        adivinaLaCarta.text.gameObject.SetActive(false);
                         StartCoroutine(SitDownSmooth());
                         //Animacion del centro lucius para tepearse
                         StartCoroutine(TeletransporteLucius());
@@ -64,12 +68,32 @@ public class SitOnObject : MonoBehaviour
                     }
                     
                 }
+
             }
-            
 
             
         }
         HandleCursorState();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && !triggerDesactivado)
+        {
+            adivinaLaCarta.jugadorCerca = true; // Detecta que el jugador está cerca
+            //interaction.SetActive(true);
+            adivinaLaCarta.text.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            adivinaLaCarta.jugadorCerca = false; // El jugador sale del área
+            //interaction.SetActive(false);
+            adivinaLaCarta.text.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator TeletransporteLucius()
