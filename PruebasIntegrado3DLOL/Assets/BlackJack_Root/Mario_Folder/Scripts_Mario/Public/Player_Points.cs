@@ -1,42 +1,51 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Player_Points : MonoBehaviour
 {
     [Header("Points Script Settings")]
-    public int startingPoints; // Starting points (default to 1000)
-    public int deductionAmount; // Amount to deduct after each card selection (default to 50)
-    public int minPoints = 50;
-    public TextMeshProUGUI playerPointsText; // Reference to the Text UI element for displaying points
+    public int deductAmount = 100; // Set the amount to deduct per bet
+    public TextMeshProUGUI playerPointsText;
+    public TextMeshProUGUI playerPointsTextSecondary;
 
     void Start()
     {
-        UpdatePlayerPointsText();
-    }
-
-    public void DeductPoints()
-    {
-        startingPoints -= deductionAmount; // Deduct the specified amount
-        if (startingPoints < 0) startingPoints = 0;
-        UpdatePlayerPointsText();
-    }
-
-    private void UpdatePlayerPointsText()
-    {
-        if (playerPointsText != null)
+        if (playerPointsText == null)
         {
-            playerPointsText.text = startingPoints.ToString();
+            Debug.LogError("Player Points Text is not assigned in the Inspector!");
         }
         else
         {
-            Debug.LogError("Player Points Text component is not assigned!");
+            UpdatePlayerPointsText();
+        }
+    }
+    //Guess the card, specific
+    public void DeductPoints()
+    {
+        if (SlotMachinePointsManager.Instance.HasEnoughPoints(deductAmount))
+        {
+            SlotMachinePointsManager.Instance.DeductPoints(deductAmount); // Instantly deducts points
+            UpdatePlayerPointsText();
+        }
+        else
+        {
+            Debug.Log("Not enough points to continue.");
+            SFXManager.Instance.NoCredit();
         }
     }
 
-    public bool HasEnoughPoints(int requiredPoints)
+    public void UpdatePlayerPointsText()
     {
-        Debug.Log($"Checking points: {startingPoints} vs required {requiredPoints}");
-        return startingPoints >= requiredPoints;
+        if (playerPointsText != null)
+        {
+            playerPointsText.text = SlotMachinePointsManager.Instance.playerPoints.ToString();
+            Debug.Log($"Player Points Updated: {SlotMachinePointsManager.Instance.playerPoints}"); 
+        }
+
+        if (playerPointsTextSecondary != null)
+        {
+            playerPointsTextSecondary.text = SlotMachinePointsManager.Instance.playerPoints.ToString();
+        }
     }
 }
+

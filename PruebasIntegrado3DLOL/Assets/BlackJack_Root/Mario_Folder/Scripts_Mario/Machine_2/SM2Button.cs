@@ -23,9 +23,4 @@ public class SM2Button : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

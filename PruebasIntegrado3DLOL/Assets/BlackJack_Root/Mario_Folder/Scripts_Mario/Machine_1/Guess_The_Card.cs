@@ -1,13 +1,13 @@
+﻿
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GuessTheCard : MonoBehaviour
 {
     [Header("UI ELEMENTS")]
-    public GameObject winPanel;
     public TextMeshProUGUI resultText;
     public TextMeshProUGUI winText;
 
@@ -18,7 +18,6 @@ public class GuessTheCard : MonoBehaviour
     public GameObject[] cards;
 
     [Header("Scripts")]
-    public Player_Points player_Points;
     public Player_Clock player_Clock;
     private BetManager betManager;
 
@@ -26,7 +25,8 @@ public class GuessTheCard : MonoBehaviour
     private int MachineNumber;
     private int selectedCardIndexPos = 0;
     private int turnCount = 0;
-
+    int cardNOne;
+    int diff;
     void Awake()
     {
         inputActions = new GuessCardInputActions();
@@ -36,10 +36,11 @@ public class GuessTheCard : MonoBehaviour
 
     void Start()
     {
+        resultText.gameObject.SetActive(false);
         betManager = FindObjectOfType<BetManager>();
         if (betManager == null)
         {
-            Debug.LogError("BetManager not found in scene!");
+            Debug.LogError("BetManager not found in the scene!");
         }
 
         LockGame();
@@ -50,6 +51,70 @@ public class GuessTheCard : MonoBehaviour
         MachineNumber = Random.Range(1, 14);
         ResetCardHighlightByTurn();
         Debug.Log($"Machine picked card number: {MachineNumber}");
+    }
+
+    public void EnableInputActions(bool enable)
+    {
+        if (enable)
+        {
+            inputActions.GuessTheCardGame.Enable();
+            Debug.Log("Input Actions Enabled!");
+        }
+        else
+        {
+            inputActions.GuessTheCardGame.Disable();
+        }
+    }
+
+    void OnNavigate(InputAction.CallbackContext context)
+    {
+
+        Vector2 input = context.ReadValue<Vector2>();
+        if (input.x > 0)
+        {
+            MoveSelection(1);
+           if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.CardHoverSound();
+            }
+        }
+        else if (input.x < 0)
+        {
+            MoveSelection(-1);
+            if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.CardHoverSound();
+            }
+        }
+    }
+
+    void OnSubmit(InputAction.CallbackContext context)
+    {
+        if (!betManager)
+        {
+            Debug.LogError("BetManager is missing!");
+            return;
+        }
+
+        if (cards == null || cards.Length == 0) return;
+
+        GameObject selectedCard = cards[selectedCardIndexPos];
+        if (selectedCard == null) return;
+
+        SelectedCardAction(selectedCard);
+    }
+
+    void MoveSelection(int direction)
+    {
+        HighLightCard(selectedCardIndexPos, false);
+        selectedCardIndexPos = (selectedCardIndexPos + direction + cards.Length) % cards.Length;
+        HighLightCard(selectedCardIndexPos, true);
+    }
+
+    void HighLightCard(int index, bool highlight)
+    {
+        Renderer renderer = cards[index].GetComponent<Renderer>();
+        renderer.material.color = highlight ? Color.yellow : Color.white;
     }
     void ResetCardHighlightByTurn()
     {
@@ -86,71 +151,6 @@ public class GuessTheCard : MonoBehaviour
             Debug.LogError($"Invalid selectedCardIndexPos: {selectedCardIndexPos}");
         }
     }
-    public void EnableInputActions(bool enable)
-    {
-        if (enable)
-            inputActions.GuessTheCardGame.Enable();
-        else
-            inputActions.GuessTheCardGame.Disable();
-    }
-
-    void OnNavigate(InputAction.CallbackContext context)
-    {
-        Vector2 input = context.ReadValue<Vector2>();
-        MoveSelection(input.x > 0 ? 1 : -1);
-    }
-
-    void OnSubmit(InputAction.CallbackContext context)
-    {
-        if (!betManager)
-        {
-            Debug.LogError("BetManager is missing!");
-            return;
-        }
-
-        if (cards == null || cards.Length == 0) return;
-        if (selectedCardIndexPos < 0 || selectedCardIndexPos >= cards.Length) return;
-
-        GameObject selectedCard = cards[selectedCardIndexPos];
-        if (selectedCard == null) return;
-
-        SelectedCardAction(selectedCard);
-    }
-
-    void MoveSelection(int direction)
-    {
-        HighLightCard(selectedCardIndexPos, false);
-        selectedCardIndexPos = (selectedCardIndexPos + direction + cards.Length) % cards.Length;
-        HighLightCard(selectedCardIndexPos, true);
-    }
-
-    void HighLightCard(int index, bool highlight)
-    {
-        Renderer renderer = cards[index].GetComponent<Renderer>();
-        renderer.material.color = highlight ? Color.yellow : Color.white;
-    }
-
-    void SelectedCardAction(GameObject clickedCard)
-    {
-        int cardNumber = int.Parse(clickedCard.name.Replace("Card_", ""));
-        int difference = Mathf.Abs(cardNumber - MachineNumber);
-
-        if (!player_Points.HasEnoughPoints(player_Points.minPoints))
-        {
-            resultText.text = "Not enough points to continue!";
-            Invoke("LoadGameOverScene", 2f);
-            return;
-        }
-
-        if (difference == 0) { player_Clock.AddYears(200); winPanel.SetActive(true); }
-        else if (difference == 1) { player_Clock.AddYears(120); resultText.text = "So close! +120 years!"; }
-        else if (difference <= 5) { player_Clock.AddYears(-50); resultText.text = "Not today!"; }
-        else { player_Clock.AddYears(-80); resultText.text = "Oof! -80 years."; }
-
-        HighlightMachineCard();
-        Invoke("EndRound", 2f);
-    }
-
     void HighlightMachineCard()
     {
         foreach (var card in cards)
@@ -158,14 +158,124 @@ public class GuessTheCard : MonoBehaviour
             if (int.Parse(card.name.Replace("Card_", "")) == MachineNumber)
             {
                 card.GetComponent<Renderer>().material.color = Color.red;
+               SFXManager.Instance.MachineCardSound();
+                break;
+            }
+            else if(int.Parse(card.name.Replace("Card_", "")) == 0)
+            {
+                card.GetComponent<Renderer>().material.color = Color.blue;
                 break;
             }
         }
     }
 
+    void SelectedCardAction(GameObject clickedCard)
+    {
+        int cardNumber = int.Parse(clickedCard.name.Replace("Card_", ""));
+        int difference = Mathf.Abs(cardNumber - MachineNumber);
+       // cardNOne = cardNumber;
+        diff = difference;
+        resultText.gameObject.SetActive(true);
+        if (diff == 0)
+        {
+            // player_Clock.AddYears(200);
+            StartCoroutine(DelayedAddYears(200));
+            
+            resultText.text = $"You did it!!Your card is: {MachineNumber}";
+
+        }
+        else if (diff == 1)
+        {
+            //player_Clock.AddYears(120);
+            StartCoroutine(DelayedAddYears(120));
+            resultText.text = "So close! +120 years!";
+
+        }
+        else if (diff <= 5)
+        {
+            //player_Clock.AddYears(50);
+            StartCoroutine(DelayedAddYears(50));
+            resultText.text = "Not today! + 50 years";
+
+        }
+        else
+        {
+            StartCoroutine(DelayedAddYears(10));
+            resultText.text = "Oof! +10 years.";
+
+        }
+        StartCoroutine(SequenceEvents());
+
+    }
+    //temporary commented out
+    /*  IEnumerator SequenceEvents()
+      {
+
+          // Step 1: Highlight the machine card first
+
+          // Wait 1.5 seconds before updating the timer and playing the sound
+
+          // Step 2: Update the timer and play sound
+
+          if (diff == 0)
+          {
+              //
+              yield return new WaitForSeconds(0.5f);
+              //
+              SFXManager.Instance.Win();
+              player_Clock.UpdateTimer_UI_TXT();
+          }
+          else
+          {
+              HighlightMachineCard();
+              //
+              yield return new WaitForSeconds(1.5f);
+              //
+              SFXManager.Instance.EarnTime();
+              //
+              yield return new WaitForSeconds(1f);
+              player_Clock.UpdateTimer_UI_TXT();
+          }
+
+          // Step 3: Hide result text and end the round after another delay
+          yield return new WaitForSeconds(0.5f);
+          HideResultText();
+
+          yield return new WaitForSeconds(0.5f);
+          EndRound();
+      }*/
+    IEnumerator SequenceEvents()
+    {
+        // Step 1: Highlight the machine's card
+        HighlightMachineCard();
+        yield return new WaitForSeconds(2.20f); // Wait before the next step
+
+        // Step 2: Play Earn Time sound and update earned time
+        if (diff == 0)
+        {
+            // Winning case
+            SFXManager.Instance.Win(); // Play winning sound
+        }
+        else
+        {
+            SFXManager.Instance.EarnTime(); // Play earned time sound
+        }
+
+        yield return new WaitForSeconds(1.5f); // Wait for the sound effect
+        HideResultText();
+
+        yield return new WaitForSeconds(1f);
+        EndRound();
+    }
+
+    void HideResultText()
+    {
+        resultText.gameObject.SetActive(false);
+    }
+    
     void EndRound()
     {
-        betManager.EndTurn();
+        betManager.EndTurn();//Lock input.
         ResetCards();
     }
 
@@ -175,17 +285,21 @@ public class GuessTheCard : MonoBehaviour
         {
             card.GetComponent<Renderer>().material.color = Color.white;
         }
-        winPanel.SetActive(false);
-    }
+        resultText.gameObject.SetActive(false); //Hide resultText at the start
 
-    public void LoadGameOverScene()
+    }
+    IEnumerator DelayedAddYears(int years)
     {
-        SceneManager.LoadScene("CarlesTesting");
+        yield return new WaitForSeconds(2f);
+        player_Clock.AddYears(years);
     }
-
     private void LockGame()
     {
         EnableInputActions(false);
         this.enabled = false;
+    }
+    public void LoadGameOverScene()
+    {
+        SceneManager.LoadScene("CarlesTesting");
     }
 }
