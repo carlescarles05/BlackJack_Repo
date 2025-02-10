@@ -13,6 +13,7 @@ public class Cronometro : MonoBehaviour
 
     public bool isCorutineActive = false;
     public bool isPause = false;
+    public bool isLucius = false;
 
     public int currentYear;
 
@@ -53,7 +54,7 @@ public class Cronometro : MonoBehaviour
             }
 
             yield return new WaitForSeconds(countdownInterval);
-            if (isPause == false) currentYear--;
+            if (isPause == false && isLucius == false) currentYear--;
         }
 
         yearText.text = "¡Llegaste al año " + endYear + "!";
