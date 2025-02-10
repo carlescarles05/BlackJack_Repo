@@ -21828,6 +21828,7 @@ MonoBehaviour:
   yearTextMinijuego: {fileID: 1765071491}
   isCorutineActive: 0
   isPause: 0
+  isLucius: 0
   currentYear: 0
   audioSource: {fileID: 1682336079}
   tickSound: {fileID: 8300000, guid: 5b8d547a6ea0d4742a95a79552cc1838, type: 3}
@@ -76950,6 +76951,7 @@ MonoBehaviour:
   yearTextMinijuego: {fileID: 0}
   isCorutineActive: 0
   isPause: 0
+  isLucius: 1
   currentYear: 0
   audioSource: {fileID: 1682336079}
   tickSound: {fileID: 8300000, guid: 5b8d547a6ea0d4742a95a79552cc1838, type: 3}
