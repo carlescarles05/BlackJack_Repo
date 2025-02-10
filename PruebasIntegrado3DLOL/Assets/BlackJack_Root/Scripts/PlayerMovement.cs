@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isSitting;
     public bool canMove;
 
-    private CharacterController characterController; // Controlador de personaje
+    public CharacterController characterController; // Controlador de personaje
 
     void Start()
     {

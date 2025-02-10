@@ -25,6 +25,11 @@ public class Buttons : MonoBehaviour
             Debug.LogWarning("Buttons component message:No GCG component.");
         }
     }
+    //SlotMachine 2
+
+
+
+    //Guess The Card
     //guessthe card screen button
     public void ShowMainScreen()
     {

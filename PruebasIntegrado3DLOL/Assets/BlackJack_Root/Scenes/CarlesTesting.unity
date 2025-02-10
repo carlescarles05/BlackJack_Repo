@@ -21861,8 +21861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4584c3841d0e244ebfbc10133a6f258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1501265934}
-  mouseSensitivity: 100
 --- !u!65 &337789077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27084,6 +27082,7 @@ MonoBehaviour:
   seatPoint: {fileID: 1939691119}
   canvasObject: {fileID: 791713286}
   enemyCanvasObject: {fileID: 1378816758}
+  interactKey: 101
   transitionSpeed: 2
   PlayerCards: []
   timerCanvas: {fileID: 250983285}
@@ -68833,6 +68832,7 @@ MonoBehaviour:
   moveSpeed: 15
   mouseSensitivity: 80
   cameraTransform: {fileID: 330585546}
+  slider: {fileID: 0}
   gravityMultiplier: 3
   footstepClips:
   - {fileID: 8300000, guid: ba2ba93fd8cd87e4a96e50ce00367fbb, type: 3}
@@ -68841,6 +68841,7 @@ MonoBehaviour:
   gravity: -9.81
   isSitting: 0
   canMove: 0
+  characterController: {fileID: 1501265936}
 --- !u!143 &1501265936
 CharacterController:
   m_ObjectHideFlags: 0
