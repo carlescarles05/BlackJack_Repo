@@ -44,24 +44,40 @@ public partial class @GuessCardInputActions: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Bet"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d52cdb6-3c0b-42ab-a265-d88bf3541299"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PointerMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""301da584-1e60-4881-9552-3127ecc9f276"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PointerClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd89c743-520e-4fcd-a859-d16f641a4855"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""a37afc56-7ee6-4a82-b175-4c27989c782d"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Submition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""644baaea-ff1d-47b0-a311-fdd78399bf62"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -112,6 +128,61 @@ public partial class @GuessCardInputActions: IInputActionCollection2, IDisposabl
                     ""action"": ""Navigation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9068e7ca-5efd-44d3-89ba-ddb68ed750b3"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""419e4071-ef87-4ba3-bb2f-db9386964bff"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae161ef8-9d9d-4382-9dbd-af7022e1b0e9"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PointerMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91f1efa5-4b05-4f93-aa4b-1db823dfabbf"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a37afc56-7ee6-4a82-b175-4c27989c782d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PointerClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +193,9 @@ public partial class @GuessCardInputActions: IInputActionCollection2, IDisposabl
         m_GuessTheCardGame = asset.FindActionMap("GuessTheCardGame", throwIfNotFound: true);
         m_GuessTheCardGame_Navigation = m_GuessTheCardGame.FindAction("Navigation", throwIfNotFound: true);
         m_GuessTheCardGame_Submition = m_GuessTheCardGame.FindAction("Submition", throwIfNotFound: true);
+        m_GuessTheCardGame_Bet = m_GuessTheCardGame.FindAction("Bet", throwIfNotFound: true);
+        m_GuessTheCardGame_PointerMovement = m_GuessTheCardGame.FindAction("PointerMovement", throwIfNotFound: true);
+        m_GuessTheCardGame_PointerClick = m_GuessTheCardGame.FindAction("PointerClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,12 +259,18 @@ public partial class @GuessCardInputActions: IInputActionCollection2, IDisposabl
     private List<IGuessTheCardGameActions> m_GuessTheCardGameActionsCallbackInterfaces = new List<IGuessTheCardGameActions>();
     private readonly InputAction m_GuessTheCardGame_Navigation;
     private readonly InputAction m_GuessTheCardGame_Submition;
+    private readonly InputAction m_GuessTheCardGame_Bet;
+    private readonly InputAction m_GuessTheCardGame_PointerMovement;
+    private readonly InputAction m_GuessTheCardGame_PointerClick;
     public struct GuessTheCardGameActions
     {
         private @GuessCardInputActions m_Wrapper;
         public GuessTheCardGameActions(@GuessCardInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigation => m_Wrapper.m_GuessTheCardGame_Navigation;
         public InputAction @Submition => m_Wrapper.m_GuessTheCardGame_Submition;
+        public InputAction @Bet => m_Wrapper.m_GuessTheCardGame_Bet;
+        public InputAction @PointerMovement => m_Wrapper.m_GuessTheCardGame_PointerMovement;
+        public InputAction @PointerClick => m_Wrapper.m_GuessTheCardGame_PointerClick;
         public InputActionMap Get() { return m_Wrapper.m_GuessTheCardGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -206,6 +286,15 @@ public partial class @GuessCardInputActions: IInputActionCollection2, IDisposabl
             @Submition.started += instance.OnSubmition;
             @Submition.performed += instance.OnSubmition;
             @Submition.canceled += instance.OnSubmition;
+            @Bet.started += instance.OnBet;
+            @Bet.performed += instance.OnBet;
+            @Bet.canceled += instance.OnBet;
+            @PointerMovement.started += instance.OnPointerMovement;
+            @PointerMovement.performed += instance.OnPointerMovement;
+            @PointerMovement.canceled += instance.OnPointerMovement;
+            @PointerClick.started += instance.OnPointerClick;
+            @PointerClick.performed += instance.OnPointerClick;
+            @PointerClick.canceled += instance.OnPointerClick;
         }
 
         private void UnregisterCallbacks(IGuessTheCardGameActions instance)
@@ -216,6 +305,15 @@ public partial class @GuessCardInputActions: IInputActionCollection2, IDisposabl
             @Submition.started -= instance.OnSubmition;
             @Submition.performed -= instance.OnSubmition;
             @Submition.canceled -= instance.OnSubmition;
+            @Bet.started -= instance.OnBet;
+            @Bet.performed -= instance.OnBet;
+            @Bet.canceled -= instance.OnBet;
+            @PointerMovement.started -= instance.OnPointerMovement;
+            @PointerMovement.performed -= instance.OnPointerMovement;
+            @PointerMovement.canceled -= instance.OnPointerMovement;
+            @PointerClick.started -= instance.OnPointerClick;
+            @PointerClick.performed -= instance.OnPointerClick;
+            @PointerClick.canceled -= instance.OnPointerClick;
         }
 
         public void RemoveCallbacks(IGuessTheCardGameActions instance)
@@ -237,5 +335,8 @@ public partial class @GuessCardInputActions: IInputActionCollection2, IDisposabl
     {
         void OnNavigation(InputAction.CallbackContext context);
         void OnSubmition(InputAction.CallbackContext context);
+        void OnBet(InputAction.CallbackContext context);
+        void OnPointerMovement(InputAction.CallbackContext context);
+        void OnPointerClick(InputAction.CallbackContext context);
     }
 }

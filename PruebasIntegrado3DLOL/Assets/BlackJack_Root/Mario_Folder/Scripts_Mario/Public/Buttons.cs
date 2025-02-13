@@ -1,39 +1,70 @@
 using UnityEngine;
-//Calls BetManager PlaceBet
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using System.Collections;
+using UnityEditor.Search;
 public class Buttons : MonoBehaviour
 {
-    public GameObject ControlScreen;       // 01_MainScreen
+    //UI
+    public GameObject gameAbout;       // 01_MainScreen
     public GameObject GameCanvas; // 02_GuessTheCardGame
+    public Button guessButton;
+    //Scripts
     private Scene_Manager sceneManager;
+    public GuessTheCard guessthecardscript;
+    public GuessCardInputActions inputActions;//
     public GameObject cardDeck;
+    private EventSystem eventSystem;
+    public void Awake()
+    {
+        inputActions = new GuessCardInputActions();
+        inputActions.GuessTheCardGame.Bet.performed += ctx => SimulateButtonClick(guessButton);
+        eventSystem = EventSystem.current;
+    }
+    public void OnEnable() => inputActions.GuessTheCardGame.Enable();
+    public void OnDisable() => inputActions.GuessTheCardGame.Disable();
     void Start()
     {
         sceneManager = FindObjectOfType<Scene_Manager>();
-
         if (sceneManager == null)
         {
             Debug.LogError("Scene_Manager not found in the scene!");
         }
-        cardDeck.gameObject.SetActive(false);
-     
+        guessthecardscript = FindObjectOfType<GuessTheCard>();
+        if (guessthecardscript == null)
+        {
+            Debug.LogError("GTC not found in the scene!,Buttons call");
+        }
+
+
+        cardDeck.gameObject.SetActive(false);  //active on GTCS
+
         // Start with only the main screen enabled
         ShowMainScreen();
 
         //
-        if(cardDeck == null)
+        if (cardDeck == null)
         {
             Debug.LogWarning("Buttons component message:No GCG component.");
         }
     }
-    //SlotMachine 2
-
-
-
-    //Guess The Card
-    //guessthe card screen button
+    public void SimulateButtonClick(Button button)
+    {
+        if (button != null)
+        {
+            eventSystem.SetSelectedGameObject(button.gameObject);
+            button.onClick.Invoke();
+            Debug.Log("Apuesta button clicked via Input System!");
+        }
+        else
+        {
+            Debug.LogError("Apuesta button is not assigned in the Inspector!");
+        }
+    }
     public void ShowMainScreen()
     {
-        ControlScreen.SetActive(true);
+        gameAbout.SetActive(true);
         GameCanvas.SetActive(false);
         cardDeck.gameObject.SetActive(false);
         SFXManager.Instance.DisableEnvironmentAudio();
@@ -41,25 +72,43 @@ public class Buttons : MonoBehaviour
     //controls screen button
     public void ShowGuessTheCardGame()
     {
-        ControlScreen.SetActive(false);
-
+        
+        
+        StartCoroutine(DelayedGameActivation()); 
+    }
+    public void activaControlsImage()
+    {
+     guessthecardscript.controlsImage.SetActive(true);
+     StartCoroutine(DelayedGameActivation());
+    }
+    IEnumerator ControlsDeactivation()
+    { 
+      yield return new WaitForSeconds(4f);
+      guessthecardscript.controlsImage.SetActive(false);
+    }
+     IEnumerator DelayedGameActivation()
+    {
+        guessthecardscript.controlsImage.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        gameAbout.SetActive(false);
+        guessthecardscript.controlsImage.SetActive(false);
         GameCanvas.SetActive(true);
         cardDeck.gameObject.SetActive(true);
         SFXManager.Instance.EnableEnvironmentAudio();
     }
- 
+
     //controls screen button
-    public void GoBackToMainScene() //change back to playercapsule scene
+    public void GoBackToMainScene() //change back to playercapsule's scene
     {
-        ControlScreen.SetActive(false);
+        gameAbout.SetActive(false);
         GameCanvas.SetActive(false);
-        cardDeck.gameObject.SetActive(false);
+       if(cardDeck != null) cardDeck.gameObject.SetActive(false);
         sceneManager.GoBackToMainScreen(); // Return to "00_Scenario"or another
     }
 
     public void LoadMachineGame()
     {
-        ControlScreen.SetActive(false);
+        gameAbout.SetActive(false);
         GameCanvas.SetActive(true);
         sceneManager.LoadScene2(); // Load "01_Machine#1"
     }
@@ -76,10 +125,15 @@ public class Buttons : MonoBehaviour
         if (betManager != null)
         {
             betManager.PlaceBet();
+            if (guessthecardscript != null)
+            {
+            
+                Debug.Log("Guess The Card script enabled after bet!,Buttons call");
+            }
         }
         else
         {
-            Debug.LogError("BetManager not found in scene!");
+            Debug.LogError("BetManager not found in scene!,buttons call");
         }
     }
 }

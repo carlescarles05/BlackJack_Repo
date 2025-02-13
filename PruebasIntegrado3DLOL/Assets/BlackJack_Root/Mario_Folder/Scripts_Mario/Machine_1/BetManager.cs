@@ -15,7 +15,7 @@ public class BetManager : MonoBehaviour
         if (!SlotMachinePointsManager.Instance.HasEnoughPoints(200))
         {
             Debug.Log("Not enough points to bet");
-           // LockGame();
+             LockGame();
 
             return;
         }
@@ -25,9 +25,9 @@ public class BetManager : MonoBehaviour
             Debug.Log("Bet already placed, wait for the round to end.");
             return;
         }
-        
+
         SlotMachinePointsManager.Instance.DeductPoints(200); // Instantly deduct points
-       if (SFXManager.Instance != null)
+        if (SFXManager.Instance != null)
         {
             Debug.Log("Bet placed! Playing deduct_points sound NOW...");
             SFXManager.Instance.Cashed();
@@ -56,7 +56,7 @@ public class BetManager : MonoBehaviour
         else
         {
             Debug.Log("Enough points for next round. Keeping input unlocked.");
-           LockGame(); // Regular lock at the end of the round
+            LockGame(); // Regular lock at the end of the round
         }
     }
 
@@ -79,4 +79,5 @@ public class BetManager : MonoBehaviour
         guessTheCardScript.StartGame(); // Start a new round after a bet
         Debug.Log("Game Unlocked and GuessTheCard script enabled!");
     }
+   
 }

@@ -98,8 +98,8 @@ public class Player_Clock : MonoBehaviour
                 earnedTimeText.gameObject.SetActive(true);
             }
         //Update text within the earned time
-        earnedTimeText.text = years > 0 ? $"{years} years" : $"{years} years";
-        childEarnedTimeText.text = years > 0 ? $"{years} years" : $"{years} years";
+        earnedTimeText.text = years > 0 ? $"{years} LifePoints" : $"{years} LifePoints";
+        childEarnedTimeText.text = years > 0 ? $"{years} LifePoints" : $"{years} LifePoints";
             //Start the coroutine to hide the text after a delay
             StartCoroutine(HideEarnedTimeAfterDelay());
         }

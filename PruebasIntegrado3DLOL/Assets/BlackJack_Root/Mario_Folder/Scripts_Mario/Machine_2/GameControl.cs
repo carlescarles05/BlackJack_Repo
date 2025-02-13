@@ -302,43 +302,43 @@ public class GameControl : MonoBehaviour
          && rows[1].stoppedSlot == "Diamond"
          && rows[2].stoppedSlot == "Diamond")
         {
-            prizeValue = 200;
+            prizeValue = 120;
         }
         else if (rows[0].stoppedSlot == "Crown"
         && rows[1].stoppedSlot == "Crown"
         && rows[2].stoppedSlot == "Crown")
         {
-            prizeValue = 400;
+            prizeValue = 600;
         }
         else if (rows[0].stoppedSlot == "Bar"
         && rows[1].stoppedSlot == "Bar"
         && rows[2].stoppedSlot == "Bar")
         {
-            prizeValue = 800;
+            prizeValue = 100;
         }
         else if (rows[0].stoppedSlot == "Melon"
         && rows[1].stoppedSlot == "Melon"
         && rows[2].stoppedSlot == "Melon")
         {
-            prizeValue = 600;
+            prizeValue = 300;
         }
         else if (rows[0].stoppedSlot == "Seven"
         && rows[1].stoppedSlot == "Seven"
         && rows[2].stoppedSlot == "Seven")
         {
-            prizeValue = 1500;
+            prizeValue = 70;
         }
         else if (rows[0].stoppedSlot == "Cherry"
         && rows[1].stoppedSlot == "Cherry"
         && rows[2].stoppedSlot == "Cherry")
         {
-            prizeValue = 3000;
+            prizeValue = 50;
         }
         else if (rows[0].stoppedSlot == "Lemon"
         && rows[1].stoppedSlot == "Lemon"
         && rows[2].stoppedSlot == "Lemon")
         {
-            prizeValue = 5000;
+            prizeValue = 120;
             SFXManagerSMtwo.Instance.Jackpot(); // Play jackpot sound for lemons
          //   jackPOT.gameObject.SetActive(true);
         }
