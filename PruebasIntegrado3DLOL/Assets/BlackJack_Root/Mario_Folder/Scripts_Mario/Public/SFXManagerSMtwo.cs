@@ -6,6 +6,7 @@ public class SFXManagerSMtwo : MonoBehaviour
 {
     public static SFXManagerSMtwo Instance;
     [Header("Audio Source for sound Effects")]
+    [SerializeField] private AudioSource backgroundmusic;
     private AudioSource sfxSource;
 
     [Header("GuessTheCard Sound Effects")]
@@ -30,9 +31,17 @@ public class SFXManagerSMtwo : MonoBehaviour
         sfxSource = gameObject.AddComponent<AudioSource>();
         sfxSource.playOnAwake = false;
         sfxSource.loop = false;
+        DisableEnvironmentAudio();
     }
     // Play a sound effect by passing a specific clip.
-
+    public void EnableEnvironmentAudio()
+    {
+        backgroundmusic.gameObject.SetActive(true);
+    }
+    public void DisableEnvironmentAudio()
+    {
+        backgroundmusic.gameObject.SetActive(false);
+    }
     public void PlaySFX(AudioClip clip)
     {
         if (clip != null)

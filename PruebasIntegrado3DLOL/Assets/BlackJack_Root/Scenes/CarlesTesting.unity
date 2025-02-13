@@ -5320,7 +5320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc07d8d03a8bae4e89699d84d6b9355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPoints: 2000
+  playerPoints: 1200
+  wonPoints: 200
 --- !u!4 &90006614
 Transform:
   m_ObjectHideFlags: 0
@@ -68832,11 +68833,12 @@ MonoBehaviour:
   moveSpeed: 15
   mouseSensitivity: 80
   cameraTransform: {fileID: 330585546}
-  slider: {fileID: 0}
+  slider: {fileID: 318262592}
   gravityMultiplier: 3
   footstepClips:
   - {fileID: 8300000, guid: ba2ba93fd8cd87e4a96e50ce00367fbb, type: 3}
   stepInterval: 0.4
+  audioSource: {fileID: 0}
   jumpHeight: 2
   gravity: -9.81
   isSitting: 0

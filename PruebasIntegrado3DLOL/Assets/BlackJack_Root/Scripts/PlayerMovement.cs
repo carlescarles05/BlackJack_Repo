@@ -24,9 +24,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip[] footstepClips; // Clips de sonido de pasos
     public float stepInterval = 0.5f; // Intervalo entre pasos
     private float stepTimer; // Temporizador para los pasos
-    private AudioSource audioSource; // Componente de audio
+    public AudioSource audioSource; // Componente de audio
     public float jumpHeight = 2f;              // Altura de salto
-    public float gravity = -9.81f;             // Fuerza de gravedad
+    public float gravity = -9.81f;             // Fuerza de gravedad//
     public bool isSitting;
     public bool canMove;
 
