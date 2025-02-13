@@ -47,14 +47,10 @@ public class GuessTheCard : MonoBehaviour
         inputActions = new GuessCardInputActions();
         inputActions.GuessTheCardGame.Navigation.performed += OnNavigate;
         inputActions.GuessTheCardGame.Submition.performed += OnSubmit;
-        /*inputActions.GuessTheCardGame.PointerMovement.performed += MoveCursor;
-        inputActions.GuessTheCardGame.PointerClick.performed += Click;*/
+
         
     } 
-    //cursor movement
-  /*  void OnEnable() => inputActions.GuessTheCardGame.Enable();
-    void OnDisable() => inputActions.GuessTheCardGame.Disable();
-  */
+
     void Start()
     {
         //Text
@@ -83,29 +79,7 @@ public class GuessTheCard : MonoBehaviour
         Debug.Log($"Machine picked card number: {MachineNumber}");
     }
 
-    //GPad movement setup
-   /** void MoveCursor(InputAction.CallbackContext context)
-    {
-        Vector2 input = context.ReadValue<Vector2>();
-        cursorPosition += input * cursorSpeed * Time.deltaTime;
-        cursorTransform.anchoredPosition = cursorPosition;
-    }
-    void Click(InputAction.CallbackContext context)
-    {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current)
-        {
-            position = cursorTransform.position
-        };
-
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
-
-        foreach (var result in results)
-        {
-            Button button = result.gameObject.GetComponent<Button>();
-            if (button != null) button.onClick.Invoke(); // Simulate click
-        }
-    }*/
+   
     public void EnableInputActions(bool enable)
     {
         if (enable)
@@ -302,43 +276,6 @@ public class GuessTheCard : MonoBehaviour
         StartCoroutine(SequenceEvents());
 
     }
-    //temporary commented out
-    /*  IEnumerator SequenceEvents()
-      {
-
-          // Step 1: Highlight the machine card first
-
-          // Wait 1.5 seconds before updating the timer and playing the sound
-
-          // Step 2: Update the timer and play sound
-
-          if (diff == 0)
-          {
-              //
-              yield return new WaitForSeconds(0.5f);
-              //
-              SFXManager.Instance.Win();
-              player_Clock.UpdateTimer_UI_TXT();
-          }
-          else
-          {
-              HighlightMachineCard();
-              //
-              yield return new WaitForSeconds(1.5f);
-              //
-              SFXManager.Instance.EarnTime();
-              //
-              yield return new WaitForSeconds(1f);
-              player_Clock.UpdateTimer_UI_TXT();
-          }
-
-          // Step 3: Hide result text and end the round after another delay
-          yield return new WaitForSeconds(0.5f);
-          HideResultText();
-
-          yield return new WaitForSeconds(0.5f);
-          EndRound();
-      }*/
     IEnumerator SequenceEvents()
     {
         Buttons Canvadeactive = FindObjectOfType<Buttons>();
@@ -372,8 +309,7 @@ public class GuessTheCard : MonoBehaviour
         {
             // Step 1: Highlight the machine's card
             HighlightMachineCard();
-           // winPanel.SetActive(false);
-            //WinText.gameObject.SetActive(true);
+       
             yield return new WaitForSeconds(1.7f); // Wait before the next step
             SFXManager.Instance.EarnTime(); // Play earned time sound
         }
