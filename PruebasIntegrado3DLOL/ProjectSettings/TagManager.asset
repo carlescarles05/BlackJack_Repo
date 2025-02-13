@@ -4,12 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Ground
+  - Machine2
+  - Machine1
+  - NPCView
   - Chair
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Interactable
   - Water
   - UI
   - 

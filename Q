@@ -1,0 +1,188 @@
+[33mcommit 8b8f7c00ac1a9b6c21ce22a1dccb6632ec3157a7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mDev[m[33m)[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:33:21 2025 +0100
+
+    u
+
+[33mcommit 6513cb2459e3b761aa86c6bea293a83c48430b07[m
+Merge: a94cb2c 83aded6
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:33:05 2025 +0100
+
+    Merge branch 'Dev' of https://github.com/carlescarles05/BlackJack_Repo into Dev
+
+[33mcommit a94cb2c5b1087365add5aa03546c79bb2d79a199[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:32:50 2025 +0100
+
+    t
+
+[33mcommit 83aded628edcf37d2abae88a0af70eb08efb42f6[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Fri Jan 31 10:28:55 2025 +0100
+
+    carleschangesreverted
+    
+    ...
+
+[33mcommit ddaca30d2104d9fab24b44dd7844b6909d1feb48[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Fri Jan 31 10:28:10 2025 +0100
+
+    carleschangesreverted
+    
+    ...
+
+[33mcommit 2cba6ba34ab84fca2c1240ed4e30030eba172424[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Fri Jan 31 10:26:06 2025 +0100
+
+    niidea
+
+[33mcommit 7ed52d9b5b649067caa02fb697eee7f2f787c762[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Fri Jan 31 10:14:38 2025 +0100
+
+    discarded_CarlesClasChanges
+    
+    done
+
+[33mcommit 0f6921927b9c4b9bc09cd2c51195b0e395d31d9a[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Fri Jan 31 10:14:38 2025 +0100
+
+    discarded_CarlesClasChanges
+    
+    done
+
+[33mcommit f5b68601f1e40b6353aeffa1a818620754d7b73a[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:09:22 2025 +0100
+
+    MATADME
+
+[33mcommit 04c57099a4e836b035ac1966d60fb743f58441b0[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:08:24 2025 +0100
+
+    Revert "Reapply "m""
+    
+    This reverts commit 57234743c2c1078209753a2371485b4e11e71a3d.
+
+[33mcommit e2933da2d17bace2a000aa30362ed7520445a382[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:08:20 2025 +0100
+
+    Revert "01Machine"
+    
+    This reverts commit 78306ebedef35fdb1026e666cb510639c1e4356a.
+
+[33mcommit 78306ebedef35fdb1026e666cb510639c1e4356a[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:07:34 2025 +0100
+
+    01Machine
+
+[33mcommit 57234743c2c1078209753a2371485b4e11e71a3d[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:06:41 2025 +0100
+
+    Reapply "m"
+    
+    This reverts commit a56597bff88f1000ac81f70bbddc228209123c35.
+
+[33mcommit a56597bff88f1000ac81f70bbddc228209123c35[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:06:34 2025 +0100
+
+    Revert "m"
+    
+    This reverts commit e10c3b918544594d7d58f2307ba9155fa5181686.
+
+[33mcommit e10c3b918544594d7d58f2307ba9155fa5181686[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:05:39 2025 +0100
+
+    m
+
+[33mcommit 9d817243767cf1b8335b2282396fc3eb2a791b2d[m
+Merge: bf8ecaa 0ed7a23
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:04:45 2025 +0100
+
+    m
+
+[33mcommit bf8ecaaaf580acac822b67062195f3fbb99f1eb2[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 10:04:33 2025 +0100
+
+    l
+
+[33mcommit 0ed7a232edc7960dc105eac49175f62db7e0559e[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Fri Jan 31 10:03:37 2025 +0100
+
+    UI_Basics(2)Mario
+    
+    ...
+
+[33mcommit 5724eda4df8aec075594460fb661c4004e51159c[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Fri Jan 31 09:59:53 2025 +0100
+
+    CambiosUIimage
+    
+    ...
+
+[33mcommit 6b39bc5b97251e8194d14afb4d5e79acb4fed9da[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 09:56:00 2025 +0100
+
+    caca
+
+[33mcommit 74f15f12f0f4cbb52e2810d3c2f40851442b787f[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Fri Jan 31 09:49:59 2025 +0100
+
+    matadme
+
+[33mcommit beba70a87943dc1d62b7a63315c77139d60ac74b[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Thu Jan 30 19:50:22 2025 +0100
+
+    GuessTheCardUi
+    
+    completed(01)
+
+[33mcommit 8b6a526c9c078a619cc19077265ba32626770380[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Thu Jan 30 18:29:10 2025 +0100
+
+    TextMeshPro
+
+[33mcommit 3e604cc6c81fcc77c12c698d13fdfdb0d9840e24[m
+Merge: 79d718d f91886f
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Thu Jan 30 15:56:24 2025 +0100
+
+    Merge branch 'Dev' of https://github.com/carlescarles05/BlackJack_Repo into Dev
+
+[33mcommit 79d718dcdf043667c28b3b0dc8ea25b9bb7ce1cf[m
+Author: carlescarles05 <151786310+carlescarles05@users.noreply.github.com>
+Date:   Thu Jan 30 15:56:15 2025 +0100
+
+    f
+
+[33mcommit f91886f8c0621e1f002aafd03156e4d6ebd3eab6[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Thu Jan 30 13:19:16 2025 +0100
+
+    Eventsystem change
+    
+    New Event input system
+
+[33mcommit 21232a9f104c6fc9e667a92f6cf90c244eb276f1[m
+Author: Mari0Pineda <mariocallejas19@gmail.com>
+Date:   Thu Jan 30 13:07:14 2025 +0100
+
+    carles push
