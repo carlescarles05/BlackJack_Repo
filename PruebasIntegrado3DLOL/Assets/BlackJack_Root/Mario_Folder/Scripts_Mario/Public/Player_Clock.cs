@@ -86,28 +86,44 @@ public class Player_Clock : MonoBehaviour
      yield return new WaitForSeconds(2.2f);
         UpdateTimer_UI_TXT();
     }
-
-    public void ShowEarnedTime(int years) 
+    public void ShowEarnedTime(int years)
     {
-        if (earnedTimeText !=  null)
+        if (!gameObject.activeInHierarchy)
         {
-            //Forced
-            if (!earnedTimeText.gameObject.activeInHierarchy) 
-            {
-               
-                earnedTimeText.gameObject.SetActive(true);
-            }
-        //Update text within the earned time
-        earnedTimeText.text = years > 0 ? $"{years} LifePoints" : $"{years} LifePoints";
-        childEarnedTimeText.text = years > 0 ? $"{years} LifePoints" : $"{years} LifePoints";
-            //Start the coroutine to hide the text after a delay
+            Debug.LogWarning("Player_Clock is inactive! Skipping coroutine.");
+            return; // Prevents error
+        }
+
+        if (earnedTimeText != null)
+        {
+            earnedTimeText.gameObject.SetActive(true);
+            earnedTimeText.text = $"{years} LifePoints";
+            childEarnedTimeText.text = $"{years} LifePoints";
             StartCoroutine(HideEarnedTimeAfterDelay());
         }
-        else
-        {
-            Debug.LogError("EarnedTimeText is not assigned or missing!");
-        }
     }
+
+    /* public void ShowEarnedTime(int years) 
+     {
+         if (earnedTimeText !=  null)
+         {
+             //Forced
+             if (!earnedTimeText.gameObject.activeInHierarchy) 
+             {
+
+                 earnedTimeText.gameObject.SetActive(true);
+             }
+         //Update text within the earned time
+         earnedTimeText.text = years > 0 ? $"{years} LifePoints" : $"{years} LifePoints";
+         childEarnedTimeText.text = years > 0 ? $"{years} LifePoints" : $"{years} LifePoints";
+             //Start the coroutine to hide the text after a delay
+             StartCoroutine(HideEarnedTimeAfterDelay());
+         }
+         else
+         {
+             Debug.LogError("EarnedTimeText is not assigned or missing!");
+         }
+     }*/
     private IEnumerator HideEarnedTimeAfterDelay()
     {
         yield return new WaitForSeconds(3f);

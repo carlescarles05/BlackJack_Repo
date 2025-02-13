@@ -188,11 +188,19 @@ public class GameControl : MonoBehaviour
     [Header("TextMeshComp")]
     [SerializeField]
     private TextMeshProUGUI goodLuckText;
+    [Header("JACKPOT")]
     [SerializeField]
-    //private TextMeshProUGUI jackPOT;
-
+    private TextMeshProUGUI jackPOT;
+    [Header("WINBLUE")]
+    [SerializeField]
+    public TextMeshProUGUI blutoken;
+    //sprite
+    [SerializeField]
+    public GameObject chip;
+    public GameObject GAMECANVA;
     [Header("Script")]
     public Player_Clock playerTime;
+    //sprite
 
     [Header("Variables")]
     [SerializeField]
@@ -213,7 +221,10 @@ public class GameControl : MonoBehaviour
         inputActions = new GameInputActions();
         spinReelsAction = inputActions.SlotMachine.PullHandle;
         spinReelsAction.Enable();
-       // jackPOT.gameObject.SetActive(false);
+        //winning
+        blutoken.gameObject.SetActive(false);
+        chip.gameObject.SetActive(false);
+        jackPOT.gameObject.SetActive(false);
         // Enable player clock script
         playerTime = FindObjectOfType<Player_Clock>();
 
@@ -241,6 +252,7 @@ public class GameControl : MonoBehaviour
             {
                 playerTime.earnedTimeText.gameObject.SetActive(false);
             }
+            prizeValue = 0;
             resultsChecked = false;
         }
 
@@ -259,7 +271,7 @@ public class GameControl : MonoBehaviour
         {
             if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped)
             {
-                if (!SlotMachinePointsManager.Instance.HasEnoughPoints(200))
+                if (!SlotMachinePointsManager.Instance.HasEnoughPoints(100))
                 {
                     Debug.Log("Not Enough Points");
                     SFXManagerSMtwo.Instance.NoCredit();
@@ -267,8 +279,7 @@ public class GameControl : MonoBehaviour
                 }
 
                 SlotMachinePointsManager.Instance.DeductPoints(100);
-              
-                //StartCoroutine("PullHandle");
+
                 ShowGoodLuckText(); // Activate good luck text when starting the spin
                 SFXManagerSMtwo.Instance.Cashed(); // Play cashed sound
                 StartCoroutine("TriggerReels");
@@ -281,20 +292,7 @@ public class GameControl : MonoBehaviour
         yield return new WaitForSeconds(1);
         HandlePulled?.Invoke();
     }
-  /*  private IEnumerator PullHandle()
-    {
-        for (int i = 0; i < 15; i += 5)
-        {
-            handle.Rotate(0f, 0f, i);
-            yield return new WaitForSeconds(0.1f);
-        }
-        HandlePulled?.Invoke();
-        for (int i = 0; i < 15; i += 5)
-        {
-            handle.Rotate(0f, 0f, -i);
-            yield return new WaitForSeconds(0.5f);//0.1
-        }
-    }*/
+ 
 
     private void CheckResults()
     {
@@ -302,13 +300,25 @@ public class GameControl : MonoBehaviour
          && rows[1].stoppedSlot == "Diamond"
          && rows[2].stoppedSlot == "Diamond")
         {
-            prizeValue = 120;
+            prizeValue = 300;
+            SlotMachinePointsManager.Instance.PointsWon(400);
+            foreach (Transform child in GAMECANVA.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            StartCoroutine(delayedenableblutoken());
+            StartCoroutine(HideJackpotAfterDelay());
+            StartCoroutine(HideblutokenAfterDelay());
         }
         else if (rows[0].stoppedSlot == "Crown"
         && rows[1].stoppedSlot == "Crown"
         && rows[2].stoppedSlot == "Crown")
         {
             prizeValue = 600;
+            resultsChecked = true;
+            SFXManagerSMtwo.Instance.Jackpot(); // Play jackpot sound 
+            jackPOT.gameObject.SetActive(true);
+            StartCoroutine(HideJackpotAfterDelay());
         }
         else if (rows[0].stoppedSlot == "Bar"
         && rows[1].stoppedSlot == "Bar"
@@ -320,7 +330,7 @@ public class GameControl : MonoBehaviour
         && rows[1].stoppedSlot == "Melon"
         && rows[2].stoppedSlot == "Melon")
         {
-            prizeValue = 300;
+            prizeValue = 120;
         }
         else if (rows[0].stoppedSlot == "Seven"
         && rows[1].stoppedSlot == "Seven"
@@ -339,21 +349,44 @@ public class GameControl : MonoBehaviour
         && rows[2].stoppedSlot == "Lemon")
         {
             prizeValue = 120;
-            SFXManagerSMtwo.Instance.Jackpot(); // Play jackpot sound for lemons
-         //   jackPOT.gameObject.SetActive(true);
+           
         }
 
         resultsChecked = true;
+       
         playerTime.AddYears(prizeValue);
         SFXManagerSMtwo.Instance.EarnTime(); // Play EarnTime sound
     }
+    //
+    private IEnumerator HideJackpotAfterDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        jackPOT.gameObject.SetActive(false);
+    }
+    private IEnumerator HideblutokenAfterDelay()
+    {
+       
+        yield return new WaitForSeconds(3f);
+        //
+     
+        blutoken.gameObject.SetActive(false);
+        chip.gameObject.SetActive(false);
+        GAMECANVA.gameObject.SetActive(true);
 
+    }
+    private IEnumerator delayedenableblutoken()
+    {
+        yield return new WaitForSeconds(1f);
+        blutoken.gameObject.SetActive(true);
+        chip.gameObject.SetActive(true);
+    }
+    //
     private void ShowGoodLuckText()
     {
         goodLuckText.gameObject.SetActive(true);
         StartCoroutine(HideGoodLuckTextAfterDelay());
     }
-
+ 
     private IEnumerator HideGoodLuckTextAfterDelay()
     {
         yield return new WaitForSeconds(4f);

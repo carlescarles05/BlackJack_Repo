@@ -5320,7 +5320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc07d8d03a8bae4e89699d84d6b9355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPoints: 1200
+  playerPoints: 2000
   wonPoints: 200
 --- !u!4 &90006614
 Transform:
