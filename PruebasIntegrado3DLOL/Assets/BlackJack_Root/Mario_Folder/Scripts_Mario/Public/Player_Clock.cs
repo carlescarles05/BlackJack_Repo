@@ -9,8 +9,7 @@ public class Player_Clock : MonoBehaviour
     //  public int StartYears;  // Initial years
     //  private int totalYears;
     [Header("TextMeshProComponent")]
-    public TextMeshProUGUI timer;
-    public TextMeshProUGUI timerTxtSecondary;
+    [SerializeField] public TextMeshProUGUI[] timerTexts;
     public  TextMeshProUGUI earnedTimeText;
     public TextMeshProUGUI childEarnedTimeText;
     [Header("Variable")]
@@ -20,18 +19,6 @@ public class Player_Clock : MonoBehaviour
     public GuessTheCard gameManager; // Reference to GuessTheCard script
     void Start()
     {
-        //Main timer
-        timer = GetComponent<TextMeshProUGUI>();
-        if (timer == null)
-        {
-            Debug.LogError("No Text component found on this GameObject.");
-            return;
-        }
-        //secondary timer
-        if(timerTxtSecondary == null)
-        {
-            Debug.LogError("No text component found on this GameObject");
-        }
         //Earned time
         if (earnedTimeText == null)
         {
@@ -65,13 +52,14 @@ public class Player_Clock : MonoBehaviour
 
     public void UpdateTimer_UI_TXT()
     {
-        if (timer != null) 
+        string timeText = $"{SlotMachinesTimeManager.Instance.TotalYears}";
+        foreach (var text in timerTexts)
         {
-            timer.text = $"{SlotMachinesTimeManager.Instance.TotalYears}";
-        }
-        if (timerTxtSecondary != null)
-        {
-            timerTxtSecondary.text = $"{SlotMachinesTimeManager.Instance.TotalYears}";
+            if (text != null)
+            { 
+            text.text = timeText;
+                text.ForceMeshUpdate();
+            }
         }
     }
     public void AddYears(int years)
@@ -91,7 +79,7 @@ public class Player_Clock : MonoBehaviour
         if (!gameObject.activeInHierarchy)
         {
             Debug.LogWarning("Player_Clock is inactive! Skipping coroutine.");
-            return; // Prevents error
+            return; 
         }
 
         if (earnedTimeText != null)
@@ -102,28 +90,6 @@ public class Player_Clock : MonoBehaviour
             StartCoroutine(HideEarnedTimeAfterDelay());
         }
     }
-
-    /* public void ShowEarnedTime(int years) 
-     {
-         if (earnedTimeText !=  null)
-         {
-             //Forced
-             if (!earnedTimeText.gameObject.activeInHierarchy) 
-             {
-
-                 earnedTimeText.gameObject.SetActive(true);
-             }
-         //Update text within the earned time
-         earnedTimeText.text = years > 0 ? $"{years} LifePoints" : $"{years} LifePoints";
-         childEarnedTimeText.text = years > 0 ? $"{years} LifePoints" : $"{years} LifePoints";
-             //Start the coroutine to hide the text after a delay
-             StartCoroutine(HideEarnedTimeAfterDelay());
-         }
-         else
-         {
-             Debug.LogError("EarnedTimeText is not assigned or missing!");
-         }
-     }*/
     private IEnumerator HideEarnedTimeAfterDelay()
     {
         yield return new WaitForSeconds(3f);
@@ -149,7 +115,6 @@ public class Player_Clock : MonoBehaviour
             }
         }
     }
-
     public void OnTimeOut() //and reset to default
     {
         isTimerActive = false;
@@ -163,7 +128,6 @@ public class Player_Clock : MonoBehaviour
         {
             gameManager.LoadGameOverScene();
         }
-
         else
         {
             Debug.LogWarning("Time's up!Game Over");

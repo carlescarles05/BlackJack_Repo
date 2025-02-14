@@ -225,23 +225,19 @@ public class GameControl : MonoBehaviour
         blutoken.gameObject.SetActive(false);
         chip.gameObject.SetActive(false);
         jackPOT.gameObject.SetActive(false);
-        // Enable player clock script
-        playerTime = FindObjectOfType<Player_Clock>();
-
-        if (playerTime.timer && playerTime.timerTxtSecondary != null)
+        foreach (var text in playerTime.timerTexts)
         {
-            playerTime.timer.text = "";
-            playerTime.timerTxtSecondary.text = "";
-            playerTime.timerTxtSecondary.enabled = true; // was false
-            playerTime.timer.enabled = true;
-        }
-
-        if (playerTime.timer != null)
-        {
-            playerTime.timer.enabled = true;
+            if (text != null)
+            {
+                text.enabled = true;
+                text.text = "";
+            }
         }
     }
-
+    private void Start()
+    {
+        StartCoroutine(FindPlayerClock());
+    }
     void Update()
     {
         // Spinning logic
@@ -271,6 +267,8 @@ public class GameControl : MonoBehaviour
         {
             if (rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped)
             {
+
+
                 if (!SlotMachinePointsManager.Instance.HasEnoughPoints(100))
                 {
                     Debug.Log("Not Enough Points");
@@ -296,69 +294,170 @@ public class GameControl : MonoBehaviour
 
     private void CheckResults()
     {
+
         if (rows[0].stoppedSlot == "Diamond"
          && rows[1].stoppedSlot == "Diamond"
          && rows[2].stoppedSlot == "Diamond")
         {
             prizeValue = 300;
             SlotMachinePointsManager.Instance.PointsWon(400);
-            foreach (Transform child in GAMECANVA.transform)
-            {
-                child.gameObject.SetActive(false);
-            }
+            GAMECANVA.SetActive(false);
             StartCoroutine(delayedenableblutoken());
+            StartCoroutine(delayedAddyears());
             StartCoroutine(HideJackpotAfterDelay());
             StartCoroutine(HideblutokenAfterDelay());
         }
-        else if (rows[0].stoppedSlot == "Crown"
+        else
+        {
+         if (rows[0].stoppedSlot == "Crown"
         && rows[1].stoppedSlot == "Crown"
         && rows[2].stoppedSlot == "Crown")
-        {
-            prizeValue = 600;
-            resultsChecked = true;
-            SFXManagerSMtwo.Instance.Jackpot(); // Play jackpot sound 
-            jackPOT.gameObject.SetActive(true);
-            StartCoroutine(HideJackpotAfterDelay());
-        }
-        else if (rows[0].stoppedSlot == "Bar"
-        && rows[1].stoppedSlot == "Bar"
-        && rows[2].stoppedSlot == "Bar")
-        {
-            prizeValue = 100;
-        }
-        else if (rows[0].stoppedSlot == "Melon"
-        && rows[1].stoppedSlot == "Melon"
-        && rows[2].stoppedSlot == "Melon")
-        {
-            prizeValue = 120;
-        }
-        else if (rows[0].stoppedSlot == "Seven"
-        && rows[1].stoppedSlot == "Seven"
-        && rows[2].stoppedSlot == "Seven")
-        {
-            prizeValue = 70;
-        }
-        else if (rows[0].stoppedSlot == "Cherry"
-        && rows[1].stoppedSlot == "Cherry"
-        && rows[2].stoppedSlot == "Cherry")
-        {
-            prizeValue = 50;
-        }
-        else if (rows[0].stoppedSlot == "Lemon"
-        && rows[1].stoppedSlot == "Lemon"
-        && rows[2].stoppedSlot == "Lemon")
-        {
-            prizeValue = 120;
-           
-        }
+            {
+                prizeValue = 600;
+                resultsChecked = true;
+                SFXManagerSMtwo.Instance.Jackpot(); // Play jackpot sound 
+                jackPOT.gameObject.SetActive(true);
+                StartCoroutine(HideJackpotAfterDelay());
+            }
+            else if (rows[0].stoppedSlot == "Bar"
+            && rows[1].stoppedSlot == "Bar"
+            && rows[2].stoppedSlot == "Bar")
+            {
+                prizeValue = 100;
+            }
+            else if (rows[0].stoppedSlot == "Melon"
+            && rows[1].stoppedSlot == "Melon"
+            && rows[2].stoppedSlot == "Melon")
+            {
+                prizeValue = 120;
+            }
+            else if (rows[0].stoppedSlot == "Seven"
+            && rows[1].stoppedSlot == "Seven"
+            && rows[2].stoppedSlot == "Seven")
+            {
+                prizeValue = 70;
+            }
+            else if (rows[0].stoppedSlot == "Cherry"
+            && rows[1].stoppedSlot == "Cherry"
+            && rows[2].stoppedSlot == "Cherry")
+            {
+                prizeValue = 50;
+            }
+            else if (rows[0].stoppedSlot == "Lemon"
+            && rows[1].stoppedSlot == "Lemon"
+            && rows[2].stoppedSlot == "Lemon")
+            {
+                prizeValue = 120;
 
+            }
+            //Double prizes.
+            else if (((rows[0].stoppedSlot == rows[1].stoppedSlot)
+            && (rows[0].stoppedSlot == "Diamond"))
+
+            || ((rows[0].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[0].stoppedSlot == "Diamond"))
+
+            || ((rows[1].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[1].stoppedSlot == "Diamond")))
+
+            {
+                prizeValue = 0;
+            }
+
+            else if (((rows[0].stoppedSlot == rows[1].stoppedSlot)
+            && (rows[0].stoppedSlot == "Crown"))
+
+            || ((rows[0].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[0].stoppedSlot == "Crown"))
+
+            || ((rows[1].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[1].stoppedSlot == "Crown")))
+            {
+                prizeValue = 0;
+
+            }
+            else if (((rows[0].stoppedSlot == rows[1].stoppedSlot)
+            && (rows[0].stoppedSlot == "Melon"))
+
+            || ((rows[0].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[0].stoppedSlot == "Melon"))
+
+            || ((rows[1].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[1].stoppedSlot == "Melon")))
+            {
+               // prizeValue = 0;
+            }
+            else if (((rows[0].stoppedSlot == rows[1].stoppedSlot)
+            && (rows[0].stoppedSlot == "Bar"))
+
+            || ((rows[0].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[0].stoppedSlot == "Bar"))
+
+            || ((rows[1].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[1].stoppedSlot == "Bar")))
+            {
+                //prizeValue = 0;
+            }
+            else if (((rows[0].stoppedSlot == rows[1].stoppedSlot)
+            && (rows[0].stoppedSlot == "Seven"))
+
+            || ((rows[0].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[0].stoppedSlot == "Seven"))
+
+            || ((rows[1].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[1].stoppedSlot == "Seven")))
+            {
+               // prizeValue = 0;
+            }
+            else if (((rows[0].stoppedSlot == rows[1].stoppedSlot)
+            && (rows[0].stoppedSlot == "Cherry"))
+
+            || ((rows[0].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[0].stoppedSlot == "Cherry"))
+
+            || ((rows[1].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[1].stoppedSlot == "Cherry")))
+            {
+               // prizeValue = 0;
+            }
+            else if (((rows[0].stoppedSlot == rows[1].stoppedSlot)
+             && (rows[0].stoppedSlot == "Lemon")
+
+            || (rows[0].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[0].stoppedSlot == "Lemon")
+
+            || (rows[1].stoppedSlot == rows[2].stoppedSlot)
+            && (rows[1].stoppedSlot == "Lemon")))
+            {
+               // prizeValue = 0;
+            }
+        }
         resultsChecked = true;
-       
+     
         playerTime.AddYears(prizeValue);
         SFXManagerSMtwo.Instance.EarnTime(); // Play EarnTime sound
     }
-    //
-    private IEnumerator HideJackpotAfterDelay()
+    
+    private IEnumerator delayedAddyears()//if winning blutoken
+    {
+        yield return new WaitForSeconds(3f);
+        playerTime.AddYears(prizeValue);
+    }
+    private IEnumerator FindPlayerClock()
+    {
+        yield return new WaitForSeconds(0.1f);
+        playerTime = FindObjectOfType<Player_Clock>();
+        if (playerTime != null) 
+        {
+            Debug.Log("Player_Clock found successfully!");
+        }
+        else 
+        {
+            Debug.LogError("Player_Clock not found!");
+        }
+     
+    }
+        private IEnumerator HideJackpotAfterDelay()
     {
         yield return new WaitForSeconds(3f);
         jackPOT.gameObject.SetActive(false);
@@ -368,15 +467,26 @@ public class GameControl : MonoBehaviour
        
         yield return new WaitForSeconds(3f);
         //
-     
         blutoken.gameObject.SetActive(false);
-        chip.gameObject.SetActive(false);
+        chip.gameObject.SetActive(false); 
+        //main canvas is re enabled
         GAMECANVA.gameObject.SetActive(true);
-
+        yield return new WaitForSeconds(1f);
+        foreach (var text in playerTime.timerTexts)
+        {
+            if (text != null) 
+            {
+            text.gameObject.SetActive(true);
+            }
+            if(playerTime.earnedTimeText!=null)
+            {
+                playerTime.earnedTimeText.gameObject.SetActive(true);
+            }
+        }
     }
     private IEnumerator delayedenableblutoken()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         blutoken.gameObject.SetActive(true);
         chip.gameObject.SetActive(true);
     }
