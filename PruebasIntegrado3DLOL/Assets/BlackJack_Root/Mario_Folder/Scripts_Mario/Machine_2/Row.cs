@@ -99,7 +99,8 @@ public class Row : MonoBehaviour
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI.Table;
 public class Row : MonoBehaviour
 {
     private int randomValue;            // Random value for spins
@@ -112,14 +113,11 @@ public class Row : MonoBehaviour
         rowStopped = true;
         GameControl.HandlePulled += StartRotating; // Subscribe to the HandlePulled event
     }
-
     private void StartRotating()
     {
         Debug.Log($"Row {gameObject.name} started rotating.");
 
         stoppedSlot = "";
-        rowStopped = false;
-
         // Play spin sound when the row starts spinning
         if (SFXManagerSMtwo.Instance != null)
         {
@@ -128,8 +126,8 @@ public class Row : MonoBehaviour
 
         StartCoroutine(Rotate());
     }
-
-    private IEnumerator Rotate()
+    /*
+ private IEnumerator Rotate()
     {
         rowStopped = false;
         timeInterval = 0.025f;
@@ -144,8 +142,32 @@ public class Row : MonoBehaviour
             yield return new WaitForSeconds(timeInterval);
         }
 
+        // FORCE a specific winning combination for testing
+        stoppedSlot = "Diamond";  // Change to "Diamond" if needed
+        rowStopped = true;
+
+        Debug.Log($"Row {gameObject.name} stopped with forced slot: {stoppedSlot}");
+
+    }
+   */
+   private IEnumerator Rotate()
+     {
+         rowStopped = false;
+         timeInterval = 0.025f;
+        // Initial rotation (fixed number of spins)
+        for (int i = 0; i < 30; i++)
+        {
+            if (transform.position.y <= -3.5f)
+            {
+                transform.position = new Vector2(transform.position.x, 1.75f);
+            }
+            transform.position = new Vector2(transform.position.x, transform.position.y - 0.25f);
+            yield return new WaitForSeconds(timeInterval);
+        }
+        // Generate a random value for spins
         randomValue = Random.Range(60, 100);
 
+        // Adjust randomValue to ensure alignment
         switch (randomValue % 3)
         {
             case 1:
@@ -156,6 +178,7 @@ public class Row : MonoBehaviour
                 break;
         }
 
+        // Main spinning logic with slowing down effect
         for (int i = 0; i < randomValue; i++)
         {
             if (transform.position.y <= -3.5f)
@@ -164,15 +187,27 @@ public class Row : MonoBehaviour
             }
             transform.position = new Vector2(transform.position.x, transform.position.y - 0.25f);
 
-            if (i > Mathf.RoundToInt(randomValue * 0.95f)) { timeInterval = 0.2f; }
-            else if (i > Mathf.RoundToInt(randomValue * 0.75f)) { timeInterval = 0.15f; }
-            else if (i > Mathf.RoundToInt(randomValue * 0.5f)) { timeInterval = 0.05f; }
-            else if (i > Mathf.RoundToInt(randomValue * 0.25f)) { timeInterval = 0.01f; }
+            // Adjust time interval to simulate slowing down
+            if (i > Mathf.RoundToInt(randomValue * 0.95f))
+            {
+                timeInterval = 0.2f;
+            }
+            else if (i > Mathf.RoundToInt(randomValue * 0.75f))
+            {
+                timeInterval = 0.15f;
+            }
+            else if (i > Mathf.RoundToInt(randomValue * 0.5f))
+            {
+                timeInterval = 0.05f;
+            }
+            else if (i > Mathf.RoundToInt(randomValue * 0.25f))
+            {
+                timeInterval = 0.01f;
+            }
 
             yield return new WaitForSeconds(timeInterval);
         }
 
-        
         // Determine the stopped slot based on the final position
         float yPosition = transform.position.y;
         if (Mathf.Abs(yPosition - (-3.5f)) < 0.01f) { stoppedSlot = "Diamond"; }
@@ -184,13 +219,10 @@ public class Row : MonoBehaviour
         else if (Mathf.Abs(yPosition - (1f)) < 0.01f) { stoppedSlot = "Lemon"; }
         else if (Mathf.Abs(yPosition - (1.75f)) < 0.01f) { stoppedSlot = "Diamond"; }
 
-        rowStopped = true;
-        // Stop the spin sound once the row stops spinning
-       
-
+        rowStopped = true; // Mark row as stopped
         Debug.Log($"Row {gameObject.name} stopped with slot: {stoppedSlot}");
     }
-
+  
     private void OnDestroy()
     {
         

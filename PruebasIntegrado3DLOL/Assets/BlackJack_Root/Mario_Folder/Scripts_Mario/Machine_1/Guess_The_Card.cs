@@ -210,8 +210,6 @@ public class GuessTheCard : MonoBehaviour
                 //Apply emission effects
                 material.SetColor("_EmissionColor", Color.red * 0.5f); //Make it glow red
                 material.EnableKeyword("_EMISSION");
-                //Slightly scale up the card
-                //cardTransform.localScale = Vector3.one * 1.6f;  /scale up
                 SFXManager.Instance.MachineCardSound();
                 break;
             }
@@ -313,8 +311,6 @@ public class GuessTheCard : MonoBehaviour
             yield return new WaitForSeconds(1.7f); // Wait before the next step
             SFXManager.Instance.EarnTime(); // Play earned time sound
         }
-        //active main game canvas
-        
         //Deactivate
         yield return new WaitForSeconds(2f); // Wait for the sound effect...
         foreach (Transform child in Canvadeactive.transform)
